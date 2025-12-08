@@ -54,4 +54,4 @@ aufgerufen.
 Der Meetingclient wird über die Mitgelieferten Scripte gestartet (siehe src/main/scripts)
 
 ## 📄 Lizenz
-Dieses Projekt ist lizenziert unter der Apache License 2.0. Siehe LICENSE Datei für Details.
+Dieses Projekt ist lizenziert unter der Meeting Base Lizenz. Siehe LICENSE Datei für Details.
