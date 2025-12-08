@@ -1,0 +1,504 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:c="jakarta.tags.core" lang="de">
+    <!-- Übersicht und Kurzbeschreibung der einzelnen Seiten siehe KonstPortalView -->
+    <h:panelGroup id="seite">
+        <!-- muß an dieser Stelle stehen, da sonst userEingeloggt nicht richtig
+                gefüllt wird -->
+        <section id="parameter-bereich">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-2">
+                        <p>
+                            <h:inputText id="schliessenId" value="#{tSession.userEingeloggt}" style="display:none" />
+                            <h:inputText id="logoutButtonClicked" value="0" style="display:none" />
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <h:panelGroup rendered="#{tRender.andereZeit()}">
+                            <p>
+                                <h:outputLabel value="#{tSession.andereZeit()}" />
+                            </p>
+                        </h:panelGroup>
+                    </div>
+                </div>
+                <h:panelGroup rendered="#{tSession.testModus=='2'}">
+                    <div class="row">
+                        <div class="col-8">
+                            <p>
+                                <h:outputText value="Language= #{tLanguage.lang}" />
+                                <br />
+                                <h:outputLabel value="viewnummer= #{tSession.viewnummer}  " />
+                                <h:outputLabel value="seitenname= #{tSession.seitenname()}" />
+                                <br />
+                                <h:outputLabel value="App-Titel= #{tSeitensteuerung.holeTextAppTitel()}" />
+                            </p>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </div>
+        </section>
+
+
+
+        <h:panelGroup rendered="#{tSession.viewnummer==0}">
+            <ui:include src="iFehlerLinkAufruf.xhtml" />
+        </h:panelGroup>
+        <!--
+        <h:panelGroup rendered="#{tSession.viewnummer==1}">
+            <ui:include src="iFehlerPortalNichtAktiv.xhtml" />
+        </h:panelGroup>
+        -->
+
+        <h:panelGroup rendered="#{tSession.viewnummer==2}">
+            <ui:include src="iFehlerUnbekannt.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==3}">
+            <ui:include src="iFehlerSysLogout.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==4}">
+            <ui:include src="iFehlerDialog.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==5}">
+            <ui:include src="iFehlerVeraendert.xhtml" />
+        </h:panelGroup>
+        <!--
+        <h:panelGroup rendered="#{tSession.viewnummer==6}">
+            <ui:include src="iFehlerZweiSession.xhtml" />
+        </h:panelGroup>
+-->
+
+        <h:panelGroup rendered="#{tSession.viewnummer==8}">
+            <ui:include src="iFehlerZweiterMandant.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{tSession.viewnummer==75}">
+            <ui:include src="iBestaetigen.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==76}">
+            <ui:include src="iBestaetigen2.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==77}">
+            <ui:include src="iBestaetigt.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==78}">
+            <ui:include src="iBestaetigt2.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{tSession.viewnummer==81}">
+            <ui:include src="iPasswortVergessen.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==82}">
+            <ui:include src="iPasswortVergessenQuittung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==83}">
+            <ui:include src="iPWZurueck.xhtml" />
+        </h:panelGroup>
+
+
+        <h:panelGroup rendered="#{tSession.viewnummer==101}">
+            <ui:include src="iLogin.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{tSession.viewnummer==102}">
+            <ui:include src="iEinstellungen.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{tSession.viewnummer==103}">
+            <ui:include src="iAuswahl.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{tSession.viewnummer==104}">
+            <ui:include src="iEinstellungenBestaetigung.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{tSession.viewnummer==107}">
+            <ui:include src="iMonitoring.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==120}">
+            <ui:include src="iFehlerView.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==121}">
+            <ui:include src="iFehlerViewTechnisch.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==150}">
+            <ui:include src="iBesitzVertretungAbfragen.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==401}">
+            <ui:include src="iStreamstart.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{tSession.viewnummer==402}">
+            <f:subview id="iIUnterlagen">
+                <ui:include src="iUnterlagen.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==403}">
+            <f:subview id="iIFragen">
+                <ui:include src="iMitteilung.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==404}">
+            <f:subview id="iIWortmeldungen">
+                <ui:include src="iMitteilung.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==405}">
+            <f:subview id="iIWidersprueche">
+                <ui:include src="iMitteilung.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==406}">
+            <ui:include src="iTeilnehmerverz.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==407}">
+            <f:subview id="iIAntraege">
+                <ui:include src="iMitteilung.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==408}">
+            <f:subview id="iISonstMitteilungen">
+                <ui:include src="iMitteilung.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==409}">
+            <ui:include src="iAbstimmungserg.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==411}">
+            <f:subview id="iIBotschaftenEinreichen">
+                <ui:include src="iMitteilung.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==412}">
+            <f:subview id="iIBotschaftenAnzeigen">
+                <ui:include src="iUnterlagen.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==413}">
+            <f:subview id="iIRueckfragen">
+                <ui:include src="iMitteilung.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+
+        <!--
+
+        <h:panelGroup rendered="#{tSession.viewnummer==501}">
+            <ui:include src="iNeueWillenserklaerung.xhtml" />
+        </h:panelGroup>
+-->
+        <h:panelGroup rendered="#{tSession.viewnummer==502}">
+            <ui:include src="iWeisung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==503}">
+            <ui:include src="iWeisungBestaetigung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==504}">
+            <ui:include src="iWeisungAendern.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==505}">
+            <ui:include src="iWeisungQuittung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==506}">
+            <ui:include src="iWeisungStornieren.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==507}">
+            <ui:include src="iWeisungStornierenQuittung.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{tSession.viewnummer==1001}">
+            <ui:include src="iNurAnmeldung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==1002}">
+            <ui:include src="iNurAnmeldungQuittung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==1010}">
+            <ui:include src="iEintrittskarte.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==1011}">
+            <ui:include src="iEintrittskarteQuittung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==1012}">
+            <ui:include src="iEintrittskarteDetail.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==1014}">
+            <ui:include src="iEintrittskarteStornieren.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==1016}">
+            <ui:include src="iEintrittskarteStornierenQuittung.xhtml" />
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{tSession.viewnummer==1021}">
+            <ui:include src="iGastkarteUebersicht.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==1022}">
+            <ui:include src="iGastkarteEingabe.xhtml" />
+        </h:panelGroup>
+
+ 
+        <!-- Vereine und Generalversammlungen -->
+        <h:panelGroup rendered="#{tSession.viewnummer==110}">
+            <ui:include src="iAuswahl1.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==111}">
+            <ui:include src="iAuswahl1Generalversammlung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==112}">
+            <ui:include src="iAuswahl1Teilnahme.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==113}">
+            <ui:include src="iAuswahl1TeilnahmeGast.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==114}">
+            <ui:include src="iAuswahl1Dialogveranstaltungen.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==115}">
+            <ui:include src="iAuswahl1AnmeldenDialogveranstaltungen.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==116}">
+            <ui:include src="iAuswahl1GeneralversammlungBriefwahl.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==201}">
+            <ui:include src="iPraesenzZugangAbfragePerson.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==202}">
+            <ui:include src="iPraesenzZugangPersonBestaetigen.xhtml" />
+        </h:panelGroup>
+        <!--
+        <h:panelGroup rendered="#{tSession.viewnummer==203}">
+            <ui:include src="iPraesenzAbgang.xhtml" />
+        </h:panelGroup>
+        -->
+        <h:panelGroup rendered="#{tSession.viewnummer==204}">
+            <ui:include src="iPraesenzZugangFalschePerson.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==205}">
+            <ui:include src="iPraesenzAbgangBestaetigung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==206}">
+            <ui:include src="iPraesenzZugangAbfrageStornierung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==301}">
+            <ui:include src="iStimmabgabe.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==302}">
+            <ui:include src="iStimmabgabeAuswahl.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==303}">
+            <ui:include src="iStimmabgabeQuittung.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==304}">
+            <ui:include src="iStimmabgabeDerzeitNichtMoeglich.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==601}">
+            <ui:include src="iGeneralversammlungAnAbmelden.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==602}">
+            <ui:include src="iGeneralversammlungVollmachtStornieren.xhtml" />
+        </h:panelGroup>
+        <h:panelGroup rendered="#{tSession.viewnummer==605}">
+            <ui:include src="iGeneralversammlungBriefwMitgliedDurchBevollStorno.xhtml" />
+        </h:panelGroup>
+
+    </h:panelGroup>
+
+    <!-- === Websocket === -->
+
+    <script>
+        aktionaer = '#{eclLoginDatenM.eclLoginDaten.loginKennungExtern}';
+        serverPraefix = '#{eclParamM.paramServer.pLocalPraefixLinkExtern}';
+        jwtWsToken = '#{tSession.jwtWsToken}';
+    </script>
+
+    <!-- === Modals nach Websocket für Konferenz === -->
+
+    <div id="socket-modal-wortmeldung-ts" class="modal">
+        <div class="modal-content slide-in-left">
+            <div class="modal-body">
+                <span class="close close01" onclick="hideModal('socket-modal-wortmeldung-ts');">
+                    <i class="fas fa-times">
+
+                    </i>
+                </span>
+                <header>
+                </header>
+                <!-- 2083; Anzeige Raumnummer rauslassen, nicht relevant für Aktionär -->
+                <h:outputText value="#{eclPortalTexteM.holeText('2083')}" escape="false" />
+                <br />
+                <p>
+                    <!-- 2084 -->
+                    <h:commandButton value="#{eclPortalTexteM.holeText('2084')}"
+                        action="#{tMitteilung.doKonferenzTestStarten()}" styleClass="btn-typ-00">
+                        <f:ajax execute="@all" render="@form konferenzform" onevent="nachAjaxButtonKonferenz" />
+                    </h:commandButton>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="socket-modal-wortmeldung-tv" class="modal">
+        <div class="modal-content slide-in-left">
+            <div class="modal-body">
+                <header>
+                </header>
+                <!-- 2085 -->
+                <h:outputText value="#{eclPortalTexteM.holeText('2085')}" escape="false" />
+                <br />
+                <p>
+                    <!-- 2086 -->
+                    <h:commandButton value="#{eclPortalTexteM.holeText('2086')}"
+                        action="#{tMitteilung.doKonferenzTestBeenden()}" styleClass="btn-typ-00">
+                        <f:ajax execute="@all" render="@form konferenzform" onevent="nachAjaxButtonKonferenz" />
+                    </h:commandButton>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="socket-modal-wortmeldung-tv-nok" class="modal">
+        <div class="modal-content slide-in-left">
+            <div class="modal-body">
+                <header>
+                </header>
+                <!-- 2123 -->
+                <h:outputText value="#{eclPortalTexteM.holeText('2123')}" escape="false" />
+                <br />
+                <p>
+                    <!-- 2124 -->
+                    <h:commandButton value="#{eclPortalTexteM.holeText('2124')}"
+                        action="#{tMitteilung.doKonferenzTestBeenden()}" styleClass="btn-typ-00">
+                        <f:ajax execute="@all" render="@form konferenzform" onevent="nachAjaxButtonKonferenz" />
+                    </h:commandButton>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="socket-modal-wortmeldung-rs" class="modal">
+        <div class="modal-content slide-in-left">
+            <div class="modal-body">
+                <span class="close close01" onclick="hideModal('socket-modal-wortmeldung-rs');">
+                    <i class="fas fa-times">
+                    </i>
+                </span>
+                <header>
+                </header>
+                <!-- 2087 -->
+                <h:outputText value="#{eclPortalTexteM.holeText('2087')}" escape="false" />
+                <br />
+                <p>
+                    <!-- 2088 -->
+                    <h:commandButton value="#{eclPortalTexteM.holeText('2088')}"
+                        action="#{tMitteilung.doKonferenzInRederaumGehen()}" styleClass="btn-typ-00">
+                        <f:ajax execute="@all" render="@form konferenzform streamform"
+                            onevent="nachAjaxButtonKonferenz" />
+                    </h:commandButton>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="socket-modal-wortmeldung-sp" class="modal">
+        <div class="modal-content slide-in-left">
+            <div class="modal-body">
+                <span class="close close01" onclick="hideModal('socket-modal-wortmeldung-sp');">
+                    <i class="fas fa-times" />
+                </span>
+                <header>
+                </header>
+                <!-- 2089 -->
+                <h:outputText value="#{eclPortalTexteM.holeText('2089')}" escape="false" />
+                <br />
+                <p>
+                    <!-- 2090 -->
+                    <h:commandButton value="#{eclPortalTexteM.holeText('2090')}"
+                        action="#{tMitteilung.doKonferenzRedeBeginnen()}" styleClass="btn-typ-00">
+                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButtonKonferenz" />
+                    </h:commandButton>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="socket-modal-wortmeldung-rv" class="modal">
+        <div class="modal-content slide-in-left">
+            <div class="modal-body">
+                <header>
+                </header>
+                <!-- 2091 -->
+                <h:outputText value="#{eclPortalTexteM.holeText('2091')}" escape="false" />
+                <br />
+                <p>
+                    <!-- 2092 -->
+                    <h:commandButton value="#{eclPortalTexteM.holeText('2092')}"
+                        action="#{tMitteilung.doKonferenzRederaumVerlassen()}" styleClass="btn-typ-00">
+                        <f:ajax execute="@all" render="@form konferenzform streamform"
+                            onevent="nachAjaxButtonKonferenz" />
+                    </h:commandButton>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="socket-modal-test-nicht-erreicht" class="modal">
+        <div class="modal-content slide-in-left">
+            <div class="modal-body">
+                <header>
+                </header>
+                <!-- 2125 -->
+                <h:outputText value="#{eclPortalTexteM.holeText('2125')}" escape="false" />
+                <br />
+                <p>
+                    <!-- 2126 -->
+                    <h:commandButton value="#{eclPortalTexteM.holeText('2126')}"
+                        action="#{tMitteilung.doKonferenzTestBeenden()}" styleClass="btn-typ-00">
+                        <f:ajax execute="@all" render="@form konferenzform streamform"
+                            onevent="nachAjaxButtonKonferenz" />
+                    </h:commandButton>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="socket-modal-rede-nicht-erreicht" class="modal">
+        <div class="modal-content slide-in-left">
+            <div class="modal-body">
+                <header>
+                </header>
+                <!-- 2127 -->
+                <h:outputText value="#{eclPortalTexteM.holeText('2127')}" escape="false" />
+                <br />
+                <p>
+                    <!-- 2128 -->
+                    <h:commandButton value="#{eclPortalTexteM.holeText('2128')}"
+                        action="#{tMitteilung.doKonferenzRederaumVerlassen()}" styleClass="btn-typ-00">
+                        <f:ajax execute="@all" render="@form konferenzform streamform"
+                            onevent="nachAjaxButtonKonferenz" />
+                    </h:commandButton>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- === Websocket laden, wenn Wortmeldung vorhanden === -->
+
+    <c:if test="#{eclBesitzGesamtM.kennungHatWortmeldungErteilt and not empty tSession.jwtWsToken}">
+        <script>
+            openWebSocket(0);
+        </script>
+    </c:if>
+
+</ui:composition>

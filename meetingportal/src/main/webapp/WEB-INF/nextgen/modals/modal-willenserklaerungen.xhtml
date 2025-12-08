@@ -1,0 +1,190 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+xmlns:f="jakarta.faces.core" lang="de">
+    <div class="modal fade modal-xl" id="modal-willenserklaerungen-#{modWilHeader}" tabindex="-1"
+        aria-labelledby="modal-willenserklaerungen-#{modWilHeader}Label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="infoModalLoginLabel">Zugehörige Willenersklärungen für
+                        Zugangskennung: #{modWilHeader}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- ++++++++++++++Schleife für alle Kennungen usw. ++++++++++++-->
+                    <ui:repeat value="#{eclBesitzGesamtM.besitzJeKennungListe}" var="besitzJeKennung"
+                        id="schleifeBesitzJeKennung">
+
+                        <h:panelGroup rendered="#{besitzJeKennung.kennungFuerAnzeige eq modWilHeader}">
+                            <div class="container-fluid">
+                                <div class="card card-detail mt-3">
+                                    <div class="card-body">
+                                        <!-- +++++++Kennung anzeigen, wenn mehrere Kennungen zugeordnet +++++-->
+                                        <h:panelGroup rendered="#{eclBesitzGesamtM.weitereKennungen==true}">
+                                            <!-- die Kennung ist die eigene Kennung  -->
+                                            <h:panelGroup
+                                                rendered="#{besitzJeKennung.besitzIstUrsprungVonKennung==true}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1241')}" styleClass="row">        
+                                                <div class="col fs-4">
+                                                    <P>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1241')}"
+                                                            escape="false">
+                                                        </h:outputText>
+                                                    </P>
+                                                </div>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <!-- die Kennung ist eine zugeordnete Kennung  -->
+                                            <h:panelGroup
+                                                rendered="#{besitzJeKennung.besitzIstUrsprungVonKennung==false}">
+                                                <!-- Kennung "Aktienregistereintrag" anzeigen mit Text drum rum -->
+                                                <div class="row">
+                                                    <div class="col-7 fs-4">
+                                                        <h:panelGroup rendered="#{besitzJeKennung.kennungsArt==1}">
+                                                            <P>
+                                                                <h:panelGroup
+                                                                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('1230')}">
+                                                                    <h:outputText
+                                                                        value="#{eclPortalTexteM.holeText('1230')}"
+                                                                        escape="false"></h:outputText>
+                                                                </h:panelGroup>
+                                                                <h:outputText
+                                                                    value="#{besitzJeKennung.kennungFuerAnzeige}"
+                                                                    escape="false">
+                                                                </h:outputText>
+                                                                <h:panelGroup
+                                                                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('1231')}">
+                                                                    <h:outputText
+                                                                        value="#{eclPortalTexteM.holeText('1231')}"
+                                                                        escape="false"></h:outputText>
+                                                                </h:panelGroup>
+                                                            </P>
+                                                        </h:panelGroup>
+
+                                                        <!-- Kennung "Gast" anzeigen mit Text drum rum -->
+                                                        <h:panelGroup rendered="#{besitzJeKennung.kennungsArt==2}">
+                                                            <P>
+                                                                <h:panelGroup
+                                                                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('1232')}">
+                                                                    <h:outputText
+                                                                        value="#{eclPortalTexteM.holeText('1232')}"
+                                                                        escape="false"></h:outputText>
+                                                                </h:panelGroup>
+                                                                <h:outputText
+                                                                    value="#{besitzJeKennung.kennungFuerAnzeige}"
+                                                                    escape="false">
+                                                                </h:outputText>
+                                                                <h:panelGroup
+                                                                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('1233')}">
+                                                                    <h:outputText
+                                                                        value="#{eclPortalTexteM.holeText('1233')}"
+                                                                        escape="false"></h:outputText>
+                                                                </h:panelGroup>
+                                                            </P>
+                                                        </h:panelGroup>
+                                                    </div>
+                                                    <div class="col-5 text-end">
+                                                        <!-- Button zur Aufhebung der Zuordnung -->
+                                                        <h:commandLink
+                                                            action="#{tAuswahl.doZuordnungAufheben(besitzJeKennung)}"
+                                                            styleClass="btn btn-danger">
+                                                            <f:ajax execute="@all" render="inhaltsform"
+                                                                onevent="function(data) {nachAjaxButton(data, 'true', 'false', 'mainInhaltModal', null, 'true')}" />
+                                                            <i class="fa-solid fa-trash-can me-2"></i>
+                                                            #{eclPortalTexteM.holeText('1234')}
+                                                        </h:commandLink>
+                                                    </div>
+                                                </div>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+
+
+                                        <!-- Falls vorhanden: Eigene Aktienregistereinträge anzeigen -->
+                                        <h:panelGroup rendered="#{besitzJeKennung.eigenerAREintragVorhanden==true}">
+
+                                            <ui:repeat value="#{besitzJeKennung.eigenerAREintragListe}"
+                                                var="besitzAREintrag" id="schleifeBesitzJeKennungEigenerAREintrag">
+                                                <f:subview id="iEigenerAREintrag">
+                                                    <ui:include src="../idetail/idAuswahlAREintragAll.xhtml" />
+                                                </f:subview>
+                                                <!-- Falls Gastkartenanforderung über Portal möglich -->
+                                                <!-- Falls  gastKartenGemeldetEigeneAktien>0, dann Gastkartenliste anzeigen -->
+                                                <!-- Falls gastKartenGemeldetEigeneAktien<zulaessigeMaxAnzahl, dann neu-Anforderung möglich -->
+                                            </ui:repeat>
+                                        </h:panelGroup>
+
+                                        <!-- Falls vorhanden: erhaltene Gastkarte anzeigen -->
+
+
+                                        <!-- Falls vorhanden: erhaltene Vollmachten anzeigen -->
+                                        <h:panelGroup rendered="#{besitzJeKennung.erhalteneVollmachtenVorhanden==true}">
+                                            <section class="bereits-angemeldet-bereich">
+                                                <!-- Starttext Vollmachten an Dritte vorhanden -->
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1441')}"
+                                                    styleClass="row">
+                                                    <div class="col">
+                                                        <p>
+                                                            <h:outputText value="#{eclPortalTexteM.holeText('1441')}"
+                                                                escape="false">
+                                                            </h:outputText>
+                                                        </p>
+                                                    </div>
+                                                </h:panelGroup>
+
+                                                <ui:repeat
+                                                    value="#{besitzJeKennung.zugeordneteMeldungenBevollmaechtigtListe}"
+                                                    var="meldung" id="schleifeZugeordneteMeldungenBevollmaechtigtListe">
+                                                    <f:subview id="iVollmachtMELDintrag">
+                                                        <ui:include src="../idetail/idAuswahlMELDEintrag.xhtml" />
+                                                    </f:subview>
+                                                </ui:repeat>
+                                            </section>
+
+                                        </h:panelGroup>
+
+                                        <!-- Falls vorhanden: Insti-Aktienregistereinträge anzeigen -->
+                                        <h:panelGroup rendered="#{besitzJeKennung.instiAREintraegeVorhanden==true}">
+                                            <ui:repeat value="#{besitzJeKennung.instiAREintraegeListe}"
+                                                var="besitzAREintrag" id="schleifeBesitzJeKennungInstiAREintrag">
+                                                <f:subview id="iInstiAREintrag">
+                                                    <ui:include src="../idetail/idAuswahlAREintragAll.xhtml" />
+                                                </f:subview>
+                                            </ui:repeat>
+                                        </h:panelGroup>
+
+                                        <!-- Falls vorhanden: Insti-Anmeldungen anzeigen -->
+                                        <h:panelGroup rendered="#{besitzJeKennung.instiMeldungenVorhanden==true}">
+                                            <ui:repeat value="#{besitzJeKennung.zugeordneteMeldungenInstiListe}"
+                                                var="meldung" id="schleifeZugeordneteMeldungenInstiListe">
+                                                <f:subview id="iInstiMELDintrag">
+                                                    <ui:include src="../idetail/idAuswahlMELDEintrag.xhtml" />
+                                                </f:subview>
+                                            </ui:repeat>
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                    </ui:repeat>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Schließen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui:composition>

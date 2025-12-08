@@ -1,0 +1,81 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <div class="divArbeitsbereich">
+
+        <table class="divArbeitsbereichUeberschrift">
+            <tr>
+                <td class="divArbeitsbereichUeberschriftText">
+                    <h:outputLabel value="Details Nachricht" rendered="#{eclNachrichtM.technischeNachricht==false}" />
+                    <h:outputLabel value="Details Aktion" rendered="#{eclNachrichtM.technischeNachricht==true}" />
+                </td>
+                <td class="divArbeitsbereichUeberschriftButton">
+                    <h:commandButton value="Ausblenden" action="#{uNachrichtEmpfangen.doDetailsAusblenden()}"
+                        styleClass="btnStandard">
+                    </h:commandButton>
+                </td>
+            </tr>
+        </table>
+
+
+
+        <!-- Empfänger werden derzeit - aus Datenschutzgründen! nicht angezeigt
+        <h:dataTable value="#{blMNachrichten.nachrichtenEmpfaengerListe}"
+            var="empfaenger">
+            <h:column>
+                <h:outputLabel value="#{empfaenger.name}" />
+            </h:column>
+
+        </h:dataTable>
+        -->
+
+        <p:panelGrid columns="2" styleClass="colStandard">
+
+            <!-- Betreff -->
+            <h:outputLabel value="Betreff:" style="font-weight: bold;" />
+            <h:outputLabel value="#{eclNachrichtM.betreff}" />
+
+            <!-- Mailtext -->
+            <h:outputLabel value="Nachrichten-Text:" style="font-weight: bold;" />
+            <h:outputText value="#{eclNachrichtM.mailText}" escape="false" />
+
+            <!-- Anhänge -->
+            <h:outputLabel value="Anhänge:" style="font-weight: bold;"
+                rendered="#{blMNachrichten.nachrichtenAnhangListeVorhanden()==true}"></h:outputLabel>
+            <p:dataTable value="#{blMNachrichten.nachrichtAnhangListe}"
+                rendered="#{blMNachrichten.nachrichtenAnhangListeVorhanden()==true}" var="anhang">
+                <p:column styleClass="colStandard" width="25%">
+                    <f:facet name="header">Dateiname</f:facet>
+                    <h:outputText value="#{anhang.dateiname}" />
+                </p:column>
+                <p:column styleClass="colStandard">
+                    <f:facet name="header">Beschreibung</f:facet>
+                    <h:outputText value="#{anhang.beschreibung}" />
+                </p:column>
+
+                <p:column styleClass="colStandard" width="15%">
+                    <h:commandButton value="Anzeigen" styleClass="btnKlein" onclick="this.form.target='_blank'"
+                        action="#{uNachrichtEmpfangen.doAnzeigenAnhang(anhang)}">
+                    </h:commandButton>
+                </p:column>
+
+            </p:dataTable>
+        </p:panelGrid>
+    </div>
+
+</ui:composition>

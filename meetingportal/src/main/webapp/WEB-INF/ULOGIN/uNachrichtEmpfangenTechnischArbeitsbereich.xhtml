@@ -1,0 +1,72 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <div class="divArbeitsbereich">
+
+        <table class="divArbeitsbereichUeberschrift">
+            <tr>
+                <td class="divArbeitsbereichUeberschriftText">
+                    <h:outputLabel value="Erforderliche Aktionen" />
+                </td>
+                <td class="divArbeitsbereichUeberschriftButton">
+                    <h:commandButton value="Refresh" action="#{uNachrichtEmpfangen.doEmpfangenNachrichtenRefresh()}"
+                        styleClass="btnStandard">
+                    </h:commandButton>
+                </td>
+            </tr>
+        </table>
+
+        <h:panelGroup id="empfangeneNachrichtenTechnischBereich">
+            <h:selectBooleanCheckbox id="mailsUnbearbeiteteAnzeigenTechnisch"
+                value="#{blMNachrichten.nurUnbearbeiteteNachrichtenTechnischAnzeigen}">
+                <f:ajax render="empfangeneNachrichtenTechnisch" />
+            </h:selectBooleanCheckbox>
+            <h:outputLabel value="Nur zu bearbeitende Aktionen anzeigen" />
+            <br /><br />
+            <h:panelGroup id="empfangeneNachrichtenTechnisch">
+                <h:panelGroup rendered="#{blMNachrichten.nurUnbearbeiteteNachrichtenTechnischAnzeigen==false}">
+                    <h:panelGroup rendered="#{blMNachrichten.liefereNachrichtenTechnischVorhanden()==true}">
+                        <p:dataTable value="#{blMNachrichten.empfangeneNachrichtenTechnischAlleListe}" var="nachricht">
+
+                            <ui:include src="uNachrichtEmpfangenTechnischElement.xhtml">
+                            </ui:include>
+                        </p:dataTable>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{blMNachrichten.liefereNachrichtenTechnischVorhanden()==false}">
+                        Keine Aktionen vorhanden.
+                    </h:panelGroup>
+
+                </h:panelGroup>
+                <h:panelGroup rendered="#{blMNachrichten.nurUnbearbeiteteNachrichtenTechnischAnzeigen==true}">
+                    <h:panelGroup rendered="#{blMNachrichten.liefereNachrichtenUnbearbeitetTechnischVorhanden()==true}">
+                        <p:dataTable value="#{blMNachrichten.empfangeneNachrichtenTechnischUnbearbeiteteListe}"
+                            var="nachricht">
+
+                            <ui:include src="uNachrichtEmpfangenTechnischElement.xhtml">
+                            </ui:include>
+                        </p:dataTable>
+                    </h:panelGroup>
+                    <h:panelGroup
+                        rendered="#{blMNachrichten.liefereNachrichtenUnbearbeitetTechnischVorhanden()==false}">
+                        Keine zu bearbeitende Aktionen vorhanden.
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+    </div>
+</ui:composition>

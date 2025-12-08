@@ -1,0 +1,52 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+
+    <f:subview id="iNurAnmeldungQuittungOben">
+        <ui:include src="idetail/idSeiteStartModals.xhtml" />
+    </f:subview>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <f:subview id="iNurAnmeldenQuittungBestaende">
+                <ui:include src="idetail/idDurchfuehrenFuerBestand.xhtml" />
+            </f:subview>
+
+            <!-- Arbeitsbereich -->
+
+            <div class="container-80">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1252')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1252')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+            </div>
+        </div>
+    </div>
+
+    <f:subview id="iNurAnmeldungQuittungButtons">
+        <ui:include src="idetail/idSeiteButtonsUntenModals.xhtml">
+            <ui:param name="modalShowBtnRight" value="false" />
+            <ui:param name="modalStaticBtnRight" value="false" />
+            <ui:param name="modalShowBtnLeft" value="false" />
+            <ui:param name="modalStaticBtnLeft" value="false" />
+        </ui:include>
+    </f:subview>
+
+</ui:composition>

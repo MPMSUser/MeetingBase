@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutX="20.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="1400.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+      <Label layoutX="26.0" layoutY="29.0" text="Profil HV-Spezifisch">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbKennungHVSpezifisch" layoutX="182.0" layoutY="28.0" mnemonicParsing="false" onAction="#onCbKennungHVSpezifisch" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="142.0" layoutX="20.0" layoutY="65.0" stroke="BLACK" strokeType="INSIDE" width="1400.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Label layoutX="28.0" layoutY="78.0" text="Profil">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfKennung" layoutX="178.0" layoutY="73.0" onKeyPressed="#onKeyPressedKennung" prefHeight="25.0" prefWidth="445.0" />
+      <Button fx:id="btnBearbeiten" layoutX="645.0" layoutY="74.0" mnemonicParsing="false" onAction="#clickedBearbeiten" text="Bearbeiten">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnNeueKennungAnlegen" layoutX="734.0" layoutY="74.0" mnemonicParsing="false" onAction="#clickedNeueKennungAnlegen" text="Neues Profil anlegen">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSuchen" layoutX="1019.0" layoutY="74.0" mnemonicParsing="false" onAction="#clickedSuchen" text="Suchen">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="28.0" layoutY="111.0" text="Profil-Beschreibung">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfName" layoutX="178.0" layoutY="107.0" prefHeight="25.0" prefWidth="930.0" />
+      <Label layoutX="28.0" layoutY="142.0" text="Profil-Klasse">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfMailAdresse" layoutX="178.0" layoutY="138.0" prefHeight="25.0" prefWidth="930.0" />
+      <ScrollPane fx:id="scrpnBerechtigungen" layoutX="21.0" layoutY="231.0" prefHeight="519.0" prefWidth="1400.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="231.0" />
+      <Button fx:id="btnSpeichern" layoutX="26.0" layoutY="903.0" mnemonicParsing="false" onAction="#clickedSpeichern" text="Speichern" AnchorPane.bottomAnchor="15.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAbbrechen" layoutX="123.0" layoutY="903.0" mnemonicParsing="false" onAction="#clickedAbbrechen" text="Abbrechen" AnchorPane.bottomAnchor="15.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

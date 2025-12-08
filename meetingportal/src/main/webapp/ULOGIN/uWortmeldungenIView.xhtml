@@ -1,0 +1,189 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <!-- viewoffset enthält die ident (und damit das Offset) des angezeigten Subviews
+            arrayoffset enthält das offset in dem Array der Daten der Subviews.
+        -->
+
+
+
+    <!-- Liste e -->
+    <div class="divArbeitsbereich">
+        <table class="divArbeitsbereichUeberschrift">
+            <tr>
+                <td class="divArbeitsbereichUeberschriftText">
+                    <h:outputLabel
+                        value="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].textUeberschrift}" />
+                </td>
+                <td class="divArbeitsbereichUeberschriftButton">
+                </td>
+            </tr>
+        </table>
+        <p:dataTable value="#{uWortmeldungenSession.rednerlistenKoordination[arrayoffset]}" var="redner">
+            <p:column styleClass="colStandard" style="width:5%">
+                <f:facet name="header">
+                    <h:outputLabel value="LfdNr" />
+                </f:facet>
+                <h:outputLabel value="#{redner.lfdNrInListe}" />
+            </p:column>
+
+            <p:column styleClass="colStandard" style="width:20%">
+                <f:facet name="header">
+                    <h:outputLabel value="Zeitp.Wortm. / "
+                        rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].uhrzeitErgaenzen==1}" />
+                    <h:outputLabel value="Status" />
+                </f:facet>
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].uhrzeitErgaenzen==1}">
+                    <h:outputLabel value="#{redner.zeitpunktFuerAnzeige}" />
+                    <br />
+                </h:panelGroup>
+                <h:outputLabel
+                    value="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].statusArray[redner.status].anzeigeTextInDieserView}">
+                </h:outputLabel>
+                <h:outputLabel
+                    value=" (#{uWortmeldungenSession.wortmeldetischView.testStationBegriff} #{redner.raumNr})"
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].testraumErgaenzen==1 and uWortmeldungenSession.wortmeldetischViewArray[viewoffset].statusArray[redner.status].testraumErgaenzen==1}" />
+                <h:outputLabel
+                    value=" (#{uWortmeldungenSession.wortmeldetischView.redeStationBegriff} #{redner.raumNr})"
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].rederaumErgaenzen==1 and uWortmeldungenSession.wortmeldetischViewArray[viewoffset].statusArray[redner.status].rederaumErgaenzen==1}" />
+            </p:column>
+
+            <p:column styleClass="colStandard" style="width:40%">
+                <f:facet name="header">
+                    <h:outputLabel value="Redner (Kennung Konferenz)" />
+                    <h:outputLabel value=" / zu TOP"
+                        rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].infoFelderMitteilungAnzeigen==1}" />
+                    <h:outputLabel value=" / Kontaktdaten"
+                        rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].kontaktDatenAnzeigen==1}" />
+                    <h:outputLabel value=" / Kommentar intern"
+                        rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].kommentarInternAnzeigen==1}" />
+                    <h:outputLabel value=" / Kommentar Versammlungsleiter"
+                        rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].kommentarVersammlungsleiterAnzeigen==1}" />
+                    <h:outputLabel value=" / Präsenz"
+                    	rendered="#{uWortmeldungenSession.wortmeldetischView.praesenzAnzeigeAusfuehren==1 and uWortmeldungenSession.wortmeldetischViewArray[viewoffset].praesenzAnzeigeAusfuehren==1}" />   
+                </f:facet>
+                <h:outputLabel value="#{redner.nameVornameOrt} (#{redner.loginKennung} #{redner.loginKennung})" />
+                <br />
+
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].kontaktDatenAnzeigen==1}">
+                    <h:panelGroup rendered="#{redner.kontaktDaten!=''}">
+                        <h:outputText value="#{redner.kontaktDaten}" escape="true" />
+                        <br />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{redner.kontaktDatenTelefon!=''}">
+                        <h:outputText value="#{redner.kontaktDatenTelefon}" escape="true" />
+                        <br />
+                    </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].infoFelderMitteilungAnzeigen==1}">
+                    <h:panelGroup rendered="#{redner.zuTOPListe!=''}">
+                        <h:outputText value="#{redner.zuTOPListe}" escape="true" />
+                        <br />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{redner.inhaltsHinweiseVorhandenundAktiv}">
+                        <ui:repeat value="#{redner.inhaltsHinweiseListe}" var="inhaltsHinweis">
+                            <h:outputText value="#{inhaltsHinweis.textDE}" rendered="#{tLanguage.lang == 1}"
+                                escape="true" />
+                            <h:outputText value="#{inhaltsHinweis.textEN}" rendered="#{tLanguage.lang == 2}"
+                                escape="true" />
+                            <br />
+                        </ui:repeat>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{redner.mitteilungKurztext!=''}">
+                        <h:outputText value="#{redner.mitteilungKurztext}" escape="true" />
+                        <br />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{redner.mitteilungLangtext!=''}">
+                        <h:outputText value="#{redner.mitteilungLangtext}" escape="true" />
+                        <br />
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.praesenzAnzeigeAusfuehren==1 and uWortmeldungenSession.wortmeldetischViewArray[viewoffset].praesenzAnzeigeAusfuehren==1}">
+                         <h:outputText value="Präsent" escape="true" rendered="#{redner.praesent==1}"/>
+                         <h:outputText value="Nicht Präsent" escape="true" rendered="#{redner.praesent!=1}"/>
+                    </h:panelGroup>
+                    
+                </h:panelGroup>
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].kommentarInternAnzeigen==1}">
+                    <br />
+                    <h:outputText value="Kommentar intern: #{redner.kommentarIntern}" escape="true" />
+                    <br />
+                </h:panelGroup>
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].kommentarVersammlungsleiterAnzeigen==1}">
+                    <br />
+                    <h:outputText value="Kommentar extern: #{redner.kommentarVersammlungsleiter}" escape="true" />
+                    <br />
+                </h:panelGroup>
+
+            </p:column>
+
+            <p:column styleClass="colStandard" style="width:35%">
+
+                <h:dataTable value="#{redner.buttonKoordination[arrayoffset]}" var="button">
+                    <h:column>
+                        <h:commandButton value="#{button.buttonLabel}"
+                            action="#{uWortmeldungen.doButtonStatusAenderung(redner, button)}"
+                            styleClass="btnStandard" />
+                        <br />
+                    </h:column>
+                </h:dataTable>
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].detailBearbeitungZulassen==1}">
+                    <h:commandButton value="Bearbeiten" action="#{uWortmeldungen.doBearbeiten(redner)}"
+                        styleClass="btnStandard" />
+                    <br />
+                </h:panelGroup>
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].reihenfolgeBearbeitungZulassen==1}">
+                    <h:commandButton value="Rednerposition verändern" action="#{uWortmeldungen.doRednerpositionVeraendern(redner)}"
+                        styleClass="btnStandard" />
+                    <br />
+                </h:panelGroup>
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].rednerBearbeitungZulassen==1}">
+                    <h:commandButton value="Rednername verändern" action="#{uWortmeldungen.doRednernameVeraendern(redner)}"
+                        styleClass="btnStandard" />
+                    <br />
+                </h:panelGroup>
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].kommentarInternEingabeMoeglich==1}">
+                    <h:commandButton value="Kommentar intern" action="#{uWortmeldungen.doKommentarIntern(redner)}"
+                        styleClass="btnStandard" />
+                    <br />
+                </h:panelGroup>
+                <h:panelGroup
+                    rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].kommentarVersammlungsleiterEingabeMoeglich==1}">
+                    <h:commandButton value="Kommentar Versammlungsleiter"
+                        action="#{uWortmeldungen.doKommentarVersammlungsleiter(redner)}" styleClass="btnStandard" />
+                    <br />
+                </h:panelGroup>
+            </p:column>
+
+        </p:dataTable>
+        <h:panelGroup
+            rendered="#{uWortmeldungenSession.wortmeldetischViewArray[viewoffset].nachrichtAnVersammlungsleiterMoeglich==1}">
+            <h:commandButton value="Nachricht an Versammlungsleiter"
+                action="#{uWortmeldungen.doNachrichtAnVersammlungsleiter()}" styleClass="btnStandard" />
+            <br />
+        </h:panelGroup>
+    </div>
+</ui:composition>

@@ -1,0 +1,55 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+
+    <ui:define name="content">
+        <h:form enctype="multipart/form-data">
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Nachricht senden" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+
+
+            <ui:include src="/WEB-INF/ULOGIN/uNachrichtSendenDetail.xhtml">
+            </ui:include>
+
+            <!-- Arbeitsbereich Buttons -->
+            <table class="divButtons">
+                <tr>
+                    <td class="divButtonsLeft"></td>
+                    <td class="divButtonsCenter">
+                        <h:outputText value="&#160;" escape="false" />
+                    </td>
+                    <td class="divButtonsRight">
+                        <h:commandButton value="Nachricht Senden" action="#{uNachrichtSenden.doSenden()}"
+                            styleClass="btnStandard" />
+                    </td>
+                </tr>
+            </table>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

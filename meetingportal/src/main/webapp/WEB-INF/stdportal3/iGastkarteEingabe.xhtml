@@ -1,0 +1,204 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" lang="de">
+
+
+     <f:subview id="iGastkarteEingabeOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+
+     <div class="container-80">
+
+
+
+		<div class="row">
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldAnrede()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2273)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+                       <h:selectOneMenu value="#{tGaesteSession.feldAnrede}">
+                            <f:selectItems value="#{eclAnredeListeM.anredeListeM}" var="anrede"
+                                itemLabel="#{anrede.anredentext}" itemValue="#{anrede.anredennr}" />
+                        </h:selectOneMenu>
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldTitel()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2274)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldTitel}" maxlength="20"
+						size="30" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldAdelstitel()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2275)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldAdelstitel}" maxlength="30"
+						size="20" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldName()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2276)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldName}" maxlength="80"
+						size="40" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldVorname()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2277)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldVorname}" maxlength="80"
+						size="40" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldZuHaenden()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2278)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldZuHaenden}" maxlength="80"
+						size="40" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldZusatz1()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2279)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldZusatz1}" maxlength="80"
+						size="40" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldZusatz2()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2280)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldZusatz2}" maxlength="80"
+						size="40" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldStrasse()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2281)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldStrasse}" maxlength="80"
+						size="40" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldLand()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2282)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldLand}" maxlength="4"
+						size="4" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldPLZ()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2283)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldPLZ}" maxlength="20"
+						size="10" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldOrt()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2284)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldOrt}" maxlength="80"
+						size="40" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldMailadresse()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2285)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldMailadresse}" maxlength="80"
+						size="40" />
+				</div>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{tGaesteSession.liefereEingebenFeldKommunikationssprache()}">
+				<div class="col-3">
+					<h:outputLabel value="#{eclPortalTexteM.holeIText(2286)}"
+						escape="false" />
+				</div>
+				<div class="col-5">
+					<h:inputText value="#{tGaesteSession.feldKommunikationssprache}" maxlength="1"
+						size="1" />
+				</div>
+			</h:panelGroup>
+			
+			<div class="col-8"></div>
+
+			<!-- Endetext immer -->
+			<h:panelGroup
+				rendered="#{eclPortalTexteM.pruefeITextVorhanden(2287)}">
+				<p>
+					<h:outputText value="#{eclPortalTexteM.holeIText(2287)}"
+						escape="false" />
+
+				</p>
+			</h:panelGroup>
+		</div>
+	</div>
+    <f:subview id="iGastkarteEingabeButtons">
+        <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+    </f:subview>
+
+</ui:composition>

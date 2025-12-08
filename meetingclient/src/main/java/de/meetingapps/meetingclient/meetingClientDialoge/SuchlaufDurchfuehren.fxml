@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="160.0" layoutX="14.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="525.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="35.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="160.0" layoutX="646.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="800.0" AnchorPane.leftAnchor="550.0" AnchorPane.topAnchor="35.0" />
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="25.0" text="Suchbegriffe" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="40.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblAktion" layoutX="24.0" layoutY="24.0" prefHeight="25.0" text="Suchbegriffe" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnAktualisieren" layoutX="153.0" layoutY="52.0" mnemonicParsing="false" onAction="#onBtnAktualisieren" prefHeight="25.0" prefWidth="121.0" text="Aktualisieren" AnchorPane.topAnchor="40.0" />
+      <Label fx:id="lblSucheIn" layoutX="332.0" layoutY="56.0" prefHeight="25.0" prefWidth="200.0" text="Suche in Aktionärs-/Vertretername" AnchorPane.topAnchor="40.0" />
+      <TextArea fx:id="taSuchbegriffe" layoutX="26.0" layoutY="89.0" prefHeight="100.0" prefWidth="500.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="80.0" />
+      <Label layoutX="665.0" layoutY="55.0" prefHeight="25.0" text="Einzelsuche" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="40.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnEinzelsucheDurchfuehren" layoutX="881.0" layoutY="52.0" mnemonicParsing="false" onAction="#onBtnEinzelsucheDurchfuehren" prefHeight="25.0" prefWidth="225.0" text="Einzelsuche durchführen" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="40.0" />
+      <TabPane fx:id="tabPaneGesamt" layoutX="14.0" layoutY="225.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="135.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+        <tabs>
+            <Tab fx:id="tabVeraenderung" text="Veränderungen">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fx:id="scpnVeraenderungen" fitToHeight="true" fitToWidth="true" layoutY="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabAlle" text="Alle">
+              <content>
+                <AnchorPane>
+                     <children>
+                        <ScrollPane fx:id="scpnAlle" fitToHeight="true" fitToWidth="true" layoutY="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabUnbearbeitete" text="Unbearbeitete">
+              <content>
+                <AnchorPane>
+                     <children>
+                        <ScrollPane fx:id="scpnUnbearbeitete" fitToHeight="true" fitToWidth="true" layoutY="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                           </padding></ScrollPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabVerarbeitete" text="Verarbeitete">
+              <content>
+                <AnchorPane>
+                     <children>
+                        <ScrollPane fx:id="scpnVerarbeitete" fitToHeight="true" fitToWidth="true" layoutY="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                           </padding></ScrollPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabAusgeblendete" text="Ausgeblendete">
+              <content>
+                <AnchorPane>
+                     <children>
+                        <ScrollPane fx:id="scpnAusgeblendete" fitToHeight="true" fitToWidth="true" layoutY="4.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" top="5.0" />
+                           </padding></ScrollPane>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="btnSpeichern" layoutX="16.0" layoutY="833.0" mnemonicParsing="false" onAction="#onBtnSpeichern" prefWidth="165.0" text="Speichern" AnchorPane.bottomAnchor="95.0" />
+      <Button fx:id="btnSpeichernBeenden" layoutX="16.0" layoutY="874.0" mnemonicParsing="false" onAction="#onBtnSpeichernBeenden" prefWidth="165.0" text="Speichern / Beenden" AnchorPane.bottomAnchor="55.0" />
+      <Button fx:id="btnAbbrechen" layoutX="201.0" layoutY="833.0" mnemonicParsing="false" onAction="#onBtnAbbrechen" prefWidth="165.0" text="Abbrechen" AnchorPane.bottomAnchor="95.0" />
+      <Button fx:id="btnAusgewaehlteVerarbeiten1" layoutX="493.0" layoutY="833.0" mnemonicParsing="false" onAction="#onBtnAusgewaehlteVerarbeiten1" prefWidth="300.0" text="Ausgewählte Verarbeiten 1" AnchorPane.bottomAnchor="95.0" />
+      <Button fx:id="btnAusgewaehlteVerarbeiten2" layoutX="493.0" layoutY="872.0" mnemonicParsing="false" onAction="#onBtnAusgewaehlteVerarbeiten2" prefWidth="300.0" text="Ausgewählte Verarbeiten 2" AnchorPane.bottomAnchor="55.0" />
+      <Button fx:id="btnAusgewaehlteVerarbeiten3" layoutX="493.0" layoutY="911.0" mnemonicParsing="false" onAction="#onBtnAusgewaehlteVerarbeiten3" prefWidth="300.0" text="Ausgewählte Verarbeiten 3" AnchorPane.bottomAnchor="15.0" />
+      <Button fx:id="btnAusgewaehlteAusblenden" layoutX="1215.0" layoutY="833.0" mnemonicParsing="false" onAction="#onBtnAusgewaehlteAusblenden" prefWidth="300.0" text="Ausgewählte Ausblenden" AnchorPane.bottomAnchor="95.0" AnchorPane.rightAnchor="225.0" />
+      <Label layoutX="1214.0" layoutY="876.0" prefHeight="25.0" prefWidth="100.0" text="Ausblenden weil:" AnchorPane.bottomAnchor="55.0" AnchorPane.rightAnchor="425.0" />
+      <TextField fx:id="tfAusgeblendetWeil" layoutX="1322.0" layoutY="872.0" minWidth="100.0" prefWidth="400.0" AnchorPane.bottomAnchor="55.0" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btnAusgewaehlteEinblenden" layoutX="1214.0" layoutY="911.0" mnemonicParsing="false" onAction="#onBtnAusgewaehlteEinblenden" prefWidth="300.0" text="Ausgewählte Einblenden" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="225.0" />
+</children>
+</AnchorPane>

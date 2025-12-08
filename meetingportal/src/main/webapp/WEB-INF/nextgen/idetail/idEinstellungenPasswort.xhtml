@@ -1,0 +1,189 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    xmlns:f="jakarta.faces.core" xmlns:a="http://xmlns.jcp.org/jsf/passthrough" lang="de">
+    <div class="mt-5 mb-5">
+        <!-- aDlgVariablen.renderDauerhaftesPasswortAngebotenUndZulaessig()==true -->
+        <h:panelGroup id="eigenesPasswort" rendered="#{tRender.dauerhaftesPasswortAngebotenUndZulaessig()==true}">
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('266')}" styleClass="row">
+                <div class="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('266')}" escape="false" />
+                    </p>
+                </div>
+            </h:panelGroup>
+
+            <!-- dauerhaftes Passwort - falls bisher noch kein Passwort vergeben -->
+            <!-- !aDlgVariablen.passwortBereitsVergeben  -->
+            <h:panelGroup rendered="#{!tEinstellungenSession.passwortBereitsVergeben}">
+                <div class="row">
+                    <div class="col">
+                        <!--  Checkbox - ja ich will vergeben -->
+                        <!-- aDlgVariablen.ausgewaehltVergabeEigenesPasswort -->
+                        <h:selectBooleanCheckbox id="id3" value="#{tEinstellungenSession.vergabeEigenesPasswort}"
+                            styleClass="form-check-input">
+                            <f:ajax render="passwortvergabe" />
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value="#{eclPortalTexteM.holeText('267')}" escape="false" for="id3"
+                            styleClass="form-check-label"></h:outputLabel>
+                    </div>
+                </div>
+                <h:panelGroup id="passwortvergabe">
+                    <!-- aDlgVariablen.ausgewaehltVergabeEigenesPasswort -->
+                    <h:panelGroup rendered="#{tEinstellungenSession.vergabeEigenesPasswort}">
+
+                        <!-- Passwort vergeben, falls oben angeklickt -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('268')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('268')}" escape="false" />
+                                </p>
+                            </div>
+                        </h:panelGroup>
+
+                        <div class="row">
+                            <div class="col">
+                                <p>
+                                    <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.neuesPasswort -->
+                                    <h:inputSecret value="#{tEinstellungenSession.neuesPasswort}" maxlength="20"
+                                        size="20" redisplay="true" autocomplete="off" styleClass="form-control"
+                                        a:placeholder="#{eclPortalTexteM.holeText('269')}"></h:inputSecret>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p>
+                                    <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.neuesPasswortBestaetigung -->
+                                    <h:inputSecret value="#{tEinstellungenSession.neuesPasswortBestaetigung}"
+                                        maxlength="20" sizwe="20" redisplay="true" autocomplete="off"
+                                        styleClass="form-control" a:placeholder="#{eclPortalTexteM.holeText('270')}">
+                                    </h:inputSecret>
+                                </p>
+                            </div>
+                        </div>
+
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('271')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('271')}" escape="false" />
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- Passwort, falls bereits vergeben -->
+            <!-- aDlgVariablen.passwortBereitsVergeben -->
+            <h:panelGroup rendered="#{tEinstellungenSession.passwortBereitsVergeben}">
+                <!-- Checkbox, dass ich wieder auf "nicht dauerhaftes Passwort" umschalten will -->
+                <div class="row">
+                    <div class="col">
+                        <!-- aDlgVariablen.ausgewaehltVergabeEigenesPasswort -->
+                        <h:selectBooleanCheckbox id="id3keinDauerhaftesPasswortMehr"
+                            value="#{tEinstellungenSession.vergabeEigenesPasswort}">
+                            <f:ajax render="passwortDauerhaft" styleClass="form-check-input" />
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value="#{eclPortalTexteM.holeText('279')}" escape="false"
+                            for="id3keinDauerhaftesPasswortMehr" styleClass="form-check-label"></h:outputLabel>
+                    </div>
+                </div>
+
+                <h:panelGroup id="passwortDauerhaft">
+
+                    <!-- aDlgVariablen.ausgewaehltVergabeEigenesPasswort -->
+                    <h:panelGroup rendered="#{tEinstellungenSession.vergabeEigenesPasswort}">
+                        <div class="row">
+                            <div class="col">
+                                <!-- aDlgVariablen.neuesPasswort -->
+                                <h:selectBooleanCheckbox id="id3neuesPasswort"
+                                    value="#{tEinstellungenSession.passwortNeuVergeben}" styleClass="form-check-input">
+                                    <f:ajax render="passwortNeu" />
+                                </h:selectBooleanCheckbox>
+                                <h:outputLabel value="#{eclPortalTexteM.holeText('278')}" escape="false"
+                                    for="id3neuesPasswort" styleClass="form-check-label">
+                                </h:outputLabel>
+                            </div>
+                        </div>
+
+
+                        <h:panelGroup id="passwortNeu">
+                            <!-- aDlgVariablen.neuesPasswort and aDlgVariablen.ausgewaehltVergabeEigenesPasswort -->
+                            <h:panelGroup
+                                rendered="#{tEinstellungenSession.passwortNeuVergeben and tEinstellungenSession.vergabeEigenesPasswort}">
+
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('268')}" styleClass="row">
+                                    <div class="col">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('268')}" escape="false" />
+                                        </p>
+                                    </div>
+                                </h:panelGroup>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <p>
+                                            <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.neuesPasswort -->
+                                            <h:inputSecret value="#{tEinstellungenSession.neuesPasswort}" maxlength="20"
+                                                size="20" redisplay="true" autocomplete="off"
+                                                a:placeholder="#{eclPortalTexteM.holeText('269')}"
+                                                styleClass="form-control">
+                                            </h:inputSecret>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p>
+                                            <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.neuesPasswortBestaetigung -->
+                                            <h:inputSecret value="#{tEinstellungenSession.neuesPasswortBestaetigung}"
+                                                maxlength="20" sizwe="20" redisplay="true" autocomplete="off"
+                                                a:placeholder="#{eclPortalTexteM.holeText('270')}"
+                                                styleClass="form-control">
+                                            </h:inputSecret>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('271')}" styleClass="row">
+                                    <div class="col">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('271')}" escape="false" />
+                                        </p>
+                                    </div>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <!-- aDlgVariablen.renderDauerhaftesPasswortAngebotenAberNichtZulaessig()==true -->
+        <h:panelGroup id="passwortNichtZulaessig"
+            rendered="#{tRender.dauerhaftesPasswortAngebotenAberNichtZulaessig()==true}">
+            <!-- einleitender Text -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('617')}" styleClass="row">
+                <div class="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('617')}" escape="false" />
+                    </p>
+                </div>
+            </h:panelGroup>
+        </h:panelGroup>
+    </div>
+</ui:composition>

@@ -1,0 +1,117 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Nachrichten - Pflege Basistexte" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <div class="divArbeitsbereich">
+                <p:panelGrid style="width: 1180px">
+                    <p:row rendered="#{uNachrichtSendenSession.auswahlVerwendungsCodeMoeglich}">
+                        <p:column>
+                            <!-- Verwendungscodes -->
+                            <h:outputLabel value="Text-Nr:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <table class="tableSendenZwei">
+                                <tr>
+                                    <td>
+                                        <h:inputText value="#{uPflegeNachrichtBasisTextSession.ident}" maxlength="6"
+                                            size="6" rendered="#{uPflegeNachrichtBasisTextSession.modus==0}">
+                                        </h:inputText>
+                                        <h:outputLabel value="#{uPflegeNachrichtBasisTextSession.ident}"
+                                            rendered="#{uPflegeNachrichtBasisTextSession.modus!=0}" />
+
+                                    </td>
+                                    <td class="tableRechts">
+                                        <h:commandButton value="Weiter" action="#{uPflegeNachrichtBasisText.doWeiter()}"
+                                            rendered="#{uPflegeNachrichtBasisTextSession.modus==0}"
+                                            styleClass="btnNeutral" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </p:column>
+                    </p:row>
+                    <p:row rendered="#{uPflegeNachrichtBasisTextSession.modus!=0}">
+                        <p:column>
+                            <h:outputLabel value="Beschreibung:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{uPflegeNachrichtBasisTextSession.beschreibung}" maxlength="80"
+                                size="40"></h:inputText>
+                        </p:column>
+                    </p:row>
+
+                    <p:row rendered="#{uPflegeNachrichtBasisTextSession.modus!=0}">
+                        <p:column>
+                            <h:outputLabel value="Betreff:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{uPflegeNachrichtBasisTextSession.betreff}" maxlength="80" size="60">
+                            </h:inputText>
+                        </p:column>
+                    </p:row>
+
+                    <p:row rendered="#{uPflegeNachrichtBasisTextSession.modus!=0}">
+                        <p:column>
+                            <h:outputLabel value="Nachrichten-Text:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputTextarea rows="6" cols="80" value="#{uPflegeNachrichtBasisTextSession.mailText}"
+                                rendered="#{uPflegeNachrichtBasisTextSession.modus!=0}"></h:inputTextarea>
+                        </p:column>
+                    </p:row>
+
+
+                </p:panelGrid>
+                <table class="divButtonsArbeitsbereich">
+                    <tr>
+                        <td class="divButtonsLeft">
+                            <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                rendered="#{uPflegeNachrichtBasisTextSession.modus==1 or uPflegeNachrichtBasisTextSession.modus==2}"
+                                action="#{uPflegeNachrichtBasisText.doAbbrechen()}" />
+                        </td>
+                        <td class="divButtonsCenter">
+                            <h:outputText value="&#160;" escape="false" />
+                        </td>
+                        <td class="divButtonsRight">
+                            <h:commandButton value="Speichern" styleClass="btnStandard"
+                                rendered="#{uPflegeNachrichtBasisTextSession.modus==1}"
+                                action="#{uPflegeNachrichtBasisText.doSpeichern()}" />
+                            <h:commandButton value="Neu Anlegen" styleClass="btnStandard"
+                                rendered="#{uPflegeNachrichtBasisTextSession.modus==2}"
+                                action="#{uPflegeNachrichtBasisText.doNeu()}" />
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

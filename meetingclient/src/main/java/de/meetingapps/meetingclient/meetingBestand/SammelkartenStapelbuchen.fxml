@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane vgap="15.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints percentHeight="45.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="45.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" GridPane.columnSpan="3" GridPane.rowSpan="2">
+              <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1;">
+                     <children>
+                        <Label prefHeight="25.0" text="Umbuchen auf eine andere Sammelkarte" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ScrollPane fx:id="scpnUmbuchen" fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" style="-fx-border-color: black; -fx-border-width: 1;">
+                     <children>
+                        <Label prefHeight="25.0" text="Weisung für Abstimmungspunkt setzen auf:" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="10.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnWeisungGesamt" mnemonicParsing="false" onAction="#clickedWeisungGesamt" prefHeight="25.0" text="Weisungen setzen" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="10.0" />
+                        <ScrollPane fx:id="scpnAbstimmungspunkte" fitToHeight="true" fitToWidth="true" layoutX="1.0" layoutY="42.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <AnchorPane style="-fx-border-color: black; -fx-border-width: 1;" GridPane.columnSpan="3" GridPane.rowIndex="2">
+               <children>
+                  <Label prefHeight="25.0" text="Sonstiges" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="10.0">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnLoeschenAusSammelkarte" mnemonicParsing="false" onAction="#clickedLoeschenAusSammelkarte" prefHeight="25.0" text="Aus der Sammelkarte löschen" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="10.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+      <Button fx:id="btnAbbrechen" layoutX="23.0" layoutY="659.0" mnemonicParsing="false" onAction="#clickedAbbrechen" prefHeight="25.0" text="Abbrechen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+   </children>
+</AnchorPane>

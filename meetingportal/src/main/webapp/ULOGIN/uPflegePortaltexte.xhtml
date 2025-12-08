@@ -1,0 +1,815 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="#{uPflegePortaltexteSession.ueberschrift}" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <div class="divArbeitsbereich">
+
+                <!-- Eingabebereich - Nummer aufrufen -->
+                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px"
+                    rendered="#{uPflegePortaltexteSession.modus==0}">
+
+                    <p:column>
+                        <h:outputLabel value="Basis-Set"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegePortaltexteSession.basisSet}" maxlength="5" size="5"></h:inputText>
+                        <h:outputLabel
+                            value=" (Voreinstellung: Basis-Set #{uPflegePortaltexteSession.basisSetVoreingestellt})">
+                        </h:outputLabel>
+
+                        <h:outputLabel value="#{uPflegeFehlertextePortalSession.basisSet}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Text-Nr"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegePortaltexteSession.textnummer}" maxlength="6" size="6" />
+                    </p:column>
+
+                    <p:column>
+                        <h:commandButton value="Text-Nr. bearbeiten" action="#{uPflegePortaltexte.doTextNrBearbeiten}"
+                            styleClass="btnNeutral" />
+                    </p:column>
+                    <p:column>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputText value="&#160;" />
+                    </p:column>
+                    <p:column>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="App-Seite"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegePortaltexteSession.appSeite}" maxlength="6" size="6" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="App-Ident"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegePortaltexteSession.appIdent}" maxlength="6" size="6" />
+                    </p:column>
+
+                    <p:column>
+                        <h:commandButton value="App-Ident bearbeiten"
+                            action="#{uPflegePortaltexte.doAppIdentBearbeiten}" styleClass="btnNeutral" />
+                    </p:column>
+                    <p:column>
+                    </p:column>
+
+                </p:panelGrid>
+                <h:outputText value="&#160;" />
+
+
+                <!-- Arbeitsbereich -->
+                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px"
+                    rendered="#{uPflegePortaltexteSession.modus==1}">
+
+                    <p:column>
+                        <h:outputLabel value="Basis-Set" />
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegePortaltexteSession.basisSet}" />
+                        <h:outputLabel
+                            value=" (Voreinstellung: Basis-Set #{uPflegePortaltexteSession.basisSetVoreingestellt})" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Text-Nr" />
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegePortaltexteSession.textnummer}" maxlength="6" size="6" />
+                    </p:column>
+
+
+                    <p:column>
+                        <h:outputLabel value="Seite/Beschreibung"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <b>
+                            <h:outputLabel
+                                value="#{uPflegePortaltexteSession.seitenName} #{uPflegePortaltexteSession.beschreibung}" />
+                        </b>
+                        <h:outputLabel value=" Verb. mit #{uPflegePortaltexteSession.verbundenMitIdentGesamt}"
+                            rendered="#{uPflegePortaltexteSession.verbundenMitIdentGesamt!='0'}" />
+                    </p:column>
+                </p:panelGrid>
+
+                <!-- Deutsch Beginn -->
+                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px"
+                    rendered="#{uPflegePortaltexteSession.modus==1 and uPflegePortaltexteSession.mandantenSpezifisch==true}">
+
+                    <p:column>
+                        <h:outputLabel value="DE Standard-Text" />
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegePortaltexteSession.portalStandardTextDE}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="DE Standard-Text Adaptiv" rendered="#{eclPortalTexteM.adaptivePflegen}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegePortaltexteSession.portalStandardAdaptivTextDE}"
+                            rendered="#{eclPortalTexteM.adaptivePflegen}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="DE Standard-Text App" rendered="#{eclPortalTexteM.appPflegen}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegePortaltexteSession.appStandardTextDE}"
+                            rendered="#{eclPortalTexteM.appPflegen}" />
+                    </p:column>
+
+                    <p:column>
+                    </p:column>
+                    <p:column>
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.portalVonStandardVerwendenDE}">
+                            <f:ajax render="textDE" />
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value=" Standard-Texte DE verwenden" />
+                    </p:column>
+
+                </p:panelGrid>
+
+                <h:panelGroup id="textDE">
+                    <h:panelGroup
+                        rendered="#{!uPflegePortaltexteSession.portalVonStandardVerwendenDE and uPflegePortaltexteSession.modus==1}">
+                        <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                            style="width: 1180px">
+                            <p:column>
+                                <h:outputLabel value="DE Mand.Text Portal" />
+                            </p:column>
+                            <p:column>
+                                <h:inputTextarea rows="4" cols="80" value="#{uPflegePortaltexteSession.portalTextDE}">
+                                </h:inputTextarea>
+                                <h:outputLabel value="  " />
+                                <h:commandButton action="#{uPflegePortaltexte.doPortalVonStandardDE}"
+                                    value="Standard kopieren"
+                                    rendered="#{uPflegePortaltexteSession.mandantenSpezifisch}" />
+                            </p:column>
+                        </p:panelGrid>
+
+                        <h:panelGroup rendered="#{eclPortalTexteM.adaptivePflegen}">
+                            <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                                style="width: 1180px">
+
+                                <p:column>
+                                </p:column>
+                                <p:column>
+                                    <h:selectBooleanCheckbox
+                                        value="#{uPflegePortaltexteSession.portalAdaptivAbweichendDE}">
+                                        <f:ajax render="adaptiveDE" />
+                                    </h:selectBooleanCheckbox>
+                                    <h:outputLabel value=" DE Mand.Text Adaptive - Abweichend von Portal" />
+                                </p:column>
+                            </p:panelGrid>
+
+                            <h:panelGroup id="adaptiveDE">
+                                <h:panelGroup rendered="#{uPflegePortaltexteSession.portalAdaptivAbweichendDE}">
+                                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                                        style="width: 1180px">
+                                        <p:column>
+                                            <h:outputLabel value="DE Mand.Text Adaptive" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:inputTextarea rows="4" cols="80"
+                                                value="#{uPflegePortaltexteSession.portalAdaptivTextDE}">
+                                            </h:inputTextarea>
+                                            <h:outputLabel value="  " />
+                                            <h:commandButton action="#{uPflegePortaltexte.doAdaptivVonPortalDE}"
+                                                value="Portal-Text kopieren" />
+                                        </p:column>
+
+                                    </p:panelGrid>
+
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{eclPortalTexteM.appPflegen}">
+                            <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                                style="width: 1180px">
+
+                                <p:column>
+                                </p:column>
+                                <p:column>
+                                    <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.appAbweichendDE}">
+                                        <f:ajax render="appDE" />
+                                    </h:selectBooleanCheckbox>
+                                    <h:outputLabel value=" DE Mand.Text App - Abweichend von Portal" />
+                                </p:column>
+                            </p:panelGrid>
+
+                            <h:panelGroup id="appDE">
+                                <h:panelGroup rendered="#{uPflegePortaltexteSession.appAbweichendDE}">
+                                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                                        style="width: 1180px">
+                                        <p:column>
+                                            <h:outputLabel value="DE Mand.Text App" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:inputTextarea rows="4" cols="80"
+                                                value="#{uPflegePortaltexteSession.appTextDE}"></h:inputTextarea>
+                                            <h:outputLabel value="  " />
+                                            <h:commandButton action="#{uPflegePortaltexte.doAppVonPortalDE}"
+                                                value="Portal-Text kopieren" />
+                                        </p:column>
+
+                                    </p:panelGrid>
+
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+
+                    </h:panelGroup>
+                </h:panelGroup>
+                <!--  Deutsch Ende -->
+
+                <!-- Englisch Beginn -->
+                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px"
+                    rendered="#{uPflegePortaltexteSession.modus==1 and uPflegePortaltexteSession.mandantenSpezifisch==true}">
+
+                    <p:column>
+                        <h:outputLabel value="EN Standard-Text" />
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegePortaltexteSession.portalStandardTextEN}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="EN Standard-Text Adaptiv" rendered="#{eclPortalTexteM.adaptivePflegen}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegePortaltexteSession.portalStandardAdaptivTextEN}"
+                            rendered="#{eclPortalTexteM.adaptivePflegen}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="EN Standard-Text App" rendered="#{eclPortalTexteM.appPflegen}" />
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegePortaltexteSession.appStandardTextEN}"
+                            rendered="#{eclPortalTexteM.appPflegen}" />
+                    </p:column>
+
+                    <p:column>
+                    </p:column>
+                    <p:column>
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.portalVonStandardVerwendenEN}">
+                            <f:ajax render="textEN" />
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value=" Standard-Texte EN verwenden" />
+                    </p:column>
+
+                </p:panelGrid>
+
+                <h:panelGroup id="textEN">
+                    <h:panelGroup
+                        rendered="#{!uPflegePortaltexteSession.portalVonStandardVerwendenEN and uPflegePortaltexteSession.modus==1}">
+                        <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                            style="width: 1180px">
+                            <p:column>
+                                <h:outputLabel value="EN Mand.Text Portal" />
+                            </p:column>
+                            <p:column>
+                                <h:inputTextarea rows="4" cols="80" value="#{uPflegePortaltexteSession.portalTextEN}">
+                                </h:inputTextarea>
+                                <h:outputLabel value="  " />
+                                <h:commandButton action="#{uPflegePortaltexte.doPortalVonStandardEN}"
+                                    value="Standard kopieren"
+                                    rendered="#{uPflegePortaltexteSession.mandantenSpezifisch}" />
+                            </p:column>
+                        </p:panelGrid>
+
+                        <h:panelGroup rendered="#{eclPortalTexteM.adaptivePflegen}">
+                            <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                                style="width: 1180px">
+
+                                <p:column>
+                                </p:column>
+                                <p:column>
+                                    <h:selectBooleanCheckbox
+                                        value="#{uPflegePortaltexteSession.portalAdaptivAbweichendEN}">
+                                        <f:ajax render="adaptiveEN" />
+                                    </h:selectBooleanCheckbox>
+                                    <h:outputLabel value=" EN Mand.Text Adaptive - Abweichend von Portal" />
+                                </p:column>
+                            </p:panelGrid>
+
+                            <h:panelGroup id="adaptiveEN">
+                                <h:panelGroup rendered="#{uPflegePortaltexteSession.portalAdaptivAbweichendEN}">
+                                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                                        style="width: 1180px">
+                                        <p:column>
+                                            <h:outputLabel value="EN Mand.Text Adaptive" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:inputTextarea rows="4" cols="80"
+                                                value="#{uPflegePortaltexteSession.portalAdaptivTextEN}">
+                                            </h:inputTextarea>
+                                            <h:outputLabel value="  " />
+                                            <h:commandButton action="#{uPflegePortaltexte.doAdaptivVonPortalEN}"
+                                                value="Portal-Text kopieren" />
+                                        </p:column>
+
+                                    </p:panelGrid>
+
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{eclPortalTexteM.appPflegen}">
+                            <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                                style="width: 1180px">
+
+                                <p:column>
+                                </p:column>
+                                <p:column>
+                                    <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.appAbweichendEN}">
+                                        <f:ajax render="appEN" />
+                                    </h:selectBooleanCheckbox>
+                                    <h:outputLabel value=" EN Mand.Text App - Abweichend von Portal" />
+                                </p:column>
+                            </p:panelGrid>
+
+                            <h:panelGroup id="appEN">
+                                <h:panelGroup rendered="#{uPflegePortaltexteSession.appAbweichendEN}">
+                                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                                        style="width: 1180px">
+                                        <p:column>
+                                            <h:outputLabel value="EN Mand.Text App" />
+                                        </p:column>
+                                        <p:column>
+                                            <h:inputTextarea rows="4" cols="80"
+                                                value="#{uPflegePortaltexteSession.appTextEN}"></h:inputTextarea>
+                                            <h:outputLabel value="  " />
+                                            <h:commandButton action="#{uPflegePortaltexte.doAppVonPortalEN}"
+                                                value="Portal-Text kopieren" />
+                                        </p:column>
+
+                                    </p:panelGrid>
+
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+
+                    </h:panelGroup>
+                </h:panelGroup>
+                <!--  englisch Ende -->
+
+                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px"
+                    rendered="#{uPflegePortaltexteSession.modus==1}">
+
+                    <p:column>
+                        <h:outputLabel value="AppSeitennummer" />
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegePortaltexteSession.seitennummer}" maxlength="10" size="10"
+                            rendered="#{!uPflegePortaltexteSession.mandantenSpezifisch}" />
+                        <h:outputLabel value="#{uPflegePortaltexteSession.seitennummer}"
+                            rendered="#{uPflegePortaltexteSession.mandantenSpezifisch}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="AppIdent-Nummer" />
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegePortaltexteSession.ident}" maxlength="10" size="10"
+                            rendered="#{!uPflegePortaltexteSession.mandantenSpezifisch}" />
+                        <h:outputLabel value="#{uPflegePortaltexteSession.ident}"
+                            rendered="#{uPflegePortaltexteSession.mandantenSpezifisch}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Text ist in Portal" />
+                    </p:column>
+                    <p:column>
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.textInPortal}"
+                            rendered="#{!uPflegePortaltexteSession.mandantenSpezifisch}" />
+                        <h:outputLabel value="#{uPflegePortaltexteSession.textInPortal}"
+                            rendered="#{uPflegePortaltexteSession.mandantenSpezifisch}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Text ist in App" />
+                    </p:column>
+                    <p:column>
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.textInApp}"
+                            rendered="#{!uPflegePortaltexteSession.mandantenSpezifisch}" />
+                        <h:outputLabel value="#{uPflegePortaltexteSession.textInApp}"
+                            rendered="#{uPflegePortaltexteSession.mandantenSpezifisch}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Text ist Verbunden mit Nr." />
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegePortaltexteSession.verbundenMitIdentGesamt}"
+                            rendered="#{!uPflegePortaltexteSession.mandantenSpezifisch}" />
+                        <h:outputLabel value="#{uPflegePortaltexteSession.verbundenMitIdentGesamt}"
+                            rendered="#{uPflegePortaltexteSession.mandantenSpezifisch}" />
+                    </p:column>
+
+
+                </p:panelGrid>
+                <h:panelGroup rendered="#{uPflegePortaltexteSession.modus==1}">
+                    <table class="divButtons">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                    action="#{uPflegePortaltexte.doAbbrechen()}" />
+                            </td>
+                            <td class="divButtonsCenter"></td>
+                            <td class="divButtonsRight">
+                                <h:commandButton value="Speichern" styleClass="btnStandard"
+                                    action="#{uPflegePortaltexte.doSpeichern()}" />
+                            </td>
+
+                        </tr>
+                    </table>
+                </h:panelGroup>
+                <br /><br />
+
+
+                <!-- Suchbereich -->
+                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px">
+
+
+                    <p:column>
+                        <h:outputLabel value="Such-Begriff"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegePortaltexteSession.suchenBegriff}" maxlength="40" size="40">
+                        </h:inputText>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Selektion Sprache" />
+                    </p:column>
+                    <p:column>
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.suchenDeutsch}" />
+                        <h:outputLabel value=" Deutsch" />
+                        <br />
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.suchenEnglisch}" />
+                        <h:outputLabel value=" Englisch" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Selektion Verwendung" />
+                    </p:column>
+                    <p:column>
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.suchenPortal}" />
+                        <h:outputLabel value=" Portal" />
+                        <br />
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.suchenApp}" />
+                        <h:outputLabel value=" App" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Selektion Textart" />
+                    </p:column>
+                    <p:column>
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.suchenMandant}" />
+                        <h:outputLabel value=" Mandant" />
+                        <br />
+                        <h:selectBooleanCheckbox value="#{uPflegePortaltexteSession.suchenStandard}" />
+                        <h:outputLabel value=" Standard" />
+                    </p:column>
+
+                    <p:column>
+                        <h:commandButton value="Suchen" action="#{uPflegePortaltexte.doSuchen}"
+                            styleClass="btnNeutral" />
+                    </p:column>
+                    <p:column>
+                    </p:column>
+
+
+                </p:panelGrid>
+
+                <!-- Suchergebnis> -->
+                <p:panelGrid columnClasses="panel25FirstColumn" columns="1" style="width: 1180px">
+                    <p:column>
+                        <h:dataTable value="#{uPflegePortaltexteSession.ergebnisListe}" var="ergebnisElement">
+                            <h:column>
+                                <h:outputText value="#{ergebnisElement.ident}" />
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="#{ergebnisElement.seitenName}" />
+                            </h:column>
+                            <h:column>
+                                <h:outputText value="#{ergebnisElement.beschreibung}" />
+                            </h:column>
+                        </h:dataTable>
+                    </p:column>
+                </p:panelGrid>
+
+                <br />
+                <br />
+                <table>
+                    <tr>
+                        <td>&lt;**Kommentartext**&gt;</td>
+                        <td>Kommentartext (beliebiger Text) wird als Kommentar gewertet und nicht angezeigt</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;Gesellschaft&gt;&gt;&gt;</td>
+                        <td>Bezeichnung der Gesellschaft</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;MailHotlineLink&gt;&gt;&gt;,
+                            &lt;&lt;&lt;MailGesellschaftLink&gt;&gt;&gt;</td>
+                        <td>EMail-Adresse (Link), z.B. für Hotline</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;MailHotlineText&gt;&gt;&gt;</td>
+                        <td>EMail-Adresse (Anzeigetext), z.B. für Hotline</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;MailVollmachtLink&gt;&gt;&gt;,
+                            &lt;&lt;&lt;MailVollmachtText&gt;&gt;&gt;</td>
+                        <td>EMail-Adresse (Link und Anzeigetext), für Vollmachtene</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;Stimmrechtsvertreter&gt;&gt;&gt;</td>
+                        <td>Text für Stimmrechtsvertreter Namen</td>
+                    </tr>
+
+                    <tr>
+                        <td>&lt;&lt;&lt;LinkTagesordnung&gt;&gt;&gt;</td>
+                        <td>Link zur Tagesordnung</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;LinkGegenantraege&gt;&gt;&gt;</td>
+                        <td>Link zu den veröffentlichten Gegenanträgen</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;LinkEinladungsPDF&gt;&gt;&gt;</td>
+                        <td>Link zum Einladungstext</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;LinkNutzungAktionaersPortal&gt;&gt;&gt;</td>
+                        <td>Link zu Nutzungsbedingungen Aktionärsportal</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;LinkNutzungHVPortal&gt;&gt;&gt;</td>
+                        <td>Link zu Nutzungsbedingungen HV-Portal</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;LinkDatenschutzHinweise&gt;&gt;&gt;</td>
+                        <td>Link zu Datenschutzhinweisen</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;LinkDatenschutzHinweiseKunde&gt;&gt;&gt;</td>
+                        <td>Link zu Datenschutzhinweisen des Kunden (für innerhalb
+                            aDatenschutz.xhtml)</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;LinkImpressum&gt;&gt;&gt;</td>
+                        <td>Link zum Impressum</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;TextEK&gt;&gt;&gt;</td>
+                        <td>Text Eintrittskarte etc.</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;TextEKMitArtikel&gt;&gt;&gt;</td>
+                        <td>Text Eintrittskarte etc. mit Artikel</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>&lt;&lt;&lt;AnredeKomplett&gt;&gt;&gt; (Deprecated)</td>
+                        <td>Komplette Anrede (z.B. Sehr geehrter Herr Mustermann),
+                            aus AnredenDatenbank und Aktionärsdaten zusammengesetzt</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;TextGattung&gt;&gt;&gt;</td>
+                        <td>Deprecated</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;TextGattung1&gt;&gt;&gt;</td>
+                        <td>Langtext Gattung 1</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;TextGattung2&gt;&gt;&gt;</td>
+                        <td>Langtext Gattung 2</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;TextGattung3&gt;&gt;&gt;</td>
+                        <td>Langtext Gattung 3</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;TextGattung4&gt;&gt;&gt;</td>
+                        <td>Langtext Gattung 4</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;TextGattung5&gt;&gt;&gt;</td>
+                        <td>Langtext Gattung 5</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;Link&gt;&gt;&gt;</td>
+                        <td>Bestätigungslink in Emails für E-Mail-Registrierung und
+                            Passwort zurücksetzen</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;LinkNurCode&gt;&gt;&gt;</td>
+                        <td>BestätigungsCode (App!) in Emails für
+                            E-Mail-Registrierung und Passwort zurücksetzen</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;MailEK1&gt;&gt;&gt;</td>
+                        <td>Mailadresse, an die die erste (bzw. einzige) EK
+                            verschickt wurde</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;MailEK2&gt;&gt;&gt;</td>
+                        <td>Mailadresse, an die die zweite EK verschickt wurde</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;EkNummer&gt;&gt;&gt;</td>
+                        <td>Eintrittskartennummer</td>
+                    </tr>
+
+                    <tr>
+                        <td>&lt;&lt;&lt;HVDatum&gt;&gt;&gt;</td>
+                        <td>HV-Datum ("nur" formatiertes Datum)</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;HVOrt&gt;&gt;&gt;</td>
+                        <td>HV-Ort</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;TextHVDatum&gt;&gt;&gt;</td>
+                        <td>HV-Datum laut Text Terminliste</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Analog: TextVeröffentlichungDatum, TextEinberufungDatum,
+                            TextEndeTOErweiterungDatum, <br /> TextEndeGegenanträgeDatum,
+                            TextRecordDateDatum, TextLetzterAnmeldetagDatum
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">Analog für Portalphasen: TextPhase1Datum bis
+                            TextPhase20Datum</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            Grundsätzlich Phasen frei verwendbar, aber Standard ist:<br /> 1
+                            = Portal noch nicht in Betrieb - Phase vor Portal Start.<br /> 2
+                            = Reine Email-Registrierung - Phase vor Einladungsversand<br />
+                            3 = Anmeldung möglich - Start Einladungsversand bis Letzter
+                            Anmeldetag<br /> 4 = Anmeldung nicht mehr möglich, aber Rest bis
+                            erstes Ende (Standard: Schluß SRV)<br /> 5 = erstes Ende bis
+                            zweites Ende (z.B. Briefwahl ändern noch möglich nach Schluß SRV
+                            - nicht im Standard)<br /> 6 = zweites Ende bis drittes Ende
+                            (Standard: Vollmacht an Dritte auch noch während HV)<br /> 7 =
+                            Nach der HV<br /> 11 = Beginn Hotline<br /> 12 = Ende Hotline<br />13
+                            = Beginn Test-Stream<br />14 = Beginn HV-Stream<br />
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;MindestLaengePasswort&gt;&gt;&gt;</td>
+                        <td>Mindest-Länge des individuellen Passworts</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;MeldungAktien&gt;&gt;&gt; (Deprecated)</td>
+                        <td>Anzahl der Aktien der Meldung (aNeueWillenserklaerungEK)</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;NL&gt;&gt;&gt;</td>
+                        <td>Neue Zeile</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;B&gt;&gt;&gt; &lt;&lt;&lt;/B&gt;&gt;&gt;</td>
+                        <td>Bold (Fett) an/aus</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;I&gt;&gt;&gt; &lt;&lt;&lt;/I&gt;&gt;&gt;</td>
+                        <td>Italic (Kursiv) an/aus</td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;U&gt;&gt;&gt; &lt;&lt;&lt;/U&gt;&gt;&gt;</td>
+                        <td>
+                            Underline an/aus <b>Achtung! Von App nicht unterstützt! Wird
+                                in App wie Italic gehandhabt!</b>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;H1&gt;&gt;&gt; &lt;&lt;&lt;/H1&gt;&gt;&gt;</td>
+                        <td>Überschrift 1 (bzw. bei App: Schriftgröße 1)</td>
+                    </tr>
+                    <tr>
+                        <td>bis</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&lt;&lt;&lt;H4&gt;&gt;&gt; &lt;&lt;&lt;/H4&gt;&gt;&gt;</td>
+                        <td>Überschrift 4 (bzw. bei App: Schriftgröße 4)</td>
+                    </tr>
+                    <tr>
+                        <td>$$$LINK$$$ $$$LINKTEXT$$$ $$$/LINK$$$</td>
+                        <td>Link auf Seite im internet. Achtung: zwischen $$$LINK$$$
+                            und $$$/LINK$$$ dürfen keine weiteren Steuerzeichen verwendet
+                            (außer &lt;&gt;) werden!</td>
+                    </tr>
+                    <tr>
+                        <td>[[[APP_VORHANDEN]]] [[[/APP_VORHANDEN]]]</td>
+                        <td>Enthaltener Text wird nur angezeigt, wenn APPVORHANDEN
+                            erfüllt</td>
+                    </tr>
+                    <tr>
+                        <td>[[[BRIEFWAHL_VORHANDEN]]] [[[/BRIEFWAHL_VORHANDEN]]]</td>
+                        <td>Enthaltener Text wird nur angezeigt, wenn
+                            BRIEFWAHLVORHANDEN IM PORTAL (unabhängig von Phase) erfüllt</td>
+                    </tr>
+                    <tr>
+                        <td>[[[SRV0]]] [[[/SRV0]]]</td>
+                        <td>Enthaltener Text wird nur angezeigt, wenn 1 männlicher
+                            SRV vorhanden ist (analog SRV1=weiblicher SRV, SRV2=zwei SRV)</td>
+
+                    </tr>
+                    <tr>
+                        <td>[[[GATTUNG1]]] [[[/GATTUNG1]]]</td>
+                        <td>Enthaltener Text wird nur angezeigt, wenn Gattung des
+                            Aktionärs 1 ist (analog 2, 3, 4, 5). Darf nur in Willenserklärungsprozessen verwendet
+                            werden, nachdem der Bestand
+                            für den die Willenserklärung ausgewählt wurde. GATTUNG0 wird angezeigt, wenn mehrere
+                            Bestände aus unterschiedlichen Gattungen
+                            ausgewählt wurden.</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">Analog: EMAILREGISTRIERUNG_VORHANDEN,
+                            ADRESSÄNDERUNG_VORHANDEN, SRV_VORHANDEN, KIAV_VORHANDEN,
+                            VDRITTE_VORHANDEN, STREAMTEST_VORHANDEN</td>
+                    </tr>
+                    <tr>
+                        <td>###PHASE=1,2,3### ###/PHASE###</td>
+                        <td>Enthaltener Text wird nur angezeigt, wenn eine der Phasen
+                            hinter= aktiv ist</td>
+                    </tr>
+                    <tr>
+                        <td>+++&amp;+++</td>
+                        <td>&amp; als HTML-Steuerzeichen, z.B. &amp;nbsp; muß
+                            geschrieben werden als +++&amp;+++nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <table class="divButtons">
+                <tr>
+                    <td class="divButtonsLeft">
+                        <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                            action="#{uPflegeFehlertextePortal.doAbbrechen()}" />
+                    </td>
+                    <td class="divButtonsCenter"></td>
+                    <td class="divButtonsRight">
+                        <h:commandButton value="Speichern" styleClass="btnStandard"
+                            action="#{uPflegeFehlertextePortal.doSpeichern()}" />
+                    </td>
+
+                </tr>
+            </table>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

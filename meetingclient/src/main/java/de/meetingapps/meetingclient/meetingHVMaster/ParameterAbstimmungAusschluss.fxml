@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="700.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/17.0.9" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="lbllAbstimmung" layoutX="14.0" layoutY="23.0" prefHeight="15.0" text="Label" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <ScrollPane fx:id="scrPane" fitToHeight="true" fitToWidth="true" focusTraversable="false" layoutX="14.0" layoutY="48.0" prefHeight="464.0" prefWidth="567.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0" />
+      <TableView fx:id="tableEinzel" visible="false" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0" />
+      <Label fx:id="lblMeldeIdent" layoutX="285.0" layoutY="505.0" prefHeight="25.0" text="MeldeIdent:" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="300.0" />
+      <TextField fx:id="tfMeldeIdent" layoutX="469.0" layoutY="518.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.bottomAnchor="85.0" AnchorPane.rightAnchor="15.0" />
+      <Label fx:id="lblEkNummer" layoutX="295.0" layoutY="630.0" prefHeight="25.0" text="EK-Nummer:" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="300.0" />
+      <TextField fx:id="tfEkNummer" layoutX="470.0" layoutY="630.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="15.0" />
+      <Label fx:id="lblAktionaersnummer" layoutX="285.0" layoutY="540.0" prefHeight="25.0" text="Aktionärsnummer:" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="300.0" />
+      <TextField fx:id="tfAktionaersnummer" layoutX="434.0" layoutY="543.0" prefHeight="25.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btnNeu" layoutX="152.0" layoutY="518.0" mnemonicParsing="false" onAction="#onBtnCllickedNeu" prefHeight="45.0" prefWidth="100.0" text="Ausführen" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="165.0">
+         <tooltip>
+            <Tooltip text="Enter" />
+         </tooltip></Button>
+      <Button fx:id="btnSuche" focusTraversable="false" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBtnClickedSuche" prefHeight="45.0" prefWidth="130.0" text="Suchen" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="14.0" />
+      <Button fx:id="btnSpeichern" focusTraversable="false" layoutX="14.0" layoutY="557.0" mnemonicParsing="false" onAction="#onBtnClickedSpeichern" prefWidth="130.0" text="Speichern / Beenden" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <Label fx:id="lblFehler" alignment="CENTER" layoutX="165.0" layoutY="561.0" textFill="#903333" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+   </children>
+</AnchorPane>

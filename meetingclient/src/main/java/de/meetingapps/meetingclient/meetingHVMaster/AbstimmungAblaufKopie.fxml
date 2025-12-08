@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btnBeenden" layoutX="14.0" layoutY="749.0" mnemonicParsing="false" onAction="#onBtnBeenden" text="Beenden" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="166.0" layoutX="14.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="1059.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="550.0" layoutX="14.0" layoutY="188.0" stroke="BLACK" strokeType="INSIDE" width="1059.0" />
+      <ScrollPane fx:id="gpAktiveAbstimmung" layoutX="228.0" layoutY="21.0" prefHeight="88.0" prefWidth="834.0" />
+      <Label layoutX="31.0" layoutY="21.0" text="Aktive Abstimmungen" />
+      <TextField fx:id="tfAktiveElektronischeAbstimmung" layoutX="228.0" layoutY="113.0" prefHeight="25.0" prefWidth="834.0" />
+      <Label layoutX="31.0" layoutY="150.0" text="Zu verarbeitende Abstimmung" />
+      <TextField fx:id="tfZuVerarbeitendeAbstimmung" layoutX="228.0" layoutY="146.0" prefHeight="25.0" prefWidth="834.0" />
+      <Pane fx:id="pnAblauf" layoutX="1078.0" prefHeight="800.0" prefWidth="419.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="779.0" layoutX="11.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <ScrollPane fx:id="gpAblauf" layoutX="21.0" layoutY="21.0" prefHeight="765.0" prefWidth="384.0" />
+         </children>
+      </Pane>
+      
+      
+          <Pane fx:id="pnDRUEX" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="112.0" layoutX="10.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="342.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="121.0" layoutX="10.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="342.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="241.0" layoutX="365.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="673.0" />
+            <Label fx:id="lblDRUEXUeberschrift" layoutX="14.0" layoutY="6.0" text="Drucken / Exportieren" />
+            <Button fx:id="btnDRUEXFertig" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBtnDRUEXFertig" text="Fertig" />
+            <ScrollPane layoutX="14.0" layoutY="281.0" prefHeight="192.0" prefWidth="1022.0">
+               <content>
+                  <GridPane fx:id="gpDRUEXProtokoll" prefHeight="30.0" prefWidth="1020.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="201.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+            <Button fx:id="btnDRUEXLangfassung" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#onBtnDRUEXLangfassung" text="Drucken Langfassung" />
+            <Button fx:id="btnDRUEXKurzfassung" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#onBtnDRUEXKurzfassung" prefHeight="25.0" prefWidth="130.0" text="Drucken Kurzfassung" />
+            <Button fx:id="btnDRUEXListe" layoutX="14.0" layoutY="105.0" mnemonicParsing="false" onAction="#onBtnDRUEXListe" prefHeight="25.0" prefWidth="130.0" text="Drucken Liste" />
+            <Button fx:id="btnDRUEXPraesentationPDF" layoutX="376.0" layoutY="50.0" mnemonicParsing="false" onAction="#onBtnDRUEXPraesentationPDF" prefHeight="25.0" prefWidth="138.0" text="Präsentation PDF" />
+             <Label layoutX="170.0" layoutY="37.0" text="Form.Nr." />
+            <Label layoutX="170.0" layoutY="74.0" text="Form.Nr." />
+            <Label layoutX="525.0" layoutY="31.0" text="Form.Nr." />
+            <Label layoutX="170.0" layoutY="109.0" text="ListenNr." />
+            <TextField fx:id="tfDRUEXLangfassung" layoutX="242.0" layoutY="33.0" prefHeight="25.0" prefWidth="82.0" />
+            <TextField fx:id="tfDRUEXKurzfassung" layoutX="242.0" layoutY="70.0" prefHeight="25.0" prefWidth="82.0" />
+            <TextField fx:id="tfDRUEXListe" layoutX="242.0" layoutY="105.0" prefHeight="25.0" prefWidth="82.0" />
+            <Button fx:id="btnDRUEXPraesentationPP" layoutX="376.0" layoutY="80.0" mnemonicParsing="false" onAction="#onBtnDRUEXPraesentationPP" prefHeight="25.0" prefWidth="138.0" text="Präsentation PP" />
+            <Button fx:id="btnDRUEXTexteBuehne" layoutX="375.0" layoutY="148.0" mnemonicParsing="false" onAction="#onBtnDRUEXTexteBuehne" prefHeight="25.0" prefWidth="138.0" text="Texte Bühne" />
+           <Button fx:id="btnDRUEXExport" layoutX="376.0" layoutY="223.0" mnemonicParsing="false" onAction="#onBtnDRUEXExport" prefHeight="25.0" prefWidth="202.0" text="Export Stimmabgaben" />
+            <Label layoutX="588.0" layoutY="31.0" text="Dateiname" />
+            <Label layoutX="760.0" layoutY="31.0" text="LW Pfad" />
+            <TextField fx:id="tfDRUEXPraesentationPDFNr" layoutX="522.0" layoutY="50.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXPraesentationPDFDatei" layoutX="587.0" layoutY="50.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXPraesentationPDFPfad" layoutX="759.0" layoutY="49.0" prefHeight="25.0" prefWidth="268.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPNr" layoutX="521.0" layoutY="80.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPDatei" layoutX="586.0" layoutY="80.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPPfad" layoutX="758.0" layoutY="79.0" prefHeight="25.0" prefWidth="268.0" />
+            <TextField fx:id="tfDRUEXTexteBuehneNr" layoutX="521.0" layoutY="149.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXTexteBuehneDatei" layoutX="586.0" layoutY="149.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXTexteBuehnePfad" layoutX="758.0" layoutY="148.0" prefHeight="25.0" prefWidth="268.0" />
+             <TextField fx:id="tfDRUEXExportNr" layoutX="519.0" layoutY="183.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXExportDatei" layoutX="586.0" layoutY="183.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXExportPfad" layoutX="758.0" layoutY="183.0" prefHeight="25.0" prefWidth="268.0" />
+            <Button fx:id="btnDRUEXAusfuehrenJob" layoutX="14.0" layoutY="163.0" mnemonicParsing="false" onAction="#onBtnDRUEXAusfuehrenJob" prefHeight="25.0" prefWidth="130.0" text="Ausführen Job" />
+            <ComboBox fx:id="cbDRUEXJob" layoutX="14.0" layoutY="208.0" prefHeight="25.0" prefWidth="313.0" />
+            <Button fx:id="btnDRUEXExportFuerPP" layoutX="376.0" layoutY="183.0" mnemonicParsing="false" onAction="#onBtnDRUEXExportFuerPP" prefHeight="25.0" prefWidth="138.0" text="Export für PP" />
+            <Button fx:id="btnDRUEXPraesentationPPListe" layoutX="377.0" layoutY="114.0" mnemonicParsing="false" onAction="#onBtnDRUEXPraesentationPPListe" prefHeight="25.0" prefWidth="138.0" text="Präsentation PP Liste" />
+            <TextField fx:id="tfDRUEXPraesentationPPNrListe" layoutX="522.0" layoutY="114.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPDateiListe" layoutX="587.0" layoutY="114.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPPfadListe" layoutX="759.0" layoutY="113.0" prefHeight="25.0" prefWidth="268.0" />
+         </children>
+      </Pane>
+
+ 
+ 
+      <Label layoutX="31.0" layoutY="117.0" text="Aktive elektronische Abstimmung" />
+   </children>
+</Pane>

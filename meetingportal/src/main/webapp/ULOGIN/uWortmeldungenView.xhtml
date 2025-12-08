@@ -1,0 +1,1141 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough" xmlns:p="http://primefaces.org/ui" lang="de"
+    template="/WEB-INF/uTemplate.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.zurueckButtonAnzeigen==1}">
+                <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                    <ui:param name="ueberschrift"
+                        value="#{uWortmeldungenSession.wortmeldetischView.textUeberschrift}" />
+                    <ui:param name="zurueck" value="1" />
+                </ui:include>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.zurueckButtonAnzeigen==0}">
+                <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                    <ui:param name="ueberschrift"
+                        value="#{uWortmeldungenSession.wortmeldetischView.textUeberschrift}" />
+                    <ui:param name="zurueck" value="0" />
+                </ui:include>
+            </h:panelGroup>
+
+
+
+            <!-- Zahlen + Aktualisieren-Button -->
+            <div class="divArbeitsbereich">
+                <table class="divArbeitsbereichUeberschrift">
+                    <tr>
+                        <td class="divArbeitsbereichUeberschriftText">
+                            <h:dataTable value="#{uWortmeldungenSession.summenView}" var="summe">
+                                <h:column>
+                                    <h:outputText value="#{summe.textVorZahl}#{summe.wert}#{summe.textNachZahl}" />
+                                    <br />
+                                </h:column>
+                            </h:dataTable>
+                            <ui:repeat value="#{uWortmeldungenSession.summenViewZusammen}" var="summe">
+                                <h:column>
+                                    <h:outputText value="#{summe.textVorZahl}#{summe.wert}#{summe.textNachZahl}" />
+                                </h:column>
+                            </ui:repeat>
+                        </td>
+                        <td class="divArbeitsbereichUeberschriftButton">
+                            <h:commandButton value="Aktualisieren" action="#{uWortmeldungen.doAktualisierenView()}"
+                                styleClass="btnStandard"
+                                rendered="#{uWortmeldungenSession.wortmeldetischView.aktualisierenButtonAnzeigen==1}" />
+
+                            <h:panelGroup
+                                rendered="#{uWortmeldungenSession.wortmeldetischView.redestationNrAnzeigen==1 or uWortmeldungenSession.wortmeldetischView.teststationNrAnzeigen==1}">
+                                <br />
+                            </h:panelGroup>
+
+                            <h:panelGroup
+                                rendered="#{uWortmeldungenSession.wortmeldetischView.redestationNrAnzeigen==1}">
+                                <h:outputLabel value="#{uWortmeldungenSession.wortmeldetischView.redeStationBegriff} ">
+                                </h:outputLabel>
+                                <h:inputText value="#{uWortmeldungenSession.telefonieNr}" maxlength="5" size="5">
+                                </h:inputText>
+                            </h:panelGroup>
+                            <h:panelGroup
+                                rendered="#{uWortmeldungenSession.wortmeldetischView.redestationNrAnzeigen==1 and uWortmeldungenSession.wortmeldetischView.teststationNrAnzeigen==1}">
+                                <br />
+                            </h:panelGroup>
+                            <h:panelGroup
+                                rendered="#{uWortmeldungenSession.wortmeldetischView.teststationNrAnzeigen==1}">
+                                <h:outputLabel value="#{uWortmeldungenSession.wortmeldetischView.testStationBegriff} ">
+                                </h:outputLabel>
+                                <h:inputText value="#{uWortmeldungenSession.testNr}" maxlength="5" size="5">
+                                </h:inputText>
+                            </h:panelGroup>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+            <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.sichtVersammlungsleiterAnzeigen==1}">
+                <!-- Rednerliste Vorsitzender -->
+                <div class="divArbeitsbereich">
+                    <table class="divArbeitsbereichUeberschrift">
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftText">
+                                <h:outputLabel
+                                    value="#{uWortmeldungenSession.wortmeldetischViewVersammlungsleiter.textUeberschrift}" />
+                            </td>
+                            <td class="divArbeitsbereichUeberschriftButton"></td>
+                        </tr>
+                    </table>
+                    <p:panelGrid>
+                        <p:row>
+                            <p:column style="width: 1180px">
+                                <h:inputTextarea rows="12" style="width: 100%"
+                                    value="#{uWortmeldungenSession.rednerlisteVersammlungsleitung}"></h:inputTextarea>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+                    <p:panelGrid rendered="#{uWortmeldungenSession.infoVersammlungsleiter!=''}">
+                        <p:row>
+                            <p:column style="width: 1180px">
+                                <h:inputTextarea rows="12" style="width: 100%"
+                                    value="#{uWortmeldungenSession.infoVersammlungsleiter}"></h:inputTextarea>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
+                </div>
+            </h:panelGroup>
+
+
+            <!-- Falls Links, dann anzeigen -->
+            <h:panelGroup rendered="#{uWortmeldungenSession.testraumLink!=''}">
+                Aktueller Link Testraum:
+                <div class="divArbeitsbereich">
+                    <table class="divArbeitsbereichUeberschrift">
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftText">
+                                <h:inputTextarea rows="12" style="width: 100%"
+                                    value="#{uWortmeldungenSession.testraumLink}"></h:inputTextarea>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftButton">
+                                <h:commandButton value="Clear" action="#{uWortmeldungen.doClearTestraumLink()}"
+                                    styleClass="btnStandard" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{uWortmeldungenSession.rederaumLink!=''}">
+                Aktueller Link Rederaum:
+                <div class="divArbeitsbereich">
+                    <table class="divArbeitsbereichUeberschrift">
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftText">
+                                <h:inputTextarea rows="12" style="width: 100%"
+                                    value="#{uWortmeldungenSession.rederaumLink}"></h:inputTextarea>
+                            </td>
+                        </tr>
+                        3<tr>
+                            <td class="divArbeitsbereichUeberschriftButton">
+                                <h:commandButton value="Clear" action="#{uWortmeldungen.doClearRederaumLink()}"
+                                    styleClass="btnStandard" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </h:panelGroup>
+
+            <!-- Falls Bearbeitungsmodus, dann anzeigen -->
+            <h:panelGroup rendered="#{uWortmeldungenSession.inBearbeitung==1}">
+                <div class="divArbeitsbereich">
+
+                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                        style="width: 1180px"> <!-- style="width: 1180px" -->
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kennung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.loginKennungAnzeige}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (Eingabe durch Wortmelder):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrt}"
+                                    maxlength="200" size="60"></h:inputText>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (lt. Kennung):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrtKennung}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kontakt-Daten:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.kontaktDaten}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kontakt-Daten Telefon:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.kontaktDatenTelefon}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kurz-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungKurztext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Lang-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungLangtext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Inhaltshinweise:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:panelGroup
+                                    rendered="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseVorhandenundAktiv}">
+                                    <ui:repeat value="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseListe}"
+                                        var="inhaltsHinweis">
+                                        <h:outputText value="#{inhaltsHinweis.textDE}" escape="true" />
+                                        <br />
+                                    </ui:repeat>
+                                </h:panelGroup>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Zeitpunkt Wortmeldung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.zeitpunktFuerAnzeige}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktueller Status:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.aktuellerStatus}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuell Präsent:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="Ja" rendered="#{uWortmeldungenSession.praesenteVorhanden==true}">
+                                </h:outputLabel>
+                                <h:outputLabel value="Nein"
+                                    rendered="#{uWortmeldungenSession.praesenteVorhanden==false}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kommentar intern:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputTextarea rows="4" cols="80"
+                                    value="#{uWortmeldungenSession.bWortmeldung.kommentarIntern}" pt:maxlength="500">
+                                </h:inputTextarea>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kommentar Versammlungsleiter:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputTextarea rows="4" cols="80"
+                                    value="#{uWortmeldungenSession.bWortmeldung.kommentarVersammlungsleiter}"
+                                    pt:maxlength="500"></h:inputTextarea>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="neuer Status:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:selectOneRadio value="#{uWortmeldungenSession.neuerStatus}" layout="pageDirection">
+                                    <f:selectItems value="#{uWortmeldungenSession.bearbeitenSelectItemListe}" var="item"
+                                        itemLabel="#{item.itemLabel}" itemValue="#{item.itemValue}" />
+                                </h:selectOneRadio>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuelle Position in Rednerliste:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.lfdNrInListe}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="neue Position in Rednerliste (vor jetziger LfdNr):">
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{uWortmeldungenSession.neueLfdNr}" maxlength="5" size="5">
+                                </h:inputText>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doAbbrechen()}" />
+                            </td>
+                            <td class="divButtonsCenter">
+                                <h:commandButton value="Speichern und an das Ende der Rednerliste"
+                                    styleClass="btnStandard" action="#{uWortmeldungen.doSpeichernAnsEnde()}" />
+                            </td>
+                            <td class="divButtonsRight">
+                                <h:commandButton value="Speichern" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doSpeichern()}" />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </h:panelGroup>
+
+            <!-- Falls Bearbeitungsmodus Kommentar intern, dann anzeigen -->
+            <h:panelGroup rendered="#{uWortmeldungenSession.inBearbeitung==2}">
+                <div class="divArbeitsbereich">
+
+                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                        style="width: 1180px">
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kennung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.loginKennungAnzeige}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (Eingabe durch Wortmelder):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrt}" />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (lt. Kennung):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrtKennung}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kurz-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungKurztext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Lang-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungLangtext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Inhaltshinweise:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:panelGroup
+                                    rendered="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseVorhandenundAktiv}">
+                                    <ui:repeat value="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseListe}"
+                                        var="inhaltsHinweis">
+                                        <h:outputText value="#{inhaltsHinweis.textDE}" escape="true" />
+                                        <br />
+                                    </ui:repeat>
+                                </h:panelGroup>
+                            </p:column>
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktueller Status:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.aktuellerStatus}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuell Präsent:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="Ja" rendered="#{uWortmeldungenSession.praesenteVorhanden==true}">
+                                </h:outputLabel>
+                                <h:outputLabel value="Nein"
+                                    rendered="#{uWortmeldungenSession.praesenteVorhanden==false}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kommentar intern:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputTextarea rows="4" cols="80"
+                                    value="#{uWortmeldungenSession.bWortmeldung.kommentarIntern}" pt:maxlength="500">
+                                </h:inputTextarea>
+                            </p:column>
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuelle Position in Rednerliste:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.lfdNrInListe}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+
+                    </p:panelGrid>
+
+
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doAbbrechen()}" />
+                            </td>
+                            <td class="divButtonsCenter">
+                            </td>
+                            <td class="divButtonsRight">
+                                <h:commandButton value="Speichern" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doSpeichernKommentarIntern()}" />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </h:panelGroup>
+
+            <!-- Falls Bearbeitungsmodus Kommentar Versammlungslieter, dann anzeigen -->
+            <h:panelGroup rendered="#{uWortmeldungenSession.inBearbeitung==3}">
+                <div class="divArbeitsbereich">
+
+                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                        style="width: 1180px">
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kennung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.loginKennungAnzeige}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (Eingabe durch Wortmelder):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrt}" />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (lt. Kennung):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrtKennung}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kurz-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungKurztext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Lang-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungLangtext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Inhaltshinweise:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:panelGroup
+                                    rendered="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseVorhandenundAktiv}">
+                                    <ui:repeat value="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseListe}"
+                                        var="inhaltsHinweis">
+                                        <h:outputText value="#{inhaltsHinweis.textDE}" escape="true" />
+                                        <br />
+                                    </ui:repeat>
+                                </h:panelGroup>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktueller Status:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.aktuellerStatus}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuell Präsent:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="Ja" rendered="#{uWortmeldungenSession.praesenteVorhanden==true}">
+                                </h:outputLabel>
+                                <h:outputLabel value="Nein"
+                                    rendered="#{uWortmeldungenSession.praesenteVorhanden==false}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kommentar Versammlungsleiter:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputTextarea rows="4" cols="80"
+                                    value="#{uWortmeldungenSession.bWortmeldung.kommentarVersammlungsleiter}"
+                                    pt:maxlength="500"></h:inputTextarea>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuelle Position in Rednerliste:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.lfdNrInListe}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doAbbrechen()}" />
+                            </td>
+                            <td class="divButtonsCenter">
+                            </td>
+                            <td class="divButtonsRight">
+                                <h:commandButton value="Speichern" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doSpeichernKommentarVersammlungsleiter()}" />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </h:panelGroup>
+
+            <!-- Falls Reihenfolge bearbeiten, dann anzeigen -->
+            <h:panelGroup rendered="#{uWortmeldungenSession.inBearbeitung==5}">
+                <div class="divArbeitsbereich">
+
+                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                        style="width: 1180px"> <!-- style="width: 1180px" -->
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kennung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.loginKennungAnzeige}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (Eingabe durch Wortmelder):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrt}" />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (lt. Kennung):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrtKennung}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kontakt-Daten:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.kontaktDaten}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kontakt-Daten Telefon:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.kontaktDatenTelefon}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kurz-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungKurztext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Lang-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungLangtext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Inhaltshinweise:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:panelGroup
+                                    rendered="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseVorhandenundAktiv}">
+                                    <ui:repeat value="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseListe}"
+                                        var="inhaltsHinweis">
+                                        <h:outputText value="#{inhaltsHinweis.textDE}" escape="true" />
+                                        <br />
+                                    </ui:repeat>
+                                </h:panelGroup>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Zeitpunkt Wortmeldung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.zeitpunktFuerAnzeige}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktueller Status:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.aktuellerStatus}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuell Präsent:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="Ja" rendered="#{uWortmeldungenSession.praesenteVorhanden==true}">
+                                </h:outputLabel>
+                                <h:outputLabel value="Nein"
+                                    rendered="#{uWortmeldungenSession.praesenteVorhanden==false}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kommentar intern:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{uWortmeldungenSession.bWortmeldung.kommentarIntern}" />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kommentar Versammlungsleiter:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputText
+                                    value="#{uWortmeldungenSession.bWortmeldung.kommentarVersammlungsleiter}" />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuelle Position in Rednerliste:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.lfdNrInListe}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="neue Position in Rednerliste (vor jetziger LfdNr):">
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{uWortmeldungenSession.neueLfdNr}" maxlength="5" size="5">
+                                </h:inputText>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doAbbrechen()}" />
+                            </td>
+                            <td class="divButtonsCenter">
+                            </td>
+                            <td class="divButtonsRight">
+                                <h:commandButton value="Speichern" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doSpeichernRednerpositionVeraendern()}" />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </h:panelGroup>
+
+            <!-- Falls Redner bearbeiten, dann anzeigen -->
+            <h:panelGroup rendered="#{uWortmeldungenSession.inBearbeitung==6}">
+                <div class="divArbeitsbereich">
+
+                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                        style="width: 1180px"> <!-- style="width: 1180px" -->
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kennung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.loginKennungAnzeige}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (Eingabe durch Wortmelder):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrt}"
+                                    maxlength="200" size="60"></h:inputText>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Redner (lt. Kennung):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.nameVornameOrtKennung}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kontakt-Daten:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.kontaktDaten}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kontakt-Daten Telefon:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.kontaktDatenTelefon}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kurz-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungKurztext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Lang-Text:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.mitteilungLangtext}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Inhaltshinweise:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:panelGroup
+                                    rendered="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseVorhandenundAktiv}">
+                                    <ui:repeat value="#{uWortmeldungenSession.bWortmeldung.inhaltsHinweiseListe}"
+                                        var="inhaltsHinweis">
+                                        <h:outputText value="#{inhaltsHinweis.textDE}" escape="true" />
+                                        <br />
+                                    </ui:repeat>
+                                </h:panelGroup>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Zeitpunkt Wortmeldung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.zeitpunktFuerAnzeige}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktueller Status:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.aktuellerStatus}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuell Präsent:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="Ja" rendered="#{uWortmeldungenSession.praesenteVorhanden==true}">
+                                </h:outputLabel>
+                                <h:outputLabel value="Nein"
+                                    rendered="#{uWortmeldungenSession.praesenteVorhanden==false}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kommentar intern:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputText value="#{uWortmeldungenSession.bWortmeldung.kommentarIntern}" />
+                            </p:column>
+                        </p:row>
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Kommentar Versammlungsleiter:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputText
+                                    value="#{uWortmeldungenSession.bWortmeldung.kommentarVersammlungsleiter}" />
+                            </p:column>
+                        </p:row>
+
+
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Aktuelle Position in Rednerliste:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{uWortmeldungenSession.bWortmeldung.lfdNrInListe}">
+                                </h:outputLabel>
+                            </p:column>
+                        </p:row>
+
+                    </p:panelGrid>
+
+
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doAbbrechen()}" />
+                            </td>
+                            <td class="divButtonsCenter">
+                            </td>
+                            <td class="divButtonsRight">
+                                <h:commandButton value="Speichern" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doSpeichernRednernameVeraendern()}" />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </h:panelGroup>
+
+
+            <!-- Falls Bearbeitungsmodus Nachricht an Versammlungslieter, dann anzeigen -->
+            <h:panelGroup rendered="#{uWortmeldungenSession.inBearbeitung==4}">
+                <div class="divArbeitsbereich">
+
+                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                        style="width: 1180px">
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Nachricht an Versammlungsleiter:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputTextarea rows="4" cols="80" value="#{uWortmeldungenSession.bInfo.infoText}"
+                                    pt:maxlength="1000"></h:inputTextarea>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doAbbrechen()}" />
+                            </td>
+                            <td class="divButtonsCenter"></td>
+                            <td class="divButtonsRight">
+                                <h:commandButton value="Speichern" styleClass="btnStandard"
+                                    action="#{uWortmeldungen.doSpeichernNachrichtAnVersammlungsleiter()}" />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </h:panelGroup>
+
+
+
+            <!-- Listen für die SubViews -->
+            <f:subview id="iWortmeldungenView0">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[0]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[0]}" />
+                        <ui:param name="arrayoffset" value="0" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+            <f:subview id="iWortmeldungenView1">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[1]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[1]}" />
+                        <ui:param name="arrayoffset" value="1" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+            <f:subview id="iWortmeldungenView2">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[2]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[2]}" />
+                        <ui:param name="arrayoffset" value="2" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+            <f:subview id="iWortmeldungenView3">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[3]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[3]}" />
+                        <ui:param name="arrayoffset" value="3" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+            <f:subview id="iWortmeldungenView4">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[4]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[4]}" />
+                        <ui:param name="arrayoffset" value="4" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+            <f:subview id="iWortmeldungenView5">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[5]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[5]}" />
+                        <ui:param name="arrayoffset" value="5" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+            <f:subview id="iWortmeldungenView6">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[6]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[6]}" />
+                        <ui:param name="arrayoffset" value="6" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+            <f:subview id="iWortmeldungenView7">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[7]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[7]}" />
+                        <ui:param name="arrayoffset" value="7" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+            <f:subview id="iWortmeldungenView8">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[8]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[8]}" />
+                        <ui:param name="arrayoffset" value="8" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+            <f:subview id="iWortmeldungenView9">
+                <h:panelGroup rendered="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[9]!=0}">
+                    <ui:include src="uWortmeldungenIView.xhtml">
+                        <ui:param name="viewoffset"
+                            value="#{uWortmeldungenSession.wortmeldetischView.subViewsIdent[9]}" />
+                        <ui:param name="arrayoffset" value="9" />
+                    </ui:include>
+                </h:panelGroup>
+            </f:subview>
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

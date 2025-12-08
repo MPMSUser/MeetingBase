@@ -1,0 +1,145 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:c="jakarta.tags.core" xmlns:fn="jakarta.tags.functions"
+    xmlns:p="http://primefaces.org/ui" lang="de">
+    <div class="row">
+        <div class="unterlagen-bereich">
+            <div class="col-8">
+                <!-- Button -->
+                <h:panelGroup rendered="#{unterlage.art==0}">
+                    <!-- Button als Button -->
+                    <h:panelGroup rendered="#{unterlage.artStyle==0 or unterlage.artStyle==1}">
+                        <p>
+                            <h:commandButton rendered="#{tLanguage.lang ==1}" value="#{unterlage.bezeichnungDE}"
+                                action="#{tUnterlagen.doUnterlageDE(unterlage)}" styleClass="btn-typ-00"
+                                onclick="this.form.target='_blank'"></h:commandButton>
+                            <h:commandButton rendered="#{tLanguage.lang ==2}" value="#{unterlage.bezeichnungEN}"
+                                action="#{tUnterlagen.doUnterlageEN(unterlage)}" styleClass="btn-typ-00"
+                                onclick="this.form.target='_blank'"></h:commandButton>
+                        </p>
+                    </h:panelGroup>
+
+                    <!-- Button als Link -->
+                    <h:panelGroup rendered="#{unterlage.artStyle==2}">
+                        <p>
+                            <h:commandLink rendered="#{tLanguage.lang ==1}" value="#{unterlage.bezeichnungDE}"
+                                action="#{tUnterlagen.doUnterlageDE(unterlage)}" styleClass="link-typ-00"
+                                target="_blank">
+                            </h:commandLink>
+                            <h:commandLink rendered="#{tLanguage.lang ==2}" value="#{unterlage.bezeichnungEN}"
+                                action="#{tUnterlagen.doUnterlageEN(unterlage)}" styleClass="link-typ-00"
+                                onclick="this.form.target='_new'"></h:commandLink>
+                        </p>
+                    </h:panelGroup>
+
+                </h:panelGroup>
+
+                <!-- Überschrift -->
+                <h:panelGroup rendered="#{unterlage.art==1}">
+                    <h3>
+                        <h:outputText value="#{unterlage.bezeichnungDE}" rendered="#{tLanguage.lang ==1}"
+                            escape="false">
+                        </h:outputText>
+                        <h:outputText value="#{unterlage.bezeichnungEN}" rendered="#{tLanguage.lang ==2}"
+                            escape="false">
+                        </h:outputText>
+                    </h3>
+
+                </h:panelGroup>
+
+                <!-- normaler Text -->
+                <h:panelGroup rendered="#{unterlage.art==2}">
+                    <p>
+                        <h:outputText value="#{unterlage.bezeichnungDE}" rendered="#{tLanguage.lang ==1}"
+                            escape="false" />
+                        <h:outputText value="#{unterlage.bezeichnungEN}" rendered="#{tLanguage.lang ==2}"
+                            escape="false" />
+                    </p>
+                </h:panelGroup>
+
+                <!-- Video-Button -->
+                <h:panelGroup rendered="#{unterlage.art==3}">
+                    <p>
+                        <h:panelGroup rendered="#{unterlage.artStyle==0 or unterlage.artStyle==1}">
+                            <h:commandButton rendered="#{tLanguage.lang ==1}" value="#{unterlage.bezeichnungDE}"
+                                action="#{tUnterlagen.doVodAnzeigen(unterlage)}" styleClass="btn-typ-00">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                            <h:commandButton rendered="#{tLanguage.lang ==2}" value="#{unterlage.bezeichnungEN}"
+                                action="#{tUnterlagen.doVodAnzeigen(unterlage)}" styleClass="btn-typ-00">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                        </h:panelGroup>
+                    </p>
+                    <p>
+                        <h:panelGroup rendered="#{unterlage.artStyle==2}">
+                            <h:commandLink rendered="#{tLanguage.lang ==1}" value="#{unterlage.bezeichnungDE}"
+                                action="#{tUnterlagen.doVodAnzeigen(unterlage)}" styleClass="link-typ-00">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandLink>
+                            <h:commandLink rendered="#{tLanguage.lang ==2}" value="#{unterlage.bezeichnungEN}"
+                                action="#{tUnterlagen.doVodAnzeigen(unterlage)}" styleClass="link-typ-00">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandLink>
+                        </h:panelGroup>
+                    </p>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{unterlage.art==4}">
+                    <!-- Button als Link-Button -->
+                    <h:panelGroup rendered="#{unterlage.artStyle==1 or unterlage.artStyle==0}">
+                        <p>
+                            <h:panelGroup rendered="#{tLanguage.lang ==1}">
+                                <a href="#{unterlage.dateiname}" target="_blank"
+                                    class="btn-typ-00-link">#{unterlage.bezeichnungDE}</a>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{tLanguage.lang ==2}">
+                                <a href="#{unterlage.dateiname}" target="_blank"
+                                    class="btn-typ-00-link">#{unterlage.bezeichnungEN}</a>
+                            </h:panelGroup>
+                        </p>
+                    </h:panelGroup>
+
+                    <!-- Button als Link -->
+                    <h:panelGroup rendered="#{unterlage.artStyle==2}">
+                        <p>
+                            <h:panelGroup rendered="#{tLanguage.lang ==1}">
+                                <a href="#{unterlage.dateiname}" target="_blank"
+                                    class="link-typ-00-link">#{unterlage.bezeichnungDE}</a>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{tLanguage.lang ==2}">
+                                <a href="#{unterlage.dateiname}" target="_blank"
+                                    class="link-typ-00-link">#{unterlage.bezeichnungEN}</a>
+                            </h:panelGroup>
+                        </p>
+                    </h:panelGroup>
+
+                </h:panelGroup>
+
+            </div>
+        </div>
+
+        <h:panelGroup rendered="#{unterlage.iFrameUrl != ''}">
+            <div class="iframeContainer col-4">
+                <iframe class="iframeResponsive" src="#{unterlage.iFrameUrl}" allowfullscreen="allowfullscreen"
+                    webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen"
+                    allow="autoplay"></iframe>
+            </div>
+        </h:panelGroup>
+    </div>
+</ui:composition>

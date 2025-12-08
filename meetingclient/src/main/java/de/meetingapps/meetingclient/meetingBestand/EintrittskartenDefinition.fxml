@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane tabClosingPolicy="UNAVAILABLE" tabMinWidth="75.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Grunddaten">
+            <content>
+              <AnchorPane maxHeight="550.0" maxWidth="1000.0">
+                     <children>
+                        <VBox prefWidth="275.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+                           <children>
+                              <Label text="Aktiengattung">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></Label>
+                              <ChoiceBox prefWidth="275.0" />
+                              <Label layoutX="10.0" layoutY="10.0" text="Aktienkennziffer">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin></Label>
+                              <ChoiceBox layoutX="10.0" layoutY="27.0" prefWidth="275.0" />
+                              <Label layoutX="10.0" layoutY="52.0" text="Aktienartkennziffer">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin></Label>
+                              <ChoiceBox layoutX="10.0" layoutY="69.0" prefWidth="275.0" />
+                              <Label layoutX="10.0" layoutY="94.0" text="Prüfsumme">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin></Label>
+                              <ChoiceBox layoutX="10.0" layoutY="111.0" prefWidth="275.0" />
+                              <Label layoutX="10.0" layoutY="136.0" text="Barcode">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin></Label>
+                              <ChoiceBox layoutX="10.0" layoutY="153.0" prefWidth="275.0" />
+                              <Label layoutX="10.0" layoutY="178.0" text="Barcodeanhang">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin></Label>
+                              <TextField />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="146.0" layoutY="32.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="320.0" AnchorPane.topAnchor="15.0">
+                           <children>
+                              <Label text="Firmennamen">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></Label>
+                              <ChoiceBox prefWidth="275.0" />
+                              <Label text="Formular">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin></Label>
+                              <ChoiceBox prefWidth="275.0" />
+                              <Label text="Zu druckende Aktionärsdaten">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin></Label>
+                              <ChoiceBox prefWidth="275.0" />
+                              <Label text="Änderungen">
+                                 <VBox.margin>
+                                    <Insets top="15.0" />
+                                 </VBox.margin></Label>
+                              <ChoiceBox prefWidth="275.0" />
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Texte">
+            <content>
+              <AnchorPane maxHeight="550.0" maxWidth="1000.0">
+                     <children>
+                        <VBox layoutX="204.0" layoutY="162.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+                           <children>
+                              <Label text="1. Textblock (8 Zeilen - 46 Zeichen)">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="CENTER" maxHeight="200.0" prefHeight="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <TextArea fx:id="taText1" />
+                                    <Button fx:id="btnPreview" minWidth="30.0" mnemonicParsing="false" onAction="#preparePreview" prefHeight="75.0" prefWidth="30.0" HBox.hgrow="ALWAYS" />
+                                    <TextArea fx:id="taText1Preview" editable="false" />
+                                 </children>
+                              </HBox>
+                              <Label text="2. Textblock (2 Zeilen - 65 Zeichen)">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="taText2" minHeight="45.0" prefHeight="50.0" />
+                              <VBox fx:id="variableBox" spacing="1.0" style="-fx-border-style: solid;">
+                                 <VBox.margin>
+                                    <Insets top="30.0" />
+                                 </VBox.margin>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Logo">
+            <content>
+              <AnchorPane maxHeight="550.0" maxWidth="1000.0">
+                     <children>
+                        <Label text="Logo" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <VBox alignment="CENTER" fillWidth="false" prefHeight="300.0" prefWidth="500.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="35.0">
+                           <children>
+                              <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
+                                 <viewport>
+                                    <Rectangle2D />
+                                 </viewport>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                        <Button fx:id="btnLogo" mnemonicParsing="false" onAction="#selectLogo" prefHeight="30.0" prefWidth="120.0" text="Logo auswählen" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="350.0" />
+                        <Button fx:id="btnLogoDelete" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteLogo" prefHeight="30.0" prefWidth="120.0" text="Logo entfernen" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="350.0" />
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="btnClose" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="75.0" text="Beenden" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnSave" mnemonicParsing="false" onAction="#save" prefHeight="25.0" prefWidth="75.0" text="Speichern" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+   </children>
+</AnchorPane>

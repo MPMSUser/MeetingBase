@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<menus>
+				<Menu fx:id="mnoDatei" mnemonicParsing="false" text="Datei">
+					<items>
+                    <MenuItem fx:id="mnEmittentenUebersicht" mnemonicParsing="false" onAction="#gewEmittentenUebersicht" text="Emittenten Übersicht" />
+                  <MenuItem fx:id="mnModulauswahl" mnemonicParsing="false" onAction="#gewModulauswahl" text="Modulauswahl" />
+						<MenuItem fx:id="mnMandantWechseln" mnemonicParsing="false" onAction="#gewMandantWechseln" text="Mandant Wechseln" />
+					</items>
+				</Menu>
+				<Menu fx:id="mnoHVPraesenz" mnemonicParsing="false" text="Präsenz">
+					<items>
+						<MenuItem fx:id="mnDivAktionaer" mnemonicParsing="false" onAction="#gewDivAktionaer" text="Diverses für Aktionär" />
+						<MenuItem fx:id="mnInaktiveWeisungen" mnemonicParsing="false" onAction="#gewInaktiveWeisungen" text="Inaktive Weisungen checken" />
+                        <MenuItem fx:id="mnWeisungenKonsolidieren" mnemonicParsing="false" onAction="#gewWeisungenKonsolidieren" text="Weisungen Konsolidieren" />
+						<MenuItem fx:id="mnSRV" mnemonicParsing="false" onAction="#gewSRV" text="VollmachtWeisungSRV" />
+						<MenuItem fx:id="mnPraesenzsummen" mnemonicParsing="false" onAction="#gewPraesenzsummen" text="Präsenzsummen" />
+						<MenuItem fx:id="mnProtokoll" mnemonicParsing="false" onAction="#gewProtokolle" text="Protokolle" />
+						<MenuItem fx:id="mnDelay" mnemonicParsing="false" onAction="#gewDelay" text="(-)Delay" />
+						<MenuItem fx:id="mnPraesenzFeststellen" mnemonicParsing="false" onAction="#gewPraesenzFeststellen" text="Präsenz feststellen" />
+						<MenuItem fx:id="mnPraesenzlisteDrucken" mnemonicParsing="false" onAction="#gewPraesenzlisteDrucken" text="Präsenzliste drucken" />
+						<MenuItem fx:id="mnElekTeilnehmerverzeichnisVersorgen" mnemonicParsing="false" onAction="#gewElekTeilnehmerverzeichnisVersorgen" text="Elektr.Teilnehmerverz. versorgen" />
+						<MenuItem fx:id="mnElekTeilnehmerverzeichnisAnzeigen" mnemonicParsing="false" onAction="#gewElekTeilnehmerverzeichnisAnzeigen" text="Elektr.Teilnehmerverz. anzeigen" />
+						<MenuItem fx:id="mnVereinVersorgen" mnemonicParsing="false" onAction="#gewVereinVersorgen" text="Vereinsstatistik versorgen" />
+						<MenuItem fx:id="mnPersonenZaehlung" mnemonicParsing="false" onAction="#gewPersonenZaehlung" text="Anwesende Personen (ohne Gäste)" />
+						<MenuItem fx:id="mnVerzeichnisVerein" mnemonicParsing="false" onAction="#gewVerzeichnisVerein" text="Verzeichnis Anwesende Verein" />
+                        <MenuItem fx:id="mnUebersichtPraesenz" mnemonicParsing="false" onAction="#gewUebersichtPraesenz" text="Präsenz Übersicht" />
+					</items>
+				</Menu>
+
+				<Menu fx:id="mnoHVAbstimmung" mnemonicParsing="false" text="Abstimmung">
+					<items>
+						<MenuItem fx:id="mnAbstimmungAblauf" mnemonicParsing="false" onAction="#gewAbstimmungAblauf" text="Abstimmungs-Ablauf" />
+                        <MenuItem fx:id="mnAbstimmungArchiv" mnemonicParsing="false" onAction="#gewAbstimmungArchiv" text="Abstimmungs-Archiv" />
+                        <SeparatorMenuItem />
+                        <MenuItem fx:id="mnWeisungenKopieren" mnemonicParsing="false" onAction="#gewWeisungenKopieren" text="Weisungen Kopieren" />
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnAbstimmungEingabe" mnemonicParsing="false" onAction="#gewAbstimmungEingabe" text="(-)Eingabe" />
+						<MenuItem fx:id="mnUebersichtSRV" mnemonicParsing="false" onAction="#gewUebersichtSRV" text="(-)SRV-Freigabe" />
+						<MenuItem fx:id="mnAbstimmungsverhalten" mnemonicParsing="false" onAction="#gewAbstimmungsverhalten" text="(-)Abstimmungsverhalten" />
+						<MenuItem fx:id="mnAbstimmungZuruecksetzen" mnemonicParsing="false" onAction="#gewAbstimmungZuruecksetzen" text="Abstimmung zurücksetzen" />
+					</items>
+				</Menu>
+
+
+				<Menu fx:id="mnoKonfiguration" mnemonicParsing="false" text="Konfiguration">
+					<items>
+						<MenuItem fx:id="mnUserLogin" mnemonicParsing="false" onAction="#gewUserLogin" text="Benutzer-Kennungen" />
+                        <MenuItem fx:id="mnUserProfile" mnemonicParsing="false" onAction="#gewUserProfile" text="Profile" />
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnParameterServer" mnemonicParsing="false" onAction="#gewParameterServer" text="Server-Konfiguration" />
+						<MenuItem fx:id="mnGeraeteSet" mnemonicParsing="false" onAction="#gewGeraeteSet" text="Geräte-Sets" />
+						<MenuItem fx:id="mnGeraeteKlasse" mnemonicParsing="false" onAction="#gewGeraeteKlasse" text="Geräte-Klassen" />
+						<MenuItem fx:id="mnGeraeteKlasseHV" mnemonicParsing="false" onAction="#gewGeraeteKlasseHV" text="HV-Konfiguration" />
+						<MenuItem fx:id="mnGeraeteZuordnung" mnemonicParsing="false" onAction="#gewGeraeteZuordnung" text="Geräte-Zuordnung" />
+						<MenuItem fx:id="mnGeraeteLabelPrinter" mnemonicParsing="false" onAction="#gewGeraeteLabelPrinter" text="Geräte-Label-Printer" />
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnParameterPresetsAlpha" mnemonicParsing="false" onAction="#gewParameterPresets" text="Presets (Alpha)" />
+						<MenuItem fx:id="mnParameterGrundeinstellungen" mnemonicParsing="false" onAction="#gewParameterGrundeinstellungen" text="Grundeinstellungen (Alpha)" />
+						<MenuItem fx:id="mnParameterAuswahl" mnemonicParsing="false" onAction="#gewParameterAuswahl" text="Auswahl Parametergruppen (Alpha)" />
+						<SeparatorMenuItem />
+						<Menu fx:id="mnParameterPresets" mnemonicParsing="false" text="Preset Parameter">
+							<items>
+							<MenuItem fx:id="mnNeueParameter" mnemonicParsing="false" onAction="#gewPresetsNeueParameter" text="Neue Parameter" />
+							</items>
+						</Menu>
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnParameterBasis" mnemonicParsing="false" onAction="#gewParameterBasis" text="Basis-Konfiguration" />
+						<MenuItem fx:id="mnParameterNummernformen" mnemonicParsing="false" onAction="#gewParameterNummernformen" text="Nummernformen" />
+						<MenuItem fx:id="mnParameterEmittent" mnemonicParsing="false" onAction="#gewParameterEmittent" text="Parameter Emittent" />
+						<MenuItem fx:id="mnParameterTermine" mnemonicParsing="false" onAction="#gewParameterTermine" text="Termine" />
+						<MenuItem fx:id="mnParameterPortalApp" mnemonicParsing="false" onAction="#gewParameterPortalApp" text="Parameter Portal App" />
+						<MenuItem fx:id="mnParameterAkkreditierung" mnemonicParsing="false" onAction="#gewParameterAkkreditierung" text="Parameter Akkreditierung" />
+						<MenuItem fx:id="mnParameterPraesenzliste" mnemonicParsing="false" onAction="#gewParameterPraesenzliste" text="Parameter Präsenzliste" />
+						<MenuItem fx:id="mnParameterAbstimmungenParameter" mnemonicParsing="false" onAction="#gewParameterAbstimmungenParameter" text="Parameter Weisungen/Abstimmungen" />
+						<MenuItem fx:id="mnParameterKonfigAuswertung" mnemonicParsing="false" onAction="#gewParameterKonfigAuswertung" text="Konfiguration Auswertungen" />
+                        <MenuItem fx:id="mnImportWortmeldetisch" mnemonicParsing="false" onAction="#gewImportWortmeldetisch" text="Konfiguration Wortmeldetisch" />
+                        <SeparatorMenuItem />
+                        <MenuItem fx:id="mnParameterGaeste" mnemonicParsing="false" onAction="#gewParameterGaeste" text="Parameter Gäste" />
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnParameterSonder" mnemonicParsing="false" onAction="#gewParameterSonder" text="Parameter Sonderabläufe" />
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnParameterAbstimmungen" mnemonicParsing="false" onAction="#gewParameterAbstimmungen" text="Abstimmungen" />
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnDesigner" mnemonicParsing="false" onAction="#gewDesigner" text="Formular- und List-Designer" />
+						<SeparatorMenuItem />
+						<MenuItem fx:id="mnParameterSetSpeichern" mnemonicParsing="false" onAction="#gewParameterSetSpeichern" text="Parameter-Set speichern" />
+					</items>
+				</Menu>
+
+
+
+				<Menu fx:id="mnoTesten" mnemonicParsing="false" text="Testen">
+					<items>
+						<MenuItem fx:id="mnHVZuruecksetzen" mnemonicParsing="false" onAction="#gewHVZuruecksetzen" text="HV Zurücksetzen" />
+						<MenuItem fx:id="mnMassenZuAbgang" mnemonicParsing="false" onAction="#gewMassenZuAbgang" text="Massen-Zu/Abgang" />
+						<MenuItem fx:id="mnBildschirmAufloesung" mnemonicParsing="false" onAction="#gewBildschirmAufloesung" text="Bildschirmauflösung" />
+						<MenuItem fx:id="mnModulTest" mnemonicParsing="false" onAction="#gewModulTest" text="Modul-Test" />
+					</items>
+				</Menu>
+				<Menu fx:id="mnoAdmin" mnemonicParsing="false" text="Admin">
+					<items>
+						<MenuItem fx:id="mnAdminReorgIdents" mnemonicParsing="false" onAction="#gewAdminReorgIdents" text="Reorg Idents" />
+						<MenuItem fx:id="mnAdminDiv" mnemonicParsing="false" onAction="#gewAdminDiv" text="Div. AdministrationTools" />
+					</items>
+				</Menu>
+				
+				<Menu fx:id="mnoVerwaltung" mnemonicParsing="false" text="Verwaltung">
+					<items>
+						<MenuItem fx:id="mnPasswortAendern" mnemonicParsing="false" onAction="#gewPasswortAendern" text="Passwort Ändern" />
+						<MenuItem fx:id="mnNeuenMandantAnlegen" mnemonicParsing="false" onAction="#gewNeuenMandantAnlegen" text="Neuen Mandant anlegen" />
+						<MenuItem mnemonicParsing="false" text="About" />
+					</items>
+				</Menu>
+            <Menu fx:id="mnoMailing" mnemonicParsing="false" text="Mailing">
+              <items>
+                <MenuItem fx:id="mnMailingParameter" mnemonicParsing="false" onAction="#gewMailingParameter" text="Parameter Mailing" />
+                  <MenuItem fx:id="mnMailingVersand" mnemonicParsing="false" onAction="#gewMailingVersand" text="Versand" />
+              </items>
+            </Menu>
+            <Menu fx:id="mnoSRD" mnemonicParsing="false" text="SRD II">
+               <items>
+                  <MenuItem fx:id="mnSRDNotification" mnemonicParsing="false" onAction="#gewSRDNotification" text="Notification" />
+                  <MenuItem fx:id="mnSRDCancallation" mnemonicParsing="false" onAction="#gewSRDCancallation" text="Cancallation" />
+                  <MenuItem fx:id="mnSRDResult" mnemonicParsing="false" onAction="#gewSRDResult" text="Result Dissemination" />
+               </items>
+            </Menu>
+			</menus>
+		</MenuBar>
+      <Label fx:id="lblMandant" layoutX="31.0" layoutY="54.0" prefHeight="92.0" prefWidth="1050.0" wrapText="true" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="50.0" />
+      <Label fx:id="lblServer" layoutX="188.0" layoutY="274.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="160.0" text="Consultant:" AnchorPane.leftAnchor="35.0" />
+      <Label fx:id="lblConsultant" alignment="TOP_LEFT" layoutX="133.0" layoutY="160.0" prefHeight="88.0" prefWidth="708.0" />
+      <Label fx:id="lblDatenStatus" layoutX="35.0" layoutY="265.0" prefHeight="141.0" prefWidth="971.0" textFill="#f20303" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="35.0">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Label>
+            <GridPane fx:id="hvAnsicht" hgap="25.0" style="-fx-background-color: e8e8e8; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" vgap="25.0" visible="false" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints prefHeight="115.0" vgrow="SOMETIMES" />
+          <RowConstraints prefHeight="115.0" vgrow="SOMETIMES" />
+          <RowConstraints prefHeight="115.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+               </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </GridPane>
+      <CheckBox fx:id="cbAnsicht" focusTraversable="false" layoutX="1006.0" layoutY="567.0" mnemonicParsing="false" onAction="#onCbAnsicht" prefHeight="25.0" text="HV - Ansicht" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </CheckBox>
+	</children>
+</AnchorPane>

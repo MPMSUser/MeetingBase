@@ -1,0 +1,163 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" lang="de" template="WEB-INF/eTemplate.xhtml">
+    <ui:define name="content">
+        <h2>
+            <h:outputText value="Basis-Freigabe"></h:outputText>
+        </h2>
+        <h:form>
+            <h:outputLabel value="#{eDlgVariablen.fehlerMeldung}"></h:outputLabel>
+            <br />
+            <h:panelGroup rendered="#{eControllerBestandsabgleichSession.basisStatus==0}">
+
+                <h:commandButton value="Nächstes Dokument bearbeiten"
+                    action="#{eControllerBestandsabgleichBasisPDF.doNaechstesDokument()}" class="btnCommand" />
+                <br /><br />
+
+
+                <br />
+                <br />
+                <div class="divButtons divButtonsLeft">
+                    <h:commandButton value="Schließen" action="#{eControllerBestandsabgleichBasisPDF.doMenue()}" />
+                </div>
+                <div class="divButtons divButtonsCenter">
+                </div>
+                <div class="divButtons divButtonsRight">
+                </div>
+
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{eControllerBestandsabgleichSession.basisStatus==1}">
+
+                <h:commandButton value="PDF #{eclBestWorkflowM.dateinameBestaetigung} anzeigen"
+                    action="#{eControllerBestandsabgleichBasisPDF.doPDFAnzeigen()}" class="btnCommand"
+                    onclick="this.form.target='_blank'" />
+                <br />
+                <h:outputLabel value="Mitgliedsnummer:" /><br />
+                <h:inputText value="#{eclBestWorkflowM.zuAktionaersnummer}" maxlength="20" size="20"></h:inputText>
+                <br />
+                <h:commandButton value="Daten holen" action="#{eControllerBestandsabgleichBasisPDF.doNameHolen()}"
+                    class="btnCommand" />
+                <br />
+
+
+                <table>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fNameVorname}" />
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fGeburtsdatum}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fStrasseHausnummer}" />
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fPLZ} " />
+                            <h:outputLabel value="#{eclBestWorkflowM.fOrt} " />
+                            <h:outputLabel value="#{eclBestWorkflowM.fLand}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fAdresszusatz}" />
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fSteuerlicheIdent}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fTelefon}" />
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fMailAdresse}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>ggf. Ehefrau</b></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fEheNameVorname}" />
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fEheGeburtsdatum}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fEheSteuerlicheIdent}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Bankverbindung</b></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fKontoBei}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fIBAN}" />
+                        </td>
+                        <td>
+                            <h:outputLabel value="#{eclBestWorkflowM.fBIC}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Kontoinhaber</b>
+                            <h:outputLabel value=" #{eclBestWorkflowM.fNameVornameKontoinhaber}" />
+                        </td>
+                    </tr>
+                </table>
+
+                <h:outputLabel value="#{eclBestWorkflowM.nameMitglied}" /><br />
+                <h:selectOneRadio id="freigabe" value="#{eclBestWorkflowM.pruefstatusErgebnis}" layout="pageDirection">
+                    <f:selectItem itemLabel="Abweichungen vorhanden" itemValue="1" />
+                    <f:selectItem itemLabel="ohne Abweichungen" itemValue="2" />
+                    <f:selectItem itemLabel="zur Wiedervorlage" itemValue="3" />
+
+                </h:selectOneRadio><br />
+                <h:outputLabel value="Kommentar:" /><br />
+                <h:inputTextarea rows="4" cols="80" value="#{eclBestWorkflowM.kommentar}"></h:inputTextarea>
+
+
+                <br />
+                <div class="divButtons divButtonsLeft">
+                    <h:commandButton value="Speichern " action="#{eControllerBestandsabgleichBasisPDF.doSpeichern()}"
+                        class="btnCommand" onclick="this.form.target='_self'" /><br />
+                    <h:commandButton value="Speichern und Dokument weiterem Mitglied zuordnen"
+                        action="#{eControllerBestandsabgleichBasisPDF.doSpeichernFortsetzen()}" class="btnCommand"
+                        onclick="this.form.target='_self'" /><br />
+                    <h:commandButton value="Abbrechen" action="#{eControllerBestandsabgleichBasisPDF.doAbbrechen()}"
+                        class="btnCommand" onclick="this.form.target='_self'" /><br />
+                </div>
+                <div class="divButtons divButtonsCenter">
+                </div>
+                <div class="divButtons divButtonsRight">
+                </div>
+
+            </h:panelGroup>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

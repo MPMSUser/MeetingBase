@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btnTblPortalTexteGlobal" layoutX="85.0" layoutY="60.0" mnemonicParsing="false" onAction="#onBtnTblPortalTexteGlobal" prefHeight="25.0" prefWidth="234.0" text="Anlegen tbl_portaltexte global" />
+      <Button fx:id="btnTblPortalTexteMandant" layoutX="85.0" layoutY="100.0" mnemonicParsing="false" onAction="#onBtnTblPortalTexteMandant" prefHeight="25.0" prefWidth="234.0" text="Anlegen tbl_portaltexte mandant" />
+      <Button fx:id="btnTblParameterLang" layoutX="85.0" layoutY="140.0" mnemonicParsing="false" onAction="#onBtnTblParameterLang" prefHeight="25.0" prefWidth="234.0" text="Anlegen tbl_parameterLang" />
+      <Button fx:id="btnTblTermine" layoutX="85.0" layoutY="180.0" mnemonicParsing="false" onAction="#onBtnTblTermine" prefHeight="25.0" prefWidth="234.0" text="Anlegen tbl_termine" />
+      <Button fx:id="btnTblAufgaben" layoutX="85.0" layoutY="223.0" mnemonicParsing="false" onAction="#onBtnTblAufgaben" prefHeight="25.0" prefWidth="234.0" text="Anlegen tbl_Aufgaben (mc)" />
+      <Button fx:id="btnTblDrucklauf" layoutX="85.0" layoutY="264.0" mnemonicParsing="false" onAction="#onBtnTblDrucklauf" prefHeight="25.0" prefWidth="234.0" text="Anlegen tbl_Drucklauf" />
+      <Button fx:id="btnTblVerarbeitungslaufVerarbeitungspotokoll" layoutX="85.0" layoutY="301.0" mnemonicParsing="false" onAction="#onBtnVerarbeitungslaufVerarbeitungspotokoll" prefHeight="55.0" prefWidth="234.0" text="Anlegen tbl_verarbeitungslauf und tbl_verarbeitungsprotokoll (beide mc)" wrapText="true" />
+      <Button fx:id="btnTblKonfigVerarbeitung" layoutX="85.0" layoutY="373.0" mnemonicParsing="false" onAction="#onBtnTblKonfigVerarbeitung" prefHeight="55.0" prefWidth="234.0" text="Anlegen tbl_konfigVerarbeitung (mandant)" wrapText="true" />
+      <Button fx:id="btnTblInstiProv" layoutX="85.0" layoutY="447.0" mnemonicParsing="false" onAction="#onBtnTblInstiProv" prefHeight="55.0" prefWidth="234.0" text="Anlegen tbl_instiProv (mandant)" wrapText="true" />
+      <Button fx:id="btnSpezial" layoutX="85.0" layoutY="521.0" mnemonicParsing="false" onAction="#onBtnSpezial" prefHeight="55.0" prefWidth="234.0" text="Spezial ScanLauf" wrapText="true" />
+      <Button fx:id="btnTblIpTracking" layoutX="85.0" layoutY="586.0" mnemonicParsing="false" onAction="#onBtnTblIpTracking" prefHeight="55.0" prefWidth="234.0" text="Anlegen tbl_ipTracking (mandant)" wrapText="true" />
+      <Button fx:id="btnTblBestWorkflow" layoutX="361.0" layoutY="60.0" mnemonicParsing="false" onAction="#onBtnTblBestWorkflow" prefHeight="55.0" prefWidth="234.0" text="Anlegen tbl_bestWorkflow (mandant)" wrapText="true" />
+      <Button fx:id="btnTblAktienregisterMailRuecklauf" layoutX="361.0" layoutY="125.0" mnemonicParsing="false" onAction="#onBtnTblAktienregisterMailRuecklauf" prefHeight="55.0" prefWidth="234.0" text="Anlegen tbl_aktienregisterMailRuecklauf (mandant)" wrapText="true" />
+      <Button fx:id="btnTblHTable" layoutX="361.0" layoutY="196.0" mnemonicParsing="false" onAction="#onBtnTblhTable" prefHeight="55.0" prefWidth="234.0" text="ku178: Übertragen hTable in nachversand" wrapText="true" />
+      <TextField fx:id="tfHTable" layoutX="447.0" layoutY="258.0" />
+      <Button fx:id="btnTblNameNrMeldebestand" layoutX="361.0" layoutY="301.0" mnemonicParsing="false" onAction="#onBtnTblNameNrMeldebestand" prefHeight="55.0" prefWidth="234.0" text="ku178: Füllen Name + Mitgliedsnr. Meldebestand" wrapText="true" />
+      <Label layoutX="361.0" layoutY="262.0" text="Versand-Nr" />
+   </children>
+</Pane>

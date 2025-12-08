@@ -1,0 +1,202 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:p="http://primefaces.org/ui"
+        lang="de">
+
+<head>
+    <title>iLogin</title>
+</head>
+
+<body>
+    <ui:composition>
+
+
+        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1')}">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-8">
+                        <h1>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1')}" escape="false" />
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </h:panelGroup>
+
+        <f:subview id="iloginOben">
+            <ui:include src="idetail/idSeiteStart.xhtml" />
+        </f:subview>
+
+        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2')}">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-8">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('2')}" escape="false" />
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </h:panelGroup>
+
+        <section id="login-eingabe-bereich">
+            <div class="container-80">
+
+                <div class="row">
+                    <div class="col-4">
+                        <h:outputText value="#{eclPortalTexteM.holeText('5')}" escape="false"></h:outputText>
+                    </div>
+                    <div class="col-4">
+                        <h:inputText id="kennung" value="#{tLoginLogoutSession.loginKennung}" maxlength="20" styleClass="txtLogin"></h:inputText>
+                    </div>
+                </div>
+
+                <h:panelGroup rendered="#{eclParamM.loginVerfahren==99}">
+                    <!-- ku216-Bank -->
+
+                    <div class="row">
+                        <div class="col-4">
+                            <h:outputText value="#{eclPortalTexteM.holeText('910')}" escape="false"></h:outputText>
+                        </div>
+                        <div class="col-4">
+                            <h:inputText id="name99" redisplay="true" value="#{tLoginLogoutSession.loginName}" maxlength="200" size="30" autocomplete="off" styleClass="txtLogin"></h:inputText>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <h:outputText value="#{eclPortalTexteM.holeText('911')}" escape="false"></h:outputText>
+                        </div>
+                        <div class="col-4">
+                            <h:inputText id="datum99" redisplay="true" value="#{tLoginLogoutSession.loginDatum}" maxlength="15" autocomplete="off" styleClass="txtLogin"></h:inputText>
+                        </div>
+                    </div>
+
+                </h:panelGroup>
+
+
+                <div class="row">
+                    <div class="col-4">
+                        <h:outputText value="#{eclPortalTexteM.holeText('6')}" escape="false"></h:outputText>
+                    </div>
+                    <div class="col-4">
+                        <h:inputSecret id="passwort" redisplay="true" value="#{tLoginLogoutSession.loginPasswort}" maxlength="20" autocomplete="off" styleClass="txtLogin"></h:inputSecret>
+                        <span id="spanShowPassword">
+                            <i class="fas fa-eye" onclick="showPassword();"></i>
+                        </span>
+                        <span id="spanHidePassword" class="d-none">
+                            <i class="fas fa-eye-slash" onclick="hidePassword();"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <h:panelGroup rendered="#{eclParamM.verfahrenPasswortVergessen!=0}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('9')}">
+                                <h:outputLabel value="#{eclPortalTexteM.holeText('9')}" escape="false"></h:outputLabel>
+                                <br />
+                            </h:panelGroup>
+                            <h:commandLink value="#{eclPortalTexteM.holeText('10')}" action="#{tLoginLogout.doPasswortVergessen()}">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandLink>
+                        </h:panelGroup>
+                    </div>
+                </div>
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('7')}">
+                    <div class="row">
+                        <div class="col-8">
+                            <p>
+                                <h:outputLabel value="#{eclPortalTexteM.holeText('7')}" escape="false"></h:outputLabel>
+                            </p>
+                        </div>
+                    </div>
+                </h:panelGroup>
+                <div class="row">
+                    <div class="col-8">
+                        <h:commandButton value="#{eclPortalTexteM.holeText('8')}" id="buttonUntenRight1" action="#{tLoginLogout.doLogin()}" styleClass="btn-typ-login">
+                            <f:ajax execute="@all" render="headerform inhaltsform streamform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                        <!--
+                        <h:panelGroup rendered="#{tSeitensteuerungSession.rechtenButtonAnzeigen==true}">
+                            <h:commandButton value="#{tSeitensteuerung.holeTextRechterButton()}" id="buttonUntenRight1" action="#{tLoginLogout.doLogin()}" styleClass="btn-typ-00" rendered="#{tSeitensteuerungSession.rechterButtonRenderKomplett==true}">
+                                <f:ajax execute="@all" render="headerform inhaltsform streamform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                            <h:commandButton value="#{tSeitensteuerung.holeTextRechterButton()}" id="buttonUntenRight2" action="#{tSeitensteuerung.doRechterButton()}" styleClass="btn-typ-00" rendered="#{tSeitensteuerungSession.rechterButtonRenderKomplett==false}">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                        </h:panelGroup>
+                        -->
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <f:subview id="iloginButtons">
+            <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+        </f:subview>
+
+        <h:panelGroup rendered="#{eclParamM.appInstallButtonsAnzeigen==1}">
+            <section id="app-button-bereich">
+                <div class="container-80">
+                    <div class="row">
+                        <div class="col-8">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('199')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('199')}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <a href="https://itunes.apple.com/de/app/bettersmart/id1355773210?mt=8" target="_blank">
+                                <h:graphicImage value="../resources/std/images/app-badges/app-store_de.svg" rendered="#{tLanguage.lang == 1}" styleClass="app-store-badge" />
+                            </a>
+                            <a href="https://itunes.apple.com/de/app/bettersmart/id1355773210?mt=8" target="_blank">
+                                <h:graphicImage value="../resources/std/images/app-badges/app-store_en.svg" rendered="#{tLanguage.lang == 2}" styleClass="app-store-badge" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <a href="http://play.google.com/store/apps/details?id=de.betterorange.bettersmart" target="_blank">
+                                <h:graphicImage value="../resources/std/images/app-badges/google-play-badge_de.png" rendered="#{tLanguage.lang == 1}" styleClass="play-store-badge" />
+                            </a>
+                            <a href="http://play.google.com/store/apps/details?id=de.betterorange.bettersmart" target="_blank">
+                                <h:graphicImage value="../resources/std/images/app-badges/google-play-badge_en.png" rendered="#{tLanguage.lang == 2}" styleClass="play-store-badge" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </h:panelGroup>
+    </ui:composition>
+</body>
+
+</html>

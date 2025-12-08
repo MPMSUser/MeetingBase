@@ -1,0 +1,67 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" lang="de" template="/WEB-INF/uTemplateLLogin.xhtml">
+
+    <f:metadata>
+        <f:viewParam name="baselink" value="#{uLoginSession.baseLink}" />
+        <f:viewParam name="hvjahr" value="#{uLoginSession.hvjahr}" />
+        <f:viewParam name="hvnummer" value="#{uLoginSession.hvnummer}" />
+        <f:viewParam name="datenbankbereich" value="#{uLoginSession.datenbankbereich}" />
+        <f:viewParam name="mandant" value="#{uLoginSession.mandant}" />
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncHeaderL.xhtml">
+                <ui:param name="loginAnzeigen" value="0" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschrift.xhtml">
+                <ui:param name="ueberschrift" value="Login" />
+            </ui:include>
+
+
+            <div class="divArbeitsbereich">
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="Kennung"></h:outputLabel>
+                    <h:inputText value="#{uLoginSession.kennung}" maxlength="20" size="20"></h:inputText>
+
+                    <h:outputLabel value="Passwort"></h:outputLabel>
+                    <h:inputText value="#{uLoginSession.passwort}" maxlength="20" size="20"></h:inputText>
+                </h:panelGrid>
+            </div>
+
+            <table class="divButtons">
+                <tr>
+                    <td class="divButtonsLeft">
+                        <h:outputText value="&#160;" escape="false" />
+                    </td>
+                    <td class="divButtonsCenter">
+                        <h:outputText value="&#160;" escape="false" />
+                    </td>
+                    <td class="divButtonsRight">
+                        <h:commandButton value="Login" action="#{uLogin.doLoginL()}" styleClass="btnStandard" />
+                    </td>
+                </tr>
+            </table>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,131 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    xmlns:f="jakarta.faces.core" lang="de">
+    <h:panelGroup rendered="#{meldung.ausgeblendet==false}">
+        <ui:repeat value="#{meldung.zugeordneteWillenserklaerungenList}" var="willenserklaerung">
+            <div class="col">
+                <div class="row mt-2">
+                    <div class="card card-detail">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <div class="container-fluid">
+                                        <ui:repeat value="#{willenserklaerung.textListe}" var="textElement">
+                                            <h:panelGroup rendered="#{tLanguage.lang == 1}">
+                                                <h:outputText
+                                                    value="#{eclPortalTexteM.holeText(textElement.textNr)}#{textElement.textInhalt}"
+                                                    rendered="#{textElement.textNr!=0}" />
+                                                <ui:repeat value="#{textElement.textListe}" var="textListeElement">
+                                                    <p>
+                                                        <h:outputText value="#{textListeElement}" />
+                                                    </p>
+                                                </ui:repeat>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{tLanguage.lang == 2}">
+                                                <h:outputText
+                                                    value="#{eclPortalTexteM.holeText(textElement.textNr)}#{textElement.textInhaltEN}"
+                                                    rendered="#{textElement.textNr!=0}" />
+
+                                                <ui:repeat value="#{textElement.textListeEN}" var="textListeElement">
+                                                    <p>
+                                                        <h:outputText value="#{textListeElement}" />
+                                                    </p>
+                                                </ui:repeat>
+                                            </h:panelGroup>
+                                        </ui:repeat>
+                                        <h:panelGroup rendered="#{willenserklaerung.istLeerDummy}">
+                                            <p>
+                                                <i class="fa-solid fa-circle-exclamation fs-3"></i>
+                                            </p>
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('134')}" escape="false">
+                                                </h:outputText>
+                                                <h:outputText
+                                                    value=" #{meldung.aktionaerStimmenDE} #{eclPortalTexteM.holeText('140')} "
+                                                    rendered="#{tLanguage.lang == 1 and tRender.stimmenAnzeigen()==true}" />
+                                                <h:outputText
+                                                    value=" #{meldung.aktionaerStimmenEN} #{eclPortalTexteM.holeText('140')} "
+                                                    rendered="#{tLanguage.lang == 2 and tRender.stimmenAnzeigen()==true}" />
+                                                <h:outputText value="#{eclPortalTexteM.holeText('135')}" escape="false">
+                                                </h:outputText>
+                                            </p>
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 p-3">
+                                <h:commandLink
+                                    rendered="#{willenserklaerung.stornierenIstZulaessigPortal and willenserklaerung.gesperrt==false and (willenserklaerung.liefereWillenserklaerungIstBriefwahl()==false or tRender.liefereBriefwahlStornierenZulaessig()==true)}"
+                                    action="#{tAuswahl.doStornieren(meldung, willenserklaerung)}"
+                                    id="willenserklStornieren" styleClass="btn btn-danger w-100 text-center">
+                                    <f:ajax execute="@all" render="inhaltsform"
+                                        onevent="function(data) {nachAjaxButton(data, true, false, 'mainInhaltModal', null, true)}" />
+                                    <i class="fa-solid fa-rotate-left me-1"></i> #{eclPortalTexteM.holeText('136')}
+                                </h:commandLink>
+                                <h:panelGroup
+                                    rendered="#{willenserklaerung.liefereWillenserklaerungIstBriefwahl()==false or tRender.liefereBriefwahlIstStimmabgabe()==false}">
+
+                                    <h:commandLink
+                                        rendered="#{willenserklaerung.aendernIstZulaessigPortal and willenserklaerung.gesperrt==false}"
+                                        action="#{tAuswahl.doAendern(meldung, willenserklaerung)}"
+                                        id="willenserklAendernNichtStimmabgabe" styleClass="btn btn-outline-primary w-100 text-center">
+                                        <f:ajax execute="@all" render="inhaltsform"
+                                            onevent="function(data) {nachAjaxButton(data, true, false, 'mainInhaltModal', null, true)}" />
+                                        <i class="fa-solid fa-pen-to-square me-1"></i>
+                                        #{eclPortalTexteM.holeText('137')}
+                                    </h:commandLink>
+
+                                </h:panelGroup>
+                                <h:panelGroup
+                                    rendered="#{willenserklaerung.liefereWillenserklaerungIstBriefwahl()==true and tRender.liefereBriefwahlIstStimmabgabe()==true}">
+
+                                    <h:commandLink
+                                        rendered="#{willenserklaerung.aendernIstZulaessigPortal and willenserklaerung.gesperrt==false}"
+                                        action="#{tAuswahl.doAendern(meldung, willenserklaerung)}"
+                                        id="willenserklAendernStimmabgabe" styleClass="btn btn-outline-primary w-100 text-center">
+                                        <f:ajax execute="@all" render="inhaltsform"
+                                            onevent="function(data) {nachAjaxButton(data, true, false, 'mainInhaltModal', null, true)}" />
+                                        <i class="fa-solid fa-pen-to-square me-1"></i>
+                                        #{eclPortalTexteM.holeText('2305')}
+                                    </h:commandLink>
+
+                                </h:panelGroup>
+
+
+                                <h:commandLink rendered="#{willenserklaerung.detailAnzeigeIstZulaessig}"
+                                    action="#{tAuswahl.doDetails(meldung, willenserklaerung)}" id="willenserklDetail"
+                                    styleClass="btn btn-outline-primary w-100 text-center">
+                                    <f:ajax execute="@all" render="inhaltsform"
+                                        onevent="function(data) {nachAjaxButton(data, true, false, 'mainInhaltModal', null, true)}" />
+                                    <i class="fa-solid fa-circle-info me-1"></i> #{eclPortalTexteM.holeText('138')}
+                                </h:commandLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ui:repeat>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{meldung.ausgeblendet==true}">
+        <div class="row">
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1457')}">
+                <h:outputText value="#{eclPortalTexteM.holeText('1457')}" escape="false" />
+            </h:panelGroup>
+        </div>
+    </h:panelGroup>
+</ui:composition>

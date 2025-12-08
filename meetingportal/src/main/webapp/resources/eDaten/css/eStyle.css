@@ -1,0 +1,196 @@
+/**
+ *  Copyright 2025 Better Orange IR & HV AG
+ *
+ *  Licensed under the Meetingbase License (the "License");
+ *  Vou may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+body {
+	font-family: sans-serif;
+	width: 1200px;
+	margin: auto;
+	font-size: 15px;
+}
+
+span{
+	width: 50px;
+}
+
+#container {
+	width: 1200px;
+}
+
+
+#header {
+	margin-top: 20px;
+	width: 1200px;
+	height: 100px;
+	text-align: left;
+}
+
+
+#footer{
+	width: 1200px;
+}
+
+
+.divFooter{
+	width: 600px;
+	float: left;
+}
+
+.linkFooter{
+	color: #000;
+	text-decoration: underline;
+}
+
+#divFooterRight{
+	text-align: right;
+}
+
+#logo{
+	width: 300px;
+}
+
+#divLogin{
+	width: 400px;
+	margin: auto;
+	text-align: center;
+	border: 1px solid #336799;
+	border-radius: 10px;
+}
+
+#tblLogin{
+	width: 380px;
+	margin: auto;
+}
+
+#tblLogin td{
+	width: 190px;
+}
+
+.leftText{
+	text-align: left;
+}
+
+.rightText{
+	text-align: right;
+}
+
+.fehlermeldungen{
+	color: red;
+}
+
+.divButtons{
+	width: 400px;
+	float: left;
+}
+
+.divButtonsLeft{
+	text-align: left;
+}
+
+.divButtonsCenter{
+	text-align: center;
+}
+
+.divButtonsRight{
+	text-align: right;
+}
+
+.commandLink{
+	font-size: 20px;
+	text-decoration: underline;
+	font-family: sans-serif;
+	color: #000;
+}
+
+.divMenu{
+	padding-left: 10px;
+	width: 1200px;
+	border: 1px solid #336799;
+	border-radius: 10px;
+}
+
+.divMenuUnder{
+	float: left;
+}
+
+.divMenuUnderLeft{
+	width: 400px;
+}
+
+.divMenuUnderRight{
+	width: 800px;
+}
+
+.tblKennzeichen{
+	width: 800px;
+}
+
+.tblKennzeichenC00{
+	width: 100px;
+}
+
+.tblKennzeichenC01{
+	width: 350px;
+}
+
+.tblKennzeichenC02{
+	width: 350px;
+}
+
+.tblPerson{
+	width: 1000px;
+}
+
+.tblPersonC00{
+	width: 200px;
+}
+
+.tblPersonC01{
+	width: 200px;
+}
+
+.tblPersonC02{
+	width: 200px;
+}
+
+.tblPersonC03{
+	width: 200px;
+}
+
+.tblPersonC04{
+	width: 200px;
+}
+
+.tblPerson2{
+	width: 800px;
+}
+
+.tblPerson2C00{
+	width: 200px;
+}
+
+.tblPerson2C01{
+	width: 200px;
+}
+
+.tblPerson2C02{
+	width: 200px;
+}
+
+.tblPerson2C03{
+	width: 200px;
+}
+
+
+
+
+

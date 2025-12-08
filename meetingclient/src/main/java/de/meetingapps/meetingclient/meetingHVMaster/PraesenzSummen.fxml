@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="47.0" layoutY="38.0" text="Aktuelle Präsenz" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <GridPane fx:id="grdPnAktuell" layoutX="47.0" layoutY="88.0" prefHeight="90.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="60.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Präsenzsummen normal" GridPane.rowIndex="1" />
+            <Label text="Präsenzsummen delayed" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Label layoutX="178.0" layoutY="212.0" prefHeight="50.0" text="Aktuelle Präsenz-/Nachtrags-Nummer" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0" />
+      <Label fx:id="lblAktuellePraesenzNr" layoutX="473.0" layoutY="212.0" prefHeight="50.0" text="Label" AnchorPane.leftAnchor="370.0" AnchorPane.topAnchor="200.0" />
+      <Button fx:id="btnRefresh" layoutX="644.0" layoutY="196.0" mnemonicParsing="false" onAction="#clickedBtnRefresh" prefHeight="50.0" prefWidth="221.0" text="Refresh" AnchorPane.rightAnchor="275.0" AnchorPane.topAnchor="200.0" />
+      <Button fx:id="btnBeenden" layoutX="879.0" layoutY="196.0" mnemonicParsing="false" onAction="#clickedBtnBeenden" prefHeight="50.0" prefWidth="225.0" text="Beenden" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="200.0" />
+      <Label layoutX="48.0" layoutY="246.0" text="Zeile 1: berechnet; Zeile 2: aus Liste" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="270.0" />
+      <ScrollPane fx:id="scrollPnListenSummen" layoutX="48.0" layoutY="276.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="300.0" />
+   </children>
+</AnchorPane>

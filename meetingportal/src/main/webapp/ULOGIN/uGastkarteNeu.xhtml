@@ -1,0 +1,573 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="#{uGastkarteSession.ueberschrift}" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <div class="divArbeitsbereich">
+
+                <h:panelGroup rendered="#{uGastkarteSession.gruppenausstellung}">
+                    <b>
+                        <h:outputText value="Bitte hier die Daten des Gruppenverwalters eingeben:"></h:outputText>
+                    </b>
+                </h:panelGroup>
+
+                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px">
+
+                    <p:column>
+                        <h:outputLabel value="Gastkarten-Nr"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="(wird automatisch vergeben)"></h:outputLabel>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldAnredeVerwenden>0}">
+                        <h:outputLabel value="Anrede"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldAnredeVerwenden>0}">
+                        <h:selectOneMenu value="#{eclGastM.anrede}">
+                            <f:selectItems value="#{eclAnredeListeM.anredeListeM}" var="anrede"
+                                itemLabel="#{anrede.anredentext}" itemValue="#{anrede.anredennr}" />
+                        </h:selectOneMenu>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldTitelVerwenden>0}">
+                        <h:outputLabel value="Titel"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldTitelVerwenden>0}">
+                        <h:inputText value="#{eclGastM.titel}" maxlength="30" size="32"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldAdelstitelVerwenden>0}">
+                        <h:outputLabel value="Adelstitel"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldAdelstitelVerwenden>0}">
+                        <h:inputText value="#{eclGastM.adelstitel}" maxlength="30" size="32"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldNameVerwenden>0}">
+                        <h:outputLabel value="Name"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldNameVerwenden>0}">
+                        <h:inputText value="#{eclGastM.name}" maxlength="80" size="82"></h:inputText>
+                    </p:column>
+
+
+                    <p:column rendered="#{uGastkarteSession.feldVornameVerwenden>0}">
+                        <h:outputLabel value="Vorname"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldVornameVerwenden>0}">
+                        <h:inputText value="#{eclGastM.vorname}" maxlength="80" size="82"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldZuHaendenVerwenden>0}">
+                        <h:outputLabel value="#{uGastkarteSession.feldZuHaendenBezeichnung}"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldZuHaendenVerwenden>0}">
+                        <h:inputText value="#{eclGastM.zuHdCo}" maxlength="80" size="82"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldZusatz1Verwenden>0}">
+                        <h:outputLabel value="#{uGastkarteSession.feldZusatz1Bezeichnung}"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldZusatz1Verwenden>0}">
+                        <h:inputText value="#{eclGastM.zusatz1}" maxlength="80" size="82"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldZusatz2Verwenden>0}">
+                        <h:outputLabel value="#{uGastkarteSession.feldZusatz2Bezeichnung}"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldZusatz2Verwenden>0}">
+                        <h:inputText value="#{eclGastM.zusatz2}" maxlength="80" size="82"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldStrasseVerwenden>0}">
+                        <h:outputLabel value="Straße"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldStrasseVerwenden>0}">
+                        <h:inputText value="#{eclGastM.strasse}" maxlength="80" size="82"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldLandVerwenden>0}">
+                        <h:outputLabel value="Land"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldLandVerwenden>0}">
+                        <h:inputText value="#{eclGastM.land}" maxlength="4" size="6"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldPLZVerwenden>0}">
+                        <h:outputLabel value="Postleitzahl"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldPLZVerwenden>0}">
+                        <h:inputText value="#{eclGastM.plz}" maxlength="20" size="22"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldOrtVerwenden>0}">
+                        <h:outputLabel value="Ort"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldOrtVerwenden>0}">
+                        <h:inputText value="#{eclGastM.ort}" maxlength="80" size="82"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldMailadresseVerwenden>0}">
+                        <h:outputLabel value="Mailadresse"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldMailadresseVerwenden>0}">
+                        <h:inputText value="#{eclGastM.mailadresse}" maxlength="80" size="82"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldKommunikationsspracheVerwenden>0}">
+                        <!-- <h:outputLabel value="Kommunikationssprache"></h:outputLabel> -->
+                        <h:outputLabel value="Insti-Ident"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldKommunikationsspracheVerwenden>0}">
+                        <h:inputText value="#{eclGastM.kommunikationssprache}" maxlength="6" size="6"></h:inputText>
+
+                        <!--
+                            <h:selectOneMenu value="#{eclGastM.kommunikationssprache}">
+                                <f:selectItems
+                                    value="#{eclKommunikationsSpracheListeM.kommunikationsSpracheListeM}"
+                                    var="sprache" itemLabel="#{sprache.sprache}"
+                                    itemValue="#{sprache.sprachennr}" />
+                            </h:selectOneMenu>
+                                    -->
+                    </p:column>
+
+
+                    <p:column rendered="#{uGastkarteSession.feldGruppeVerwenden>0}">
+                        <h:outputLabel value="Gruppe"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldGruppeVerwenden>0}">
+                        <h:selectOneMenu value="#{eclGastM.gruppe}">
+                            <f:selectItems value="#{eclGruppeListeM.gruppeListeM}" var="gruppe"
+                                itemLabel="#{gruppe.gruppenText}" itemValue="#{gruppe.gruppenNr}" />
+                        </h:selectOneMenu>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:outputLabel value="Ausstellungsgrund"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:selectOneMenu value="#{eclGastM.neuerAusstellungsgrund}">
+                            <f:selectItems value="#{eclAusstellungsgrundListeM.ausstellungsgrundListeM}"
+                                var="ausstellungsgrund" itemLabel="#{ausstellungsgrund.beschreibung}"
+                                itemValue="#{ausstellungsgrund.kuerzel}" />
+                        </h:selectOneMenu>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:outputLabel value="Ausstellungsgrund Kommentar"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:inputText value="#{eclGastM.neuerAusstellungsgrundKommentar}" maxlength="80" size="82">
+                        </h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:outputLabel value=""></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:commandButton value="Weiteren Ausstellungsgrund hinzufügen" styleClass="btnNeutral"
+                            action="#{uGastkarte.doWeitererAusstellungsgrund()}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:outputLabel value=""></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:dataTable value="#{eclGastM.ausstellungsgrundListe}" var="ausstellungsgrund"
+                            styleClass="tblKennzeichen"
+                            columnClasses="tblKennzeichenC00, tblKennzeichenC01, tblKennzeichenC02"
+                            rowClasses="leftText">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Kürzel" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{ausstellungsgrund.ausstellungsGrundKuerzel}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Beschreibung" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{ausstellungsgrund.beschreibung}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Kommentar" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{ausstellungsgrund.kommentar}" />
+                            </h:column>
+
+                        </h:dataTable>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:outputLabel value="VIP-Kennzeichen"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:selectOneMenu value="#{eclGastM.neuesVipKZ}">
+                            <f:selectItems value="#{eclVipKZListeM.vipKZListeM}" var="vipKZ"
+                                itemLabel="#{vipKZ.beschreibung}" itemValue="#{vipKZ.kuerzel}" />
+                        </h:selectOneMenu>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:outputLabel value="VIP-Kennzeichen - Meldungstext"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:inputText value="#{eclGastM.neuesVipKZKommentar}" maxlength="80" size="82"></h:inputText>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:outputLabel value=""></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:commandButton value="Weiteres VIP-Kennzeichen hinzufügen" styleClass="btnNeutral"
+                            action="#{uGastkarte.doWeiteresVipKZ()}" />
+                    </p:column>
+
+
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:outputLabel value="" />
+                    </p:column>
+
+
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:dataTable value="#{eclGastM.vipKZListe}" var="vipKZ"
+                            columnClasses="tblKennzeichenC00, tblKennzeichenC01, tblKennzeichenC02"
+                            rowClasses="leftText" styleClass="tblKennzeichen">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg.Kuerzel}" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{vipKZ.vipKZKuerzel}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg.Beschreibung}" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{vipKZ.beschreibung}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="#{msg.Kommentar}" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{vipKZ.parameter}" />
+                            </h:column>
+
+                        </h:dataTable>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.gruppenausstellung}">
+                        <h:outputLabel value="Anzahl der zugeordneten Gastkarten zur Selbsteingabe"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.gruppenausstellung}">
+                        <h:inputText value="#{eclGastM.anzahlZugeordneteEK}" maxlength="4" size="6"></h:inputText>
+                    </p:column>
+
+                </p:panelGrid>
+                <br /> <br />
+            </div>
+
+            <table class="divButtons">
+                <tr>
+                    <td class="divButtonsLeft">
+                        <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                            action="#{uGastkarte.doAbbrechen()}" />
+                        <h:panelGroup rendered="#{uMenueSession.menueServicelinetools()}">
+                            <br />
+                            <br />
+                            <h:commandButton value="Zum Service-Line-Tool" styleClass="btnStandard"
+                                action="#{uGastkarte.doZumServiceLineTool()}" />
+                        </h:panelGroup>
+
+                    </td>
+                    <td class="divButtonsCenter"></td>
+                    <td class="divButtonsRight">
+                        <h:panelGroup
+                            rendered="#{!uGastkarteSession.gruppenausstellung and uGastkarteSession.buttonSpeichernAnzeigen}">
+                            <h:commandButton value="Speichern" styleClass="btnStandard"
+                                action="#{uGastkarte.doSpeichernVormerken()}" />
+                            <br />
+                            <br />
+                        </h:panelGroup>
+                        <h:panelGroup
+                            rendered="#{!uGastkarteSession.gruppenausstellung and uGastkarteSession.buttonSpeichernDruckenAnzeigen}">
+                            <h:commandButton value="Speichern und Sofort-Druck/Versand" styleClass="btnStandard"
+                                action="#{uGastkarte.doSpeichernSofort()}" />
+                            <br />
+                            <br />
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{uGastkarteSession.gruppenausstellung}">
+                            <h:commandButton value="Speichern und Sofort-Mail" styleClass="btnStandard"
+                                action="#{uGastkarte.doSpeichernSofort()}" />
+                        </h:panelGroup>
+                    </td>
+
+                </tr>
+            </table>
+
+            <h:panelGroup rendered="#{eclUserLoginM.pruefe_emittentenPortal_gaestemodulZusatzberechtigungen()==true}">
+                <div class="divArbeitsbereich">
+
+                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                        style="width: 1180px">
+
+                        <p:column>
+                            <h:outputLabel value="Stream"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfStream}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Fragen"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfFragen}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Wortmeldungen"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfWortmeldungen}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Widersprüche"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfWidersprueche}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Anträge"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfAntraege}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Sonstige Mitteilungen"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfSonstigeMitteilungen}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Unterlagen Gruppe 1"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfUnterlagenGruppe1}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Unterlagen Gruppe 2"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfUnterlagenGruppe2}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Unterlagen Gruppe 3"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfUnterlagenGruppe3}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Unterlagen Gruppe 4"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfUnterlagenGruppe4}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Unterlagen Gruppe 5"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfUnterlagenGruppe5}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Teilnehmerverzeichnis"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfTeilnehmerverzeichnis}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Abstimmungsergebnis"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfAbstimmungsergebnisse}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Botschaften einreichen"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfBotschaftenEinreichen}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Botschaften anzeigen"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfBotschaftenAnzeige}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Rückfragen"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfRueckfragen}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+
+                        <p:column>
+                            <h:outputLabel value="Monitoring"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfMonitoring}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Unterlagen-Preview"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfPreview}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Gastgruppe 1"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfGast1}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Gastgruppe 2"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfGast2}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Gastgruppe 3"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfGast3}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Gastgruppe 4"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfGast4}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Gastgruppe 5"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfGast5}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Gastgruppe 6"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfGast6}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Gastgruppe 7"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfGast7}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Gastgruppe 8"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfGast8}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Gastgruppe 9"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclGastM.darfGast9}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                    </p:panelGrid>
+
+                </div>
+            </h:panelGroup>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

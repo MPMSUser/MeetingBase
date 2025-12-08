@@ -1,0 +1,207 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:p="http://primefaces.org/ui"
+        lang="de">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <ui:composition>
+
+
+        <f:subview id="iAuswahl1Oben">
+            <ui:include src="idetail/idSeiteStart.xhtml" />
+        </f:subview>
+
+        <div class="container-80">
+            <div class="row">
+                <div class="col-8  btn-w-100">
+                    <!-- Auswahl 1 -->
+                    <h:panelGroup rendered="#{tAuswahl1.auswahlAnzeigen('1')==true}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlStart('1'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlStart('1'))}" escape="false"></h:outputText>
+                            </p>
+                        </h:panelGroup>
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlButton('1'))}" action="#{tAuswahl1.doButton('1')}" styleClass="btn-typ-00" id="i110btn1">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlEnde('1'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlEnde('1'))}" escape="false"></h:outputText>
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Auswahl 2 -->
+                    <h:panelGroup rendered="#{tAuswahl1.auswahlAnzeigen('2')==true}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlStart('2'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlStart('2'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlButton('2'))}" action="#{tAuswahl1.doButton('2')}" styleClass="btn-typ-00" id="i110btn2">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlEnde('2'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlEnde('2'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Auswahl 3 -->
+                    <h:panelGroup rendered="#{tAuswahl1.auswahlAnzeigen('3')==true}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlStart('3'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlStart('3'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlButton('3'))}" action="#{tAuswahl1.doButton('3')}" styleClass="btn-typ-00" id="i110btn3">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlEnde('3'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlEnde('3'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Auswahl 4 -->
+                    <h:panelGroup rendered="#{tAuswahl1.auswahlAnzeigen('4')==true}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlStart('4'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlStart('4'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlButton('4'))}" action="#{tAuswahl1.doButton('4')}" styleClass="btn-typ-00" id="i110btn4">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlEnde('4'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlEnde('4'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Auswahl 5 -->
+                    <h:panelGroup rendered="#{tAuswahl1.auswahlAnzeigen('5')==true}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlStart('5'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlStart('5'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlButton('5'))}" action="#{tAuswahl1.doButton('5')}" styleClass="btn-typ-00" id="i110btn5">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlEnde('5'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlEnde('5'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Auswahl 6 -->
+                    <h:panelGroup rendered="#{tAuswahl1.auswahlAnzeigen('6')==true}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlStart('6'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlStart('6'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlButton('6'))}" action="#{tAuswahl1.doButton('6')}" styleClass="btn-typ-00" id="i110btn6">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlEnde('6'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlEnde('6'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+
+                    <!-- Auswahl 7 -->
+                    <h:panelGroup rendered="#{tAuswahl1.auswahlAnzeigen('7')==true}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlStart('7'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlStart('7'))}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlButton('7'))}" action="#{tAuswahl1.doButton('7')}" styleClass="btn-typ-00" id="i110btn7">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                        </p>
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tAuswahl1.auswahlEnde('7'))}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tAuswahl1.auswahlEnde('7'))}" escape="false"></h:outputText>
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+
+        <f:subview id="iAuswahl1Buttons">
+            <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+        </f:subview>
+
+
+    </ui:composition>
+</body>
+
+</html>

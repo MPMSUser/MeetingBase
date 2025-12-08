@@ -1,0 +1,66 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    lang="de" template="/WEB-INF/uTemplate.xhtml">
+    <ui:define name="content">
+        <h:form enctype="multipart/form-data">
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Datenmanipulation Ergebnis" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+
+            <div class="divArbeitsbereich">
+                <!-- Aktionär anzeigen und bearbeiten-->
+                <table class="divArbeitsbereichUeberschrift">
+                    <tr>
+                        <td class="divArbeitsbereichUeberschriftText">
+                            <h:outputLabel value="#{uDatenmanipulationSession.ueberschrift}" />
+                        </td>
+                        <td class="divArbeitsbereichUeberschriftButton"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Die Funktion ist derzeit noch in Arbeit - bitte warten"
+                                rendered="#{uDatenmanipulationSession.stehtZurVerfuegung==false}" />
+                            <h:outputLabel value="Die Funktion wurde beendet"
+                                rendered="#{uDatenmanipulationSession.stehtZurVerfuegung==true}" />
+                        </td>
+                        <td>
+                            <h:commandButton value="Refresh" styleClass="btnStandard"
+                                action="#{uDatenmanipulation.doRefresh}"
+                                rendered="#{uDatenmanipulationSession.stehtZurVerfuegung==false}"
+                                onclick="this.form.target='_self'" />
+                            <h:outputLabel value="#{uDatenmanipulationSession.anzeigeText}"
+                                rendered="#{uDatenmanipulationSession.stehtZurVerfuegung==true}" />
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <!-- <h:outputLabel value="Blablabla" rendered="#{uDatenmanipulationSession.nummer==2}"/> -->
+                </p>
+
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

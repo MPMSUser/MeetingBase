@@ -1,0 +1,61 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+        <f:subview id="ipasswortVergessenQuittungOben">
+            <ui:include src="idetail/idSeiteStartModals.xhtml" />
+        </f:subview>
+
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <h:panelGroup
+                            rendered="#{eclPortalTexteM.pruefeTextVorhanden('238') and tPasswortVergessenSession.textVarianteQuittung==1}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('238')}" escape="false"></h:outputText>
+                            </p>
+                        </h:panelGroup>
+                        <h:panelGroup
+                            rendered="#{eclPortalTexteM.pruefeTextVorhanden('239') and tPasswortVergessenSession.textVarianteQuittung==2}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('239')}" escape="false"></h:outputText>
+                            </p>
+                        </h:panelGroup>
+                        <h:panelGroup
+                            rendered="#{eclPortalTexteM.pruefeTextVorhanden('635') and tPasswortVergessenSession.textVarianteQuittung==3}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('635')}" escape="false"></h:outputText>
+                            </p>
+                        </h:panelGroup>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col text-end">
+                        <button type="button" class="btn btn-primary" onclick="okBtnModals();">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ui:composition>

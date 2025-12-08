@@ -1,0 +1,657 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+
+    <ui:define name="content">
+        <h:form enctype="multipart/form-data">
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Unterlagen-PDFs verwalten" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <div class="divArbeitsbereich">
+
+                <table class="divArbeitsbereichUeberschrift">
+                    <tr>
+                        <td class="divArbeitsbereichUeberschriftText">
+                            <h:outputLabel value="" />
+                        </td>
+                        <td class="divArbeitsbereichUeberschriftButton">
+                            <h:commandButton value="Refresh Anzeige" action="#{uUnterlagenPdfs.doRefresh()}"
+                                styleClass="btnStandard" />
+                        </td>
+                    </tr>
+                </table>
+
+                <p:dataTable value="#{uUnterlagenPdfsSession.portalUnterlagenListe}" var="portalUnterlage">
+
+                    <p:column styleClass="colStandard" style="width:50%">
+                        <f:facet name="header">Unterlage</f:facet>
+                        <b>Art: </b>
+                        <h:outputLabel value="PDF-Datei" rendered="#{portalUnterlage.art==0}" />
+                        <h:outputLabel value="Überschrift" rendered="#{portalUnterlage.art==1}" />
+                        <h:outputLabel value="Text" rendered="#{portalUnterlage.art==2}" />
+                        <h:outputLabel value="Link" rendered="#{portalUnterlage.art==4}" />
+                        <br />
+                        <b>
+                            <h:outputLabel value="Dateiname: " rendered="#{portalUnterlage.art==0}" />
+                            <h:outputLabel value="Überschrifttext: " rendered="#{portalUnterlage.art==1}" />
+                            <h:outputLabel value="Text: " rendered="#{portalUnterlage.art==2}" />
+                            <h:outputLabel value="Link-Adresse: " rendered="#{portalUnterlage.art==4}" />
+                        </b>
+                        <h:outputLabel value="#{portalUnterlage.dateiname}" rendered="#{portalUnterlage.art==0}" />
+                        <h:outputLabel value="#{portalUnterlage.bezeichnungDE}" rendered="#{portalUnterlage.art==1}" />
+                        <h:outputLabel value="#{portalUnterlage.bezeichnungDE}" rendered="#{portalUnterlage.art==2}" />
+                        <h:outputLabel value="#{portalUnterlage.dateiname}" rendered="#{portalUnterlage.art==4}" />
+                        <br />
+                        <b>
+                            <h:outputLabel value="Stil: " rendered="#{portalUnterlage.art==0}" />
+                        </b>
+                        <h:outputLabel value="Nicht definiert"
+                            rendered="#{portalUnterlage.art==0 and portalUnterlage.artStyle==0}" />
+                        <h:outputLabel value="Als Button anzeigen"
+                            rendered="#{portalUnterlage.art==0 and portalUnterlage.artStyle==1}" />
+                        <h:outputLabel value="Als Link anzeigen"
+                            rendered="#{portalUnterlage.art==0 and portalUnterlage.artStyle==2}" />
+                        <br />
+                        <b>
+                            <h:outputLabel value="Bezeichnung DE: "
+                                rendered="#{portalUnterlage.art==0 or portalUnterlage.art==4}" />
+                        </b>
+                        <h:outputLabel value="#{portalUnterlage.bezeichnungDE}"
+                            rendered="#{portalUnterlage.art==0 or portalUnterlage.art==4}" />
+                        <br />
+                        <b>
+                            <h:outputLabel value="Bezeichnung EN: "
+                                rendered="#{(portalUnterlage.art==0 or portalUnterlage.art==4) and portalUnterlage.dateiMehrsprachigVorhanden==1}" />
+                        </b>
+                        <h:outputLabel value="#{portalUnterlage.bezeichnungEN}"
+                            rendered="#{(portalUnterlage.art==0 or portalUnterlage.art==4) and portalUnterlage.dateiMehrsprachigVorhanden==1}" />
+                    </p:column>
+                    <p:column styleClass="colStandard" style="width:50%">
+                        <h:commandButton value="Pdf anzeigen"
+                            action="#{uUnterlagenPdfs.doPdfAnzeigen(portalUnterlage.dateiname)}"
+                            styleClass="btnStandard" onclick="this.form.target='_blank'"
+                            rendered="#{portalUnterlage.art==0}" />
+                        <br />
+                        <h:commandButton value="Download"
+                            action="#{uUnterlagenPdfs.doDownload(portalUnterlage.dateiname)}"
+                            onclick="this.form.target='_blank'" styleClass="btnStandard"
+                            rendered="#{portalUnterlage.art==0}" />
+                        <br />
+                        <br />
+                        <h:commandLink value="Unterlage bearbeiten"
+                            action="#{uUnterlagenPdfs.doEdit(portalUnterlage)}" />
+                        <br />
+                        <br />
+                        <h:commandLink value="Reihenfolge auf Seite bearbeiten"
+                            action="#{uUnterlagenPdfs.doShowReihenfolgeModal(portalUnterlage.unterlagenbereichMenueNr)}"
+                            rendered="#{portalUnterlage.unterlagenbereichMenueNr > 0}" />
+                        <br />
+                        <br />
+                        <h:commandLink value="Löschen" style="color: red;"
+                            action="#{uUnterlagenPdfs.doUnterlageLoeschen(portalUnterlage)}" />
+                    </p:column>
+                </p:dataTable>
+
+                <!-- validator="#{uUnterlagenPdfsSession.pruefeDatei}"  -->
+                <br />
+                <br />
+                <h:commandButton value="Neue Unterlage anlegen" action="#{uUnterlagenPdfs.doNeueUnterlage}"
+                    styleClass="btnStandard" />
+                <br />
+
+                <h:panelGroup id="unterlageBearbeitenModal"
+                    rendered="#{uUnterlagenPdfsSession.showUnterlageBearbeiten}">
+                    <div class="modal">
+                        <div class="modal-content slide-in-left">
+                            <div class="modal-body">
+                                <h3>
+                                    Unterlage bearbeiten
+                                </h3>
+                                <div>
+                                    <br />
+                                    <br /> Seite:
+                                    <h:selectOneMenu
+                                        value="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.unterlagenbereichMenueNr}"
+                                        styleClass="fs-1-5">
+                                        <f:selectItem itemValue="0" itemLabel="Nicht zugeordnet" />
+                                        <f:selectItems value="#{uUnterlagenPdfsSession.menuListe}" var="menu"
+                                            itemValue="#{menu.funktionscodeSub}"
+                                            itemLabel="#{eclPortalTexteM.holeText(menu.textNrGespeichert)}" />
+                                    </h:selectOneMenu>
+                                    <br />
+                                    <br /> Stil:
+                                    <h:selectOneMenu
+                                        value="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.artStyle}"
+                                        styleClass="fs-1-5">
+                                        <f:selectItem itemValue="0" itemLabel="Nicht definiert" />
+                                        <f:selectItem itemValue="1" itemLabel="Als Button anzeigen" />
+                                        <f:selectItem itemValue="2" itemLabel="Als Link anzeigen" />
+                                    </h:selectOneMenu>
+                                    <br />
+                                    <br /> Bezeichnung DE:<br />
+                                    <h:inputText
+                                        value="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.bezeichnungDE}"
+                                        styleClass="fs-1-5"
+                                        rendered="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.art != 2}" />
+                                    <h:inputTextarea row="10" col="10" style="width: 75%; height: 200px;"
+                                        rendered="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.art == 2}"
+                                        value="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.bezeichnungDE}">
+                                    </h:inputTextarea>
+                                    <br />
+                                    <br /> Mehrsprachig:
+                                    <h:inputText
+                                        value="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.dateiMehrsprachigVorhanden}"
+                                        styleClass="fs-1-5" />
+                                    <br />
+                                    <h:panelGroup
+                                        rendered="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.dateiMehrsprachigVorhanden == 1}">
+                                        <br /> Bezeichnung EN:<br />
+                                        <h:inputText
+                                            value="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.bezeichnungEN}"
+                                            styleClass="fs-1-5"
+                                            rendered="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.art != 2}" />
+                                        <h:inputTextarea row="10" col="10" style="width: 75%; height: 200px;"
+                                            rendered="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.art == 2}"
+                                            value="#{uUnterlagenPdfsSession.eclPortalUnterlagenSelected.bezeichnungEN}">
+                                        </h:inputTextarea>
+                                    </h:panelGroup>
+                                </div>
+                                <div>
+                                    <br />
+                                    <h:commandButton value="Speichern"
+                                        action="#{uUnterlagenPdfs.doUnterlageAenderungSpeichern}"
+                                        styleClass="btnStandard">
+                                    </h:commandButton>
+                                </div>
+                                <div>
+                                    <br />
+                                    <h:commandButton value="Abbrechen" action="#{uUnterlagenPdfs.doAbbrechenModal}"
+                                        styleClass="btnStandard">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup id="unterlageNeuModal" rendered="#{uUnterlagenPdfsSession.showNeueUnterlage}">
+                    <div class="modal">
+                        <div class="modal-content slide-in-left">
+                            <div class="modal-body">
+                                <h3>
+                                    Unterlage anlegen
+                                </h3>
+                                <div>
+                                    <input id="radio0" type="radio" name="art" value="1"
+                                        onclick="doRadioNeueUnterlage(0)" />
+                                    <label for="radio0">Aus bestehender PDF-Datei</label><br />
+                                    <input id="radio1" type="radio" name="art" value="2"
+                                        onclick="doRadioNeueUnterlage(1)" />
+                                    <label for="radio1">PDF-Datei hochladen</label><br />
+                                    <input id="radio2" type="radio" name="art" value="3"
+                                        onclick="doRadioNeueUnterlage(2)" />
+                                    <label for="radio2">Link</label><br />
+                                    <input id="radio3" type="radio" name="art" value="4"
+                                        onclick="doRadioNeueUnterlage(3)" />
+                                    <label for="radio3">Nur Text</label><br />
+                                    <input id="radio4" type="radio" name="art" value="4"
+                                        onclick="doRadioNeueUnterlage(4)" />
+                                    <label for="radio4">Überschrift</label><br />
+                                    <br />
+                                    <br />
+                                </div>
+                                <div id="radio0selected" class="d-none">
+                                    <p:dataTable value="#{uUnterlagenPdfsSession.dateienListe}" var="datei">
+                                        <p:column styleClass="colStandard" style="width:50%">
+                                            <f:facet name="header">Datei</f:facet>
+                                            <h:outputLabel value="#{datei}" />
+                                        </p:column>
+                                        <p:column styleClass="colStandard" style="width:50%">
+                                            <h:commandButton value="Datei auswählen"
+                                                action="#{uUnterlagenPdfs.doUnterlageZuDatei(datei)}"
+                                                styleClass="btnStandard" />
+                                        </p:column>
+                                    </p:dataTable>
+                                </div>
+                                <div id="radio1selected" class="d-none">
+                                    <h:inputFile id="file" styleClass="btnNeutral fs-1-5"
+                                        value="#{uUnterlagenPdfsSession.dateiHochladen}" />
+                                    <br />
+                                    <br />
+                                    <h:commandButton value="Neues PDF Uploaden"
+                                        action="#{uUnterlagenPdfs.doNeueDateiHochladen}" styleClass="btnStandard" />
+                                </div>
+                                <div id="radio2selected" class="d-none">
+                                    Link-Adresse:
+                                    <h:inputText value="#{uUnterlagenPdfsSession.neueUnterlageLink}"
+                                        styleClass="fs-1-5" />
+                                    <br />
+                                    <br />
+                                    <h:commandButton value="Speichern" action="#{uUnterlagenPdfs.doNeueUnterlageLink}"
+                                        styleClass="btnStandard">
+                                    </h:commandButton>
+                                </div>
+                                <div id="radio3selected" class="d-none">
+                                    Texte müssen im Nachgang bearbeitet werden.
+                                    <br />
+                                    <br />
+                                    <h:commandButton value="Speichern" action="#{uUnterlagenPdfs.doNeueUnterlageText}"
+                                        styleClass="btnStandard">
+                                    </h:commandButton>
+                                </div>
+                                <div id="radio4selected" class="d-none">
+                                    Überschrift DE:
+                                    <h:inputText value="#{uUnterlagenPdfsSession.neueUnterlageBezeichnungDE}"
+                                        styleClass="fs-1-5" />
+                                    <br /> Überschrift EN:
+                                    <h:inputText value="#{uUnterlagenPdfsSession.neueUnterlageBezeichnungEN}"
+                                        styleClass="fs-1-5" />
+                                    <br />
+                                    <br />
+                                    <h:commandButton value="Speichern"
+                                        action="#{uUnterlagenPdfs.doNeueUnterlageUeberschrift}"
+                                        styleClass="btnStandard">
+                                    </h:commandButton>
+                                </div>
+                                <div>
+                                    <br />
+                                    <h:commandButton value="Abbrechen" action="#{uUnterlagenPdfs.doAbbrechenModal}"
+                                        styleClass="btnStandard">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
+                <script>
+                    function doRadioNeueUnterlage(art) {
+                        var radio0selected = document.getElementById("radio0selected");
+                        var radio1selected = document.getElementById("radio1selected");
+                        var radio2selected = document.getElementById("radio2selected");
+                        var radio3selected = document.getElementById("radio3selected");
+                        var radio4selected = document.getElementById("radio4selected");
+                        resetRadioneueUnterlage();
+                        switch (art) {
+                            case 0:
+                                radio0selected.classList.add("d-block");
+                                break;
+                            case 1:
+                                radio1selected.classList.add("d-block");
+                                break;
+                            case 2:
+                                radio2selected.classList.add("d-block");
+                                break;
+                            case 3:
+                                radio3selected.classList.add("d-block");
+                                break;
+                            case 4:
+                                radio4selected.classList.add("d-block");
+                                break;
+                        }
+                    }
+
+                    function resetRadioneueUnterlage() {
+                        var radio0selected = document.getElementById("radio0selected");
+                        var radio1selected = document.getElementById("radio1selected");
+                        var radio2selected = document.getElementById("radio2selected");
+                        var radio3selected = document.getElementById("radio3selected");
+                        var radio4selected = document.getElementById("radio4selected");
+                        radio0selected.classList.remove("d-block");
+                        radio1selected.classList.remove("d-block");
+                        radio2selected.classList.remove("d-block");
+                        radio3selected.classList.remove("d-block");
+                        radio4selected.classList.remove("d-block");
+                    }
+                </script>
+
+                <h:panelGroup id="seitenreihenfolgeModal" rendered="#{uUnterlagenPdfsSession.showReihenfolgeModal}">
+                    <div class="modal">
+                        <div class="modal-content-static">
+                            <div class="modal-body">
+                                <h3>
+                                    Reihenfolge für Seite bearbeiten
+                                </h3>
+                                <div>
+                                    <ui:repeat value="#{uUnterlagenPdfsSession.unterlagenAufSeiteListe}" var="unterlage"
+                                        varStatus="status">
+                                        <div
+                                            style="width: 60%; margin-left: auto; margin-right: auto; border: 1px dotted #000; margin-bottom: 2rem; padding: 1rem;">
+                                            <b>
+                                                <h:outputLabel value="PDF-Datei" rendered="#{unterlage.art==0}" />
+                                                <h:outputLabel value="Überschrift" rendered="#{unterlage.art==1}" />
+                                                <h:outputLabel value="Text" rendered="#{unterlage.art==2}" />
+                                                <h:outputLabel value="Link" rendered="#{unterlage.art==4}" />
+                                            </b>
+                                            <br />
+                                            <h:outputLabel value="Nicht definiert"
+                                                rendered="#{unterlage.art==0 and unterlage.artStyle==0}" />
+                                            <h:outputLabel value="Als Button anzeigen"
+                                                rendered="#{unterlage.art==0 and unterlage.artStyle==1}" />
+                                            <h:outputLabel value="Als Link anzeigen"
+                                                rendered="#{unterlage.art==0 and unterlage.artStyle==2}" />
+                                            <br /> Bezeichnung:
+                                            <h:outputLabel value="#{unterlage.bezeichnungDE}" styleClass="fs-1-5" />
+                                            <br />
+                                            <h:commandLink
+                                                action="#{uUnterlagenPdfs.doReihenfolgeAendern(unterlage, status.index, 1)}"
+                                                value="hoch" rendered="#{!status.first}"
+                                                style="margin-left: 2rem; float: right; font-size: 1rem;" />
+                                            <h:commandLink
+                                                action="#{uUnterlagenPdfs.doReihenfolgeAendern(unterlage, status.index, 0)}"
+                                                value="runter" rendered="#{!status.last}"
+                                                style="float: right; font-size: 1rem;" />
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                                <div>
+                                    <br />
+                                    <h:commandButton value="Fertig" action="#{uUnterlagenPdfs.doAbbrechenModal}"
+                                        styleClass="btnStandard">
+                                    </h:commandButton>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+            </div>
+
+
+
+            <h:panelGroup rendered="#{1==2}">
+
+                <div class="divArbeitsbereich">
+
+
+                    <p:dataTable value="#{uBotschaftenVerarbeitenSession.botschaftenListe}" var="botschaft">
+                        <p:column styleClass="colStandard" style="width:30%">
+                            <f:facet name="header">Botschaft</f:facet>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="Nr.:" />
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="#{botschaft.mitteilungIdent}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="Kennung:" />
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="#{botschaft.loginKennungAnzeige}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="Name:" />
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="#{botschaft.nameWortmelder}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="Botschaftsart:" />
+                                    </td>
+                                    <td>
+                                        <h:panelGroup rendered="#{botschaft.liefereLangTextVorhanden()}">
+                                            <h:outputLabel value="Textfeld" /><br />
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{botschaft.liefereVideodateiVorhanden()}">
+                                            <h:outputLabel value="Videodatei" /><br />
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{botschaft.liefereTextdateiVorhanden()}">
+                                            <h:outputLabel value="Textdatei" /><br />
+                                        </h:panelGroup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="Eingereichte Datei:"
+                                            rendered="#{botschaft.liefereDateiVorhanden()}" />
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="#{botschaft.dateiname}"
+                                            rendered="#{botschaft.liefereDateiVorhanden()}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:commandButton value="Langtext anzeige"
+                                            action="#{uBotschaftenVerarbeiten.doLangtextAnzeigen(botschaft)}"
+                                            rendered="#{botschaft.liefereLangTextVorhanden() and botschaft.langTextAnzeigen==false}"
+                                            styleClass="btnStandard" />
+                                    </td>
+                                    <td>
+                                        <h:inputTextarea row="10" value="#{botschaft.mitteilungLangtext}"
+                                            readonly="true" rendered="#{botschaft.langTextAnzeigen}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="Unterlage:"
+                                            rendered="#{uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}" />
+                                    </td>
+                                    <td>
+                                        <h:panelGroup rendered="#{botschaft.liefereDateiVorhanden()}">
+                                            <h:panelGroup
+                                                rendered="#{uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                                <h:panelGroup rendered="#{botschaft.verweisAufUnterlagenident==0}">
+                                                    <h:outputLabel
+                                                        value="Noch keine Unterlage erstellt. Vor dem Bereitstellen der Datei muß eine Unterlage erstellt werden!" />
+                                                    <br />
+                                                    <h:commandButton value="Unterlage erstellen"
+                                                        action="#{uBotschaftenVerarbeiten.doUnterlageErstellen(botschaft)}"
+                                                        styleClass="btnStandard" />
+                                                    <br />
+
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{botschaft.verweisAufUnterlagenident!=0}">
+                                                    <h:outputLabel value="#{botschaft.verweisAufUnterlagenident}" />
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{botschaft.liefereDateiVorhanden()==false}">
+                                            <h:panelGroup
+                                                rendered="#{uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                                <h:outputLabel value="Text muß manuell weiterverarbeitet werden!" />
+                                                <br />
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h:outputLabel value="Stream:"
+                                            rendered="#{botschaft.liefereVideodateiVorhanden()}" />
+                                        <h:outputLabel value="Datei:"
+                                            rendered="#{botschaft.liefereTextdateiVorhanden()}" />
+                                    </td>
+                                    <td>
+                                        <h:panelGroup rendered="#{botschaft.verweisAufUnterlagenident!=0}">
+
+                                            <h:panelGroup
+                                                rendered="#{botschaft.zugeordnetePortalUnterlage.dateiname==''}">
+                                                <h:outputLabel value="Noch keine Datei bereitgestellt" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup
+                                                rendered="#{botschaft.zugeordnetePortalUnterlage.dateiname!=''}">
+                                                <h:panelGroup rendered="#{botschaft.liefereVideodateiVorhanden()}">
+                                                    <h:commandButton value="Stream anzeigen"
+                                                        action="#{uBotschaftenVerarbeiten.doStreamAnschauen(botschaft)}"
+                                                        styleClass="btnStandard" />
+                                                    <br />
+                                                    <h:panelGroup
+                                                        rendered="#{botschaft.liefereFreigegebenOeffentlicherLinkErstellt()==false and uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                                        <h:commandButton value="Öffentlichen Link freigeben"
+                                                            action="#{uBotschaftenVerarbeiten.doOeffentlichenLinkFreigeben(botschaft)}"
+                                                            styleClass="btnStandard" />
+                                                        <br />
+                                                    </h:panelGroup>
+                                                    <h:panelGroup
+                                                        rendered="#{botschaft.liefereFreigegebenOeffentlicherLinkErstellt()==true}">
+                                                        <h:outputLabel value="Öffentlicher Link vorhanden" />
+                                                        <br />
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{botschaft.liefereTextdateiVorhanden()}">
+                                                    <h:commandButton value="Pdf anzeigen"
+                                                        action="#{uBotschaftenVerarbeiten.doPdfAnzeigen(botschaft)}"
+                                                        styleClass="btnStandard" onclick="this.form.target='_blank'" />
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </p:column>
+                        <p:column styleClass="colStandard" style="width:30%">
+                            <f:facet name="header">Dateien</f:facet>
+                            <h:panelGroup rendered="#{botschaft.interneVerarbeitungLaufend==0}">
+                                <h:outputLabel value="Verarbeitung noch nicht erfolgt" />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{botschaft.interneVerarbeitungLaufend==1}">
+                                <h:outputLabel value="Verarbeitung läuft gerade" />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{botschaft.interneVerarbeitungLaufend==3}">
+                                <h:outputLabel value="Datei wird gerade hochgeladen" />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{botschaft.interneVerarbeitungLaufend==2}">
+                                <h:panelGroup rendered="#{botschaft.liefereDateiVorhanden()}">
+                                    <p:dataTable value="#{botschaft.weitereVersionen}" var="dateien">
+                                        <p:column styleClass="colStandard" style="width:60%">
+                                            <h:panelGroup rendered="#{dateien.version==0}">
+                                                <h:outputLabel value="Ursprungsversion" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{dateien.version!=0}">
+                                                <h:outputLabel value="Version Nr. #{dateien.version}" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:outputLabel
+                                                value="#{dateien.internerDateiname}.#{dateien.internerDateizusatz}" />
+                                            <br />
+                                            <h:panelGroup
+                                                rendered="#{dateien.liefereFreigegebenDurchAktionaer()==true}">
+                                                <h:outputLabel value="Durch Aktionär freigegeben" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup
+                                                rendered="#{dateien.liefereFreigegebenDurchGesellschaft()==true}">
+                                                <h:outputLabel value="Durch Gesellschaft freigegeben" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{dateien.liefereFreigegebenHochgeladen()==true}">
+                                                <h:outputLabel value="Zu Streaming Hochgeladen"
+                                                    rendered="#{botschaft.liefereVideodateiVorhanden()}" />
+                                                <h:outputLabel value="Als PDF bereitgestellt"
+                                                    rendered="#{botschaft.liefereTextdateiVorhanden()}" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup
+                                                rendered="#{dateien.liefereFreigegebenOeffentlicherLinkErstellt()==true}">
+                                                <h:outputLabel value="Öffentlicher Link erstellt" />
+                                                <br />
+                                            </h:panelGroup>
+                                        </p:column>
+                                        <p:column styleClass="colStandard" style="width:40%">
+                                            <h:panelGroup
+                                                rendered="#{dateien.liefereFreigegebenDurchGesellschaft()==false}">
+                                                <h:commandButton value="Freigabe (Gesellschaft)"
+                                                    action="#{uBotschaftenVerarbeiten.doFreigabgeGesellschaft(dateien)}"
+                                                    styleClass="btnStandard" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup
+                                                rendered="#{dateien.liefereFreigegebenHochgeladen()==false and botschaft.verweisAufUnterlagenident!=0 and uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                                <h:commandButton value="Zu Streaming hochladen"
+                                                    action="#{uBotschaftenVerarbeiten.doStreamHochladen(botschaft, dateien)}"
+                                                    styleClass="btnStandard"
+                                                    rendered="#{botschaft.liefereVideodateiVorhanden()}" />
+                                                <h:commandButton value="PDF bereitstellen"
+                                                    action="#{uBotschaftenVerarbeiten.doPDFBereitstellen(botschaft, dateien)}"
+                                                    styleClass="btnStandard"
+                                                    rendered="#{botschaft.liefereTextdateiVorhanden()}" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:commandButton value="Download"
+                                                action="#{uBotschaftenVerarbeiten.doDownload(dateien)}"
+                                                onclick="this.form.target='_blank'" styleClass="btnStandard" />
+
+                                        </p:column>
+                                    </p:dataTable>
+                                    <h:panelGroup rendered="#{uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                        <!-- validator="#{uBotschaftenVerarbeitenSession.pruefeDatei}"  -->
+                                        <h:inputFile id="file" styleClass="btnNeutral"
+                                            value="#{botschaft.dateiHochladen}" />
+                                        <br />
+                                        <h:commandButton value="Neue Version Uploaden"
+                                            action="#{uBotschaftenVerarbeiten.doNeueVersionUploaden(botschaft)}"
+                                            styleClass="btnStandard" />
+                                        <br />
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Liste öffentlicher Links downloaden" styleClass="btnStandard"
+                                    action="#{uBotschaftenVerarbeiten.doListeOeffentlicherLinks()}" />
+                            </td>
+                            <td class="divButtonsCenter">
+                            </td>
+                            <td class="divButtonsRight">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!--
+                        IFrame zum Anzeigen des ausgewählten Videos
+                    -->
+                    <section id="stream-show-bereich" class="col-8">
+                        <h:panelGroup rendered="#{uBotschaftenVerarbeitenSession.iframe_src != ''}">
+                            <iframe src="#{uBotschaftenVerarbeitenSession.iframe_src}" allowfullscreen="allowfullscreen"
+                                webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen"
+                                allow="autoplay"></iframe>
+                        </h:panelGroup>
+                    </section>
+                </div>
+            </h:panelGroup>
+
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,892 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:c="jakarta.tags.core" xmlns:p="http://primefaces.org/ui"
+    template="/WEB-INF/uTemplate.xhtml">
+
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <h:panelGroup rendered="#{!uSession.nurMandant}">
+                <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                    <ui:param name="ueberschrift" value="" />
+                    <ui:param name="zurueck" value="1" />
+                </ui:include>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{uSession.nurMandant}">
+                <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                    <ui:param name="ueberschrift" value="" />
+                    <ui:param name="zurueck" value="0" />
+                </ui:include>
+            </h:panelGroup>
+
+            <!-- Menü -->
+
+            <p:menubar rendered="#{uMenueSession.menue()}">
+                <p:submenu label="Nachrichten" styleClass="clearfix" rendered="#{uMenueSession.menueNachrichten()}">
+                    <p:menuitem value="Neue Nachricht" action="#{uMenue.doNachrichtSenden()}" styleClass="clearfix"
+                        rendered="#{eclUserLoginM.pruefe_uportal_mailSenden()}" ajax="false">
+                    </p:menuitem>
+                </p:submenu>
+                <p:submenu label="Wortmeldungen" styleClass="clearfix"
+                    rendered="#{eclUserLoginM.pruefe_uportal_rednerliste()}">
+                    <p:menuitem value="Versammlungsleitung-View" action="#{uMenue.doWortmeldungenVersammlungsleitung()}"
+                        styleClass="clearfix" ajax="false">
+                    </p:menuitem>
+                    <c:forEach items="#{uMenueSession.wortmeldungViews}" var="menueitem">
+                        <p:menuitem value="#{menueitem.bezeichnung}"
+                            action="#{uMenue.doWortmeldungenView(menueitem.funktion)}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                    </c:forEach>
+
+                </p:submenu>
+                <p:submenu label="Abstimmung" style="width: 200px;font-size: 14px;white-space:nowrap;"
+                    rendered="#{uMenueSession.menueAbstimmung()}">
+                    <p:menuitem value="Tagesordnung/Weisungsempfehlung" action="#{uMenue.doTOWeisungsEmpfehlung()}"
+                        styleClass="clearfix" rendered="#{eclUserLoginM.pruefe_govVal_admin()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Liste Weisungen" action="#{uReports.doGVSammelkarteMitWeisungenAktionaeren()}"
+                        styleClass="clearfix" rendered="#{eclUserLoginM.pruefe_govVal_admin()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Export Weisungen JNE" action="#{uReports.doGVExportAktionaereMitWeisungen()}"
+                        styleClass="clearfix" rendered="#{eclUserLoginM.pruefe_govVal_admin()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Export Weisungen Lang" action="#{uReports.doGVExportAktionaereMitWeisungen1()}"
+                        styleClass="clearfix" rendered="#{eclUserLoginM.pruefe_govVal_admin()}" ajax="false">
+                    </p:menuitem>
+                </p:submenu>
+                <p:submenu label="Service-Line" styleClass="clearfix"
+                    rendered="#{uMenueSession.menueServicelinetools()}">
+                    <p:menuitem value="Anfrage entgegennehmen" action="#{uMenue.doServicelineAnfrage()}"
+                        styleClass="clearfix" ajax="false">
+                    </p:menuitem>
+                </p:submenu>
+                <p:submenu label="Virtuelle HV" styleClass="clearfix" rendered="#{uMenueSession.menueVirtuelleHV()}">
+                    <p:submenu label="Fragen" styleClass="clearfix"
+                        rendered="#{eclParamM.fragenAngeboten and uMenueSession.menueVirtuelleHV_menuePunkte()}">
+
+                        <p:menuitem value="CSV alle" action="#{uMenue.doVirtuelleHVFragenCSVAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="CSV neue" action="#{uMenue.doVirtuelleHVFragenCSVNeue()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Report alle" action="#{uMenue.doVirtuelleHVFragenReportAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Testmail" action="#{uMenue.doVirtuelleHVFragenTestmail()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+
+                    <p:submenu label="Wortmeldungen" styleClass="clearfix"
+                        rendered="#{eclParamM.wortmeldungenAngeboten and uMenueSession.menueVirtuelleHV_menuePunkte()}">
+
+                        <p:menuitem value="CSV alle" action="#{uMenue.doVirtuelleHVWortmeldungenCSVAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="CSV neue" action="#{uMenue.doVirtuelleHVWortmeldungenCSVNeue()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Report alle" action="#{uMenue.doVirtuelleHVWortmeldungenReportAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Testmail" action="#{uMenue.doVirtuelleHVWortmeldungenTestmail()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:submenu label="Widersprüche" styleClass="clearfix"
+                        rendered="#{eclParamM.widerspruecheAngeboten and uMenueSession.menueVirtuelleHV_menuePunkte()}">
+
+                        <p:menuitem value="CSV alle" action="#{uMenue.doVirtuelleHVWiderspruecheCSVAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="CSV neue" action="#{uMenue.doVirtuelleHVWiderspruecheCSVNeue()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Report alle" action="#{uMenue.doVirtuelleHVWiderspruecheReportAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Testmail" action="#{uMenue.doVirtuelleHVWiderspruecheTestmail()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:submenu label="Anträge" styleClass="clearfix"
+                        rendered="#{eclParamM.antraegeAngeboten and uMenueSession.menueVirtuelleHV_menuePunkte()}">
+
+                        <p:menuitem value="CSV alle" action="#{uMenue.doVirtuelleHVAntraegeCSVAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="CSV neue" action="#{uMenue.doVirtuelleHVAntraegeCSVNeue()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Report alle" action="#{uMenue.doVirtuelleHVAntraegeReportAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Testmail" action="#{uMenue.doVirtuelleHVAntraegeTestmail()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:submenu label="Sonstige Mitteilungen" styleClass="clearfix"
+                        rendered="#{eclParamM.sonstigeMitteilungenAngeboten and uMenueSession.menueVirtuelleHV_menuePunkte()}">
+
+                        <p:menuitem value="CSV alle" action="#{uMenue.doVirtuelleHVSonstigeMitteilungenCSVAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="CSV neue" action="#{uMenue.doVirtuelleHVSonstigeMitteilungenCSVNeue()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Report alle" action="#{uMenue.doVirtuelleHVSonstigeMitteilungenReportAlle()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Testmail" action="#{uMenue.doVirtuelleHVSonstigeMitteilungenTestmail()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:submenu label="Eingereichte Botschaften" styleClass="clearfix"
+                        rendered="#{eclParamM.botschaftenEinreichenAngeboten and uMenueSession.menueVirtuelleHV_menuePunktBotschaften()}">
+
+                        <p:menuitem value="CSV alle" action="#{uMenue.doVirtuelleHVBotschaftenEinreichenCSVAlle()}"
+                            styleClass="clearfix"
+                            rendered="#{eclParamM.botschaftenEinreichenAngeboten and uMenueSession.menueVirtuelleHV_menuePunkte()}"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="CSV neue" action="#{uMenue.doVirtuelleHVBotschaftenEinreichenCSVNeue()}"
+                            styleClass="clearfix"
+                            rendered="#{eclParamM.botschaftenEinreichenAngeboten and uMenueSession.menueVirtuelleHV_menuePunkte()}"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Report alle"
+                            action="#{uMenue.doVirtuelleHVBotschaftenEinreichenReportAlle()}" styleClass="clearfix"
+                            rendered="#{eclParamM.botschaftenEinreichenAngeboten and uMenueSession.menueVirtuelleHV_menuePunkte()}"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Testmail" action="#{uMenue.doVirtuelleHVBotschaftenEinreichenTestmail()}"
+                            styleClass="clearfix"
+                            rendered="#{eclParamM.botschaftenEinreichenAngeboten and uMenueSession.menueVirtuelleHV_menuePunkte()}"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Verarbeitung"
+                            action="#{uMenue.doVirtuelleHVBotschaftenEinreichenVerarbeiten()}" styleClass="clearfix"
+                            rendered="#{eclParamM.botschaftenEinreichenAngeboten and uMenueSession.menueVirtuelleHV_menuePunktBotschaften()}"
+                            ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:menuitem value="PDFs Unterlagen" action="#{uMenue.doVirtuelleHVUnterlagenPdfs()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueVirtuelleHV_menuePunkte()}" ajax="false">
+                    </p:menuitem>
+
+                    <!--
+                        <p:separator />
+
+                        <p:menuitem
+                            value="Portal Aktivierung"
+                            action="#{uMenue.doPortalAktivierung()}"
+                            styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+-->
+                    <p:separator rendered="#{uMenueSession.menueVirtuelleHV_menuePunkte()}" />
+
+
+                    <p:menuitem value="Willenserklärungen für Widersprüche"
+                        action="#{uMenue.doVirtuelleHVWillenserklaerungenFuerMitteilungenReport()}"
+                        styleClass="clearfix" ajax="false" rendered="#{uMenueSession.menueVirtuelleHV_menuePunkte()}">
+                    </p:menuitem>
+
+                    <p:separator rendered="#{uMenueSession.menueVirtuelleHV_menuePunkte()}" />
+                    <p:menuitem value="Stream-User Report" action="#{uMenue.doVirtuelleHVStreamUser()}"
+                        styleClass="clearfix" ajax="false" rendered="#{uMenueSession.menueVirtuelleHV_menuePunkte()}">
+                    </p:menuitem>
+
+                    <p:separator rendered="#{uMenueSession.menueVirtuelleHV_menuePunkte()}" />
+                    <p:menuitem value="Download PDF" action="#{uMenue.doVirtuelleHVDownloadPDF()}" styleClass="clearfix"
+                        ajax="false" rendered="#{uMenueSession.menueVirtuelleHV_menuePunkte()}">
+                    </p:menuitem>
+
+                    <p:separator rendered="#{uMenueSession.menueVirtuelleHV_menuePunkte()}" />
+
+                    <p:menuitem value="HV-Cockpit an/aus" action="#{uMenue.doVirtuelleHVCockpit()}"
+                        styleClass="clearfix" ajax="false" rendered="#{uMenueSession.menueVirtuelleHV_menuePunkte()}">
+                    </p:menuitem>
+
+                </p:submenu>
+
+                <!-- ************************Gäste************************************************ -->
+                <p:submenu label="Gäste" styleClass="clearfix" rendered="#{uMenueSession.menueGaeste()}">
+                    <p:menuitem value="Neue Gastkarte" action="#{uMenue.doGaesteNeueGastkarte()}" styleClass="clearfix"
+                        ajax="false" rendered="#{uMenueSession.menueGaestePflege()}">
+                    </p:menuitem>
+                    <p:menuitem value="Gastkarte überprüfen/korrigieren"
+                        action="#{uMenue.doGaesteKorrigierenUeberpruefen()}" styleClass="clearfix" ajax="false"
+                        rendered="#{uMenueSession.menueGaestePflege()}">
+                    </p:menuitem>
+                    <p:menuitem value="Gruppenkarten erstellen"
+                        rendered="#{eclUserLoginM.pruefe_emittentenPortal_gaestemodulGruppen()}"
+                        action="#{uMenue.doGaesteGruppenkarten()}" styleClass="clearfix" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Blanko-Gastkarten" action="#{uMenue.doGaesteBlankoGastkarten()}"
+                        styleClass="clearfix" ajax="false" rendered="#{uMenueSession.menueGaestePflege()}">
+                    </p:menuitem>
+                    <p:menuitem value="Insti-Gastkarten" action="#{uMenue.doGaesteInstiGastkarten()}"
+                        styleClass="clearfix" ajax="false" rendered="#{uMenueSession.menueGaestePflege()}">
+                    </p:menuitem>
+                    <p:menuitem value="Interne Gastkarten" action="#{uMenue.doGaesteInterneGastkarten()}"
+                        styleClass="clearfix" ajax="false" rendered="#{uMenueSession.menueGaestePflege()}">
+                    </p:menuitem>
+
+                    <p:menuitem value="Gäste-Liste" action="#{uMenue.doGaesteListe()}" styleClass="clearfix"
+                        ajax="false">
+                    </p:menuitem>
+
+                </p:submenu>
+
+                <!-- *************************Reports****************************** -->
+                <p:submenu label="Reports" styleClass="clearfix" rendered="#{uMenueSession.menueReports()}">
+                    <p:submenu label="Meldebestand" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueReportsEinzeln(0)}">
+                        <p:menuitem value="Gesamt-Statistik" action="#{uMenue.doStatistik()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (Auswahl)" action="#{uMenue.doMeldeliste()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+
+                        <p:menuitem value="Meldeliste (alle, TOP 10)" action="#{uMenue.doMeldelisteAlleTop10()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (alle, Alphabetisch)" action="#{uMenue.doMeldelisteAlleAlpha()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (nicht in Sammelkarte, TOP 10)"
+                            action="#{uMenue.doMeldelisteNichtInSammelTop10()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (nicht in Sammelkarte, Alphabetisch)"
+                            action="#{uMenue.doMeldelisteNichtInSammelAlpha()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (Stimmrechtsvertreter, TOP 10)"
+                            action="#{uMenue.doMeldelisteSRVTop10()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (Stimmrechtsvertreter, Alphabetisch)"
+                            action="#{uMenue.doMeldelisteSRVAlpha()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (Briefwahl, TOP 10)"
+                            action="#{uMenue.doMeldelisteBriefwahlTop10()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (Briefwahl, Alphabetisch)"
+                            action="#{uMenue.doMeldelisteBriefwahlAlpha()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (sonstige in Sammelkarte, TOP 10)"
+                            action="#{uMenue.doMeldelisteSonstSammelTop10()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Meldeliste (sonstige in Sammelkarte, Alphabetisch)"
+                            action="#{uMenue.doMeldelisteSonstSammelAlpha()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Negativliste (Anmeldungen)" rendered="#{uMenueSession.menueReportsEinzeln(0)}"
+                        styleClass="clearfix">
+                        <p:menuitem value="Mit Auswahlmöglichkeit" action="#{uMenue.doNegativlisteAnmeldungenAuswahl()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Top 10" action="#{uMenue.doNegativlisteAnmeldungenTop10()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Weisungssummen" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueReportsEinzeln(1)}">
+                        <!--Kunde-->
+                        <p:menuitem value="Alle (ggf. einschließlich Briefwahl)"
+                            action="#{uMenue.doWeisungssummenAlleKunde()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Weisungssummen" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueReportsEinzeln(2)}">
+                        <!-- intern -->
+                        <p:menuitem value="Alle (ggf. einschließlich Briefwahl)"
+                            action="#{uMenue.doWeisungssummenAlle()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Nur Stimmrechtsvertreter" action="#{uMenue.doWeisungssummenSRV()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Mit Auswahlmöglichkeit" action="#{uMenue.doWeisungssummenMitAuswahl()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Sammelkarten" rendered="#{uMenueSession.menueReportsEinzeln(0)}"
+                        styleClass="clearfix">
+
+                        <p:menuitem value="Kurz ohne Weisung" action="#{uMenue.doSammelkartenKurzOhneWeisung()}"
+                            styleClass="clearfix" rendered="#{uMenueSession.menueReportsEinzeln(114)}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Kurz ohne Weisung (mit Auswahl)"
+                            action="#{uMenue.doSammelkartenKurzOhneWeisungAuswahl()}" styleClass="clearfix"
+                            rendered="#{uMenueSession.menueReportsEinzeln(115)}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Mit Weisung" action="#{uMenue.doSammelkartenMitWeisung()}"
+                            styleClass="clearfix" rendered="#{uMenueSession.menueReportsEinzeln(116)}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Mit Weisung (mit Auswahl)"
+                            action="#{uMenue.doSammelkartenMitWeisungAuswahl()}" styleClass="clearfix"
+                            rendered="#{uMenueSession.menueReportsEinzeln(117)}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Mit Weisung und Aktionären"
+                            action="#{uMenue.doSammelkartenMitWeisungUndAktionaere()}" styleClass="clearfix"
+                            rendered="#{uMenueSession.menueReportsEinzeln(118)}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Mit Weisung und Aktionären (mit Auswahl)"
+                            action="#{uMenue.doSammelkartenMitWeisungUndAktionaereAuswahl()}" styleClass="clearfix"
+                            rendered="#{uMenueSession.menueReportsEinzeln(119)}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Export J/N/E-Spalte" action="#{uMenue.doSammelkartenExportJNE()}"
+                            styleClass="clearfix" rendered="#{uMenueSession.menueReportsEinzeln(120)}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Export J/N/E-Spalte (mit Auswahl)"
+                            action="#{uMenue.doSammelkartenExportJNEAuswahl()}" styleClass="clearfix"
+                            rendered="#{uMenueSession.menueReportsEinzeln(121)}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Export Stimmen-Spalte" action="#{uMenue.doSammelkartenExportStimmen()}"
+                            styleClass="clearfix" rendered="#{uMenueSession.menueReportsEinzeln(122)}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Export Stimmen-Spalte (mit Auswahl)"
+                            action="#{uMenue.doSammelkartenExportStimmenAuswahl()}" styleClass="clearfix"
+                            rendered="#{uMenueSession.menueReportsEinzeln(123)}" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Willenserklärungen" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueReportsEinzeln(110)}">
+                        <p:menuitem value="Alle mit Selektionsmöglichkeit"
+                            action="#{uMenue.doWillenserklaerungenAlle()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Statistik Eingangswege"
+                            action="#{uMenue.doWillenserklaerungenEingangswege()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:menuitem value="Negativliste (Präsenz)" action="#{uMenue.doNegativlistePraesenz()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueReportsEinzeln(107)}" ajax="false">
+                    </p:menuitem>
+
+                    <p:submenu label="Kontrolle Anmeldungen" rendered="#{uMenueSession.menueReportsEinzeln(125)}"
+                        styleClass="clearfix">
+                        <p:menuitem value="Aktionäre mit kleinerem Bestand angemeldet"
+                            action="#{uMenue.doKontrolleAnmeldungenKleinererBestand()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Aktionäre mit größerem Bestand angemeldet"
+                            action="#{uMenue.doKontrolleAnmeldungenGroessererBestand()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Aktionäre mit 0-Bestand angemeldet"
+                            action="#{uMenue.doKontrolleAnmeldungenNullBestand()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Unbestätigte Einträge im Aktienregister"
+                            action="#{uMenue.doKontrolleUnbestaetigteEintraegeAktienregister()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Konsistenzprüfung" action="#{uMenue.doKontrolleKonsistenzpruefung()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:menuitem value="Kontrolle Weisungen" action="#{uMenue.doKontrolleWeisungen()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueReportsEinzeln(129)}" ajax="false">
+                    </p:menuitem>
+
+                    <p:menuitem value="Stimmausschlussliste" action="#{uMenue.doStimmausschlussliste()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueReportsEinzeln(3)}" ajax="false">
+                    </p:menuitem>
+
+                    <p:submenu label="Elektron.Einl.Versand" rendered="#{uMenueSession.menueReportsEinzeln(130)}"
+                        styleClass="clearfix">
+                        <p:menuitem value="registrierte Aktionäre" action="#{uMenue.doElekEinlRegistrierteAktionaere()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="registrierte Aktionäre, nicht zur HV angemeldet"
+                            action="#{uMenue.doElekEinlRegistrierteAktionaereNichtHVAngemeldet()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:submenu label="Sonder-Reports" rendered="#{uMenueSession.menueReportsSonder()}"
+                        styleClass="clearfix">
+                        <p:menuitem value="Arbeitsplatz-Statistik" action="#{uMenue.doArbeitsplatzStatistik()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Barcodes Eintrittskarten" action="#{uMenue.doBarcodesEintrittskarten()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Barcodes Einladungen" action="#{uMenue.dobarcodesEinladungen()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:submenu label="Mitgliederverwaltung" rendered="#{uMenueSession.menueMitgliederverwaltung()}"
+                        styleClass="clearfix">
+                        <p:menuitem value="Ticket-Übersicht" action="#{uMenue.doRemoteARTickets()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Kontaktanfragen-Übersicht"
+                            action="#{uMenue.doRemoteKontaktanfragenTickets()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Veranstaltungen" rendered="#{uMenueSession.menueVeranstaltungReporting()}"
+                        styleClass="clearfix">
+                        <p:menuitem value="Teilnehmer Veranstaltung" action="#{uMenue.doVeranstaltungTeilnehmerliste()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Zusammenfassung Veranstaltungsmanagement"
+                            action="#{uMenue.doVeranstaltungsmanagement()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Detailliste Veranstaltungsmanagement"
+                            action="#{uMenue.doVeranstaltungsmanagementDetail()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                     </p:submenu>
+                    <p:menuitem value="Erstregistrierungen Portal"
+                        action="#{uMenue.doErstregistrierungenPortalReporting()}" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueErstregistrierungenPortalReporting()}" ajax="false">
+                    </p:menuitem>
+                    <p:submenu label="(Freiwillige) Anmeldungen"
+                        rendered="#{uMenueSession.menueVeranstaltungReporting()}" styleClass="clearfix">
+                        <p:menuitem value="An-/Abmeldungen" action="#{uMenue.doFreiwilligeAnmeldungen()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                </p:submenu>
+
+                <p:submenu label="Workflow" styleClass="clearfix" rendered="#{uMenueSession.menueWorkflow()}">
+                    <p:menuitem value="Importieren PDF" action="#{uMenue.doWorkflowImportierenPDF()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueWorkflowAdmin()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Vollmachtsprüfung" action="#{uMenue.doWorkflowVollmachtspruefungStandard()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueWorkflowBasis()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Vollmachtsprüfung (erweitert)"
+                        action="#{uMenue.doWorkflowVollmachtspruefungErweitert()}" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueWorkflowSpezial()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Vollmachtseingabe (manuell)" action="#{uMenue.doWorkflowVollmachtseingabe()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueWorkflowSpezial()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Statistik" action="#{uMenue.doWorkflowVollmachtspruefungStatistik()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueWorkflowAdmin()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Prüfen gesetzliche Vertreter"
+                        action="#{uMenue.doWorkflowVollmachtspruefungGesetzlicheVertreter()}" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueWorkflowAuswahl()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Prüfen Vollmachten" action="#{uMenue.doWorkflowVollmachtspruefungVollmachten()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueWorkflowAuswahl()}" ajax="false">
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Veranstaltungsmanagement" styleClass="clearfix"
+                    rendered="#{uMenueSession.menueVeranstaltungsmanagement()}">
+                    <p:menuitem value="Simulation" action="#{uMenue.doVeranstaltungenSimulation()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menueVeranstaltungsmanagementAbfragen()}"
+                        ajax="false">
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Verschiedenes" styleClass="clearfix" rendered="#{uMenueSession.menueVerschiedenes()}">
+                    <p:menuitem value="Unterlagen" action="#{uMenue.doVerschiedenesUnterlagen()}" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueVerschiedenesUnterlagen()}" ajax="false">
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Import/Export" styleClass="clearfix" rendered="#{uMenueSession.menueImportExport()}">
+                    <p:menuitem value="Exportiere 500 Passwörter" action="#{uMenue.doExportPasswoerter()}"
+                        styleClass="clearfix" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Import Gäste" action="#{uMenue.doImportGaeste()}" styleClass="clearfix"
+                        ajax="false">
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Datenvorbereitung" styleClass="clearfix"
+                    rendered="#{uMenueSession.menueDatenmanipulationMenue()}">
+                    <p:submenu label="Daten zurücksetzen" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueDatenmanipulation()}">
+                        <p:menuitem value="Mandant komplett zurücksetzen"
+                            action="#{uMenue.doDatenmanipulationMandantZuruecksetzen()}"
+                            rendered="#{uMenueSession.menueSonderFunktionen()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Löschen Meldebestand und HV"
+                            action="#{uMenue.doDatenmanipulationLoeschenMeldebestandHV()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Löschen Aktienregister"
+                            action="#{uMenue.doDatenmanipulationLoeschenAktienregister()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Löschen Abstimmungsagenda"
+                            action="#{uMenue.doDatenmanipulationLoeschenAbstimmungsagenda()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Aktionärs-Einstellungen zurücksetzen"
+                        rendered="#{uMenueSession.menueSonderFunktionen()}" styleClass="clearfix">
+                        <p:menuitem value="Zurücksetzen Hinweise-gelesen"
+                            action="#{uMenue.doDatenmanipulationZuruecksetzenHinweiseGelesen()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Rücksetzen Hinweis Elektr.Einladungs-Versand"
+                            action="#{uMenue.doDatenmanipulationZuruecksetzenHinweisElekVersand()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Reset Passwort" action="#{uMenue.doDatenmanipulationZuruecksetzenPasswort()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <p:submenu label="Aktionärs-Daten ergänzen" rendered="#{uMenueSession.menueSonderFunktionen()}"
+                        styleClass="clearfix">
+                        <p:menuitem value="Zusätzliches Initialpasswort"
+                            action="#{uMenue.doDatenmanipulationZusaetzlichesInitialpasswort()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Aktionäre Anmelden ohne EK"
+                            action="#{uMenue.doDatenmanipulationAktionaereAnmeldenOhneEK()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Aktionäre Anmelden mit EK"
+                            action="#{uMenue.doDatenmanipulationAktionaereAnmeldenMitEK()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="ku217 Vertreterdaten vorbereiten"
+                            action="#{uMenue.doDatenmanipulationku217VertreterVorbereiten()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="ku217 Abstimmende Präsent setzen"
+                            action="#{uMenue.doDatenmanipulationku217AbstimmendePraesentSetzen()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                    <!--
+                        <p:menuitem value="Mandanten Aktionärsdaten löschen" action="#{uMenue.doDatenmanipulationMandantenAktionaersdatenLoeschen()}" rendered="#{uMenueSession.menueSonderFunktionen()}" styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        -->
+                    <p:menuitem value="Test-Bestand anlegen" action="#{uMenue.doDatenmanipulationTestbestandAnlegen()}"
+                        rendered="#{uMenueSession.menueDatenmanipulation()}" styleClass="clearfix" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Standard-Sammelkarten anlegen"
+                        action="#{uMenue.doDatenmanipulationSammelkartenAnlegen()}"
+                        rendered="#{uMenueSession.menueDatenmanipulation()}" styleClass="clearfix" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Demo-Aktionäre zurücksetzen"
+                        action="#{uMenue.doDatenmanipulationDemoAktionaereZuruecksetzen()}"
+                        rendered="#{uMenueSession.menueDemoAktionaereZuruecksetzen()}" styleClass="clearfix"
+                        ajax="false">
+                    </p:menuitem>
+
+                </p:submenu>
+
+                <p:submenu label="Konfiguration" styleClass="clearfix" rendered="#{uMenueSession.menueKonfiguration()}">
+                    <p:menuitem value="Pflege Portaltexte Standard"
+                        action="#{uMenue.doKonfigurationPflegePortaltexteStandard()}" styleClass="clearfix"
+                        rendered="#{uMenueSession.menuePflegePortaltexteStandard()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Pflege Portaltexte Mandant"
+                        action="#{uMenue.doKonfigurationPflegePortaltexteMandant()}" styleClass="clearfix"
+                        rendered="#{uMenueSession.menuePflegePortaltexteMandant()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Basis-Sets abgleichen" action="#{uMenue.doKonfigurationBasisSetsAbgleichen()}"
+                        styleClass="clearfix" rendered="#{uMenueSession.menuePflegePortaltexteStandard()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Texte Basisset ausgeben" action="#{uMenue.doKonfigurationBasisSetAusgeben()}"
+                        styleClass="clearfix"
+                        rendered="#{uMenueSession.menuePflegePortaltexteStandard() or uMenueSession.menuePflegePortaltexteMandant()}"
+                        ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Texte Mandant ausgeben"
+                        action="#{uMenue.doKonfigurationMandantentexteAusgeben()}" styleClass="clearfix"
+                        rendered="#{uMenueSession.menuePflegePortaltexteStandard() or uMenueSession.menuePflegePortaltexteMandant()}"
+                        ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Fehlertexte Portal Standard"
+                        action="#{uMenue.doKonfigurationPflegeFehlertextePortalStandard()}" styleClass="clearfix"
+                        rendered="#{uMenueSession.menuePflegePortaltexteStandard()}" ajax="false">
+                    </p:menuitem>
+                    <p:menuitem value="Fehlertexte Portal Mandant"
+                        action="#{uMenue.doKonfigurationPflegeFehlertextePortalMandant()}" styleClass="clearfix"
+                        rendered="#{uMenueSession.menuePflegePortaltexteMandant()}" ajax="false">
+                    </p:menuitem>
+
+                    <p:submenu label="Schlüssel" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueKonfiguration_schluessel()}">
+                        <p:menuitem value="Länder/Orte/Banken aktualisieren"
+                            action="#{uMenue.doKonfigurationSchluesselLaenderHolen()}" styleClass="clearfix"
+                            rendered="#{uMenueSession.menueKonfiguration_schluessel_laenderHolen()}" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:submenu label="Server-Verbund" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueKonfiguration()}">
+                        <p:menuitem value="Test Server 1" action="#{uMenue.doKonfigurationServerVerbundTest1()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Test Server 2" action="#{uMenue.doKonfigurationServerVerbundTest2()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Test Server 3" action="#{uMenue.doKonfigurationServerVerbundTest3()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Test Server 4" action="#{uMenue.doKonfigurationServerVerbundTest4()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Test Server 5" action="#{uMenue.doKonfigurationServerVerbundTest5()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                    <p:submenu label="Entwickler-Tools" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueEntwickler()}">
+                        <p:menuitem value="Testfunktion 1" action="#{uMenue.doKonfigurationEntwicklerTest1()}"
+                            styleClass="clearfix" ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+
+                    <p:submenu label="Spezialfunktionen" styleClass="clearfix"
+                        rendered="#{uMenueSession.menueKonfiguration()}">
+                        <p:menuitem value="Mandantennummer ändern"
+                            action="#{uMenue.doDatenmanipulationMandantennummerAendern()}" styleClass="clearfix"
+                            ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+
+                </p:submenu>
+
+
+
+                <p:submenu label="Sonstiges" styleClass="clearfix" rendered="#{uMenueSession.menueSonstiges()}">
+                    <p:menuitem value="Passwort ändern" action="#{uMenue.doPasswortAendern()}" ajax="false"
+                        styleClass="clearfix">
+                    </p:menuitem>
+                    <p:menuitem value="Mandanten-Kennungen" action="#{uMenue.doMandantenKennungen()}"
+                        rendered="#{uMenueSession.menueSonstiges_mandantenKennungen()}" ajax="false"
+                        styleClass="clearfix">
+                    </p:menuitem>
+                </p:submenu>
+            </p:menubar>
+
+
+            <!-- Arbeitsbereich HVCockpit -->
+            <h:panelGroup rendered="#{uMenueSession.hvCockpitEin}">
+                <div class="divArbeitsbereich">
+
+                    <table class="divArbeitsbereichUeberschrift">
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftText">
+                                <h:outputLabel value="Cockpit Virtuelle HV" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton value="Testmail (an Notar) wg. Widersprüchen schicken"
+                                    action="#{uMenue.doVirtuelleHVWiderspruecheTestmail()}" styleClass="btnBreit"
+                                    onclick="this.form.target='_self'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton value="Report (PDF) aller Widersprüche"
+                                    action="#{uMenue.doVirtuelleHVWiderspruecheReportAlle()}" styleClass="btnBreit"
+                                    onclick="this.form.target='_self'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton
+                                    value="Report (PDF) aller Willenserklärungen von Aktionären, die Widersprüche eingelegt haben"
+                                    action="#{uMenue.doVirtuelleHVWillenserklaerungenFuerMitteilungenReportCockpit()}"
+                                    styleClass="btnBreit" onclick="this.form.target='_blank'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton value="Report (PDF) aller Willenserklärungen eines Aktionärs"
+                                    action="#{uMenue.doVirtuelleHVWillenserklaerungenFuerAktionaerCockpit()}"
+                                    styleClass="btnBreit" onclick="this.form.target='_blank'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton value="Anzeige/Zählung der Videostream-Teilnehmer"
+                                    action="#{uMenue.doVirtuelleHVStreamUser()}" styleClass="btnBreit"
+                                    onclick="this.form.target='_self'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton value="Negativliste (derzeit nicht anwesend)"
+                                    action="#{uMenue.doNegativlisteCockpit()}" styleClass="btnBreit"
+                                    onclick="this.form.target='_blank'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton value="Stimmausschlussliste"
+                                    action="#{uMenue.doStimmausschlusslisteCockpit()}" styleClass="btnBreit"
+                                    onclick="this.form.target='_blank'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton value="Weisungssummen insgesamt"
+                                    action="#{uMenue.doWeisungssummenAlleCockpit()}" styleClass="btnBreit"
+                                    onclick="this.form.target='_blank'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton
+                                    value="Weisungssummen nur Stimmrechtsvertreter (für Freigabe durch SRV)"
+                                    action="#{uMenue.doWeisungssummenSRVCockpit()}" styleClass="btnBreit"
+                                    onclick="this.form.target='_blank'" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h:commandButton value="Download PDF" action="#{uMenue.doVirtuelleHVDownloadPDF()}"
+                                    styleClass="btnBreit" onclick="this.form.target='_self'" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </h:panelGroup>
+
+            <!-- Arbeitsbereich Zugeordnete Bestände -->
+
+            <h:panelGroup rendered="#{eclUserLoginM.gehoertZuInsti>0}">
+                <div class="divArbeitsbereich">
+
+                    <table class="divArbeitsbereichUeberschrift">
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftText">
+                                <h:outputLabel value="Zugeordnete Bestände für diese Hauptversammlung" />
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p:dataTable value="#{eclInstiZugeordneterBestandListeM.instiZugeordneterBestandM}"
+                        var="instiBestand">
+                        <p:column styleClass="colStandard" style="width:15%">
+                            <f:facet name="header">Ident</f:facet>
+                            <h:outputLabel value="#{instiBestand.aktionaersnummer}" />
+                        </p:column>
+                        <p:column styleClass="colStandard">
+                            <f:facet name="header">Aktionär</f:facet>
+                            <h:outputLabel value="#{instiBestand.aktionaersname}" />
+                        </p:column>
+                        <p:column styleClass="colStandard" style="width:15%">
+                            <f:facet name="header">Aktien</f:facet>
+                            <h:outputLabel value="#{instiBestand.aktien}" />
+                        </p:column>
+                        <p:column styleClass="colStandard" style="width:30%">
+                            <h:panelGroup
+                                rendered="#{instiBestand.aktien!=0 and instiBestand.zugeordneteMeldungListeM.anzZugeordneteMeldungenEigeneAktienListeM>0}">
+
+                                <h:dataTable styleClass="borderless"
+                                    value="#{instiBestand.zugeordneteMeldungListeM.zugeordneteMeldungenEigeneAktienListeM}"
+                                    var="meldung" rowClasses="borderless">
+                                    <h:column styleClass="borderless">
+
+                                        <h:dataTable styleClass="borderless"
+                                            value="#{meldung.zugeordneteWillenserklaerungenListM}"
+                                            var="willenserklaerung" cellspacing="0">
+
+                                            <h:column class="borderless">
+
+                                                <h:commandButton value="Weisung ändern"
+                                                    action="#{uWeisung.doAendern(instiBestand, meldung, willenserklaerung)}"
+                                                    rendered="#{willenserklaerung.aendernIstZulaessig and uWeisungSession.aendernZulaessig}"
+                                                    styleClass="btnNeutral" />
+                                            </h:column>
+                                            <h:column>
+                                                <h:commandButton value="Weisung anzeigen"
+                                                    action="#{uWeisung.doAnzeigen(instiBestand, meldung, willenserklaerung)}"
+                                                    styleClass="btnNeutral" />
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:panelGroup>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{eclUserLoginM.pruefe_uportal_mailKomplett()}">
+                <!-- Arbeitsbereich - wichtige Aktionen -->
+                <ui:include src="/WEB-INF/ULOGIN/uNachrichtEmpfangenTechnischArbeitsbereich.xhtml">
+                </ui:include>
+
+                <!-- Arbeitsbereich - empfangene Nachrichten -->
+                <ui:include src="/WEB-INF/ULOGIN/uNachrichtEmpfangenArbeitsbereich.xhtml">
+                </ui:include>
+
+                <!-- Arbeitsbereich - gesendete Nachrichten -->
+                <ui:include src="/WEB-INF/ULOGIN/uNachrichtGesendeteArbeitsbereich.xhtml">
+                </ui:include>
+
+                <h:panelGroup rendered="#{blMNachrichten.detailSichtVerfuegbar}">
+                    <!-- Arbeitsbereich - Nachrichten Details -->
+                    <ui:include src="/WEB-INF/ULOGIN/uNachrichtEmpfangenDetailArbeitsbereich.xhtml"></ui:include>
+                </h:panelGroup>
+            </h:panelGroup>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

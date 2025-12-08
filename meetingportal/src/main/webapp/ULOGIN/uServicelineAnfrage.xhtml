@@ -1,0 +1,1367 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+	xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+
+	<ui:define name="content">
+		<h:form enctype="multipart/form-data">
+
+			<!-- Titel -->
+			<ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+				<ui:param name="loginAnzeigen" value="1" />
+			</ui:include>
+
+			<!-- Überschrift und Fehlermeldung -->
+			<ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+				<ui:param name="ueberschrift" value="Serviceline-Anfrage" />
+				<ui:param name="zurueck" value="1" />
+			</ui:include>
+
+
+			<h:panelGroup rendered="#{uServicelineAnfrageSession.aktionaerWirdAngezeigt}">
+				<div class="divArbeitsbereich">
+					<!-- Aktionär anzeigen und bearbeiten-->
+					<!-- Allgemeine Infos -->
+					<table class="divArbeitsbereichUeberschrift">
+						<tr>
+							<td class="divArbeitsbereichUeberschriftText">
+								<h:outputLabel value="Allgemeine Daten" />
+							</td>
+							<td class="divArbeitsbereichUeberschriftButton">
+								<h:commandButton value="Neue Anfrage" action="#{uServicelineAnfrage.doNeueAnfrage()}"
+									styleClass="btnStandard" onclick="this.form.target='_self'" />
+							</td>
+						</tr>
+					</table>
+
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+						<p:column>
+							<h:outputLabel value="Kennung" />
+						</p:column>
+						<p:column>
+							<h:outputLabel value="#{uServicelineAnfrageSession.aktionaersNummer}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Name" />
+						</p:column>
+						<p:column>
+							<h:outputLabel value="#{uServicelineAnfrageSession.name}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Vorname" />
+						</p:column>
+						<p:column>
+							<h:outputLabel value="#{uServicelineAnfrageSession.vorname}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Strasse" />
+						</p:column>
+						<p:column>
+							<h:outputLabel value="#{uServicelineAnfrageSession.strasse}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="PLZ, Ort" />
+						</p:column>
+						<p:column>
+							<h:outputLabel
+								value="#{uServicelineAnfrageSession.plz} #{uServicelineAnfrageSession.ort}" />
+						</p:column>
+
+						<p:column
+							rendered="#{eclParamM.varianteDialogablauf()==0 and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<h:outputLabel value="Aktien" />
+						</p:column>
+						<p:column
+							rendered="#{eclParamM.varianteDialogablauf()==0 and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<h:outputLabel value="#{uServicelineAnfrageSession.aktien}" />
+						</p:column>
+
+						<p:column
+							rendered="#{eclParamM.varianteDialogablauf()==1 and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<h:outputLabel value="Geburtsdatum 1" />
+						</p:column>
+						<p:column
+							rendered="#{eclParamM.varianteDialogablauf()==1 and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<h:outputLabel value="#{uServicelineAnfrageSession.geburtsdatum1}" />
+						</p:column>
+
+						<p:column
+							rendered="#{eclParamM.varianteDialogablauf()==1 and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<h:outputLabel value="Geburtsdatum 2" />
+						</p:column>
+						<p:column
+							rendered="#{eclParamM.varianteDialogablauf()==1 and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<h:outputLabel value="#{uServicelineAnfrageSession.geburtsdatum2}" />
+						</p:column>
+
+						<p:column
+							rendered="#{eclParamM.varianteDialogablauf()==1 and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<h:outputLabel value="Gruppe" />
+						</p:column>
+						<p:column
+							rendered="#{eclParamM.varianteDialogablauf()==1 and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<h:outputLabel value="#{uServicelineAnfrageSession.ergaenzungGruppe}" />
+						</p:column>
+
+					</p:panelGrid>
+					<br />
+
+					<!-- Portalzugangsinfos -->
+					<h:panelGroup rendered="#{eclUserLoginM.pruefe_uportal_servicelinetools_registrierungsdaten()}">
+						<table class="divArbeitsbereichUeberschrift">
+							<tr>
+								<td class="divArbeitsbereichUeberschriftText">
+									<h:outputLabel value="Portal-Zugang" />
+								</td>
+								<td class="divArbeitsbereichUeberschriftButton"></td>
+							</tr>
+						</table>
+
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								<h:outputLabel value="Portalzugang" />
+							</p:column>
+							<p:column>
+								<h:panelGroup rendered="#{uServicelineAnfrageSession.portalNutzungGesperrt}">
+									<h:outputLabel value="Ist gesperrt  " />
+									<h:commandButton value="Zugang entsperren"
+										action="#{uServicelineAnfrage.doEntsperren()}" styleClass="btnNeutral"
+										onclick="this.form.target='_self'" />
+								</h:panelGroup>
+								<h:panelGroup rendered="#{!uServicelineAnfrageSession.portalNutzungGesperrt}">
+									<h:outputLabel value="Ist möglich  " />
+									<h:commandButton value="Zugang Sperren" action="#{uServicelineAnfrage.doSperren()}"
+										styleClass="btnNeutral" onclick="this.form.target='_self'" />
+								</h:panelGroup>
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Dauerhaftes Passwort vergeben" />
+							</p:column>
+							<p:column>
+								<h:outputLabel value="Ja"
+									rendered="#{uServicelineAnfrageSession.eigenesPasswortVergeben}" />
+								<h:outputLabel value="Nein"
+									rendered="#{!uServicelineAnfrageSession.eigenesPasswortVergeben}" />
+							</p:column>
+
+							<p:column rendered="#{uServicelineAnfrageSession.passwortInitialAnzeigen}">
+								<h:outputLabel value="Initial-Passwort" />
+							</p:column>
+							<p:column rendered="#{uServicelineAnfrageSession.passwortInitialAnzeigen}">
+								<h:outputLabel value="#{uServicelineAnfrageSession.passwortInitial}" />
+							</p:column>
+
+							<p:column
+								rendered="#{uServicelineAnfrageSession.passwortVergessenPerEmailNichtAbgeschlossen}">
+							</p:column>
+							<p:column
+								rendered="#{uServicelineAnfrageSession.passwortVergessenPerEmailNichtAbgeschlossen}">
+								<h:outputLabel value="Passwort-Vergessen-Prozess per E-Mail noch nicht abgeschlossen" />
+							</p:column>
+
+						</p:panelGrid>
+						<table class="divArbeitsbereichUeberschrift">
+							<tr>
+								<td class="divArbeitsbereichUeberschriftText">
+									<h:outputLabel value="Bisherige Passwortanforderungen per Post" />
+								</td>
+								<td class="divArbeitsbereichUeberschriftButton"></td>
+							</tr>
+						</table>
+
+						<p:dataTable value="#{uServicelineAnfrageSession.passwortAnforderungen}" var="anforderung">
+							<p:column styleClass="colStandard" style="width:10%">
+								<f:facet name="header">Nr</f:facet>
+								<h:outputLabel value="#{anforderung.argument0}" />
+							</p:column>
+							<p:column styleClass="colStandard" style="width:20%">
+								<f:facet name="header">Angefordert</f:facet>
+								<h:outputLabel value="#{anforderung.zeitpunktErteilt}" />
+								<h:panelGroup rendered="#{eclParamM.registerAnbindung==1}">
+									<br />
+									<h:outputLabel value="PW Vergessen" rendered="#{anforderung.argument3!='2'}" />
+									<h:outputLabel value="Erstregistrierung" rendered="#{anforderung.argument3=='2'}" />
+
+								</h:panelGroup>
+							</p:column>
+							<p:column styleClass="colStandard" style="width:10%">
+								<f:facet name="header">Status</f:facet>
+								<h:outputLabel value="#{anforderung.statusText}" />
+							</p:column>
+							<p:column styleClass="colStandard" style="width:10%">
+								<f:facet name="header">Erledigt</f:facet>
+								<h:outputLabel value="#{anforderung.erledigtVermerkText}" />
+							</p:column>
+							<p:column styleClass="colStandard" style="width:50%">
+								<f:facet name="header">Erledigt Datum</f:facet>
+								<h:outputLabel value="#{anforderung.zeitpunktErledigt}" />
+								<h:panelGroup rendered="#{anforderung.argument4!=''}">
+									<br />
+									<h:outputLabel value="#{anforderung.argument4}" />
+									<br />
+									<h:outputLabel value="#{anforderung.argument5}" />
+									<br />
+									<h:outputLabel value="#{anforderung.argument6}" />
+									<br />
+									<h:outputLabel value="#{anforderung.argument7}" />
+								</h:panelGroup>
+							</p:column>
+
+						</p:dataTable>
+
+						<table class="divButtonsArbeitsbereich">
+							<tr>
+								<td class="divButtonsLeft">
+									<h:commandButton value="Neues Passwort per Post" styleClass="btnStandard"
+										action="#{uServicelineAnfrage.doNeuesPasswortPerPost()}"
+										onclick="this.form.target='_self'" />
+									<h:panelGroup rendered="#{eclParamM.registerAnbindung==1}">
+										<br />
+										<h:commandButton value="Registrierung per Post" styleClass="btnStandard"
+											action="#{uServicelineAnfrage.doRegistrierungPerPost()}"
+											onclick="this.form.target='_self'" />
+									</h:panelGroup>
+								</td>
+								<td class="divButtonsCenter">
+									<h:panelGroup
+										rendered="#{uServicelineAnfrageSession.lieferePasswortPerEmailAnzeigen()==true}">
+										<h:commandButton value="Neues Passwort per Mail an hinterlegte E-Mail-Adresse"
+											styleClass="btnStandard"
+											action="#{uServicelineAnfrage.doNeuesPasswortPerMail()}"
+											onclick="this.form.target='_self'" />
+									</h:panelGroup> <br />
+									<h:panelGroup
+										rendered="#{!uServicelineAnfrageSession.passwortPerMailDialogAnzeigen}">
+										<h:commandButton value="Zugangsdaten an nicht-hinterlegte E-Mail-Adresse"
+											styleClass="btnStandard"
+											action="#{uServicelineAnfrage.doNeuesPasswortAnNichtHinterlegteEmail()}"
+											onclick="this.form.target='_self'" />
+									</h:panelGroup>
+								</td>
+								<td class="divButtonsRight">
+									<h:commandButton value="Neues Zugangsschreiben per Post" styleClass="btnStandard"
+										action="#{uServicelineAnfrage.doNeuesZugangsschreibenPerPost()}"
+										onclick="this.form.target='_self'"
+										rendered="#{uServicelineAnfrageSession.aktionaerOderGast==2}" />
+								</td>
+							</tr>
+						</table>
+						<br />
+
+						<!-- Dialog  doNeuesPasswortAnNichtHinterlegteEmail -->
+						<h:panelGroup rendered="#{uServicelineAnfrageSession.passwortPerMailDialogAnzeigen}">
+							<table class="divArbeitsbereichUeberschrift">
+								<tr>
+									<td class="divArbeitsbereichUeberschriftText">
+										<h:outputLabel
+											value="Versand Zugangsdaten an einzugebende / nicht hinterlegte E-Mail-Adresse" />
+									</td>
+									<td class="divArbeitsbereichUeberschriftButton"></td>
+								</tr>
+							</table>
+							<br />
+							<b>
+								<h:outputLabel
+									value="Diese Funktion darf nur und ausschließlich verwendet werden, wenn der (telefonische) Anforderer eindeutig als berechtigter Nutzer der Kennung identifiziert wurde, z.B. durch Vorlage und Überprüfung eines entsprechenden
+                            Identifikationsdokumentes, oder weil persönlich bekannt. In allen anderen Fällen ist die Nutzung dieser Funktion untersagt." />
+								<br /> <br />
+							</b>
+							<h:outputLabel value="Mit dieser Funktion erfolgt:" />
+							<br />
+							<h:outputLabel value="> Generierung eines Initial-Passwortes" />
+							<br />
+							<h:outputLabel
+								value="> Versand der Kennung (z.B. HV-Ticket/Aktionärsnummer) im Klartext an die E-Mail-Adresse" />
+							<br />
+							<h:outputLabel
+								value="> Versand des neuen Initial-Passwortes im Klartext an die E-Mail-Adresse in einer zweiten E-Mail" />
+							<br />
+							<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+								style="width: 1180px">
+								<p:column>
+									<h:outputLabel value="E-Mail-Adresse" />
+								</p:column>
+								<p:column>
+									<h:inputText value="#{uServicelineAnfrageSession.neueEmailAdresse}" maxlength="150"
+										size="30"></h:inputText>
+								</p:column>
+							</p:panelGrid>
+
+							<br />
+							<table class="divButtonsArbeitsbereich">
+								<tr>
+									<td class="divButtonsLeft">
+										<h:commandButton value="Kennung und neues Passwort an eingegebene Mailadresse"
+											styleClass="btnStandard"
+											action="#{uServicelineAnfrage.doNeuesPasswortAnNichtHinterlegteEmailAusfuehren()}"
+											onclick="this.form.target='_self'" />
+									</td>
+									<td class="divButtonsCenter"></td>
+									<td class="divButtonsRight"></td>
+								</tr>
+							</table>
+							<br />
+							<br />
+
+
+						</h:panelGroup>
+
+						<!-- Mail, E-Mail-Versand -->
+						<table class="divArbeitsbereichUeberschrift">
+							<tr>
+								<td class="divArbeitsbereichUeberschriftText">
+									<h:outputLabel value="E-Mail, elektronischer Einladungsversand" />
+								</td>
+								<td class="divArbeitsbereichUeberschriftButton"></td>
+							</tr>
+						</table>
+
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								<h:outputLabel
+									value="Dauerhafte Registrierung (elektronischer Einladungsversand, Passwort)" />
+							</p:column>
+							<p:column>
+								<h:outputLabel value="Ist gesperrt"
+									rendered="#{uServicelineAnfrageSession.dauerhafteRegistrierungUnzulaessig}" />
+								<h:outputLabel value="Ist möglich"
+									rendered="#{!uServicelineAnfrageSession.dauerhafteRegistrierungUnzulaessig}" />
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Für elektronischen Einladungsversand registriert" />
+							</p:column>
+							<p:column>
+								<h:outputLabel value="Ja"
+									rendered="#{uServicelineAnfrageSession.fuerEmailVersandRegistriert}" />
+								<h:outputLabel value="Nein"
+									rendered="#{!uServicelineAnfrageSession.fuerEmailVersandRegistriert}" />
+								<h:panelGroup
+									rendered="#{uServicelineAnfrageSession.fuerEmailVersandRegistriert and uServicelineAnfrageSession.emailWurdeBestaetigt==false}">
+									<br />
+									<h:outputLabel
+										value="Einladungsversand erfolgt trotzdem postalisch, da E-Mail-Adresse noch nicht bestätigt" />
+								</h:panelGroup>
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Hinterlegte E-Mail-Adresse" />
+							</p:column>
+							<p:column>
+								<h:outputLabel value="#{uServicelineAnfrageSession.emailHinterlegt}" />
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="E-Mail-Adresse wurde bestätigt" />
+							</p:column>
+							<p:column>
+								<h:outputLabel value="Ja"
+									rendered="#{uServicelineAnfrageSession.emailWurdeBestaetigt}" />
+								<h:panelGroup rendered="#{!uServicelineAnfrageSession.emailWurdeBestaetigt}">
+									<h:outputLabel value="Nein" />
+									<br />
+									<h:outputLabel value="#{uServicelineAnfrageSession.emailBestaetigungscode}" />
+								</h:panelGroup>
+							</p:column>
+
+						</p:panelGrid>
+						<h:panelGroup
+							rendered="#{uServicelineAnfrageSession.emailEingabeMoeglich and 
+							uServicelineAnfrageSession.emailEingabeAnzeigen==false
+							and uServicelineAnfrageSession.dauerhafteRegistrierungUnzulaessig==false}">
+							<table class="divButtonsArbeitsbereich">
+								<tr>
+									<td class="divButtonsLeft">
+										<h:commandButton value="Anpassung Versandweg für Einladung"
+											styleClass="btnStandard"
+											action="#{uServicelineAnfrage.doEmailRegistrierungAnzeigen()}"
+											onclick="this.form.target='_self'" />
+									</td>
+									<td class="divButtonsCenter"></td>
+									<td class="divButtonsRight"></td>
+								</tr>
+							</table>
+						</h:panelGroup>
+						<br />
+						<h:panelGroup rendered="#{uServicelineAnfrageSession.emailEingabeAnzeigen==true}">
+							<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+								style="width: 1180px">
+								<p:column>
+									<h:outputLabel value="Neue E-Mail" />
+								</p:column>
+								<p:column>
+									<h:inputText value="#{uServicelineAnfrageSession.emailEingabeEMail}" maxlength="100"
+										size="30"></h:inputText>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Für elektronischen Einladungsversand registrieren" />
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox
+										value="#{uServicelineAnfrageSession.emailEingabeRegistrierungVersand}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+							</p:panelGrid>
+							<table class="divButtonsArbeitsbereich">
+								<tr>
+									<td class="divButtonsLeft">
+										<h:commandButton value="Anpassung Versandweg für Einladung speichern" styleClass="btnStandard"
+											action="#{uServicelineAnfrage.doEmailRegistrierungSpeichern()}"
+											onclick="this.form.target='_self'" />
+									</td>
+									<td class="divButtonsCenter"></td>
+									<td class="divButtonsRight"></td>
+								</tr>
+							</table>
+						</h:panelGroup>
+					</h:panelGroup>
+
+
+					<!-- Generalversammlung -->
+					<h:panelGroup
+						rendered="#{uServicelineAnfrageSession.generalversammlungAktiv or uServicelineAnfrageSession.dialogveranstaltungAktiv
+						or eclVeranstaltungenM.pruefeObVeranstaltungenVorhanden()==true}">
+						<!--
+                            <table class="divArbeitsbereichUeberschrift">
+                                <tr>
+                                    <td class="divArbeitsbereichUeberschriftText">
+                                        <h:outputLabel value="Generalversammlung" />
+                                    </td>
+                                    <td class="divArbeitsbereichUeberschriftButton"></td>
+                                </tr>
+                            </table>
+                            -->
+
+						<!-- Version für ku178 bis 04.09.2022
+                            <h:panelGroup rendered="#{uServicelineAnfrageSession.generalversammlungAktiv and uServicelineAnfrageSession.aktionaerOderGast==1}">
+                                <table class="divArbeitsbereichUeberschrift">
+                                    <tr>
+                                        <td class="divArbeitsbereichUeberschriftText">
+                                            <h:outputLabel value="Generalversammlung" />
+                                        </td>
+                                        <td class="divArbeitsbereichUeberschriftButton"></td>
+                                    </tr>
+                                </table>
+                                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px">
+                                    <p:column>
+                                        <h:outputLabel value="Anmeldung zur Generalversammlung" />
+                                    </p:column>
+                                    <p:column>
+                                        <h:outputLabel value="Angemeldet (#{uServicelineAnfrageSession.anAbGeneralversammlung} Person(en) )"
+                                            rendered="#{(uServicelineAnfrageSession.anAbGeneralversammlung ge 1) and (uServicelineAnfrageSession.anAbGeneralversammlung lt 1000)}" />
+                                        <h:outputLabel value="Abgemeldet" rendered="#{uServicelineAnfrageSession.anAbGeneralversammlung==1024}" />
+                                        <h:outputLabel value="Vertreter angemeldet" rendered="#{uServicelineAnfrageSession.anAbGeneralversammlung==2048}" />
+                                        <h:outputLabel value="Für virtuelle Teilnahme angemeldet" rendered="#{uServicelineAnfrageSession.anAbGeneralversammlung==4096}" />
+                                    </p:column>
+
+                                </p:panelGrid>
+                            </h:panelGroup>
+                            -->
+
+
+						<h:panelGroup
+							rendered="#{uServicelineAnfrageSession.generalversammlungAktiv and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<!-- Status anzeigen -->
+							<h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anOderAbgemeldet}">
+								<table class="divArbeitsbereichUeberschrift">
+									<tr>
+										<td class="divArbeitsbereichUeberschriftText">
+											<h:outputLabel value="Statusinformation" />
+										</td>
+										<td class="divArbeitsbereichUeberschriftButton"></td>
+									</tr>
+								</table>
+								<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+									style="width: 1180px">
+									<p:column>
+										<h:outputLabel value="Anwesenheits-Status:" />
+									</p:column>
+									<p:column>
+										<h:outputLabel value="noch nicht anwesend"
+											rendered="#{eclBesitzGesamtAuswahl1M.statusPraesenz==0}" />
+										<h:outputLabel value="ist anwesend"
+											rendered="#{eclBesitzGesamtAuswahl1M.statusPraesenz==1}" />
+										<h:outputLabel value="war anwesend"
+											rendered="#{eclBesitzGesamtAuswahl1M.statusPraesenz==2}" />
+									</p:column>
+									<p:column>
+										<h:outputLabel value="Prüf-Status:" />
+									</p:column>
+									<p:column>
+										<h:outputLabel value="noch nicht geprüft"
+											rendered="#{eclBesitzGesamtAuswahl1M.statusPruefung==-1}" />
+										<h:outputLabel value="noch nicht geprüft"
+											rendered="#{eclBesitzGesamtAuswahl1M.statusPruefung==-2}" />
+									</p:column>
+								</p:panelGrid>
+								<br />
+							</h:panelGroup>
+							<!-- ggf. zur Verfügung stehende Dokumente ausdrucken -->
+							<!-- 
+                                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anOderAbgemeldet and (eclBesitzGesamtAuswahl1M.statusPruefung!=-1 and eclBesitzGesamtAuswahl1M.statusPruefung!=-2)}">
+                                    <table class="divArbeitsbereichUeberschrift">
+                                        <tr>
+                                            <td class="divArbeitsbereichUeberschriftText">
+                                                <h:outputLabel value="Zur Verfügung stehende Dokumente für die Anmeldung" />
+                                            </td>
+                                            <td class="divArbeitsbereichUeberschriftButton"></td>
+                                        </tr>
+                                    </table>
+                                    <p:panelGrid columnClasses="panel25FirstColumn" columns="1" style="width: 1180px">
+                                        <p:column>
+                                            <f:subview id="iGeneralversammlungAnAbmeldenStatusULogin">
+                                                <ui:include src="/WEB-INF/ULOGIN/uIncGeneralversammlungAnAbmeldenStatus.xhtml" />
+                                            </f:subview>
+                                        </p:column>
+                                    </p:panelGrid>
+                                    <br />
+                                </h:panelGroup>
+								-->
+
+							<!-- An-Abmaldestatus ändern -->
+							<table class="divArbeitsbereichUeberschrift">
+								<tr>
+									<td class="divArbeitsbereichUeberschriftText">
+										<h:outputLabel value="Generalversammlung An-/Abmeldestatus ändern" />
+									</td>
+									<td class="divArbeitsbereichUeberschriftButton"></td>
+								</tr>
+							</table>
+							<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px">
+								<p:column> </p:column>
+								<p:column>
+									<f:subview id="iGeneralversammlungAnAbmeldenULogin">
+										<ui:include src="/WEB-INF/ULOGIN/uIncGeneralversammlungAnAbmelden.xhtml" />
+									</f:subview>
+								</p:column>
+								<p:column> </p:column>
+								<p:column>
+							<!-- 
+									<h:outputLabel value="Anmeldung auf geprüft setzen: " />
+									<h:selectBooleanCheckbox
+										value="#{eclBesitzGesamtAuswahl1M.vertreterAufGeprueftSetzen}">
+									</h:selectBooleanCheckbox>
+									-->
+								</p:column>
+							</p:panelGrid>
+
+
+							<h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.statusPraesenz!=1}">
+
+								<table class="divButtonsArbeitsbereich">
+									<tr>
+										<td class="divButtonsLeft">
+											<h:commandButton value="Anmeldestatus speichern" styleClass="btnStandard"
+												action="#{uServicelineAnfrage.doGeneralversammlungAnmeldungSpeichern()}"
+												onclick="this.form.target='_self'" />
+										</td>
+										<td class="divButtonsCenter"></td>
+										<td class="divButtonsRight"></td>
+									</tr>
+								</table>
+								<br />
+							</h:panelGroup>
+							<h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.statusPraesenz==1}">
+								<table class="divArbeitsbereichUeberschrift">
+									<tr>
+										<td class="divArbeitsbereichUeberschriftText">
+											<h:outputLabel
+												value="Präsent, deshalb Veränderung des Anmeldestatus nicht möglich" />
+										</td>
+										<td class="divArbeitsbereichUeberschriftButton"></td>
+									</tr>
+								</table>
+								<br />
+							</h:panelGroup>
+						</h:panelGroup>
+
+
+
+						<!-- Veranstaltungen -->
+						<h:panelGroup rendered="#{eclVeranstaltungenM.pruefeObVeranstaltungenVorhanden()==true}">
+							<table class="divArbeitsbereichUeberschrift">
+								<tr>
+									<td class="divArbeitsbereichUeberschriftText">
+										<h:outputLabel value="Veranstaltungsstatus ändern" />
+										<h:panelGroup rendered="#{uServicelineAnfrageSession.veranstaltungGespeichert}">
+											<br />
+											<h:outputLabel value="Veranstaltungsstatus wurde gespeichert" />
+										</h:panelGroup>
+									</td>
+									<td class="divArbeitsbereichUeberschriftButton"></td>
+								</tr>
+							</table>
+							<!-- Fehler-->
+							<ui:include src="iVeranstaltungen.xhtml">
+							</ui:include>
+							<!-- -->
+						</h:panelGroup>
+
+
+
+
+						<!-- Dialogveranstaltung -->
+						<h:panelGroup
+							rendered="#{uServicelineAnfrageSession.dialogveranstaltungAktiv and uServicelineAnfrageSession.aktionaerOderGast==1}">
+							<table class="divArbeitsbereichUeberschrift">
+								<tr>
+									<td class="divArbeitsbereichUeberschriftText">
+										<h:outputLabel value="Dialogveranstaltung" />
+									</td>
+									<td class="divArbeitsbereichUeberschriftButton"></td>
+								</tr>
+							</table>
+							<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+								style="width: 1180px">
+								<p:column>
+									<h:outputLabel value="Anmeldung zur Dialogveranstaltung" />
+								</p:column>
+								<p:column>
+									<h:panelGroup
+										rendered="#{tRender.veranstaltungMehrfachAuswaehlbarJeGruppe()==false}">
+										<h:panelGroup rendered="#{tDialogveranstaltungenSession.istAngemeldet}">
+											<!-- Angemeldet -->
+											<h:outputLabel value="Angemeldet" />
+											<br />
+											<br />
+											<h:outputText
+												value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text1}"
+												escape="false"></h:outputText>
+											<br />
+											<h:outputText
+												value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text2}"
+												escape="false"></h:outputText>
+											<br />
+											<h:outputText
+												value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text3}"
+												escape="false"></h:outputText>
+											<br />
+											<h:outputText
+												value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text4}"
+												escape="false"></h:outputText>
+											<br />
+											<h:outputText
+												value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text5}"
+												escape="false"></h:outputText>
+											<br />
+											<h:commandButton value="Anmeldung stornieren"
+												action="#{uServicelineAnfrage.doDialogveranstaltungAnmeldungStornieren()}"
+												onclick="this.form.target='_self'">
+											</h:commandButton>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{!tDialogveranstaltungenSession.istAngemeldet}">
+											<!-- Nicht angemeldet -->
+											<h:outputLabel value="Nicht angemeldet" />
+											<br />
+											<br />
+											<h:outputText value="Mail-Adresse:" escape="false"></h:outputText>
+											<h:inputText value="#{tDialogveranstaltungenSession.mailAdresse}"
+												maxlength="100" size="50" autocomplete="off"></h:inputText>
+											<br />
+											<br />
+											<h:panelGroup
+												rendered="#{uServicelineAnfrageSession.veranstaltungPersonenzahlEingeben}">
+												<h:outputText value="Anzahl Personen (max 5)" escape="false">
+												</h:outputText>
+												<h:inputText value="#{tDialogveranstaltungenSession.anzPersonen}"
+													maxlength="5" size="5" autocomplete="off"></h:inputText>
+												<br />
+												<br />
+											</h:panelGroup>
+
+											<h:dataTable value="#{tDialogveranstaltungenSession.veranstaltungen}"
+												var="veranstaltung">
+												<h:column>
+													<h:outputText value="#{veranstaltung.text1}" escape="false">
+													</h:outputText>
+													<br />
+													<h:outputText value="#{veranstaltung.text2}" escape="false">
+													</h:outputText>
+													<br />
+													<h:outputText value="#{veranstaltung.text3}" escape="false">
+													</h:outputText>
+													<br />
+													<h:outputText value="#{veranstaltung.text4}" escape="false">
+													</h:outputText>
+													<br />
+													<h:outputText value="#{veranstaltung.text5}" escape="false">
+													</h:outputText>
+													<br />
+												</h:column>
+												<h:column>
+													<h:commandButton value="Anmelden"
+														action="#{uServicelineAnfrage.doAnmeldenDialogveranstaltung(veranstaltung)}"
+														rendered="#{!veranstaltung.ausgebucht}"
+														onclick="this.form.target='_self'">
+													</h:commandButton>
+													<h:outputText value="Veranstaltung ausgebucht" escape="false"
+														rendered="#{veranstaltung.ausgebucht}"></h:outputText>
+												</h:column>
+											</h:dataTable>
+
+
+
+										</h:panelGroup>
+									</h:panelGroup>
+									<h:panelGroup
+										rendered="#{tRender.veranstaltungMehrfachAuswaehlbarJeGruppe()==true}">
+
+										<h:panelGroup
+											rendered="#{tDialogveranstaltungenSession.istAngemeldet or tDialogveranstaltungenSession.istAbgemeldet}">
+											<!-- Aktionär ist angemeldet zu einer Dialogveranstaltung angemeldet -->
+											<ui:repeat
+												value="#{tDialogveranstaltungenSession.zuVeranstaltungenAngemeldetListe}"
+												var="veranstaltung">
+												<div class="row">
+													<div class="col-8">
+														<div class="row">
+															<div class="col-4">
+																<h:outputText value="#{eclPortalTexteM.holeText('685')}"
+																	escape="false">
+																</h:outputText>
+																<h:outputText value="#{veranstaltung.text1}"
+																	escape="false"></h:outputText>
+																<h:outputText value="#{eclPortalTexteM.holeText('686')}"
+																	escape="false">
+																</h:outputText>
+																<h:outputText value="#{veranstaltung.text2}"
+																	escape="false"></h:outputText>
+																<h:outputText value="#{eclPortalTexteM.holeText('687')}"
+																	escape="false">
+																</h:outputText>
+																<h:outputText value="#{veranstaltung.text3}"
+																	escape="false"></h:outputText>
+																<h:outputText value="#{eclPortalTexteM.holeText('688')}"
+																	escape="false">
+																</h:outputText>
+																<h:outputText value="#{veranstaltung.text4}"
+																	escape="false"></h:outputText>
+																<h:outputText value="#{eclPortalTexteM.holeText('689')}"
+																	escape="false">
+																</h:outputText>
+																<h:outputText value="#{veranstaltung.text5}"
+																	escape="false"></h:outputText>
+															</div>
+															<div class="col-4 btn-w-100"></div>
+														</div>
+													</div>
+												</div>
+											</ui:repeat>
+											<h:commandButton value="An-/Abmeldung stornieren"
+												action="#{uServicelineAnfrage.doStornierenDialogveranstaltungenMulti()}"
+												onclick="this.form.target='_self'">
+											</h:commandButton>
+
+
+										</h:panelGroup>
+
+										<h:panelGroup
+											rendered="#{(!tDialogveranstaltungenSession.istAngemeldet) and (!tDialogveranstaltungenSession.istAbgemeldet)}">
+
+											<h:outputText value="Mail-Adresse:" escape="false"></h:outputText>
+											<h:inputText value="#{tDialogveranstaltungenSession.mailAdresse}"
+												maxlength="100" size="50" autocomplete="off"></h:inputText>
+											<br />
+											<br />
+											<h:panelGroup
+												rendered="#{uServicelineAnfrageSession.veranstaltungPersonenzahlEingeben}">
+												<h:outputText value="Anzahl Personen (max 5)" escape="false">
+												</h:outputText>
+												<h:inputText value="#{tDialogveranstaltungenSession.anzPersonen}"
+													maxlength="5" size="5" autocomplete="off"></h:inputText>
+												<br />
+												<br />
+											</h:panelGroup>
+
+											<h:dataTable value="#{tDialogveranstaltungenSession.veranstaltungen}"
+												var="veranstaltung">
+												<h:column>
+													<h:outputText value="#{veranstaltung.text1}" escape="false">
+													</h:outputText>
+													<br />
+													<h:outputText value="#{veranstaltung.text2}" escape="false">
+													</h:outputText>
+													<br />
+													<h:outputText value="#{veranstaltung.text3}" escape="false">
+													</h:outputText>
+													<br />
+													<h:outputText value="#{veranstaltung.text4}" escape="false">
+													</h:outputText>
+													<br />
+													<h:outputText value="#{veranstaltung.text5}" escape="false">
+													</h:outputText>
+													<br />
+												</h:column>
+												<h:column>
+													<h:selectOneRadio value="#{veranstaltung.anAbgemeldet}"
+														layout="pageDirection">
+														<f:selectItem itemLabel="#{eclPortalTexteM.holeText('1727')}"
+															itemValue="1" />
+														<f:selectItem itemLabel="#{eclPortalTexteM.holeText('1728')}"
+															itemValue="2" />
+													</h:selectOneRadio>
+												</h:column>
+											</h:dataTable>
+											<h:commandButton value="Anmelden"
+												action="#{uServicelineAnfrage.doAnmeldenDialogveranstaltungenMulti()}"
+												onclick="this.form.target='_self'">
+											</h:commandButton>
+										</h:panelGroup>
+									</h:panelGroup>
+
+								</p:column>
+
+							</p:panelGrid>
+						</h:panelGroup>
+
+
+						<!-- Versammlung / freiwillige Anmeldung - Gast-Direktdruck Eintrittskarte -->
+						<h:panelGroup
+							rendered="#{eclUserLoginM.pruefe_uportal_servicelinetools_anAbmeldenVeranstaltung() and uServicelineAnfrageSession.aktionaerOderGast==2}">
+							<table class="divArbeitsbereichUeberschrift">
+								<tr>
+									<td class="divArbeitsbereichUeberschriftText">
+										<h:outputLabel value="Versammlung" />
+									</td>
+									<td class="divArbeitsbereichUeberschriftButton"></td>
+								</tr>
+							</table>
+							<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+								style="width: 1180px">
+								<p:column>
+									<h:outputLabel value="Gastkarten-Nummer" />
+								</p:column>
+								<h:outputLabel value="#{uServicelineAnfrageSession.gastkartenNr}"
+									rendered="#{uServicelineAnfrageSession.liefereGastkartenNrVorhanden()}" />
+								<h:outputLabel value="Wurde storniert"
+									rendered="#{uServicelineAnfrageSession.liefereGastkartenNrVorhanden()==false}" />
+								<p:column rendered="#{uServicelineAnfrageSession.liefereGastkartenNrVorhanden()}">
+								</p:column>
+								<p:column rendered="#{uServicelineAnfrageSession.liefereGastkartenNrVorhanden()}">
+									<h:commandButton value="Gastkarte drucken"
+										action="#{uServicelineAnfrage.doGastkarteDrucken()}"
+										onclick="this.form.target='_self'">
+									</h:commandButton>
+
+								</p:column>
+							</p:panelGrid>
+							<br />
+						</h:panelGroup>
+
+
+						<!--
+                            <table class="divButtonsArbeitsbereich">
+                                <tr>
+                                    <td class="divButtonsLeft">
+                                        <h:commandButton value="Anmelden (1 Person)"
+                                            styleClass="btnStandard"
+                                            action="#{uServicelineAnfrage.doAnmelden1Person()}" />
+                                    </td>
+                                    <td class="divButtonsCenter">
+                                        <h:commandButton value="Anmelden (2 Personen)"
+                                            styleClass="btnStandard"
+                                            action="#{uServicelineAnfrage.doAnmelden2Personen()}"
+                                            rendered="#{uServicelineAnfrageSession.zweiPersonenMoeglichGeneralversammlung}" />
+                                    </td>
+                                    <td class="divButtonsCenter">
+                                        <h:commandButton value="Abmelden" styleClass="btnStandard"
+                                            action="#{uServicelineAnfrage.doAbmelden()}" />
+                                    </td>
+                                    <td class="divButtonsRight">
+                                        <h:commandButton value="Zurücksetzen" styleClass="btnStandard"
+                                            action="#{uServicelineAnfrage.doAnmeldenZuruecksetzen()}" />
+                                    </td>
+                                </tr>
+                            </table>
+                            -->
+					</h:panelGroup>
+
+					<!-- Berechtigungen -->
+					<h:panelGroup
+						rendered="#{uServicelineAnfrageSession.passwortInitialAnzeigen and eclUserLoginM.pruefe_uportal_servicelinetools_registrierungsdaten()}">
+						<table class="divArbeitsbereichUeberschrift">
+							<tr>
+								<td class="divArbeitsbereichUeberschriftText">
+									<h:outputLabel value="Einzelberechtigungen" />
+								</td>
+								<td class="divArbeitsbereichUeberschriftButton"></td>
+							</tr>
+						</table>
+						<div class="divArbeitsbereich">
+							<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+								style="width: 1180px">
+
+								<p:column>
+									<h:outputLabel value="Stream"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfStream}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Fragen"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfFragen}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Wortmeldungen"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfWortmeldungen}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Widersprüche"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfWidersprueche}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Anträge"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfAntraege}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Sonstige Mitteilungen"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfSonstigeMitteilungen}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Unterlagen Gruppe 1"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfUnterlagenGruppe1}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Unterlagen Gruppe 2"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfUnterlagenGruppe2}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Unterlagen Gruppe 3"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfUnterlagenGruppe3}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Unterlagen Gruppe 4"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfUnterlagenGruppe4}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Unterlagen Gruppe 5"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfUnterlagenGruppe5}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Teilnehmerverzeichnis"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox
+										value="#{uBerechtigungenSession.darfTeilnehmerverzeichnis}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Abstimmungsergebnis"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox
+										value="#{uBerechtigungenSession.darfAbstimmungsergebnisse}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Botschaften einreichen"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox
+										value="#{uBerechtigungenSession.darfBotschaftenEinreichen}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Botschaften anzeigen"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfBotschaftenAnzeige}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Rückfragen"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfRueckfragen}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+
+								<p:column>
+									<h:outputLabel value="Monitoring"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfMonitoring}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Unterlagen-Preview"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfPreview}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Gastgruppe 1"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfGast1}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Gastgruppe 2"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfGast2}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Gastgruppe 3"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfGast3}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Gastgruppe 4"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfGast4}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Gastgruppe 5"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfGast5}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Gastgruppe 6"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfGast6}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Gastgruppe 7"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfGast7}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Gastgruppe 8"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfGast8}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:outputLabel value="Gastgruppe 9"></h:outputLabel>
+								</p:column>
+								<p:column>
+									<h:selectBooleanCheckbox value="#{uBerechtigungenSession.darfGast9}">
+									</h:selectBooleanCheckbox>
+								</p:column>
+
+								<p:column>
+									<h:commandButton value="Berechtigungen speichern"
+										action="#{uServicelineAnfrage.doBerechtigungenSpeichern()}"
+										styleClass="btnNeutral" onclick="this.form.target='_self'" />
+								</p:column>
+								<p:column>
+								</p:column>
+
+							</p:panelGrid>
+						</div>
+					</h:panelGroup>
+
+
+
+				</div>
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{!uServicelineAnfrageSession.aktionaerWirdAngezeigt}">
+				<p:defaultCommand target="einlesen" />
+				<div class="divArbeitsbereich">
+					<!-- Suchdaten eingeben -->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+						<p:column>
+							<h:outputLabel value="Kennung:" />
+						</p:column>
+						<p:column>
+							<table class="tableSendenZwei">
+								<tr>
+									<td>
+										<h:inputText value="#{uServicelineAnfrageSession.aktionaersNummer}"
+											maxlength="15" size="15"></h:inputText>
+									</td>
+									<td class="tableRechts">
+										<h:commandButton value="Einlesen" id="einlesen"
+											action="#{uServicelineAnfrage.doEinlesen()}" styleClass="btnNeutral"
+											onclick="this.form.target='_self'" />
+									</td>
+								</tr>
+							</table>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Name:" />
+						</p:column>
+						<p:column>
+							<table class="tableSendenZwei">
+								<tr>
+									<td>
+										<h:inputText value="#{uServicelineAnfrageSession.aktionaersName}" maxlength="50"
+											size="45"></h:inputText>
+									</td>
+									<td class="tableRechts">
+										<h:commandButton value="Suchen Register" id="einlesenRegister"
+											action="#{uServicelineAnfrage.doEinlesenRegister()}" styleClass="btnNeutral"
+											onclick="this.form.target='_self'" />
+										<br /> <br />
+										<h:commandButton value="Suchen Gast" id="einlesenGast"
+											action="#{uServicelineAnfrage.doEinlesenGast()}" styleClass="btnNeutral"
+											onclick="this.form.target='_self'" />
+										<br /> <br />
+										<h:panelGroup
+											rendered="#{eclUserLoginM.pruefe_uportal_servicelinetools_auchVertreter()}">
+											<h:commandButton value="Suchen Vertreter" id="einlesenVertreter"
+												action="#{uServicelineAnfrage.doEinlesenVertreter()}"
+												styleClass="btnNeutral" onclick="this.form.target='_self'" />
+											<br />
+											<br />
+										</h:panelGroup>
+										<h:panelGroup
+											rendered="#{eclUserLoginM.pruefe_uportal_servicelinetools_auchUngepruefteVertreter()}">
+											<h:commandButton value="Suchen ungeprüften Vertreter"
+												id="einlesenUngepruefterVertreter"
+												action="#{uServicelineAnfrage.doEinlesenUngeprueftenVertreter()}"
+												styleClass="btnNeutral" onclick="this.form.target='_self'" />
+										</h:panelGroup>
+									</td>
+
+								</tr>
+							</table>
+						</p:column>
+					</p:panelGrid>
+					<br />
+					<table class="divButtonsArbeitsbereich">
+						<tr>
+							<td class="divButtonsLeft"></td>
+							<td class="divButtonsCenter"></td>
+							<td class="divButtonsRight">
+								<h:commandButton value="Gastkarte ausstellen" styleClass="btnStandard"
+									action="#{uServicelineAnfrage.doGastkarteAusstellen()}"
+									rendered="#{uMenueSession.menueGaestePflege()}" />
+							</td>
+						</tr>
+					</table>
+
+				</div>
+
+				<div class="divArbeitsbereich">
+
+					<!-- Suchdaten anzeigen -->
+					<h:panelGroup rendered="#{uServicelineAnfrageSession.suchergebnisseWerdenAngezeigt}">
+						<!-- Refresh-Button anzeigen -->
+						<table class="divButtonsArbeitsbereich">
+							<tr>
+								<td class="divButtonsLeft"></td>
+								<td class="divButtonsCenter"></td>
+								<td class="divButtonsRight">
+									<h:commandButton styleClass="btnStandard" value="Suche zurücksetzen"
+										action="#{uServicelineAnfrage.doSucheZuruecksetzen()}"
+										onclick="this.form.target='_self'" />
+								</td>
+							</tr>
+						</table>
+
+						<!-- Suche nach Aktionär im Register -->
+						<h:panelGroup rendered="#{uServicelineAnfrageSession.suchergebnisArt==1}">
+							<h:dataTable value="#{uServicelineAnfrageSession.suchergebnisListe}" var="ergebnis"
+								columnClasses="tblPersonC00, tblPersonC01, tblPersonC02" rowClasses="leftText"
+								styleClass="tblPerson">
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Nummer" style="float: left" />
+									</f:facet>
+									<h:outputText value="#{ergebnis.aktionaersnummer}" />
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Name, Ort" />
+										<!-- style="float: left"-->
+									</f:facet>
+									<h:outputText value="#{ergebnis.nameKomplett}" />
+									<br />
+									<h:outputText value="#{ergebnis.aktionaerOrt}" />
+									<br />
+								</h:column>
+
+								<h:column>
+									<h:commandButton value="Auswählen" styleClass="btnNeutral"
+										action="#{uServicelineAnfrage.doAuswaehlen(ergebnis)}"
+										onclick="this.form.target='_self'" />
+								</h:column>
+							</h:dataTable>
+						</h:panelGroup>
+
+						<!-- Gast im Meldebestand -->
+						<h:panelGroup rendered="#{uServicelineAnfrageSession.suchergebnisArt==2}">
+							<h:dataTable value="#{uServicelineAnfrageSession.suchergebnisListe}" var="ergebnis"
+								columnClasses="tblPersonC00, tblPersonC01" rowClasses="leftText" styleClass="tblPerson">
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Name, Ort" style="float: left" />
+									</f:facet>
+									<h:outputText value="#{ergebnis.aktionaerName} #{ergebnis.aktionaerVorname}" />
+									<br />
+									<h:outputText value="#{ergebnis.aktionaerOrt}" />
+									<br />
+								</h:column>
+
+								<h:column>
+									<h:commandButton value="Auswählen" styleClass="btnNeutral"
+										action="#{uServicelineAnfrage.doAuswaehlen(ergebnis)}"
+										onclick="this.form.target='_self'" />
+								</h:column>
+							</h:dataTable>
+						</h:panelGroup>
+
+						<!-- Suche nach Vertreter -->
+						<h:panelGroup
+							rendered="#{uServicelineAnfrageSession.suchergebnisArt==3 or uServicelineAnfrageSession.suchergebnisArt==4}">
+							<h:dataTable value="#{uServicelineAnfrageSession.suchergebnisListe}" var="ergebnis"
+								columnClasses="tblPersonC00, tblPersonC01, tblPersonC02, tblPersonC03"
+								rowClasses="leftText" styleClass="tblPerson">
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Nummer" style="float: left" />
+									</f:facet>
+									<h:outputText value="#{ergebnis.aktionaersnummer}" />
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Vertreter" style="float: left" />
+									</f:facet>
+									<h:outputText value="#{ergebnis.vertreterName}" />
+								</h:column>
+
+								<h:column>
+									<f:facet name="header">
+										<h:outputText value="Name, Ort" />
+										<!-- style="float: left"-->
+									</f:facet>
+									<h:outputText value="#{ergebnis.nameKomplett}" />
+									<br />
+									<h:outputText value="#{ergebnis.aktionaerOrt}" />
+									<br />
+								</h:column>
+
+								<h:column>
+									<h:commandButton value="Auswählen" styleClass="btnNeutral"
+										action="#{uServicelineAnfrage.doAuswaehlen(ergebnis)}"
+										onclick="this.form.target='_self'" />
+								</h:column>
+							</h:dataTable>
+						</h:panelGroup>
+					</h:panelGroup>
+				</div>
+			</h:panelGroup>
+
+
+
+			<h:panelGroup rendered="#{eclUserLoginM.mandant==0}">
+				<div class="divArbeitsbereich">
+					<!-- Consultant-Mail anzeigen -->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+						<p:column>
+							<h:outputLabel value="Consultant-Mail" />
+						</p:column>
+						<p:column>
+							<h:outputLabel value="#{eclParamM.getMailConsultant()}" />
+						</p:column>
+					</p:panelGrid>
+				</div>
+			</h:panelGroup>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,190 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <!-- Übersicht und Kurzbeschreibung der einzelnen Seiten siehe KonstPortalView -->
+    <h:panelGroup id="seite">
+        <!-- muß an dieser Stelle stehen, da sonst userEingeloggt nicht richtig
+                    gefüllt wird -->
+        <section id="parameter-bereich" class="d-none">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-2">
+                        <p>
+                            <h:inputText id="schliessenId" value="#{tSession.userEingeloggt}" style="display:none" />
+                            <h:inputText id="logoutButtonClicked" value="0" style="display:none" />
+                        </p>
+                    </div>
+                    <div class="col-2">
+                        <h:panelGroup rendered="#{tRender.andereZeit()}">
+                            <p>
+                                <h:outputLabel value="#{tSession.andereZeit()}" />
+                            </p>
+                        </h:panelGroup>
+                    </div>
+                </div>
+                <h:panelGroup rendered="#{tSession.testModus=='2'}">
+                    <div class="row">
+                        <div class="col-8">
+                            <p>
+                                <h:outputText value="Language= #{tLanguage.lang}" />
+                                <br />
+                                <h:outputLabel value="viewnummer= #{tSession.viewnummer}  " />
+                                <h:outputLabel value="seitenname= #{tSession.seitenname()}" />
+                                <br />
+                                <h:outputLabel value="App-Titel= #{tSeitensteuerung.holeTextAppTitel()}" />
+                            </p>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </div>
+        </section>
+
+
+        <div class="container-full auswahl-container">
+            <div class="row">
+
+                <h:panelGroup rendered="#{tRender.menueAnzeigen()==true}">
+                    <section id="menue-bereich">
+                        <nav class="col-2">
+                            <f:subview id="iauswahlMenue">
+                                <ui:include src="idetail/idMenue.xhtml" />
+                            </f:subview>
+                        </nav>
+                    </section>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tSession.viewnummer==0}">
+                    <ui:include src="pFehlerLinkAufruf.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==3}">
+                    <ui:include src="pFehlerSysLogout.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==4}">
+                    <ui:include src="pFehlerDialog.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2}">
+                    <ui:include src="pFehlerUnbekannt.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==5}">
+                    <ui:include src="pFehlerVeraendert.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==120}">
+                    <ui:include src="pFehlerView.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==8}">
+                    <ui:include src="pFehlerZweiterMandant.xhtml" />
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tSession.viewnummer==410}">
+                    <ui:include src="iNachrichten.xhtml" />
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tSession.viewnummer==114}">
+                    <ui:include src="iAuswahl1Dialogveranstaltungen.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==115}">
+                    <ui:include src="iAuswahl1AnmeldenDialogveranstaltungen.xhtml" />
+                </h:panelGroup>
+ 
+
+                <h:panelGroup rendered="#{tSession.viewnummer==2001}">
+                    <ui:include src="pLogin.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2002}">
+                    <ui:include src="pEinstellungen.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2003}">
+                    <ui:include src="pEinstellungenBestaetigung.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2004}">
+                    <ui:include src="pAuswahl.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2005}">
+                    <ui:include src="pKontaktformular.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2006}">
+                    <ui:include src="pPublikationen.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2007}">
+                    <ui:include src="pBestand.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2016}">
+                    <ui:include src="pBestandHistorie.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2018}">
+                    <ui:include src="pBeteiligungserhoehung.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2017}">
+                    <ui:include src="pHVzurHV.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2020}">
+                    <ui:include src="pHVzurBeiratswahl.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2008}">
+                    <ui:include src="pAktionaersdaten.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2009}">
+                    <ui:include src="pRegistrieren.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2010}">
+                    <ui:include src="pRegistrierenQuittung.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2011}">
+                    <ui:include src="pPasswortVergessen.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2012}">
+                    <ui:include src="pPasswortVergessenQuittung.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2013}">
+                    <ui:include src="pEinstellungenAendern.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2014}">
+                    <ui:include src="pHVEinladungsversand.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2015}">
+                    <ui:include src="pPWZurueck.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2019}">
+                    <ui:include src="pUnterlagen.xhtml" />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tSession.viewnummer==2021}">
+                    <ui:include src="pVeranstaltungenAuswahl.xhtml" />
+                </h:panelGroup>
+               <h:panelGroup rendered="#{tSession.viewnummer==2022}">
+                    <ui:include src="pVeranstaltungenDetail.xhtml" />
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tRender.infoAnzeigen()==true}">
+                    <section id="info-bereich">
+                        <div class="col-2">
+                            <f:subview>
+                                <ui:include src="idetail/idInfoBereich.xhtml" />
+                            </f:subview>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+            </div>
+        </div>
+
+
+
+    </h:panelGroup>
+</ui:composition>

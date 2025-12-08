@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+     <Label prefHeight="25.0" prefWidth="100.0" text="Aktionärsnummer" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="10.0" />
+     <TextField fx:id="tfAktionaersnummer" layoutX="150.0" layoutY="11.0" onKeyPressed="#onKeyAktionaersnummer" prefHeight="25.0" prefWidth="250.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="10.0" HBox.hgrow="ALWAYS" />
+      <HBox alignment="TOP_CENTER" AnchorPane.leftAnchor="410.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <Button fx:id="btnEinlesen" mnemonicParsing="false" onAction="#clickedEinlesen" prefWidth="125.0" text="Einlesen" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnSuchen" mnemonicParsing="false" onAction="#clickedSuchen" prefWidth="125.0" text="Suchen" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnBearbeiten" mnemonicParsing="false" onAction="#clickedBearbeiten" prefWidth="125.0" text="Neu Anlegen" />
+         </children>
+      </HBox>
+    <Label prefHeight="25.0" prefWidth="100.0" text="Name, Vorname" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="45.0" />
+    <TextField fx:id="tfNameVorname" editable="false" prefHeight="25.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="45.0" HBox.hgrow="ALWAYS" />
+    <Label prefHeight="25.0" prefWidth="100.0" text="Ort" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="80.0" />
+    <TextField fx:id="tfOrt" editable="false" prefHeight="25.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="80.0" HBox.hgrow="ALWAYS" />
+    <Label prefHeight="25.0" prefWidth="100.0" text="Aktien lt Register" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="115.0" />
+    <TextField fx:id="tfAktien" editable="false" prefHeight="25.0" prefWidth="250.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="115.0" />
+    <Label prefHeight="25.0" text="Aktien bereits angemeldet" AnchorPane.rightAnchor="540.0" AnchorPane.topAnchor="115.0" />
+    <TextField fx:id="tfAktienAngemeldet" editable="false" prefHeight="25.0" prefWidth="250.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="115.0" />
+      <Label fx:id="lblHinweise" layoutX="861.0" layoutY="68.0" prefHeight="100.0" prefWidth="250.0" textFill="#eb0027" wrapText="true" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="45.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TabPane fx:id="tpTabPane" tabClosingPolicy="UNAVAILABLE" tabMinWidth="150.0" AnchorPane.bottomAnchor="180.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="155.0">
+        <tabs>
+          <Tab fx:id="tabErstanmeldung" text="Erstanmeldung">
+               <content>
+                  <ScrollPane fx:id="scrpnErstanmeldung" fitToHeight="true" fitToWidth="true">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </padding>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></ScrollPane>
+               </content>
+          </Tab>
+          <Tab fx:id="tabStatus" text="Status">
+               <content>
+                  <ScrollPane fx:id="scrpnStatus" fitToHeight="true" fitToWidth="true">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </padding></ScrollPane>
+               </content>
+           </Tab>
+          <Tab fx:id="tabWeitereWK" text="Weitere Willenserklärung">
+               <content>
+                  <ScrollPane fx:id="scrpnWeitereWillenserklaerung" fitToHeight="true" fitToWidth="true">
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" top="5.0" />
+                     </padding></ScrollPane>
+               </content>
+           </Tab>
+        </tabs>
+      </TabPane>
+      <AnchorPane prefHeight="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <TextArea fx:id="tfFehlermeldung" editable="false" prefHeight="60.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0" />
+            <HBox alignment="CENTER_LEFT" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <Label prefWidth="100.0" text="Eingangsweg">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tfErklaerungZeit" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets right="40.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label text="Erklärung Datum">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tfErklaerungDatum" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets right="40.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label text="Erklärung Zeit">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cbEingangsWeg" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Button fx:id="btnDetailPDF" mnemonicParsing="false" onAction="#clickedDetailPDF" prefWidth="75.0" text="Detail-PDF" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="135.0" />
+            <Button fx:id="btnAbbruch" cancelButton="true" mnemonicParsing="false" onAction="#clickedAbbruch" prefWidth="65.0" text="Abbruch" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="250.0" />
+            <Button fx:id="btnZurueck" mnemonicParsing="false" onAction="#clickedZurueck" text="Zurück" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="365.0" />
+            <Label prefHeight="25.0" text="Zuletzt bearbeiteter Aktionär" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+            <TextField fx:id="tfZuletztBearbeitet" editable="false" prefHeight="25.0" prefWidth="741.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="15.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

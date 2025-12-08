@@ -1,0 +1,364 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component"
+    xmlns:c="jakarta.tags.core" xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <ui:composition>
+        <section id="abstimmung-table-bereich">
+            <!-- Schleife für alle Abstimmungen - da sollen keine Farbänderungen rein -->
+            <ui:repeat value="#{eclAbstimmungenListeM.abstimmungenListeM}" var="abstimmung" id="schleifePflegeAgenda">
+                <h:panelGroup rendered="#{abstimmung.pruefeObAbstimmungku310Gefuellt()==false or abstimmung.ueberschrift==true}">
+                    <div class="container-80">
+                        <div class="row">
+                            <div class="col-8">
+                                <h:panelGroup rendered="#{abstimmung.zuAbstimmungsgruppe==1}">
+                                    <p>
+                                        <center>25. Ordentliche Mitgliederversammlung des ku310 Versorgungskasse des Bankgewerbes e.V. am 28.06.2024</center>
+                                    </p>
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{abstimmung.zuAbstimmungsgruppe==2}">
+                                    <p>
+                                        <center>111. Ordentliche Mitgliederversammlung des ku310 Versicherungsverein des Bankgewerbes a.G. am 28.06.2024</center>
+                                    </p>
+                                </h:panelGroup>
+                                <p>
+                                    <center>
+                                        <h:outputText value="TOP #{abstimmung.nummer}#{abstimmung.nummerindex}" escape="false" />
+                                    </center>
+                                    <b>
+										<center>
+											<h:outputText value="#{abstimmung.anzeigeBezeichnungLang}" rendered="#{tLanguage.lang == 1}" escape="false" />
+										</center>
+									</b>
+                                </p>
+                                <h:panelGroup rendered="#{abstimmung.ueberschrift==false}">
+                                    <p>
+                                        <center>Bei dieser Abstimmung haben Sie kein Stimmrecht.</center>
+                                    </p>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                </h:panelGroup>
+                <h:panelGroup rendered="#{abstimmung.pruefeObAbstimmungku310Gefuellt()==true}">
+                    <!-- Schleife je Abstimmung. Maximal 2 Einträge, 1 für AG (Arbeitgeber)  und einer für AN (Arbeitnehmer). Ob AG oder AN ist abfragbar über
+					abstimmungBB.geberOderNehmer==1 (Arbeitgeber) oder ==2 (Arbeitnehmer). Es kann auch nur 1 Eintrag vorhanden sein,
+					der entweder AN odewr AG ist.
+					Der Arbeitgeberbereich soll blau sein, der Arbeitnehmerbereich grün.
+					-->
+                    <ui:repeat value="#{abstimmung.abstimmungku310List}" var="abstimmungBB" id="schleifeANAG">
+                        <div class="container-80">
+                            <h:panelGroup rendered="#{abstimmungBB.geberOderNehmer==1}" styleClass="arbeitgeber"></h:panelGroup>
+                            <h:panelGroup rendered="#{abstimmungBB.geberOderNehmer==2}" styleClass="arbeitnehmer"></h:panelGroup>
+                            <div class="row">
+								<div class="col-8">
+									<h:panelGroup rendered="#{abstimmung.zuAbstimmungsgruppe==1}">
+										<p>
+										<center>25. Ordentliche Mitgliederversammlung des ku310 Versorgungskasse des Bankgewerbes e.V. am 28.06.2024</center>
+										</p>
+									</h:panelGroup>
+
+									<h:panelGroup rendered="#{abstimmung.zuAbstimmungsgruppe==2}">
+										<p>
+										<center>111. Ordentliche Mitgliederversammlung des ku310 Versicherungsverein des Bankgewerbes a.G. am 28.06.2024</center>
+										</p>
+
+
+									</h:panelGroup>
+									<p>
+									<center>
+										<h:outputText value="TOP #{abstimmung.nummer}#{abstimmung.nummerindex}" escape="false" />
+									</center>
+									<b>
+										<center>
+											<h:outputText value="#{abstimmung.anzeigeBezeichnungLang}" rendered="#{tLanguage.lang == 1}" escape="false" />
+										</center>
+									</b>
+									</p>
+									<p>
+										<b>
+											<center>
+												<h:panelGroup rendered="#{abstimmungBB.geberOderNehmer==1}" styleClass="border-2 p-0-5">
+									Arbeitgeber
+									</h:panelGroup>
+												<h:panelGroup rendered="#{abstimmungBB.geberOderNehmer==2}" styleClass="border-2 p-0-5">
+									Arbeitnehmer
+									</h:panelGroup>
+												<h:panelGroup rendered="#{abstimmungBB.geberOderNehmer==3}" styleClass="border-2 p-0-5">
+									Arbeitgeber und Arbeitnehmer
+									</h:panelGroup>
+											</center>
+									</b>
+									</p>
+								</div>
+							</div>
+                            <h:panelGroup rendered="#{abstimmungBB.aktuellAbgestimmt==false and abstimmungBB.aktuellBestaetigen==false}">
+                                <h:panelGroup rendered="#{abstimmungBB.stimmenUebernehmen==0}">
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <p>
+                                                <h:outputText value="Gesamt Stimmen" />
+                                                <br />
+                                                <h:inputText value="#{abstimmungBB.gesamtStimmenEingabe}" readonly="true" maxlength="10" width="11" />
+                                            </p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p>
+                                                 <h:outputText value="JA-Stimmen" />
+                                                <br />
+                                                <h:inputText value="#{abstimmungBB.jaStimmenEingabe}" maxlength="10" width="11" /><br /><br />
+                                   <h:commandButton value="alle auf JA" id="ku310AllesJa" action="#{tStimmabgabeku310.doAllesJaButton(abstimmungBB)}" styleClass="btn-typ-02" rendered="#{abstimmungBB.aktuellAbgestimmt==false and abstimmungBB.aktuellBestaetigen==false}">
+                                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                            </p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p>
+                                                <h:outputText value="NEIN-Stimmen" />
+                                                <br />
+                                                <h:inputText value="#{abstimmungBB.neinStimmenEingabe}" maxlength="10" width="11" /><br /><br />
+                                    <h:commandButton value="alle auf NEIN" id="ku310AllesNein" action="#{tStimmabgabeku310.doAllesNeinButton(abstimmungBB)}" styleClass="btn-typ-02" rendered="#{abstimmungBB.aktuellAbgestimmt==false and abstimmungBB.aktuellBestaetigen==false}">
+                                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                            </p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p>
+                                                <h:outputText value="Enthaltungen" />
+                                                <br />
+                                                <h:inputText value="#{abstimmungBB.enthaltungStimmenEingabe}" maxlength="10" width="11" /><br /><br />
+                                    <h:commandButton value="alle auf Enthaltungen" id="ku310AllesEnthaltung" action="#{tStimmabgabeku310.doAllesEnthaltungButton(abstimmungBB)}" styleClass="btn-typ-02" rendered="#{abstimmungBB.aktuellAbgestimmt==false and abstimmungBB.aktuellBestaetigen==false}">
+                                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{abstimmungBB.stimmenUebernehmen==1}">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <p>
+                                                <center>Die Stimmenaufteilung ist vorgegeben und kann nicht verändert werden.</center>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <p>
+                                                <h:outputText value="Gesamt Stimmen" />
+                                                <br />
+                                                <h:inputText value="#{abstimmungBB.gesamtStimmenEingabe}" readonly="true" maxlength="10" width="11" />
+                                            </p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p>
+                                                <h:outputText value="JA-Stimmen" />
+                                                <br />
+                                                <h:inputText value="#{abstimmungBB.jaStimmenEingabe}" readonly="true" maxlength="10" width="11" />
+                                            </p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p>
+                                                <h:outputText value="NEIN-Stimmen" />
+                                                <br />
+                                                <h:inputText value="#{abstimmungBB.neinStimmenEingabe}" readonly="true" maxlength="10" width="11" />
+                                            </p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p>
+                                                <h:outputText value="Enthaltungen" />
+                                                <br />
+                                                <h:inputText value="#{abstimmungBB.enthaltungStimmenEingabe}" readonly="true" maxlength="10" width="11" />
+                                            </p>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                            </h:panelGroup>
+							<h:panelGroup rendered="#{abstimmungBB.aktuellAbgestimmt==true or abstimmungBB.aktuellBestaetigen==true}">
+								<div class="row">
+									<div class="col-2">
+										<p>
+											<h:outputText value="Gesamt Stimmen" />
+											<br />
+											<h:outputText value="#{abstimmungBB.gesamtStimmenEingabe}" />
+										</p>
+									</div>
+									<div class="col-2">
+										<p>
+											<h:outputText value="JA-Stimmen" />
+											<br />
+											<h:outputText value="#{abstimmungBB.jaStimmenEingabe}" />
+										</p>
+									</div>
+									<div class="col-2">
+										<p>
+											<h:outputText value="NEIN-Stimmen" />
+											<br />
+											<h:outputText value="#{abstimmungBB.neinStimmenEingabe}" />
+										</p>
+									</div>
+									<div class="col-2">
+										<p>
+											<h:outputText value="Enthaltungen" />
+											<br />
+											<h:outputText value="#{abstimmungBB.enthaltungStimmenEingabe}" />
+										</p>
+									</div>
+								</div>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{abstimmungBB.aktuellAbgestimmt==true}">
+								<div class="row">
+									<div class="col-8">
+										<center>
+											<b>
+												<h:outputText value="Ihre Stimmabgabe wurde erfolgreich abgeschlossen." />
+											</b>
+										</center>
+									</div>
+								</div>
+							</h:panelGroup>
+
+							<div class="row">
+                                <div class="col-1_3">
+                                    <h:commandButton value="Ändern" id="stimmabgabeWiederholenku310beiAbstimmung" action="#{tStimmabgabeku310.doLinkerButton(abstimmungBB)}" styleClass="btn-typ-01 btn-grey" rendered="#{abstimmungBB.aktuellBestaetigen==true}">
+                                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                </div>
+                                <div class="col-1_3"></div>
+                                <div class="col-1_3">
+                                    <h:commandButton value="Stimmen abgeben" id="stimmabgabeku310beiAbstimmung" action="#{tStimmabgabeku310.doRechterButton(abstimmungBB)}" styleClass="btn-typ-03" rendered="#{abstimmungBB.aktuellAbgestimmt==false and abstimmungBB.aktuellBestaetigen==false}">
+                                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                    <h:commandButton value="&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Bestätigen&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" id="stimmabgabeBestaetigenku310beiAbstimmung" action="#{tStimmabgabeku310.doRechterButton(abstimmungBB)}" styleClass="btn-typ-01" rendered="#{abstimmungBB.aktuellBestaetigen==true}">
+                                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                </div>
+                            </div>
+
+                            <!-- 
+					<div class="row">
+						<div class="col-6">
+							<div class="col-1">
+								<h:panelGroup rendered="#{abstimmung.nummerUnterdruecken==false}">
+									<h:outputText value="#{abstimmung.nummer}" rendered="#{tLanguage.lang ==1}" />
+									<h:outputText value="#{abstimmung.nummerEN}" rendered="#{tLanguage.lang ==2}" />
+								</h:panelGroup>
+								<span></span>
+								<h:outputText value="#{abstimmung.nummerindex}" rendered="#{tLanguage.lang == 1}" />
+								<h:outputText value="#{abstimmung.nummerindexEN}" rendered="#{tLanguage.lang == 2}" />
+							</div>
+							<div class="col-7">
+								<h:outputText value="#{abstimmung.anzeigeBezeichnungLang}" rendered="#{tLanguage.lang == 1}" escape="false" />
+								<h:outputText value="#{abstimmung.anzeigeBezeichnungLangEN}" rendered="#{tLanguage.lang == 2}" escape="false" />
+							</div>
+						</div>
+						<div class="col-2">
+							<h:panelGroup rendered="#{abstimmung.gegenantrag==0}">
+
+								<div class="abstimmungs-btn-jne">
+									<h:selectOneRadio id="customRadioJNE" value="#{abstimmung.gewaehlt}" layout="pageDirection"
+										rendered="#{!abstimmung.ueberschrift and abstimmung.externJa!=0 and abstimmung.externNein!=0 and abstimmung.externEnthaltung!=0}">
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('164')}" itemValue="J" id="customRadioJNEJ" />
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('165')}" itemValue="N" id="customRadioJNEN" />
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('166')}" itemValue="E" id="customRadioJNEE" />
+									</h:selectOneRadio>
+								</div>
+								<div class="abstimmungs-btn-jn">
+									<h:selectOneRadio id="customRadioJN" value="#{abstimmung.gewaehlt}" layout="pageDirection"
+										rendered="#{!abstimmung.ueberschrift and abstimmung.externJa!=0 and abstimmung.externNein!=0 and abstimmung.externEnthaltung==0}">
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('164')}" itemValue="J" id="customRadioJNJ" />
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('165')}" itemValue="N" id="customRadioJNN" />
+									</h:selectOneRadio>
+								</div>
+								<div class="abstimmungs-btn-je">
+									<h:selectOneRadio id="customRadioJE" value="#{abstimmung.gewaehlt}" layout="pageDirection"
+										rendered="#{!abstimmung.ueberschrift and abstimmung.externJa!=0 and abstimmung.externNein==0 and abstimmung.externEnthaltung!=0}">
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('164')}" itemValue="J" id="customRadioJEJ" />
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('166')}" itemValue="E" id="customRadioJEE" />
+									</h:selectOneRadio>
+								</div>
+								<div class="abstimmungs-btn-j">
+									<h:selectOneRadio id="customRadioJ" value="#{abstimmung.gewaehlt}" layout="pageDirection"
+										rendered="#{!abstimmung.ueberschrift and abstimmung.externJa!=0 and abstimmung.externNein==0 and abstimmung.externEnthaltung==0}">
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('164')}" itemValue="J" id="customRadioJJ" />
+									</h:selectOneRadio>
+								</div>
+
+								<h:commandButton value="#{eclPortalTexteM.holeText('86')}" action="#{tWeisung.doEinzelLoeschen(abstimmung)}" rendered="#{!abstimmung.ueberschrift and abstimmung.externEnthaltung==0}"
+									styleClass="btn-typ-00" id="customRadioLoeschen">
+									<f:ajax execute="@all" render="@form"></f:ajax>
+								</h:commandButton>
+							</h:panelGroup>
+
+							<h:panelGroup rendered="#{abstimmung.gegenantrag==1}">
+								<div class="abstimmungs-btn-jne">
+									<h:selectOneRadio id="customRadioGegenJNE" value="#{abstimmung.gewaehlt}" layout="pageDirection"
+										rendered="#{!abstimmung.ueberschrift and abstimmung.externJa!=0 and abstimmung.externNein!=0 and abstimmung.externEnthaltung!=0}">
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('94')}" itemValue="J" id="customRadioGegenJNEJ" />
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('95')}" itemValue="N" id="customRadioGegenJNEN" />
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('96')}" itemValue="E" id="customRadioGegenJNEE" />
+									</h:selectOneRadio>
+								</div>
+								<div class="abstimmungs-btn-jn">
+									<h:selectOneRadio id="customRadioGegenJN" value="#{abstimmung.gewaehlt}" layout="pageDirection"
+										rendered="#{!abstimmung.ueberschrift and abstimmung.externJa!=0 and abstimmung.externNein!=0 and abstimmung.externEnthaltung==0}">
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('94')}" itemValue="J" id="customRadioGegenJNJ" />
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('95')}" itemValue="N" id="customRadioGegenJNN" />
+									</h:selectOneRadio>
+								</div>
+								<div class="abstimmungs-btn-je">
+									<h:selectOneRadio id="customRadioGegenJE" value="#{abstimmung.gewaehlt}" layout="pageDirection"
+										rendered="#{!abstimmung.ueberschrift and abstimmung.externJa!=0 and abstimmung.externNein==0 and abstimmung.externEnthaltung!=0}">
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('94')}" itemValue="J" id="customRadioGegenJEJ" />
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('96')}" itemValue="E" id="customRadioGegenJEE" />
+									</h:selectOneRadio>
+								</div>
+								<div class="abstimmungs-btn-j">
+									<h:selectOneRadio id="customRadioGegenJ" value="#{abstimmung.gewaehlt}" layout="pageDirection"
+										rendered="#{!abstimmung.ueberschrift and abstimmung.externJa!=0 and abstimmung.externNein==0 and abstimmung.externEnthaltung==0}">
+										<f:selectItem itemLabel="#{eclPortalTexteM.holeText('94')}" itemValue="J" id="customRadioGegenJJ" />
+									</h:selectOneRadio>
+								</div>
+								<h:commandButton value="#{eclPortalTexteM.holeText('97')}" action="#{tWeisung.doEinzelLoeschen(abstimmung)}" rendered="#{!abstimmung.ueberschrift and abstimmung.externEnthaltung==0}"
+									styleClass="btn-typ-00" id="customRadioGegenLoeschen">
+									<f:ajax execute="@all" render="@form"></f:ajax>
+								</h:commandButton>
+							</h:panelGroup>
+
+						</div>
+					</div>
+				</div>
+					-->
+                        </div>
+                        <br />
+                    </ui:repeat>
+                </h:panelGroup>
+            </ui:repeat>
+        </section>
+
+
+    </ui:composition>
+</body>
+
+</html>

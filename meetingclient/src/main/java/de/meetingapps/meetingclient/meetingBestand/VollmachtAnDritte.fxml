@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane hgap="15.0" layoutX="14.0" layoutY="25.0" vgap="10.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="25.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+        </rowConstraints>
+         <children>
+            <Label text="Aktionärsnummer" />
+            <TextField fx:id="tfAktionaersnummer" onKeyPressed="#onKeyAktionaersnummer" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+            <Button fx:id="btnEinlesen" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clickedEinlesen" text="Einlesen" GridPane.columnIndex="3" />
+            <Label text="Name, Vorname" GridPane.rowIndex="1" />
+            <TextField fx:id="tfNameVorname" editable="false" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="1" />
+            <Label text="Ort" GridPane.rowIndex="2" />
+            <TextField fx:id="tfOrt" editable="false" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="2" />
+            <Label text="Aktien" GridPane.rowIndex="3" />
+            <TextField fx:id="tfAktien" editable="false" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="3" />
+            <Label text="Vertreter Name" GridPane.rowIndex="5" />
+            <TextField fx:id="tfVertreterName" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="5" />
+            <Label text="Vertreter Vorname" GridPane.rowIndex="6" />
+            <TextField fx:id="tfVertreterVorname" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="6" />
+            <Label text="Vertreter Ort" GridPane.rowIndex="7" />
+            <TextField fx:id="tfVertreterOrt" GridPane.columnIndex="1" GridPane.columnSpan="6" GridPane.rowIndex="7" />
+            <TextArea fx:id="tfFehlermeldung" editable="false" focusTraversable="false" text=" " GridPane.columnSpan="4" GridPane.rowIndex="9" />
+            <Label fx:id="lblHinweise" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" textFill="RED" wrapText="true" GridPane.columnIndex="4" GridPane.columnSpan="3" GridPane.rowIndex="9">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label text="Erklärung Datum" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <TextField fx:id="tfErklaerungDatum" prefHeight="25.0" prefWidth="103.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+            <Label text="Erklärung Zeit" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <TextField fx:id="tfErklaerungZeit" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+            <Label prefWidth="70.0" text="Eingangsweg" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <ComboBox fx:id="cbEingangsWeg" prefHeight="25.0" prefWidth="290.0" GridPane.columnIndex="5" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+            <Button fx:id="btnSpeichern" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clickedSpeichern" text="Willenserklärung speichern" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+            <Button fx:id="btnAbbruch" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clickedAbbruch" text="Abbruch" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+            <Label text="Zuletzt bearbeiteter Aktionär" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
+            <TextField fx:id="tfZuletztBearbeitet" editable="false" maxWidth="1.7976931348623157E308" GridPane.columnIndex="2" GridPane.columnSpan="5" GridPane.rowIndex="13" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

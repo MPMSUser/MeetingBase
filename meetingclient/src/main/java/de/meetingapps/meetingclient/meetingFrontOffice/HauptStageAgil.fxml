@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btnLinks" layoutX="106.0" layoutY="411.0" mnemonicParsing="false" onAction="#onBtnLinks" text="Links">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="btnMitte" layoutX="358.0" layoutY="411.0" mnemonicParsing="false" onAction="#onBtnMitte" text="Mitte">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="btnRechts" layoutX="589.0" layoutY="411.0" mnemonicParsing="false" onAction="#onBtnRechts" text="Rechts">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Label fx:id="lblAnweisung" layoutX="106.0" layoutY="67.0" prefHeight="27.0" prefWidth="882.0" text="Anweisung">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <TextField fx:id="tfScanFeld" layoutX="106.0" layoutY="97.0" onKeyPressed="#onKeyPressedScanFeld" prefHeight="39.0" prefWidth="268.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label fx:id="lblZ1" layoutX="106.0" layoutY="67.0" prefHeight="17.0" prefWidth="592.0" text="Label Z1">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <Label fx:id="lblZ2" layoutX="106.0" layoutY="94.0" prefHeight="17.0" prefWidth="592.0" text="Label Z2">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <Label fx:id="lblZ3" layoutX="107.0" layoutY="126.0" prefHeight="17.0" prefWidth="592.0" text="Label Z3">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="lblZ4" layoutX="106.0" layoutY="153.0" prefHeight="17.0" prefWidth="592.0" text="Label Z4">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="lblZ5" layoutX="106.0" layoutY="199.0" prefHeight="17.0" prefWidth="592.0" text="Label Z5">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="lblZ6" layoutX="106.0" layoutY="243.0" prefHeight="17.0" prefWidth="592.0" text="Label Z6">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="lblZ7" layoutX="106.0" layoutY="285.0" prefHeight="17.0" prefWidth="425.0" text="Label Z7">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="lblV1" layoutX="107.0" layoutY="48.0" prefHeight="17.0" prefWidth="330.0" text="Label V1" />
+      <Label fx:id="lblV2" layoutX="107.0" layoutY="73.0" prefHeight="17.0" prefWidth="592.0" text="Label V2">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label fx:id="lblV3" layoutX="107.0" layoutY="106.0" prefHeight="17.0" prefWidth="330.0" text="Label V3" />
+      <Label fx:id="lblName" layoutX="106.0" layoutY="138.0" prefHeight="17.0" prefWidth="103.0" text="Name">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="lblVorname" layoutX="106.0" layoutY="184.0" prefHeight="17.0" prefWidth="103.0" text="Vorname">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="lblOrt" layoutX="106.0" layoutY="225.0" prefHeight="35.0" prefWidth="187.0" text="Ort (ohne PLZ):">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <TextField fx:id="tfName" layoutX="272.0" layoutY="132.0" prefHeight="39.0" prefWidth="533.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="tfVorname" layoutX="272.0" layoutY="178.0" prefHeight="39.0" prefWidth="533.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="tfOrt" layoutX="272.0" layoutY="223.0" prefHeight="39.0" prefWidth="533.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label fx:id="lblZ0" layoutX="106.0" layoutY="41.0" prefHeight="17.0" prefWidth="592.0" text="Label Z0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label fx:id="lblFehlerMeldung" layoutX="113.0" layoutY="490.0" prefHeight="99.0" prefWidth="823.0" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+      <Label fx:id="lblZuletztGebucht" layoutX="107.0" layoutY="492.0" text="Zuletzt gebucht:" />
+      <TextField fx:id="tfZuletztGebucht" editable="false" focusTraversable="false" layoutX="209.0" layoutY="488.0" prefHeight="25.0" prefWidth="501.0" />
+      <Button fx:id="btnLabelNachdruck" layoutX="753.0" layoutY="488.0" mnemonicParsing="false" onAction="#onClickedLabelNachdruck" text="Label nachdrucken" />
+      <TextField fx:id="tfScanBestaetigen" layoutX="106.0" layoutY="349.0" onKeyPressed="#onKeyPressedBestaetigen" prefHeight="39.0" prefWidth="268.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Button fx:id="btnAbstimmungsModus" layoutX="854.0" layoutY="74.0" mnemonicParsing="false" onAction="#onBtnAbstimmungsModus" prefHeight="60.0" prefWidth="168.0" text="Abstimmungsmodus aktivieren" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      
+   </children>
+</Pane>

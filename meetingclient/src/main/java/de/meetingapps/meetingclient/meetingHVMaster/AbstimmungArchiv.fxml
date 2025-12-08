@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      <Button fx:id="btnErstellen" layoutX="36.0" layoutY="583.0" mnemonicParsing="false" onAction="#onBtnErstellen" text="Erstellen Gesamtabstimmungsarchiv" />
+      <Button fx:id="btnAbbrechen" layoutX="727.0" layoutY="583.0" mnemonicParsing="false" onAction="#onBtnAbbrechen" text="Abbrechen" />
+      <Label layoutX="45.0" layoutY="27.0" prefHeight="151.0" prefWidth="500.0" text="Bevor die Abstimmungsliste erstellt oder für einzelne Aktionäre eine Abstimmungs-Bestätigung erstellt werden kann (über uLogin), müssen die während der Abstimmung erstellten Einzel-Archive zu einem Gesamtabstimmungsarchiv zusammengeführt werden. Bitte dazu die Abstimmungsvorgänge, für die eine Abstimmung durchgeführt wurde, markieren. Bitte außerdem beachten, dass die Abstimmungspunkte, die in das Archiv aufgenommen werden sollen, aktiv sein müssen." wrapText="true" />
+      <ScrollPane fx:id="scpnVorgaenge" layoutX="39.0" layoutY="169.0" prefHeight="342.0" prefWidth="765.0" />
+      <CheckBox fx:id="cbWeisungenKopfebeneVeraendert" layoutX="39.0" layoutY="529.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="765.0" text="Wenn Weisungen von Sammelkarten auf Kopfebene - ohne Anpassung der Einzelweisungen der enthaltenen Sammelkarten - verändert wurden, dann unbedingt diesen Haken setzen" wrapText="true" />
+</children>
+</Pane>

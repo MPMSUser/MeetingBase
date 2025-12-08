@@ -1,0 +1,110 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+
+    <ui:define name="content">
+        <h:form enctype="multipart/form-data">
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Report Anzeige/Export" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+
+            <div class="divArbeitsbereich">
+                <!-- Aktionär anzeigen und bearbeiten-->
+                <table class="divArbeitsbereichUeberschrift">
+                    <tr>
+                        <td class="divArbeitsbereichUeberschriftText">
+                            <h:outputLabel value="#{uReportsSession.ueberschrift}" />
+                        </td>
+                        <td class="divArbeitsbereichUeberschriftButton">
+                            <h:panelGroup rendered="#{uReportsSession.reportExport}">
+                                <h:commandButton value="Download" styleClass="btnStandard"
+                                    action="#{uReports.doExportDownload}" onclick="this.form.target='_self'" />
+                                <br />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{uReportsSession.reportExportExcel}">
+                                <h:commandButton value="Download Excel" styleClass="btnStandard"
+                                    action="#{uReports.doExportExcelDownload}" onclick="this.form.target='_self'" />
+                                <br />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{uReportsSession.reportDruck}">
+                                <h:commandButton value="Report-Ergebnis anzeigen" styleClass="btnStandard"
+                                    action="#{uReports.doDruck}" onclick="this.form.target='_blank'" />
+                                <br />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{uReportsSession.aufgabeFertig}">
+                                <h:outputText value="Aufgabe durchgeführt" />
+                                <br />
+                            </h:panelGroup>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputLabel value="Der Report wird gerade erstellt"
+                                rendered="#{uReportsSession.backgroundReport and uReportsSession.stehtZurVerfuegung==false}" />
+                        </td>
+                        <td>
+                            <h:commandButton value="Refresh" styleClass="btnStandard" action="#{uReports.doRefresh}"
+                                rendered="#{uReportsSession.backgroundReport and uReportsSession.stehtZurVerfuegung==false}"
+                                onclick="this.form.target='_self'" />
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <h:outputLabel value="#{uReportsSession.anzeigeText}" />
+                </p>
+
+                <!-- ErstregistrierungenPortal direkt anzeigen -->
+                <h:panelGroup rendered="#{uReportsSession.reportNummer==149}">
+                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                        style="width: 1180px">
+                        <p:column>
+                            <h:outputLabel value="Anzahl Nutzer Aktionärsportal" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="#{uReportsSession.anzNutzerAktionaersportal}" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="Anzahl Nutzer Mitgliederportal" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="#{uReportsSession.anzNutzerMitgliederportal}" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="Anzahl Nutzer Gesamt" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="#{uReportsSession.anzNutzerInsgesamtportal}" />
+                        </p:column>
+                    </p:panelGrid>
+                </h:panelGroup>
+
+            </div>
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

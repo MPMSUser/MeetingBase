@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="261.0" layoutX="20.0" layoutY="15.0" stroke="BLACK" strokeType="INSIDE" width="1111.0" />
+      <Label layoutX="28.0" layoutY="25.0" text="Auswahl des auf diesem Server aktiven Sets">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="32.0" layoutY="57.0" text="Set">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <ComboBox fx:id="comboAktivesSet" layoutX="182.0" layoutY="53.0" prefHeight="25.0" prefWidth="733.0" />
+      <Button fx:id="btnSetAktivieren" layoutX="927.0" layoutY="53.0" mnemonicParsing="false" onAction="#clickedSetAktivieren" text="Set auf diesem Server aktivieren">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Label layoutX="32.0" layoutY="90.0" text="Bezeichnung des Sets">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfBezeichnungAktiv" layoutX="182.0" layoutY="86.0" prefHeight="25.0" prefWidth="930.0" />
+      <Label layoutX="32.0" layoutY="119.0" text="Ausführliche Beschreibung">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextArea fx:id="tfAusfuehrlicheBeschreibungAusgewaehlt" layoutX="32.0" layoutY="143.0" prefHeight="114.0" prefWidth="1082.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="83.0" layoutX="20.0" layoutY="289.0" stroke="BLACK" strokeType="INSIDE" width="1111.0" />
+      <Button fx:id="btnTabletsZuruecksetzen" layoutX="32.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickedTabletsZuruecksetzen" text="Tablets lokale Dateien zurücksetzen">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnTabletsStatusAnzeigen" layoutX="292.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickedTabletsStatusAnzeigen" text="Status Tablets Zurücksetzen anzeigen/Refresh">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnTabletsStatusAusblenden" layoutX="580.0" layoutY="306.0" mnemonicParsing="false" onAction="#clickedTabletsStatusAusblenden" text="Status Tablets Zurücksetzen ausblenden">
+         <font>
+            <Font name="Arvo" size="12.0" />
+         </font></Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="408.0" layoutX="20.0" layoutY="383.0" stroke="BLACK" strokeType="INSIDE" width="1111.0" />
+      <ScrollPane fx:id="scrpnVorhandeneKlassen" layoutX="28.0" layoutY="391.0" prefHeight="391.0" prefWidth="680.0" />
+      <Label fx:id="lMandant" layoutX="727.0" layoutY="400.0" text="Mandant (Gesellschaft)">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboMandant" layoutX="727.0" layoutY="417.0" prefHeight="25.0" prefWidth="389.0" />
+      <Label fx:id="lHVJahr" layoutX="727.0" layoutY="452.0" text="HV-Jahr">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfHVJahr" layoutX="801.0" layoutY="447.0" />
+      <Label fx:id="lHVJahr1" layoutX="970.0" layoutY="445.0" prefHeight="32.0" prefWidth="143.0" text="z.B. 2017, 2018 (leer=Auswahl)" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lHVNummer" layoutX="727.0" layoutY="488.0" text="HV-Nummer">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfHVNummer" layoutX="801.0" layoutY="483.0" />
+      <Label fx:id="lHVNummer1" layoutX="970.0" layoutY="480.0" prefHeight="32.0" prefWidth="121.0" text="A bis Z (leer=Auswahl)" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lDatenbereich" layoutX="727.0" layoutY="524.0" text="Datenbereich">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfDatenbereich" layoutX="801.0" layoutY="519.0" />
+      <Label fx:id="lDatenbereich1" layoutX="971.0" layoutY="516.0" prefHeight="32.0" prefWidth="149.0" text="P=Prod, S=Schul, T-Z=Test (leer=Auswahl)" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lTabletHoch" layoutX="727.0" layoutY="563.0" text="Tablet Abstimmung Hochformat aktiv">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbHochformat" layoutX="934.0" layoutY="562.0" mnemonicParsing="false" />
+      <Button fx:id="btnAktivieren" layoutX="727.0" layoutY="599.0" mnemonicParsing="false" onAction="#clickedAktivieren" prefHeight="25.0" prefWidth="389.0" text="Für alle ausgewählten Klassen aktivieren">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+   </children>
+</Pane>

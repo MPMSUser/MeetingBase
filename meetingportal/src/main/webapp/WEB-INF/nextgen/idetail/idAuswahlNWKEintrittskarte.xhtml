@@ -1,0 +1,142 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    xmlns:f="jakarta.faces.core" lang="de">
+
+    <!-- Eintrittskarte -->
+    <h:panelGroup rendered="#{meldung.weitereEKMoeglich==true}">
+        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('148')}" styleClass="row">
+            <div class="col">
+                <p>
+                    <h:outputText value="#{eclPortalTexteM.holeText('148')}" escape="false"></h:outputText>
+                </p>
+            </div>
+        </h:panelGroup>
+
+        <h:panelGroup
+            rendered="#{eclParamM.ekSelbstMoeglich==1 and meldung.anzPersZutrittsIdentSelbst==0 and meldung.artBeziehung==1}">
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1430')}" styleClass="row">
+                <div class="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('1430')}" escape="false">
+                        </h:outputText>
+                    </p>
+                </div>
+            </h:panelGroup>
+            <div class="row">
+                <div class="col">
+                    <h:commandLink action="#{tNeueWillenserklaerung.doNeueWillenserklaerungEineEKSelbst(meldung)}"
+                        id="eineEKSelbstWeitereWK" styleClass="btn btn-primary btn-lg w-100 text-start py-3">
+                        <f:ajax execute="@all" render="inhaltsform"
+                            onevent="function(data) {nachAjaxButton(data, true, false, 'mainInhaltModal', null, true)}" />
+                        <i class="fa-solid fa-user"></i> #{eclPortalTexteM.holeText('1429')} <i
+                            class="fa-solid fa-chevron-right float-end mt-1 ms-3"></i>
+                    </h:commandLink>
+                </div>
+            </div>
+
+        </h:panelGroup>
+        <h:panelGroup
+            rendered="#{eclParamM.ek2SelbstMoeglich==1 and meldung.zweiEKMoeglich and meldung.anzPersZutrittsIdentSelbst==0 and meldung.artBeziehung==1}">
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1432')}" styleClass="row">
+                <div class="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('1432')}" escape="false">
+                        </h:outputText>
+                    </p>
+                </div>
+            </h:panelGroup>
+            <div class="row">
+                <div class="col">
+                    <h:commandLink action="#{tNeueWillenserklaerung.doNeueWillenserklaerungZweiEKSelbst(meldung)}"
+                        id="zweiEKSelbstWeitereWK" styleClass="btn btn-primary btn-lg w-100 text-start py-3">
+                        <f:ajax execute="@all" render="inhaltsform"
+                            onevent="function(data) {nachAjaxButton(data, true, false, 'mainInhaltModal', null, true)}" />
+                        <i class="fa-solid fa-user-plus"></i> #{eclPortalTexteM.holeText('1431')} <i
+                            class="fa-solid fa-chevron-right float-end mt-1 ms-3"></i>
+                    </h:commandLink>
+                </div>
+            </div>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{eclParamM.ekVollmachtMoeglich==1}">
+            <h:panelGroup
+                rendered="#{meldung.vollmachtDritteNichtMoeglichWeilWeisungErteilt==false and meldung.vollmachtDritteNichtMoeglichWeilBereitsVollmacht==false}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1434')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1434')}" escape="false">
+                            </h:outputText>
+                        </p>
+                    </div>
+                </h:panelGroup>
+                <div class="row">
+                    <div class="col">
+                        <h:commandLink
+                            action="#{tNeueWillenserklaerung.doNeueWillenserklaerungEineEKmitVollmacht(meldung)}"
+                            id="eineEKVollmachtWeitereWK" styleClass="btn btn-primary btn-lg w-100 text-start py-3">
+                            <f:ajax execute="@all" render="inhaltsform"
+                                onevent="function(data) {nachAjaxButton(data, true, false, 'mainInhaltModal', null, true)}" />
+                            <i class="fa-solid fa-user-group"></i> #{eclPortalTexteM.holeText('1433')} <i
+                                class="fa-solid fa-chevron-right float-end mt-1 ms-3"></i>
+                        </h:commandLink>
+                    </div>
+                </div>
+            </h:panelGroup>
+            <!-- Vollmacht an Dritte nicht möglich, weil Weisung erteilt -->
+            <h:panelGroup rendered="#{meldung.vollmachtDritteNichtMoeglichWeilWeisungErteilt}">
+                <!-- SRV bereits erteilt, deshalb keine Vollmacht an Dritte möglich -->
+                <h:panelGroup rendered="#{meldung.anzAlleSRV>0}" styleClass="row">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2121')}" styleClass="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('2121')}" escape="false">
+                            </h:outputText>
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <!-- Briefwahl bereits erteilt, deshalb keine Vollmacht an Dritte möglich -->
+                <h:panelGroup rendered="#{meldung.anzAlleBriefwahl>0}" styleClass="row">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2122')}" styleClass="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('2122')}" escape="false">
+                            </h:outputText>
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- Vollmacht an Dritte nicht möglich, weil bereits Vollmacht an Dritte erteilt -->
+            <h:panelGroup rendered="#{meldung.vollmachtDritteNichtMoeglichWeilBereitsVollmacht}" styleClass="row">
+                <!-- An  Drfitte bereits erteilt, deshalb keine Vollmacht an Dritte möglich -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1450')}" styleClass="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('1460')}" escape="false">
+                        </h:outputText>
+                    </p>
+                </h:panelGroup>
+            </h:panelGroup>
+
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('474')}" styleClass="row">
+            <div class="col">
+                <p>
+                    <h:outputText value="#{eclPortalTexteM.holeText('474')}" escape="false"></h:outputText>
+
+                </p>
+            </div>
+        </h:panelGroup>
+    </h:panelGroup>
+</ui:composition>

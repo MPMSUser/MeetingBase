@@ -1,0 +1,444 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:p="http://primefaces.org/ui"
+        lang="de">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <ui:composition>
+
+
+        <f:subview id="iMonitoringOben">
+            <ui:include src="idetail/idSeiteStart.xhtml" />
+        </f:subview>
+
+
+        <section id="monitoring-bereich-top" class="container-80">
+            <div class="row">
+                <div class="col-3">
+                    <h:outputLabel value="Zeit der Abfrage:"></h:outputLabel>
+                </div>
+                <div class="col-5">
+                    <h:outputLabel value="#{tMonitoringSession.datumZeit} Uhr"></h:outputLabel>
+                </div>
+            </div>
+
+
+            <h:panelGroup rendered="#{tSession.testModusRZAktiv()}">
+                <div class="row">
+                    <div class="col-3">
+                        <h:outputLabel value="Nr der aktiven Portalphase:"></h:outputLabel>
+                    </div>
+                    <div class="col-5">
+                        <h:outputLabel value="#{tSession.aktuellePortalPhaseNr}"></h:outputLabel>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+            <div class="row">
+                <div class="col-3">
+                    <h:outputLabel value="HV-Portal:"></h:outputLabel>
+                </div>
+                <div class="col-5">
+                    <h:outputText value="Aktiv" rendered="#{tSession.hvPortalInBetrieb}" escape="false" />
+                    <h:outputText value="Nicht aktiv" rendered="#{!tSession.hvPortalInBetrieb}" escape="false" />
+                </div>
+            </div>
+
+            <h:panelGroup rendered="#{tSession.hvPortalInBetrieb}">
+                <div class="row">
+                    <div class="col-3">
+                        <h:outputLabel value="Anmeldephase"></h:outputLabel>
+                    </div>
+                    <div class="col-5">
+                        <h:outputText value="Aktiv" rendered="#{tSession.portalErstanmeldungIstMoeglich}" escape="false" />
+                        <h:outputText value="Nicht aktiv" rendered="#{!tSession.portalErstanmeldungIstMoeglich}" escape="false" />
+                    </div>
+                </div>
+
+                <h:panelGroup rendered="#{eclParamM.liefereEKAngeboten()==1}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Eintrittskartenausstellung"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:outputText value="Aktiv" rendered="#{tSession.portalEKIstMoeglich}" escape="false" />
+                            <h:outputText value="Nicht aktiv" rendered="#{!tSession.portalEKIstMoeglich}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclParamM.srvAngeboten==1}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Stimmrechtsvertreter"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:outputText value="Aktiv" rendered="#{tSession.portalSRVIstMoeglich and eclParamM.getWeisungenAktuellNichtMoeglich()==0}" escape="false" />
+                            <h:outputText value="Nicht aktiv" rendered="#{!tSession.portalSRVIstMoeglich or eclParamM.getWeisungenAktuellNichtMoeglich()==1}" escape="false" />
+                            <p>
+                                <!-- DDDDDDDDDDDDDDDDDDDDDDDButtons sind neu - bitte schön ausrichten :-) DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
+                                <h:commandButton value="Tagesordnung anzeigen" action="#{tMonitoring.doAbstimmungenSRVEinblenden}" styleClass="btn-typ-monitoring">
+                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                            <h:panelGroup rendered="#{tMonitoringSession.sammelkarteSRVVorhanden==false}">
+                                <!-- DDDDDDDDDDDDDDDDDDDDDDDSoll ganz Dick und rot sein :-) DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
+                                <p class="error error-big">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <h:outputText value="Achtung - Sammelkarte Internet fehlt"></h:outputText>
+                                </p>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclParamM.briefwahlAngeboten==1}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Briefwahl"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:outputText value="Aktiv" rendered="#{tSession.portalBriefwahlIstMoeglich and eclParamM.getWeisungenAktuellNichtMoeglich()==0}" escape="false" />
+                            <h:outputText value="Nicht aktiv" rendered="#{!tSession.portalBriefwahlIstMoeglich or eclParamM.getWeisungenAktuellNichtMoeglich()==1}" escape="false" />
+                            <p>
+                                <!-- DDDDDDDDDDDDDDDDDDDDDDDButtons sind neu - bitte schön ausrichten :-) DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
+                                <h:commandButton value="Tagesordnung anzeigen" action="#{tMonitoring.doAbstimmungenBriefwahlEinblenden}" styleClass="btn-typ-monitoring">
+                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                            <h:panelGroup rendered="#{tMonitoringSession.sammelkarteBriefwahlVorhanden==false}">
+                                <!-- DDDDDDDDDDDDDDDDDDDDSoll ganz Dick und rot sein :-) DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD -->
+                                <p class="error error-big">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <h:outputText value="Achtung - Sammelkarte Internet fehlt"></h:outputText>
+                                </p>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+
+
+                <h:panelGroup rendered="#{tAuswahlSession.streamAngebotenUB}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Stream"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:outputText value="Aktiv" rendered="#{tAuswahlSession.streamAktivUB}" escape="false" />
+                            <h:outputText value="Nicht aktiv" rendered="#{!tAuswahlSession.streamAktivUB}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tAuswahlSession.fragenAngebotenUB}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Fragen"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:panelGroup rendered="#{tAuswahlSession.fragenAktivUB}">
+                                <h:outputText value="Aktiv" escape="false" />
+                                <h:panelGroup rendered="#{tMonitoringSession.mail1Fragen!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail1Fragen}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail2Fragen!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail2Fragen}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail3Fragen!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail3Fragen}" />
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:outputText value="Nicht aktiv" rendered="#{!tAuswahlSession.fragenAktivUB}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tAuswahlSession.wortmeldungenAngebotenUB}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Wortmeldungen"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:panelGroup rendered="#{tAuswahlSession.wortmeldungenAktivUB}">
+                                <h:outputText value="Aktiv" escape="false" />
+                                <h:panelGroup rendered="#{tMonitoringSession.mail1Wortmeldungen!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail1Wortmeldungen}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail2Wortmeldungen!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail2Wortmeldungen}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail3Wortmeldungen!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail3Wortmeldungen}" />
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:outputText value="Nicht aktiv" rendered="#{!tAuswahlSession.wortmeldungenAktivUB}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tAuswahlSession.widerspruecheAngebotenUB}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Widersprüche"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:panelGroup rendered="#{tAuswahlSession.widerspruecheAktivUB}">
+                                <h:outputText value="Aktiv" escape="false" />
+                                <h:panelGroup rendered="#{tMonitoringSession.mail1Widersprueche!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail1Widersprueche}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail2Widersprueche!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail2Widersprueche}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail3Widersprueche!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail3Widersprueche}" />
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:outputText value="Nicht aktiv" rendered="#{!tAuswahlSession.widerspruecheAktivUB}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tAuswahlSession.antraegeAngebotenUB}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Anträge"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:panelGroup rendered="#{tAuswahlSession.antraegeAktivUB}">
+                                <h:outputText value="Aktiv" escape="false" />
+                                <h:panelGroup rendered="#{tMonitoringSession.mail1Antraege!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail1Antraege}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail2Antraege!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail2Antraege}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail3Antraege!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail3Antraege}" />
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:outputText value="Nicht aktiv" rendered="#{!tAuswahlSession.antraegeAktivUB}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tAuswahlSession.sonstigeMitteilungenAngebotenUB}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Sonstige Mitteilungen"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:panelGroup rendered="#{tAuswahlSession.sonstigeMitteilungenAktivUB}">
+                                <h:outputText value="Aktiv" escape="false" />
+                                <h:panelGroup rendered="#{tMonitoringSession.mail1SonstigeMitteilungen!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail1SonstigeMitteilungen}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail2SonstigeMitteilungen!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail2SonstigeMitteilungen}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail3SonstigeMitteilungen!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail3SonstigeMitteilungen}" />
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:outputText value="Nicht aktiv" rendered="#{!tAuswahlSession.sonstigeMitteilungenAktivUB}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+               <h:panelGroup rendered="#{tAuswahlSession.botschaftenEinreichenAngebotenUB}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Botschaften einreichen"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:panelGroup rendered="#{tAuswahlSession.botschaftenEinreichenAktivUB}">
+                                <h:outputText value="Aktiv" escape="false" />
+                                <h:panelGroup rendered="#{tMonitoringSession.mail1Botschaften!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail1Botschaften}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail2Botschaften!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail2Botschaften}" />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tMonitoringSession.mail3Botschaften!='' }">
+                                    <br />
+                                    <h:outputText value="#{tMonitoringSession.mail3Botschaften}" />
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:outputText value="Nicht aktiv" rendered="#{!tAuswahlSession.botschaftenEinreichenAktivUB}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+
+                <h:panelGroup rendered="#{tAuswahlSession.teilnehmerverzeichnisAngebotenUB}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Teilnehmerverzeichnis"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:panelGroup rendered="#{tAuswahlSession.teilnehmerverzeichnisAktivUB}">
+                                <h:outputText value="Aktiv" ecape="false" />
+
+                        <h:dataTable value="#{tTeilnehmerverzSession.absTeilButtonList}" var="absTeil">
+                            <h:column>
+                                <h:commandButton value="#{eclPortalTexteM.holeText(absTeil.buttontext1Vorne)}#{absTeil.buttontext1Ziffer}#{eclPortalTexteM.holeText(absTeil.buttontext1Hinten)}" action="#{tTeilnehmerverz.doAnzeigeMonitoring(absTeil)}" onclick="this.form.target='_blank'" styleClass="btn-typ-00"
+                                />
+
+                            </h:column>
+                            <h:column>
+                                <h:commandButton value="#{eclPortalTexteM.holeText(absTeil.buttontext2Vorne)}#{absTeil.buttontext2Ziffer}#{eclPortalTexteM.holeText(absTeil.buttontext2Hinten)}" action="#{tTeilnehmerverz.doAnzeigeZusammenMonitoring(absTeil)}" styleClass="btn-typ-00" onclick="this.form.target='_blank'"
+                                    rendered="#{eclParamM.teilnehmerverzZusammenstellung==1}" />
+
+                            </h:column>
+
+                        </h:dataTable>
+
+                             </h:panelGroup>
+                            <h:outputText value="Nicht aktiv" rendered="#{!tAuswahlSession.teilnehmerverzeichnisAktivUB}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tAuswahlSession.abstimmungsergebnisseAngebotenUB}">
+                    <div class="row">
+                        <div class="col-3">
+                            <h:outputLabel value="Abstimmungsergebnisse"></h:outputLabel>
+                        </div>
+                        <div class="col-5">
+                            <h:panelGroup rendered="#{tAuswahlSession.abstimmungsergebnisseAktivUB}">
+                                <h:outputText value="Aktiv" escape="false" />
+
+                         <h:dataTable value="#{tAbstimmungsergSession.absTeilButtonList}" var="absTeil">
+                            <h:column>
+                                <h:commandButton value="#{eclPortalTexteM.holeText(absTeil.buttontext1Vorne)}#{absTeil.buttontext1Ziffer}#{eclPortalTexteM.holeText(absTeil.buttontext1Hinten)}" action="#{tAbstimmungserg.doAnzeigeMonitoring(absTeil)}" onclick="this.form.target='_blank'" styleClass="btn-typ-00"
+                                rendered="#{absTeil.buttontext1Hinten!='-'}"/>
+                                <h:commandButton value="#{eclPortalTexteM.holeText(absTeil.buttontext1Vorne)}" action="#{tAbstimmungserg.doAnzeigeMonitoring(absTeil)}" onclick="this.form.target='_blank'" styleClass="btn-typ-00"
+                                rendered="#{absTeil.buttontext1Hinten=='-'}"/>
+                            </h:column>
+                        </h:dataTable>
+                            </h:panelGroup>
+                            <h:outputText value="Nicht aktiv" rendered="#{!tAuswahlSession.abstimmungsergebnisseAktivUB}" escape="false" />
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+        </section>
+
+        <h:panelGroup rendered="#{tMonitoringSession.anzeigenAbstimmungen}">
+            <section id="monitoring-bereich-center" class="container-80">
+                <h:panelGroup rendered="#{tMonitoringSession.auswahlSRVBriefwahlMoeglich}">
+                    <div class="row">
+                        <div class="col-8">
+                            <h:selectOneRadio value="#{tMonitoringSession.anzeigenSRVBriefwahl}" layout="lineDirection">
+                                <f:selectItem itemLabel="Weisungen an den Stimmrechtsvertreter" itemValue="1" />
+                                <f:selectItem itemLabel="Briefwahl" itemValue="2" />
+                            </h:selectOneRadio>
+                        </div>
+                    </div>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{tMonitoringSession.auswahlGattungMoeglich}">
+                    <div class="row">
+                        <div class="col-8">
+                            <h:selectOneRadio value="#{tMonitoringSession.ausgewaehlteGattung}">
+                                <f:selectItems var="auswahl" value="#{tMonitoringSession.auswahlGattungen}" itemValue="#{auswahl.ident}" itemLabel="#{auswahl.bezeichnung}" />
+                            </h:selectOneRadio>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+                <div class="row">
+                    <div class="col-8">
+                        <h:selectBooleanCheckbox value="#{tMonitoringSession.anzeigenPreview}">
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value="Vorschau nächste Abstimmung" escape="false"></h:outputLabel>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8">
+                        <h:commandButton value="Tagesordnung ausblenden" action="#{tMonitoring.doAbstimmungenAusblenden}" styleClass="btn-typ-monitoring">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                </div>
+                <h:panelGroup rendered="#{tMonitoringSession.auswahlSRVBriefwahlMoeglich or tMonitoringSession.auswahlGattungMoeglich}">
+                    <div class="row">
+                        <div class="col-8">
+                            <h:commandButton value="Anzeige Tagesordnung aktualisieren" action="#{tMonitoring.doAbstimmungenRefresh}" styleClass="btn-typ-monitoring">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </section>
+            <section id="monitoring-bereich-bottom" class="container">
+                <div class="row">
+                    <h:outputText value="#{tMonitoringSession.abstimmungUeberschrift}" escape="false" /><br />
+                </div>
+                <f:subview id="monitoringWeisungAgenda">
+                    <ui:include src="idetail/idAbstimmungenPflegeAgenda.xhtml">
+                    </ui:include>
+                </f:subview>
+
+                <h:panelGroup rendered="#{eclAbstimmungenListeM.gegenantraegeVorhanden}">
+                    <f:subview id="monitoringWeisungGegen">
+                        <ui:include src="idetail/idAbstimmungenPflegeGegen.xhtml">
+                        </ui:include>
+                    </f:subview>
+                </h:panelGroup>
+            </section>
+        </h:panelGroup>
+        <f:subview id="iMonitoringButtons">
+            <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+        </f:subview>
+
+
+    </ui:composition>
+</body>
+
+</html>

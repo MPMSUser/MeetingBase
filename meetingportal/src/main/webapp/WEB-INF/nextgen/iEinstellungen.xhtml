@@ -1,0 +1,467 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+    <!-- ToDo: Noch Eingabefelder einfügen für Code-Eingeben für E-Mail-Bestätigung -->
+
+
+    <f:subview id="iEinstellungenOben">
+        <ui:include src="idetail/idSeiteStartModals.xhtml" />
+    </f:subview>
+
+
+    <div class="modal-body">
+        <div class="container-fluid">
+            <h:panelGroup rendered="#{tRender.einstellungenMoeglich()==false}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1976')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1976')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclParamM.liefereRegisterAnbindungVonHV()==1}">
+                    <!-- möglich -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1981')}" styleClass="row">
+                        <div class="col">
+                            <p>
+                                <h:outputLabel value="#{eclPortalTexteM.holeIText(1981)}" escape="false">
+                                </h:outputLabel>
+                            </p>
+                        </div>
+                    </h:panelGroup>
+
+
+                    <!--  Button Senden -->
+                    <div class="row">
+                        <div class="col text-end">
+                            <h:commandButton value="#{eclPortalTexteM.holeIText(1982)}" id="buttonHVzurHVSenden"
+                                action="#{tEinstellungen.doZumRegisterPortal()}" styleClass="btn btn-primary">
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tRender.einstellungenMoeglich()==true}">
+
+                <!-- Statusangabe zur HV -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2129')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('2129')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+                <!--  Aufforderung zum Überprüfen -->
+                <!--  aDlgVariablen.renderElekEinladungsversandAngebotenUndZulaessig()==true-->
+                <h:panelGroup rendered="#{tRender.elekEinladungsversandAngebotenUndZulaessig()==true}" styleClass="row">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('24')}" styleClass="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('24')}" escape="false" />
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <!--  aDlgVariablen.renderElekEinladungsversandAngebotenUndZulaessig()==false-->
+                <h:panelGroup rendered="#{tRender.elekEinladungsversandAngebotenUndZulaessig()==false}"
+                    styleClass="row">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('721')}" styleClass="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('721')}" escape="false" />
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!-- Hinweistext, falls E-Mail noch nicht bestätigt -->
+                <!-- aDlgVariablen.anzeigeMeldung -->
+                <h:panelGroup rendered="#{tEinstellungenSession.anzeigeMeldung}">
+                    <!-- Eigentlicher "Fehler"-Hinweis -->
+                    <!-- aDlgVariablen.anzeigeMeldungsText1 -->
+                    <h:panelGroup rendered="#{tEinstellungenSession.anzeigeMeldungsText1}" styleClass="row">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('25')}" escape="false">
+                                </h:outputText>
+                            </p>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{tEinstellungenSession.anzeigeMeldungsText2}" styleClass="row">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('286')}" escape="false">
+                                </h:outputText>
+                            </p>
+                        </div>
+                    </h:panelGroup>
+
+                    <!-- Hinweis, was zu tun ist -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('280')}" styleClass="row">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('280')}" escape="false" />
+                            </p>
+                        </div>
+                    </h:panelGroup>
+
+
+
+                </h:panelGroup>
+
+                <!-- Kommunikationssprache - falls aktiviert -->
+                <h:panelGroup id="kommunikationssprache" rendered="#{eclParamM.kommunikationsspracheAuswahl==1}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('254')}" styleClass="row">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('254')}" escape="false" />
+                            </p>
+                        </div>
+                    </h:panelGroup>
+
+                    <div class="row">
+                        <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.kommunikationssprache -->
+                        <div class="col">
+                            <h:selectOneRadio value="#{tEinstellungenSession.kommunikationssprache}"
+                                styleClass="radio-buttons" layout="pageDirection">
+                                <f:selectItem itemLabel="#{eclPortalTexteM.holeText('255')}" itemValue="1" />
+                                <f:selectItem itemLabel="#{eclPortalTexteM.holeText('256')}" itemValue="2" />
+                            </h:selectOneRadio>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
+
+                <!--  Einladungsversand und Gewinnspiel -->
+                <!-- aDlgVariablen.renderElekEinladungsversandAngebotenUndZulaessig() -->
+                <h:panelGroup id="einladungsversand"
+                    rendered="#{tRender.elekEinladungsversandAngebotenUndZulaessig()==true}">
+                    <!-- einleitender Text -->
+                    <!-- DDDDD202402 Anfang - weitere Textbausteine abhängig vom Parameter eingefügt-->
+                    <!-- einleitender Text -->
+                    <h:panelGroup rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==1}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('27')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('27')}" escape="false" />
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==2}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2180')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('2180')}" escape="false" />
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Zustimmungscheckbox zu Einladungsversand -->
+                    <div class="row">
+                        <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.hinweisHVPortalBestaetigtAnzeige -->
+                        <div class="col">
+                            <h:selectBooleanCheckbox id="id2" value="#{tEinstellungenSession.eVersandRegistrierung}"
+                                styleClass="form-check-input">
+                            </h:selectBooleanCheckbox>
+                            <h:outputLabel rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==1}"
+                                value="#{eclPortalTexteM.holeText('28')}" escape="false" for="id2"
+                                styleClass="form-check-label">
+                            </h:outputLabel>
+                            <h:outputLabel rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==2}"
+                                value="#{eclPortalTexteM.holeText('2181')}" escape="false" for="id2"
+                                styleClass="form-check-label">
+                            </h:outputLabel>
+                        </div>
+                    </div>
+
+                    <!-- Endtext -->
+                    <h:panelGroup rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==1}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('257')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('257')}" escape="false" />
+
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==2}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2182')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('2182')}" escape="false" />
+
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <!-- DDDDD202402 Ende -->
+                </h:panelGroup>
+
+                <!-- Gewinnspiel, falls aktiv -->
+                <h:panelGroup id="gewinnspiel" rendered="#{eclParamM.gewinnspielAktiv==1}">
+                    <!-- Allgemeiner Text fürs Gewinnspiel -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('287')}" styleClass="row">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('287')}" escape="false" />
+                            </p>
+                        </div>
+                    </h:panelGroup>
+
+                    <!-- Hinweis auf separate Teilnahmebedingungen - falls vorhanden -->
+                    <h:panelGroup id="separateTeilnahmebedingungen"
+                        rendered="#{eclParamM.separateTeilnahmebedingungenFuerGewinnspiel==1}" styleClass="row">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('258')}" styleClass="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('258')}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- aDlgVariablen.renderElekEinladungsversandAngebotenAberNichtZulaessig() -->
+            <h:panelGroup id="einladungsversandNichtZulaessig"
+                rendered="#{tRender.elekEinladungsversandAngebotenAberNichtZulaessig()==true}" styleClass="row">
+                <!-- einleitender Text -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('616')}" styleClass="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('616')}" escape="false" />
+                    </p>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!--  Willenserklärungsbestätigungen per E-Mail -->
+            <!-- DDDDD202402 Anfang - komplett neuer Bereich-->
+            <h:panelGroup id="einstellungenWillenserklaerungenEMail"
+                rendered="#{eclParamM.liefereBestaetigungPerEmailUeberallZulassen()==true}">
+                <!-- einleitender Text -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2185')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('2185')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+                <div class="row">
+                    <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.hinweisHVPortalBestaetigtAnzeige -->
+                    <div class="col">
+                        <h:selectBooleanCheckbox id="id2bestaetigung"
+                            value="#{tEinstellungenSession.eMailBestaetigungBeiAllenWillenserklaerungen}"
+                            styleClass="form-check-input">
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value="#{eclPortalTexteM.holeText('2186')}" escape="false" for="id2bestaetigung"
+                            styleClass="form-check-label">
+                        </h:outputLabel>
+                    </div>
+                </div>
+
+                <!-- Endtext -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2187')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('2187')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+            </h:panelGroup>
+
+            <!-- DDDDD202402 Ende -->
+
+            <!--  Text mit Links zu Publikationen, falls aktiv -->
+            <h:panelGroup id="publikationen" rendered="#{eclParamM.publikationenAnbieten==1}" styleClass="row">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('259')}" styleClass="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('259')}" escape="false" />
+
+                    </p>
+                </h:panelGroup>
+            </h:panelGroup>
+
+
+
+            <!-- bei Aktienregister-Kennung: Hinweis auf angezeigte Adresse und ggf. Weg zur Änderung -->
+            <h:panelGroup rendered="#{eclLoginDatenM.liefereKennungArt()==1}" styleClass="row">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('265')}" styleClass="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('265')}" escape="false" />
+                    </p>
+                </h:panelGroup>
+            </h:panelGroup>
+            <!-- E-Mail-Adresse bei Reihenfolge 1 -->
+            <h:panelGroup rendered="#{tRender.reihenfolgeEinstellungen()==1}">
+                <f:subview id="email1">
+                    <ui:include src="idetail/idEinstellungenEMail.xhtml">
+                    </ui:include>
+                </f:subview>
+            </h:panelGroup>
+
+            <!-- Passwort -->
+            <f:subview id="passwort0">
+                <ui:include src="idetail/idEinstellungenPasswort.xhtml">
+                </ui:include>
+            </f:subview>
+
+            <!-- E-Mail-Adresse bei Reihenfolge 0 -->
+            <h:panelGroup rendered="#{tRender.reihenfolgeEinstellungen()==0}">
+                <f:subview id="email2">
+                    <ui:include src="idetail/idEinstellungenEMail.xhtml">
+                    </ui:include>
+                </f:subview>
+            </h:panelGroup>
+
+            <!-- aDlgVariablen.anzeigeHinweisHVPortalBestaetigen or aDlgVariablen.anzeigeHinweisAktionaersPortalBestaetigen -->
+            <h:panelGroup
+                rendered="#{eclPortalTexteM.pruefeTextVorhanden('274') and (tRender.hinweisHVportalAnzeigen() or tRender.hinweisAktionaersportalAnzeigen())}"
+                styleClass="row">
+                <div class="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('274')}" escape="false" />
+
+                    </p>
+                </div>
+            </h:panelGroup>
+
+            <!--  Datenschutzerklärung - nur anzeige -->
+            <!-- aDlgVariablen.anzeigeHinweisDatenschutzerklaerung -->
+            <h:panelGroup rendered="#{tRender.hinweisDatenschutzerklaerungAnzeigen()}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('288')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('288')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('289')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('289')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- Hinweise HV Portal bestätigen -->
+            <!-- aDlgVariablen.anzeigeHinweisHVPortalBestaetigen -->
+            <h:panelGroup rendered="#{tRender.hinweisHVportalAnzeigen()}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('31')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('31')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('275')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('275')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+                <div class="row">
+                    <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.hinweisHVPortalBestaetigtAnzeige -->
+                    <div class="col">
+                        <h:selectBooleanCheckbox id="id6" value="#{tEinstellungenSession.hinweisHVPortalBestaetigt}"
+                            styleClass="form-check-input">
+                            <f:ajax render="iEinstellungenButtonsDisabledView" />
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value="#{eclPortalTexteM.holeText('32')}" escape="false" for="id6"
+                            styleClass="form-check-label">
+                        </h:outputLabel>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+            <!-- Hinweis Aktionärsportal bestätigen -->
+            <!-- aDlgVariablen.anzeigeHinweisAktionaersPortalBestaetigen -->
+            <h:panelGroup rendered="#{tRender.hinweisAktionaersportalAnzeigen()}">
+
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('276')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('276')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('277')}" styleClass="row">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('277')}" escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+                <div class="row">
+                    <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.hinweisAktionaersPortalBestaetigtAnzeige -->
+                    <div class="col">
+                        <h:selectBooleanCheckbox id="id7"
+                            value="#{tEinstellungenSession.hinweisAktionaersPortalBestaetigt}"
+                            styleClass="form-check-input">
+                            <f:ajax render="iEinstellungenButtonsDisabledView" />
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value="#{eclPortalTexteM.holeText('33')}" escape="false" for="id7"
+                            styleClass="form-check-label">
+                        </h:outputLabel>
+                    </div>
+                </div>
+            </h:panelGroup>
+        </div>
+    </div>
+
+	<h:panelGroup id="iEinstellungenButtonsDisabledView">
+	        <f:subview id="iEinstellungenButtons" 
+	        rendered="#{
+	            (tRender.hinweisHVportalAnzeigen()==false and tRender.hinweisAktionaersportalAnzeigen()==false)
+	            or
+	            (tRender.hinweisHVportalAnzeigen()==true and tRender.hinweisAktionaersportalAnzeigen()==false and tEinstellungenSession.hinweisHVPortalBestaetigt)
+	            or
+	            (tRender.hinweisHVportalAnzeigen()==false and tRender.hinweisAktionaersportalAnzeigen()==true and tEinstellungenSession.hinweisAktionaersPortalBestaetigt)
+	            or
+	            (tRender.hinweisHVportalAnzeigen()==true and tRender.hinweisAktionaersportalAnzeigen()==true and tEinstellungenSession.hinweisHVPortalBestaetigt and tEinstellungenSession.hinweisAktionaersPortalBestaetigt)
+	        }">
+	            <ui:include src="idetail/idSeiteButtonsUntenModals.xhtml">
+	                <ui:param name="modalShowBtnRight" value="true" />
+	                <ui:param name="modalStaticBtnRight" value="true" />
+	                <ui:param name="modalShowBtnLeft" value="false" />
+	                <ui:param name="modalStaticBtnLeft" value="false" />
+	            </ui:include>
+	        </f:subview>
+
+	        <f:subview id="iEinstellungenButtonsDisabled" 
+	        rendered="#{
+	            (tRender.hinweisHVportalAnzeigen() and tEinstellungenSession.hinweisHVPortalBestaetigt==false)
+	            or
+	            (tRender.hinweisAktionaersportalAnzeigen() and tEinstellungenSession.hinweisAktionaersPortalBestaetigt==false)
+	        }">
+	            <ui:include src="idetail/idSeiteButtonsUntenModalsDisabled.xhtml">
+	                <ui:param name="modalShowBtnRight" value="true" />
+	                <ui:param name="modalStaticBtnRight" value="true" />
+	                <ui:param name="modalShowBtnLeft" value="false" />
+	                <ui:param name="modalStaticBtnLeft" value="false" />
+	            </ui:include>
+	        </f:subview>
+	    </h:panelGroup>
+</ui:composition>

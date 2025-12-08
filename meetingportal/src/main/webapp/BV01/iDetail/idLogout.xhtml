@@ -1,0 +1,57 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:p="http://primefaces.org/ui"
+        lang="de">
+
+<head>
+<title></title>
+</head>
+
+<body>
+    <ui:composition>
+        <h:panelGroup rendered="#{tRender.logoutObenOderUnten()==1 and tSeitensteuerungSession.logoutAnzeigen==true}">
+
+            <!-- Button, wenn beim Logout Portal verlassen werden soll -->
+            <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonOben1" action="#{tLoginLogout.doLogoutVerlassen()}" styleClass="btn-typ-logout"
+                rendered="#{tSeitensteuerungSession.logoutSeiteVerlassenAnzeigen}">
+            </h:commandButton>
+
+            <!-- Button, wenn beim Logout zur Login-Seite zurückgekehrt wird -->
+                       <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonOben2" action="#{tLoginLogout.doLogout}" onclick="setLogoutButtonClicked()" styleClass="btn-typ-logout"
+                rendered="#{tSeitensteuerungSession.logoutNormalAnzeigen}">
+              </h:commandButton>
+
+            <!-- Button, wenn auf Login-Seite zur Aufrufseite angezeigt werden soll -->
+            <h:commandButton value="#{eclPortalTexteM.holeText('859')}" id="buttonOben3" action="#{tLoginLogout.doBeenden()}" styleClass="btn-typ-logout"
+                rendered="#{tSeitensteuerungSession.endeButtonAnzeigen}">
+            </h:commandButton>
+
+        </h:panelGroup>
+    </ui:composition>
+</body>
+
+</html>

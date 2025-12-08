@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="25.0" layoutY="21.0" text="Selektionskriterien" />
+      <RadioButton fx:id="tgNichtGedruckt" layoutX="25.0" layoutY="55.0" mnemonicParsing="false" selected="true" text="Alle noch nicht gedruckten">
+         <toggleGroup>
+            <ToggleGroup fx:id="tggGedruckt" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="tgWiederholung" layoutX="25.0" layoutY="87.0" mnemonicParsing="false" text="Wiederholung" toggleGroup="$tggGedruckt" />
+      <RadioButton fx:id="tgGeprueft" layoutX="355.0" layoutY="55.0" mnemonicParsing="false" text="Nur geprüfte Versandadressen">
+         <toggleGroup>
+            <ToggleGroup fx:id="tggGeprueft" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="tgGeprueftAlle" layoutX="355.0" layoutY="87.0" mnemonicParsing="false" selected="true" text="Alle" toggleGroup="$tggGeprueft" />
+      <Button fx:id="btnAufbereiten" layoutX="26.0" layoutY="124.0" mnemonicParsing="false" onAction="#clickedAufbereiten" prefHeight="83.0" prefWidth="267.0" text="Daten aufbereiten" textAlignment="CENTER" wrapText="true" />
+      <Label layoutX="25.0" layoutY="243.0" text="Anzahl zu druckende EKs" />
+      <TextField fx:id="tfAnzahlDrucken" editable="false" layoutX="170.0" layoutY="239.0" />
+      <Button fx:id="btnDrucken" layoutX="26.0" layoutY="275.0" mnemonicParsing="false" onAction="#clickedDrucken" prefHeight="83.0" prefWidth="267.0" text="Drucken (und Drucklauf/Druckquittung speichern)" textAlignment="CENTER" wrapText="true" />
+      <TextField fx:id="tfNrDrucklauf" editable="false" layoutX="452.0" layoutY="239.0" />
+      <Label layoutX="363.0" layoutY="243.0" text="Nr Drucklauf" />
+      <TextField fx:id="tfDrucklaufGewaehlt" layoutX="223.0" layoutY="83.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="tfNachricht" layoutX="392.0" layoutY="118.0" prefHeight="97.0" prefWidth="324.0" />
+      <RadioButton fx:id="tgLandInland" layoutX="585.0" layoutY="21.0" mnemonicParsing="false" text="nur Inland">
+         <toggleGroup>
+            <ToggleGroup fx:id="tggLand" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="tgLandAusland" layoutX="585.0" layoutY="55.0" mnemonicParsing="false" text="nur Ausland" toggleGroup="$tggLand" />
+      <RadioButton fx:id="tgLandAlle" layoutX="587.0" layoutY="87.0" mnemonicParsing="false" selected="true" text="alle" toggleGroup="$tggLand" />
+      <RadioButton fx:id="tgWegPortal" layoutX="742.0" layoutY="21.0" mnemonicParsing="false" text="nur Portal">
+         <toggleGroup>
+            <ToggleGroup fx:id="tggWeg" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="tgWegAnmeldestelle" layoutX="742.0" layoutY="55.0" mnemonicParsing="false" text="nur Anmeldestelle" toggleGroup="$tggWeg" />
+      <RadioButton fx:id="tgWegAlle" layoutX="742.0" layoutY="87.0" mnemonicParsing="false" selected="true" text="alle" toggleGroup="$tggWeg" />
+      <RadioButton fx:id="tgAktionaere" layoutX="929.0" layoutY="21.0" mnemonicParsing="false" selected="true" text="Aktionäre">
+         <toggleGroup>
+            <ToggleGroup fx:id="tgGastAktionaer" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="tgGaeste" layoutX="929.0" layoutY="55.0" mnemonicParsing="false" text="Gäste" toggleGroup="$tgGastAktionaer" />
+      <TextArea fx:id="taErsterAktionaer" editable="false" layoutX="193.0" layoutY="368.0" prefHeight="83.0" prefWidth="774.0" />
+      <TextArea fx:id="taLetzterAktionaer" editable="false" layoutX="193.0" layoutY="460.0" prefHeight="83.0" prefWidth="774.0" />
+      <Label layoutX="26.0" layoutY="368.0" text="Erster Aktionär des Drucks" />
+      <Label layoutX="26.0" layoutY="460.0" text="Letzter Aktionär des Drucks" />
+      <Button fx:id="btnDrucklauf" layoutX="134.0" layoutY="83.0" mnemonicParsing="false" onAction="#onBtnDrucklauf" text="Drucklauf" />
+      <Label layoutX="1056.0" layoutY="21.0" text="Von EK:" />
+      <Label layoutX="1056.0" layoutY="55.0" text="Bis EK:" />
+      <TextField fx:id="tfVonEK" layoutX="1127.0" layoutY="17.0" />
+      <TextField fx:id="tfBisEK" layoutX="1127.0" layoutY="51.0" />
+      <RadioButton fx:id="rbGesamtPDF" layoutX="332.0" layoutY="309.0" mnemonicParsing="false" text="Gesamt-PDF">
+         <toggleGroup>
+            <ToggleGroup fx:id="tggDruckIn" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbEinzelPDF" layoutX="579.0" layoutY="309.0" mnemonicParsing="false" text="Einzel-PDF" toggleGroup="$tggDruckIn" />
+      <RadioButton fx:id="rbDirektDruck" layoutX="738.0" layoutY="308.0" mnemonicParsing="false" text="Direkt-Druck" toggleGroup="$tggDruckIn" />
+   </children>
+</Pane>

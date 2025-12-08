@@ -1,0 +1,167 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+    <section id="stream" class="mt-3">
+        <div class="container-fluid p-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-5">
+                        <h:panelGroup id="refreshBereich">
+                            <h:panelGroup rendered="#{tAuswahlSession.streamAktiv}">
+                                <!-- Stream ist gerade aktiv -->
+
+                                <!-- Stream läuft-Bereich -->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('801')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('801')}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{eclParamM.streamAnbieter==13}">
+                                    <!-- Allgemeiner Stream -->
+                                    <h:panelGroup rendered="#{tLanguage.lang==1}">
+                                        <iframe allowfullscreen="allowfullscreen"
+                                            webkitallowfullscreen="webkitallowfullscreen"
+                                            mozallowfullscreen="mozallowfullscreen" allow="autoplay"
+                                            src="#{tStreamSession.streamLink}" frameborder="0" scrolling="no">
+                                        </iframe>
+                                    </h:panelGroup>
+                                    <!-- Allgemein Stream -->
+                                    <h:panelGroup rendered="#{tLanguage.lang==2}">
+                                        <iframe allowfullscreen="allowfullscreen"
+                                            webkitallowfullscreen="webkitallowfullscreen"
+                                            mozallowfullscreen="mozallowfullscreen" allow="autoplay"
+                                            src="#{tStreamSession.streamID}" frameborder="0" scrolling="no">
+                                        </iframe>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+
+
+                                <h:panelGroup rendered="#{eclParamM.streamAnbieter==14}">
+                                    <!-- Stream14 -->
+                                    <h:panelGroup rendered="#{tLanguage.lang==1}">
+                                        <iframe src="#{tStreamSession.streamUrl}" allowfullscreen="allowfullscreen"
+                                            webkitallowfullscreen="webkitallowfullscreen"
+                                            mozallowfullscreen="mozallowfullscreen" allow="autoplay"></iframe>
+                                    </h:panelGroup>
+                                    <!-- Stream14 -->
+                                    <h:panelGroup rendered="#{tLanguage.lang==2}">
+                                        <iframe src="#{tStreamSession.streamUrl}" allowfullscreen="allowfullscreen"
+                                            webkitallowfullscreen="webkitallowfullscreen"
+                                            mozallowfullscreen="mozallowfullscreen" allow="autoplay"></iframe>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{eclParamM.streamAnbieter==2}">
+                                    <!-- Haus der Bay. Wirt. -->
+                                    <iframe allowfullscreen="allowfullscreen"
+                                        webkitallowfullscreen="webkitallowfullscreen"
+                                        mozallowfullscreen="mozallowfullscreen" allow="autoplay"
+                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                        src="#{tStreamSession.streamUrl}" frameborder="0" scrolling="no"> </iframe>
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{eclParamM.streamAnbieter==3}">
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{eclParamM.streamAnbieter==4}">
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{eclParamM.streamAnbieter==5}">
+                                    <!-- Velten, z.B. Drillisch -->
+                                    <h:panelGroup rendered="#{tLanguage.lang==1}">
+                                        <iframe src="#{tStreamSession.streamUrl}" allowfullscreen="allowfullscreen"
+                                            webkitallowfullscreen="webkitallowfullscreen"
+                                            mozallowfullscreen="mozallowfullscreen" allow="autoplay"></iframe>
+                                    </h:panelGroup>
+                                    <!-- Velten, z.B. Drillisch -->
+                                    <h:panelGroup rendered="#{tLanguage.lang==2}">
+                                        <iframe src="#{tStreamSession.streamUrl}" allowfullscreen="allowfullscreen"
+                                            webkitallowfullscreen="webkitallowfullscreen"
+                                            mozallowfullscreen="mozallowfullscreen" allow="autoplay"></iframe>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+
+
+                                <h:panelGroup rendered="#{eclParamM.streamAnbieter==6}">
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tStreamSession.streamAnbieter==7}">
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tStreamSession.streamAnbieter==8}">
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tStreamSession.streamAnbieter==9}">
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tStreamSession.streamAnbieter==10}">
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{tStreamSession.streamAnbieter==11}">
+                                </h:panelGroup>
+
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('803')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('803')}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </div>
+                    <div class="col-7 text-center">
+                        <!-- Überschrift -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('805')}" styleClass="row">
+                            <div class="col">
+                                <p class="fs-4">
+                                    <h:outputText value="#{eclPortalTexteM.holeText('805')}" escape="false">
+                                    </h:outputText>
+                                </p>
+                            </div>
+                        </h:panelGroup>
+
+                        <!-- Starttext -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('806')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('806')}" escape="false" />
+                                </p>
+                            </div>
+                        </h:panelGroup>
+
+                        <!-- Endetext -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1205')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1205')}" escape="false" />
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                        <div class="row mt-4">
+                            <div class="col">
+                                <h:commandLink action="#{tStream.stoppeStream}" escape="false"
+                                    styleClass="btn btn-secondary">
+                                    <!-- Rendered das Panel neu in dem der Stream angezeigt wird -->
+                                    <f:ajax render="kompletteSeite streamform"
+                                        onevent="function(data) {nachAjaxButton(data, false, false, null, null, false)}">
+                                    </f:ajax>
+                                    <i class="fa-solid fa-stop me-2"></i> #{eclPortalTexteM.holeText('1206')}
+                                </h:commandLink>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</ui:composition>

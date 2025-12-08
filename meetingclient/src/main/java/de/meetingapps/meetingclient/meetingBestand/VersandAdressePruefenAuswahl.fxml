@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="568.0" prefWidth="1244.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="25.0" layoutY="21.0" text="Selektionskriterien" />
+      <RadioButton fx:id="tgWegPortal" layoutX="25.0" layoutY="55.0" mnemonicParsing="false" selected="true" text="Nur über das Portal ausgestellte Eintrittskarten">
+         <toggleGroup>
+            <ToggleGroup fx:id="tggWeg" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="tgWegAlle" layoutX="25.0" layoutY="87.0" mnemonicParsing="false" text="Eintrittskarten aller Weg" toggleGroup="$tggWeg" />
+      <RadioButton fx:id="tgGeprueftNurUngeprueft" layoutX="343.0" layoutY="55.0" mnemonicParsing="false" selected="true" text="Nur die noch nicht geprüften">
+         <toggleGroup>
+            <ToggleGroup fx:id="tggGeprueft" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="tgGeprueftAlle" layoutX="343.0" layoutY="87.0" mnemonicParsing="false" text="Alle" toggleGroup="$tggGeprueft" />
+      <RadioButton fx:id="tgManuellNurManuell" layoutX="622.0" layoutY="55.0" mnemonicParsing="false" selected="true" text="Nur manuell eingegebene Versandadressen">
+         <toggleGroup>
+            <ToggleGroup fx:id="tggManuell" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="tgManuellAlle" layoutX="622.0" layoutY="87.0" mnemonicParsing="false" text="Alle" toggleGroup="$tggManuell" />
+      <Button fx:id="btnStarten" layoutX="25.0" layoutY="149.0" mnemonicParsing="false" onAction="#clickedStarten" prefHeight="83.0" prefWidth="267.0" text="Starten" />
+   </children>
+</Pane>

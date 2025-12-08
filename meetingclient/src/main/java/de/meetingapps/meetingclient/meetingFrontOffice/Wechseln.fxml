@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/17.0.9" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="tfWechseln" text="Modus wechseln">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+      <HBox alignment="TOP_CENTER" spacing="50.0">
+         <children>
+            <Button fx:id="btnJa" defaultButton="true" mnemonicParsing="false" onAction="#onBtnJa" prefHeight="60.0" prefWidth="154.0" text="Ja" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnNein" cancelButton="true" mnemonicParsing="false" onAction="#onBtnNein" prefHeight="60.0" prefWidth="154.0" text="Nein" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS" />
+      <Button fx:id="btnProbedruck" mnemonicParsing="false" onAction="#onBtnProbedruck" prefHeight="25.0" prefWidth="100.0" text="Probedruck" />
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="30.0" right="30.0" top="50.0" />
+   </padding>
+</VBox>

@@ -1,0 +1,63 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" lang="de">
+     <f:subview id="iZuordnungAufheben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <div class="container-80">
+        <div class="row">
+            <div class="col-3">
+                <h:outputLabel value="#{eclPortalTexteM.holeIText(2158)}" escape="false" />
+            </div>
+            <div class="col-5">
+                <h:outputLabel value="#{tZuordnungSession.kennung}" />
+            </div>
+            <div class="col-3">
+                <h:outputLabel value="#{eclPortalTexteM.holeIText(2159)}" escape="false" />
+            </div>
+            <div class="col-5">
+                <h:outputLabel value="#{tZuordnungSession.name}" />
+            </div>
+            <div class="col-3">
+                <h:outputLabel value="#{eclPortalTexteM.holeIText(2160)}" escape="false" />
+            </div>
+            <div class="col-5">
+                <h:outputLabel value="#{tZuordnungSession.ort}" />
+            </div>
+
+
+            <div class="col-8">
+            </div>
+
+
+            <!-- Endetext immer -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(2157)}">
+                <p>
+                    <h:outputText value="#{eclPortalTexteM.holeIText(2157)}" escape="false" />
+
+                </p>
+            </h:panelGroup>
+        </div>
+    </div>
+
+    <f:subview id="iZuordnungButtons">
+        <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+    </f:subview>
+
+
+</ui:composition>

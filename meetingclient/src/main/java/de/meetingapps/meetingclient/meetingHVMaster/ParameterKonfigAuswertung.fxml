@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity"
+    minHeight="-Infinity" minWidth="-Infinity" prefHeight="808.0"
+    prefWidth="1205.0" xmlns="http://javafx.com/javafx/16"
+    xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+
+        <TabPane layoutX="34.0" layoutY="25.0"
+            prefHeight="707.0" prefWidth="1150.0"
+            tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Auto-Drucker">
+                    <content>
+                        <Pane prefHeight="598.0" prefWidth="1150.0">
+                            <children>
+                        <ScrollPane fx:id="scrpnAutoDrucker"
+                            prefHeight="418.0" prefWidth="1111.0" />
+                                <Button fx:id="btnSpeichernAutoDrucker"
+                                    layoutX="23.0" layoutY="631.0"
+                                    mnemonicParsing="false"
+                                    onAction="#clickedSpeichernAutoDrucker"
+                                    text="Speichern / Beenden" />
+                            </children>
+                        </Pane>
+                    </content>
+                </Tab>
+                <Tab text="Auto-Druckausgabe">
+                    <content>
+                        <Pane prefHeight="598.0" prefWidth="1150.0">
+                            <children>
+                                <ScrollPane
+                                    fx:id="scrpnAutoDruckausgabe"
+                                    prefHeight="418.0"
+                                    prefWidth="1111.0" />
+                                <Button fx:id="btnSpeichernAutoDruckausgabe"
+                                    layoutX="23.0" layoutY="631.0"
+                                    mnemonicParsing="false"
+                                    onAction="#clickedSpeichernAutoDruckausgabe"
+                                    text="Speichern / Beenden" />
+                            </children>
+                        </Pane>
+                    </content>
+                </Tab>
+                <Tab text="Stapel-Auswertung">
+                    <content>
+                        <Pane prefHeight="598.0" prefWidth="1150.0">
+                            <children>
+                                <ScrollPane fx:id="scrPn"
+                                    prefHeight="598.0"
+                                    prefWidth="1150.0" />
+                                <Button fx:id="btnSpeichern"
+                                    layoutX="115.0" layoutY="631.0"
+                                    mnemonicParsing="false"
+                                    onAction="#clickedSpeichern"
+                                    text="Speichern / Beenden" />
+                                <Button fx:id="btnNeuerEintrag"
+                                    layoutX="428.0" layoutY="631.0"
+                                    mnemonicParsing="false"
+                                    onAction="#clickedNeuerEintrag"
+                                    prefHeight="25.0" prefWidth="103.0"
+                                    text="Neuer Eintrag" />
+                                <Button fx:id="btnRefresh"
+                                    layoutX="23.0" layoutY="631.0"
+                                    mnemonicParsing="false"
+                                    onAction="#clickedRefresh"
+                                    text="Refresh" />
+                            </children>
+                        </Pane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+
+    </children>
+</Pane>

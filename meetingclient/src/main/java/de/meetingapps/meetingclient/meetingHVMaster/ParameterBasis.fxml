@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/17.0.9" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane fx:id="tbPaneAnnzeige" layoutY="36.0" onMouseClicked="#onTpChanged" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="100.0" tabMaxWidth="200.0" tabMinWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tpModule" text="Module">
+               <tooltip>
+                  <Tooltip text="Schalten Sie in diesem Tab die einzelnen Module ein oder aus" />
+               </tooltip>
+               <content>
+                  <ScrollPane>
+                     <content>
+                        <GridPane prefHeight="467.0" prefWidth="757.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <CheckBox fx:id="cbAktionaersportal" mnemonicParsing="false" text="Aktionärsportal" />
+                              <CheckBox fx:id="cbEmittentenportal" mnemonicParsing="false" text="Emittentenportal" GridPane.rowIndex="4" />
+                              <CheckBox fx:id="cbRegisteranbindung" mnemonicParsing="false" text="Registeranbindung" GridPane.rowIndex="5" />
+                              <CheckBox fx:id="cbElektronischesTeilnehmerverzeichnis" mnemonicParsing="false" text="Elektronisches Teilnehmerverzeichnis" GridPane.rowIndex="6" />
+                              <CheckBox fx:id="cbElektronischeWeisungserfassungHV" mnemonicParsing="false" prefHeight="21.0" prefWidth="728.0" text="Elektronische Weisungserfassung HV (App, oder elektronisches Weisungsterminal auf HV)" GridPane.rowIndex="7" />
+                              <CheckBox fx:id="cbTabletAbstimmung" mnemonicParsing="false" text="Abstimmung mit Tablet" GridPane.rowIndex="9" />
+                              <CheckBox fx:id="cbHVApp" mnemonicParsing="false" text="HV App" GridPane.rowIndex="10" />
+                              <CheckBox fx:id="cbHVAppAbstimmung" mnemonicParsing="false" text="HV App Abstimmung" GridPane.rowIndex="11" />
+                              <CheckBox fx:id="cbElektronischerStimmblock" mnemonicParsing="false" text="HV App Elektronischer Stimmblock" GridPane.rowIndex="12" />
+                              <CheckBox fx:id="cbOnlineTeilnahme" mnemonicParsing="false" text="Online Teilnahme" GridPane.rowIndex="13" />
+                              <CheckBox fx:id="cbEnglischeAgenda" mnemonicParsing="false" text="Englische Agenda (für Abstimmungstexte, Portal/App/Selbstbedienung)" GridPane.rowIndex="3" />
+                              <CheckBox fx:id="cbBriefwahl" mnemonicParsing="false" text="Briefwahl" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="cbScannerAbstimmung" mnemonicParsing="false" text="Abstimmung mit Stapel-Scanner" GridPane.rowIndex="8" />
+                              <CheckBox fx:id="cbWeisungenExternesSystem" mnemonicParsing="false" text="Weisungsschnittstelle von externem System" GridPane.rowIndex="1" />
+                              <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="14">
+                                 <children>
+                                    <Label text="Art der Veranstaltung:">
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
+                                    </Label>
+                                    <RadioButton fx:id="rbHvForm0" mnemonicParsing="false" text="Sonstige">
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="tgHvForm" />
+                                       </toggleGroup>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rbHvForm1" mnemonicParsing="false" text="rein virtuelle Versammlung" toggleGroup="$tgHvForm">
+                                       <padding>
+                                          <Insets right="20.0" />
+                                       </padding>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rbHvForm2" mnemonicParsing="false" text="reine Präsenz-Versammlung" toggleGroup="$tgHvForm" />
+                                 </children>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+         <Tab fx:id="tpBasis" text="Basiseinstellungen">
+               <tooltip>
+                  <Tooltip text="Wählen Sie in diesem Tab grundlegende Einstellungen für den Programmablauf" />
+               </tooltip>
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <GridPane hgap="5.0" prefHeight="627.0" prefWidth="1112.0">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="359.0" minWidth="10.0" prefWidth="359.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="465.0" minWidth="10.0" prefWidth="253.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="465.0" minWidth="10.0" prefWidth="225.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="465.0" minWidth="10.0" prefWidth="225.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                    <RowConstraints />
+                                </rowConstraints>
+                                 <children>
+                                    <CheckBox fx:id="cbInhaberaktien" mnemonicParsing="false" text="Inhaberaktien aktiv" GridPane.rowIndex="1" />
+                                    <CheckBox fx:id="cbNamensaktien" mnemonicParsing="false" text="Namensaktien aktiv" GridPane.rowIndex="2" />
+                                    <CheckBox fx:id="cbGattung1" mnemonicParsing="false" text="Gattung 1 aktiv" GridPane.rowIndex="3" />
+                                    <TextField fx:id="tfGattung1" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="tfGattung1kurz" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                    <CheckBox fx:id="cbGattung2" mnemonicParsing="false" text="Gattung 2 aktiv" GridPane.rowIndex="4" />
+                                    <TextField fx:id="tfGattung2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="tfGattung2kurz" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                    <CheckBox fx:id="cbGattung3" mnemonicParsing="false" text="Gattung 3 aktiv " GridPane.rowIndex="5" />
+                                    <TextField fx:id="tfGattung3" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <TextField fx:id="tfGattung3kurz" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                    <CheckBox fx:id="cbGattung4" mnemonicParsing="false" text="Gattung 4 aktiv" GridPane.rowIndex="6" />
+                                    <TextField fx:id="tfGattung4" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <TextField fx:id="tfGattung4kurz" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                    <CheckBox fx:id="cbGattung5" mnemonicParsing="false" text="Gattung 5 aktiv" GridPane.rowIndex="7" />
+                                    <TextField fx:id="tfGattung5" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <TextField fx:id="tfGattung5kurz" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                    <Label text="Bezeichnung Gattung" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Kurzbezeichnung Gattung (max. 3 Stellen)" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Länge Aktionärsnummer (nur Namensaktien)" GridPane.rowIndex="8" />
+                                    <TextField fx:id="tfLaengeAktionaersnummer" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                    <Label text="Investoren sind" />
+                                    <TextField fx:id="tfInvestorenSind" prefHeight="25.0" prefWidth="283.0" GridPane.columnIndex="1" />
+                                    <Label text="1=Aktionäre, 2=Mitglieder" GridPane.columnIndex="2" />
+                                    <Label text="Eintrittskarten Anmeldestelle - Anzahl Seiten" GridPane.rowIndex="10" />
+                                    <TextField fx:id="tfEkSeitenzahl" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                    <Label text="0=undefiniert, 1=1 Seite, 2=2 Seiten" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="10" />
+                                    <Label text="Aktionärsnummer ohne führende 0" GridPane.rowIndex="9" />
+                                    <Label text="0=mit führende 0, 1=ohne führende 0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                    <TextField fx:id="tfOhneNullAktionaersnummer" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <Label text="Eindeutige HV-Kennung (SRD II)" GridPane.rowIndex="12" />
+                                    <Label text="maximal 12 Stellen" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                                    <TextField fx:id="tfEindeutigeHVKennung" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                    <Label text="Mandantenstatus" GridPane.rowIndex="13" />
+                                    <TextField fx:id="tfDatenbestandIstProduktiv" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                    <Label text="Bezeichnung Gattung Englisch" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="tfGattung1EN" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <TextField fx:id="tfGattung2EN" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <TextField fx:id="tfGattung3EN" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                    <TextField fx:id="tfGattung4EN" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                    <TextField fx:id="tfGattung5EN" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                    <Button fx:id="btnTBVollerTeststatus" mnemonicParsing="false" onAction="#clickedTBVollerTeststatus" text="Vollen Test-Status aktivieren" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+                                    <Button fx:id="btnTBVollerProduktivstatus" mnemonicParsing="false" onAction="#clickedTBVollerProduktivstatus" text="Vollen Produktionsstatus aktivieren" GridPane.columnIndex="3" GridPane.rowIndex="13" />
+                                    <Label fx:id="lblVollerTeststatusAktiv" text="Voller Test-Status ist aktiv" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                                    <Label fx:id="lblVollerProduktivstatusAktiv" text="Voller Produktiv-Status ist aktiv" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                                    <CheckBox fx:id="cbTPDatenbestandProduktiv" mnemonicParsing="false" text="Datenbestand ist produktiv (1)" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="14" />
+                                    <CheckBox fx:id="cbTPVorbereitungGesperrt" mnemonicParsing="false" text="Datenvorbereitung ist gesperrt (2)" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="15" />
+                                    <CheckBox fx:id="cbTPMusterFormulareAusgeblendet" mnemonicParsing="false" text="Muster auf Formularen ist ausgeblendet (4)" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="16" />
+                                    <CheckBox fx:id="cbTPMusterPortalStartSeitenAusgeblendet" mnemonicParsing="false" text="Muster auf Portal-Startseiten ist ausgeblendet (8)" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="17" />
+                                    <CheckBox fx:id="cbTPMusterPortalInnenAusgeblendet" mnemonicParsing="false" text="Muster auf inneren Portal-Seiten ist ausgeblendet (16)" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="18" />
+                                    <CheckBox fx:id="cbTPPasswortVergessenSchreibenDrucken" mnemonicParsing="false" text="Passwort-Vergessen-Schreiben werden gedruckt (32)" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="19" />
+                                    <Label text="Berechtigungs-Profil-Klasse" GridPane.rowIndex="20" />
+                                    <TextField fx:id="tfProfileKlasse" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+                                    <Label text="Leeres Feld=Standard" GridPane.columnIndex="2" GridPane.rowIndex="20" />
+                                    <Label text="Formularhandhabung bei EK-Druck" GridPane.rowIndex="11" />
+                                    <TextField fx:id="tfEkFormularGetrenntJeVersandweg" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                    <Label text="0=ein Formular für Mail, Selbstdruck, Batchdruck, 1= getrennte Formulare" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="11" />
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </GridPane>
+                           </content></ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="btnSpeichern" layoutX="29.0" layoutY="761.0" mnemonicParsing="false" onAction="#clickedSpeichern" prefWidth="140.0" text="Speichern / Beenden" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <Label fx:id="lblFehlermeldung" contentDisplay="CENTER" layoutX="198.0" layoutY="765.0" prefHeight="25.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="170.0" />
+   </children>
+</AnchorPane>

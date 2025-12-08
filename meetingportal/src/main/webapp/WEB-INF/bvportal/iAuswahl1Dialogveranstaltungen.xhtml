@@ -1,0 +1,175 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:p="http://primefaces.org/ui"
+        lang="de">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <ui:composition>
+
+        <f:subview id="iAuswahl1DialogveranstaltungenOben">
+            <ui:include src="idetail/idSeiteStart.xhtml" />
+        </f:subview>
+
+        <div class="container-80">
+
+            <h:panelGroup rendered="#{!tAuswahl1Session.dialogveranstaltungenAktiv}">
+                <!-- Noch nicht möglich -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('677')}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('677')}" escape="false"></h:outputText>
+                    </p>
+                </h:panelGroup>
+            </h:panelGroup>
+
+
+            <h:panelGroup rendered="#{tAuswahl1Session.dialogveranstaltungenAktiv}">
+                <!-- möglich -->
+                <h:panelGroup rendered="#{(!tDialogveranstaltungenSession.istAngemeldet) and (!tDialogveranstaltungenSession.istAbgemeldet)}">
+                    <!-- Aktionär noch nicht zu einer Dialogveranstaltung an- oder abgemeldet -->
+
+                    <!-- Starttext -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('678')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('678')}" escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+
+                    <!-- Button -->
+                    <p>
+                        <h:commandButton value="#{eclPortalTexteM.holeText('679')}" action="#{tDialogveranstaltungen.doAnmelden()}" styleClass="btn-typ-00">
+                            <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </p>
+
+                    <!-- Endetext -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('680')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('680')}" escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tDialogveranstaltungenSession.istAngemeldet or tDialogveranstaltungenSession.istAbgemeldet}">
+                    <!-- Aktionär ist angemeldet zu einer Dialogveranstaltung angemeldet -->
+
+                    <!-- Starttext mit Personenzahl-->
+                    <h:panelGroup rendered="#{tDialogveranstaltungenSession.istAngemeldet}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('694')}" escape="false"></h:outputText>
+                            <h:outputText value="#{eclPortalTexteM.holeText('698')}" escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{tDialogveranstaltungenSession.istAbgemeldet}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1729')}" escape="false"></h:outputText>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1730')}" escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+
+                    <!-- Angemeldet zu dieser Veranstaltung -->
+                    <h:panelGroup rendered="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.detailsAnzeigen()}">
+                        <p>
+                            <h:panelGrid columns="2">
+                                <h:outputText value="#{eclPortalTexteM.holeText('685')}" escape="false"></h:outputText>
+                                <h:outputText value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text1}" escape="false"></h:outputText>
+                                <h:outputText value="#{eclPortalTexteM.holeText('686')}" escape="false"></h:outputText>
+                                <h:outputText value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text2}" escape="false"></h:outputText>
+                                <h:outputText value="#{eclPortalTexteM.holeText('687')}" escape="false"></h:outputText>
+                                <h:outputText value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text3}" escape="false"></h:outputText>
+                                <h:outputText value="#{eclPortalTexteM.holeText('688')}" escape="false"></h:outputText>
+                                <h:outputText value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text4}" escape="false"></h:outputText>
+                                <h:outputText value="#{eclPortalTexteM.holeText('689')}" escape="false"></h:outputText>
+                                <h:outputText value="#{tDialogveranstaltungenSession.zurVeranstaltungAngemeldet.text5}" escape="false"></h:outputText>
+                            </h:panelGrid>
+                        </p>
+                    </h:panelGroup>
+
+
+                    <!-- Ticket drucken -->
+                    <h:panelGroup rendered="#{tRender.veranstaltungTicketErzeugen()}">
+
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2098')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('2098')}" escape="false"></h:outputText>
+                            </p>
+                        </h:panelGroup>
+
+                        <!-- Button -->
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText('2099')}" action="#{tDialogveranstaltungen.doEKAnzeigen()}"  onclick="this.form.target='_blank'" styleClass="btn-typ-00">
+                            </h:commandButton>
+                        </p>
+
+                        <!-- Endetext -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2100')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('2100')}" escape="false"></h:outputText>
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+
+                    <!-- Stornieren -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('695')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('695')}" escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+
+                    <!-- Button -->
+                    <p>
+                        <h:commandButton value="#{eclPortalTexteM.holeText('697')}" action="#{tDialogveranstaltungen.doStornieren()}" styleClass="btn-typ-00">
+                            <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </p>
+
+                    <!-- Endetext -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('696')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('696')}" escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+
+        </div>
+
+        <!-- Buttons -->
+        <f:subview id="iAuswahl1DialogveranstaltungenButtons">
+            <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+        </f:subview>
+
+
+    </ui:composition>
+</body>
+
+</html>

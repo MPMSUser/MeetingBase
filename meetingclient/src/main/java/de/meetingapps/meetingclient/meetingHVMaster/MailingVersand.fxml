@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane fx:id="rootPane" minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="box" alignment="TOP_CENTER" layoutX="15.0" layoutY="7.0" prefWidth="250.0" spacing="2.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="21.0">
+         <children>
+            <Label text="Versandnummer" />
+            <TextField fx:id="tfVersandnummer" alignment="CENTER" focusTraversable="false" promptText="Versandnummer" text="1">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Vorlage" />
+            <ComboBox fx:id="cbVorlage" maxWidth="1.7976931348623157E308">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </ComboBox>
+            <Label text="Versandliste" />
+            <ComboBox fx:id="cbVersandliste" maxWidth="1.7976931348623157E308">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </ComboBox>
+            <Button fx:id="btnAnhang" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Anhänge" />
+         </children>
+      </VBox>
+      <SplitPane fx:id="splitPane" dividerPositions="0.0" style="-fx-border-style: solid; -fx-border-color: f4f4f4;" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+        <items>
+          <AnchorPane fx:id="paneVorschau" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" visible="false">
+               <children>
+                  <HBox spacing="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="10.0">
+                     <children>
+                        <Label prefHeight="25.0" text="Betreff:" />
+                        <TextField fx:id="tfBetreff" editable="false" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="btnAusblenden" mnemonicParsing="false" text="Ausblenden" />
+                     </children>
+                  </HBox>
+                  <WebView fx:id="webView" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="55.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TableView fx:id="tableView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <StackPane fx:id="reloadPane" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="280.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Button fx:id="btnLadeListe" mnemonicParsing="false" prefHeight="45.0" text="Lade Versandliste" />
+         </children>
+      </StackPane>
+      <Button fx:id="btnSenden" layoutX="17.0" layoutY="449.0" mnemonicParsing="false" prefWidth="250.0" text="Senden" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <HBox spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="294.0" AnchorPane.rightAnchor="15.0">
+         <children>
+            <CheckBox fx:id="checkTestmodus" mnemonicParsing="false" prefHeight="25.0" text="Testversand" />
+            <TextField fx:id="tfTestAdressen" onKeyPressed="#onKeyAdressen" promptText="E-Mailadressen;" visible="false" HBox.hgrow="ALWAYS" />
+            <Label fx:id="lblAnzahl" alignment="CENTER_RIGHT" prefHeight="25.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

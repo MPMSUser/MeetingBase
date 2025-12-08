@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btnSchliessen" layoutX="92.0" layoutY="346.0" mnemonicParsing="false" onAction="#clickedBtnSchliessen" prefHeight="25.0" prefWidth="129.0" text="SchlieÃŸen" />
+      <Label layoutX="96.0" layoutY="140.0" text="ListenNummer" />
+      <Label fx:id="lblMeldung" layoutX="95.0" layoutY="388.0" prefHeight="17.0" prefWidth="369.0" text="Label" />
+      <TextField fx:id="tfFormularNormaluebersicht" layoutX="249.0" layoutY="136.0" />
+      <Button fx:id="btnJurzUebersicht" layoutX="92.0" layoutY="37.0" mnemonicParsing="false" onAction="#clickedBtnKurzUebersicht" text="Kurzübersicht" />
+      <Button fx:id="btnNormalUebersicht" layoutX="96.0" layoutY="111.0" mnemonicParsing="false" onAction="#clickedBtnNormalUebersicht" text="Normalübersicht" />
+      <Label layoutX="94.0" layoutY="66.0" text="Formular Nummer" />
+      <TextField fx:id="tfFormularKurzuebersicht" layoutX="247.0" layoutY="62.0" />
+      <Label layoutX="96.0" layoutY="220.0" text="ListenNummer" />
+      <TextField fx:id="tfFormularWeisungssummen" layoutX="249.0" layoutY="216.0" />
+      <Button fx:id="btnWeisungssummen" layoutX="96.0" layoutY="191.0" mnemonicParsing="false" onAction="#clickedBtnWeisungssummen" text="Weisungssummen" />
+      <Label layoutX="96.0" layoutY="295.0" text="VertreterIdent" />
+      <TextField fx:id="tfVertreterIdent" layoutX="249.0" layoutY="291.0" />
+   </children>
+</Pane>

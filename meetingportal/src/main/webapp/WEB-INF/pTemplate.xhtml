@@ -1,0 +1,201 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    xmlns:f="jakarta.faces.core" lang="de">
+<h:head>
+    <title>Internetservice zur Versammlung</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <meta name="msapplication-TileColor" content="#{eclParamM.kachelFarbe}" />
+    <meta name="theme-color" content="#{eclParamM.themeFarbe}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="#{resource['std:icons/favicon-32x32.png']}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="#{resource['std:icons/favicon-16x16.png']}" />
+    <h:outputScript library="std" name="js/custom.js?v=1.0.1" />
+</h:head>
+<f:view>
+    <ui:insert name="metadata">
+        <f:metadata>
+            <!-- Achtung - die folgende Reihenfolge ist zwingend, sonst funktioniert die
+        "Aktivierungsprozedur" bei Portalstart nicht richtig -->
+            <f:viewParam name="zeit" value="#{tSessionVerwaltung.zeit}" />
+            <f:viewParam name="hvjahr" value="#{tSessionVerwaltung.hvjahr}" />
+            <f:viewParam name="hvnummer" value="#{tSessionVerwaltung.hvnummer}" />
+            <f:viewParam name="datenbereich" value="#{tSessionVerwaltung.datenbereich}" />
+            <f:viewParam name="mandant" value="#{tSessionVerwaltung.mandant}" />
+            <f:viewParam name="sprache" value="#{tLanguage.sprache}" />
+            <f:viewParam name="test" value="#{tSessionVerwaltung.test}" />
+            <f:viewParam name="nummer" value="#{tLoginLogoutSession.loginKennung}" />
+            <f:viewParam name="p" value="#{tLoginLogoutSession.loginPasswort}" />
+            <f:viewParam name="la" value="#{tSessionVerwaltung.linkArt}" />
+            <f:viewParam name="bestaetigungscode" value="#{tSessionVerwaltung.bestaetigungsCode}" />
+        </f:metadata>
+    </ui:insert>
+    <!-- === Style Einstellungen === -->
+    <f:subview id="idStyleEinstellungen">
+        <ui:include src="/WEB-INF/stdportal/idetail/idStyleEinstellungen.xhtml" />
+    </f:subview>
+
+
+    <h:body>
+        <div id="wrapper">
+            <div id="inhalt">
+                <h:form id="headerform">
+                    <header id="header-bereich" class="container-full">
+                        <div class="row">
+                            <div class="col-1_3">
+                                <!-- Als value wird nur ein Dummy angegeben. Welches Logo tatsächlich angezeigt wird,
+                            wird in der Bean TImageServlet.java über Parameter gesteuert bzw. aus Datei ausgelesen-->
+                                <h:graphicImage value="/images/dummy.png" width="#{eclParamM.logoBreite}"
+                                    styleClass="logoHeader" alt="Logo" />
+                                <!-- Muster für Direkteinbindung eines Logos aus dem Eclipse-Projekt:
+                            <h:graphicImage library="std"
+                                name="images/logos/#{eclParamM.logoName}"
+                                height="#{eclParamM.logoHoehe}" width="#{eclParamM.logoBreite}" />
+                                -->
+                            </div>
+                            <div class="col-1_3">
+                            </div>
+                            <div class="col-1_3">
+                            </div>
+                            <!-- Aktionärsdaten werden nur angezeigt, wenn Login erfolgreich ist -->
+                            <div class="row">
+                                <div class="col-1_3">
+                                </div>
+                                <div class="col-1_3">
+                                </div>
+                                <div class="col-1_3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                        </div>
+                    </header>
+
+                </h:form>
+
+                <div id="content">
+                    <ui:insert name="content">
+                        [Template content will be inserted here]
+                    </ui:insert>
+                </div>
+
+            </div>
+            <footer id="footer-bereich">
+                <div class="container-full">
+                    <div class="footer-top">
+                        <div class="row">
+                            <div class="col-1_3">
+                                <!-- Nutzungshinweise / Datenschutzhinweise zusammen -->
+                                <h:panelGroup rendered="#{!eclParamM.separateDatenschutzhinweise}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('200')}">
+                                        <p>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeText('200')}" escape="false" />
+                                        </p>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+
+                                <!--Nutzungshinweise und Datenschutzhinweise getrennt -->
+                                <h:panelGroup rendered="#{eclParamM.separateDatenschutzhinweise}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('729')}">
+                                        <p>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeText('729')}" escape="false">
+                                            </h:outputLabel>
+                                        </p>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{eclParamM.separateDatenschutzhinweise}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('730')}">
+                                        <p>
+                                            <h:outputLabel value=" #{eclPortalTexteM.holeText('730')}" escape="false">
+                                            </h:outputLabel>
+                                        </p>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </div>
+
+                            <div class="col-1_3">
+                                <!-- Hilfe/Kontakt -->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('202')}">
+                                    <p>
+                                        <h:outputLabel value=" #{eclPortalTexteM.holeText('202')}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+                            </div>
+
+                            <div class="col-1_3">
+                                <!-- Impressum -->
+                                <h:panelGroup rendered="#{eclParamM.impressum}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('556')}">
+                                        <p>
+                                            <h:outputLabel value=" #{eclPortalTexteM.holeText('556')}" escape="false" />
+                                        </p>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <h:panelGroup rendered="#{tSession.testModus=='1' or tSession.testModus=='2'}">
+                                <div class="col-2">
+                                    <h:commandButton value="----Texte Refresh----"
+                                        action="#{tAllgemein.doRefreshTexte()}" styleClass="btn-typ-test">
+                                        <f:ajax execute="@all" render="headerform inhaltsform footerform streamform"
+                                            onevent="nach_test_btn" />
+                                    </h:commandButton>
+                                </div>
+                                <div class="col-2">
+                                    <h:commandButton value="----Nummern ein----" action="#{tAllgemein.doNummernEin()}"
+                                        styleClass="btn-typ-test">
+                                        <f:ajax execute="@all" render="headerform inhaltsform footerform streamform"
+                                            onevent="nach_test_btn" />
+                                    </h:commandButton>
+                                </div>
+                                <div class="col-2">
+                                    <h:commandButton value="----Nummern aus----" action="#{tAllgemein.doNummernAus()}"
+                                        styleClass="btn-typ-test">
+                                        <f:ajax execute="@all" render="headerform inhaltsform footerform streamform"
+                                            onevent="nach_test_btn" />
+                                    </h:commandButton>
+                                </div>
+                                <div class="col-2">
+                                </div>
+                            </h:panelGroup>
+                        </div>
+
+                    </div>
+                    <div class="footer-bottom">
+                        <div class="row">
+                            <div class="col-8">
+                                <p id="copyright">
+                                    <h:outputLabel value=" #{eclPortalTexteM.holeText('203')}" escape="false" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <script>
+            setStickyFooter();
+            setJahr();
+            window.addEventListener('resize', setStickyFooter);
+        </script>
+    </h:body>
+</f:view>
+
+</html>

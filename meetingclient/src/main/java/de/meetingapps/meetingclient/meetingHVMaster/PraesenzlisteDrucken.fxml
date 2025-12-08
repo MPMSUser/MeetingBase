@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutX="66.0" layoutY="310.0" stroke="BLACK" strokeType="INSIDE" width="639.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="164.0" layoutX="66.0" layoutY="138.0" stroke="BLACK" strokeType="INSIDE" width="639.0" />
+      <Button fx:id="btnPraesenzDrucken" layoutX="75.0" layoutY="467.0" mnemonicParsing="false" onAction="#clickedBtnPraesenzDrucken" text="Präsenz Drucken">
+         <font>
+            <Font size="12.0" />
+         </font></Button>
+      <Button fx:id="btnAbbrechen" layoutX="302.0" layoutY="467.0" mnemonicParsing="false" onAction="#clickedBtnAbbrechen" prefHeight="25.0" prefWidth="129.0" text="Abbrechen">
+         <font>
+            <Font size="12.0" />
+         </font></Button>
+      <Label fx:id="lblPraesenzNrDrucken" layoutX="94.0" layoutY="105.0" text="Präsenz Drucken">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label fx:id="lblMeldung" layoutX="72.0" layoutY="504.0" prefHeight="77.0" prefWidth="681.0" text="Label" textFill="#f50000" wrapText="true">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="94.0" layoutY="35.0" text="Nächste Präsenz:">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label fx:id="lblAktuellePraesenz" layoutX="306.0" layoutY="35.0" prefHeight="17.0" prefWidth="91.0" text="Label" />
+      <Label layoutX="313.0" layoutY="151.0" text="Format">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfFormatNummer" layoutX="367.0" layoutY="147.0" />
+      <Label layoutX="313.0" layoutY="323.0" text="Format">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfFormatNummerZusammenstellung" layoutX="367.0" layoutY="319.0" />
+      <RadioButton fx:id="rbSortName" layoutX="88.0" layoutY="229.0" mnemonicParsing="false" selected="true" text="Sort Name">
+         <toggleGroup>
+            <ToggleGroup fx:id="tglSortierung" />
+         </toggleGroup>
+         <font>
+            <Font size="12.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="rbSortEK" layoutX="198.0" layoutY="229.0" mnemonicParsing="false" text="Sort EK" toggleGroup="$tglSortierung">
+         <font>
+            <Font size="12.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="rbSortSK" layoutX="306.0" layoutY="229.0" mnemonicParsing="false" text="Sort SK" toggleGroup="$tglSortierung">
+         <font>
+            <Font size="12.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="rbSortAktien" layoutX="411.0" layoutY="229.0" mnemonicParsing="false" text="Aktien aufsteigend" toggleGroup="$tglSortierung">
+         <font>
+            <Font size="12.0" />
+         </font></RadioButton>
+      <HBox layoutX="88.0" layoutY="262.0" prefHeight="37.0" prefWidth="653.0" spacing="10.0">
+         <children>
+            <Label text="Gattung">
+               <font>
+                  <Font size="12.0" />
+               </font></Label>
+            <RadioButton fx:id="rbGAlle" mnemonicParsing="false" selected="true" text="Alle">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tgGattung" />
+               </toggleGroup>
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </RadioButton>
+            <RadioButton fx:id="rbG1" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgGattung">
+               <font>
+                  <Font size="12.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbG2" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgGattung">
+               <font>
+                  <Font size="12.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbG3" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgGattung">
+               <font>
+                  <Font size="12.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbG4" mnemonicParsing="false" text="RadioButton" toggleGroup="$tgGattung">
+               <font>
+                  <Font size="12.0" />
+               </font></RadioButton>
+            <RadioButton fx:id="rbG5" mnemonicParsing="false" text="RadioButton">
+               <font>
+                  <Font size="12.0" />
+               </font></RadioButton>
+         </children>
+      </HBox>
+      <Label layoutX="94.0" layoutY="66.0" text="Letzte festgestellte Präsenz:">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label fx:id="lblLetzteFeststellung" layoutX="306.0" layoutY="66.0" prefHeight="17.0" prefWidth="91.0" text="Label" />
+      <ComboBox fx:id="cbPraesenzNrDrucken" layoutX="304.0" layoutY="101.0" prefHeight="25.0" prefWidth="369.0" />
+      <CheckBox fx:id="cbListeDrucken" layoutX="91.0" layoutY="151.0" mnemonicParsing="false" selected="true" text="Liste drucken (phys.Präsenz)">
+         <font>
+            <Font size="12.0" />
+         </font></CheckBox>
+      <CheckBox fx:id="cbZusammenfassungDrucken" layoutX="91.0" layoutY="323.0" mnemonicParsing="false" selected="true" text="Zusammenfassung drucken">
+         <font>
+            <Font size="12.0" />
+         </font></CheckBox>
+      <Label layoutX="568.0" layoutY="151.0" text="(Leer = wie Parameter)">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <Label layoutX="567.0" layoutY="323.0" text="(Leer = wie Parameter)">
+         <font>
+            <Font size="12.0" />
+         </font></Label>
+      <RadioButton fx:id="rbDruckWieEingaben" layoutX="83.0" layoutY="373.0" mnemonicParsing="false" selected="true" text="Druck gemäß obigen Eingaben">
+         <toggleGroup>
+            <ToggleGroup fx:id="tgDrucken" />
+         </toggleGroup>
+         <font>
+            <Font size="12.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="rbPDFfuerGewaehlteListe" layoutX="371.0" layoutY="373.0" mnemonicParsing="false" text="PDF für gewählte Präsenz wie Parameter" toggleGroup="$tgDrucken">
+         <font>
+            <Font size="12.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="rbDrucklaufFuerListe" layoutX="83.0" layoutY="429.0" mnemonicParsing="false" text="Auswertungslauf für gewählte Präsenz" toggleGroup="$tgDrucken">
+         <font>
+            <Font size="12.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="rbPDFFuerAlleListen" layoutX="371.0" layoutY="404.0" mnemonicParsing="false" text="PDF für alle Präsenzen wie Parameter" toggleGroup="$tgDrucken">
+         <font>
+            <Font size="12.0" />
+         </font></RadioButton>
+      <ComboBox fx:id="cbAuswertungslauf" layoutX="340.0" layoutY="425.0" prefHeight="25.0" prefWidth="369.0" />
+      <Label layoutX="314.0" layoutY="192.0" text="Format">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfFormatNummerVirtuell" layoutX="368.0" layoutY="188.0" />
+      <CheckBox fx:id="cbListeDruckenVirtuell" layoutX="92.0" layoutY="192.0" mnemonicParsing="false" selected="true" text="Liste drucken (virt. HV)">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </CheckBox>
+      <Label layoutX="569.0" layoutY="192.0" text="(Leer = wie Parameter)">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="720.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+               <children>
+      <GridPane fx:id="gridMeldung" hgap="15.0" layoutX="15.0" layoutY="14.0" prefWidth="820.0" vgap="2.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="14.0">
+         <columnConstraints>
+            <ColumnConstraints minWidth="30.0" prefWidth="90.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="90.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="70.0" />
+            <ColumnConstraints minWidth="30.0" prefWidth="70.0" />
+            <ColumnConstraints minWidth="30.0" prefWidth="90.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="70.0" />
+            <ColumnConstraints minWidth="20.0" prefWidth="20.0" />
+            <ColumnConstraints minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="182.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints percentHeight="5.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+            <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+         </rowConstraints>
+         <children>
+            <Label fx:id="lblManuelleNr" alignment="CENTER" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="5">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblAnr" text="Aktionärsnr. *" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfAnr" alignment="CENTER" promptText="Wird automatisch vergeben" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1" />
+            <Button alignment="TOP_LEFT" focusTraversable="false" layoutX="553.0" layoutY="356.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <graphic>
+                  <CheckBox fx:id="checkManuelleNr" mnemonicParsing="false" text="Manueller Nummernkreis">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </graphic>
+            </Button>
+            <Label text="Anrede" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <ComboBox fx:id="cbAnrede" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Label fx:id="lblTitel" text="Titel" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="tfTitel" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Label fx:id="lblNachname" text="Nachname *" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="tfNachname" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="3" />
+            <Label fx:id="lblVorname" text="Vorname" GridPane.columnSpan="2" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="tfVorname" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="4" />
+            <Label fx:id="lblName3" layoutX="10.0" layoutY="207.0" text="Name 3" visible="false" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfName3" layoutX="108.0" layoutY="203.0" visible="false" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="5" />
+            <Label text="Adresszusatz" GridPane.columnSpan="2" GridPane.rowIndex="6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="tfAdresszusatz" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="6" />
+            <Label text="Straße" GridPane.columnSpan="2" GridPane.rowIndex="7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="tfStrasse" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+            <Label text="PLZ" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="tfPlz" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+            <Label layoutX="10.0" layoutY="341.0" text="Postfach" GridPane.columnSpan="2" GridPane.rowIndex="8">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfPostfach" layoutX="10.0" layoutY="360.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+            <Label layoutX="144.0" layoutY="341.0" text="PLZ - Postfach" GridPane.columnIndex="4" GridPane.rowIndex="8">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfPlzPostfach" layoutX="144.0" layoutY="360.0" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+            <Label fx:id="lblOrt" text="Ort *" GridPane.columnSpan="2" GridPane.rowIndex="9">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="tfOrt" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="9" />
+            <Label text="Land" GridPane.columnSpan="2" GridPane.rowIndex="10">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <ComboBox fx:id="cbLand" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="10" />
+            <Label fx:id="lblAktien" text="Aktien *" GridPane.columnIndex="7" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="tfAktien" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+            <Label fx:id="lblBesitz" text="Besitzmerkmal *" GridPane.columnIndex="7" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <ComboBox fx:id="cbBesitz" maxWidth="1.7976931348623157E308" GridPane.columnIndex="8" GridPane.rowIndex="3" />
+            <Label text="ISIN / WKN" GridPane.columnIndex="7" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <ComboBox fx:id="cbIsin" maxWidth="1.7976931348623157E308" GridPane.columnIndex="8" GridPane.rowIndex="4" />
+            <Label fx:id="lblGattung" text="Gattung *" GridPane.columnIndex="7" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <ComboBox fx:id="cbGattung" maxWidth="1.7976931348623157E308" GridPane.columnIndex="8" GridPane.rowIndex="5" />
+            <Label text="Gruppe" GridPane.columnIndex="7" GridPane.rowIndex="6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <TextField fx:id="tfGruppe" GridPane.columnIndex="8" GridPane.rowIndex="6" />
+            <Button alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="7">
+               <graphic>
+                  <CheckBox fx:id="checkVersandadresse" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Abweichende Versandadresse">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </CheckBox>
+               </graphic>
+            </Button>
+            <VBox alignment="CENTER_LEFT" spacing="10.0" GridPane.columnIndex="7" GridPane.columnSpan="2" GridPane.rowIndex="8" GridPane.rowSpan="2">
+               <children>
+                  <Button alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;">
+                     <graphic>
+                        <CheckBox fx:id="checkJurPerson" mnemonicParsing="false" text="juristische Person                ">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                     </graphic>
+                  </Button>
+                  <Button alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;">
+                     <graphic>
+                        <CheckBox fx:id="checkPersonengemeinschaft" mnemonicParsing="false" text="Personengemeinschaft">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </CheckBox>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+            <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onMailversand" text="Informationen Mailversand" GridPane.columnIndex="8" GridPane.rowIndex="10" />
+         </children>
+      </GridPane>
+      <Accordion fx:id="accordion" layoutX="874.0" layoutY="7.0" AnchorPane.bottomAnchor="130.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <panes>
+            <TitledPane contentDisplay="RIGHT" graphicTextGap="5.0" text="Anschrift">
+               <content>
+                  <GridPane vgap="2.0">
+                     <columnConstraints>
+                        <ColumnConstraints minWidth="10.0" prefWidth="90.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="35.0" prefHeight="35.0" valignment="CENTER" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" valignment="CENTER" vgrow="ALWAYS" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Adresszeile 1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfAdresse1" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Adresszeile 2" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfAdresse2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Adresszeile 3" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfAdresse3" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Adresszeile 4" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfAdresse4" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Adresszeile 5" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfAdresse5" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label text="Adresszeile 6" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfAdresse6" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Button alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" GridPane.columnIndex="1">
+                           <graphic>
+                              <CheckBox fx:id="checkAdresse" mnemonicParsing="false" text="Manuell anpassen">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </CheckBox>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </GridPane>
+               </content>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </TitledPane>
+            <TitledPane contentDisplay="RIGHT" expanded="false" graphicTextGap="5.0" text="Versandadresse">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <content>
+                  <GridPane fx:id="gridVersand" hgap="10.0" vgap="2.0">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="30.0" prefWidth="90.0" />
+                      <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="90.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="70.0" />
+                        <ColumnConstraints minWidth="30.0" prefWidth="70.0" />
+                      <ColumnConstraints minWidth="30.0" prefWidth="90.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="60.0" prefWidth="70.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints percentHeight="5.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                        <RowConstraints maxHeight="80.0" valignment="CENTER" vgrow="ALWAYS" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Anrede" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cbAnredeVersand" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                        <Label fx:id="lblTitelVersand" text="Titel" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="10.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <TextField fx:id="tfTitelVersand" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                        <Label fx:id="lblNachnameVersand" text="Nachname *" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfNachnameVersand" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="2" />
+                        <Label fx:id="lblVornameVersand" text="Vorname" GridPane.columnSpan="3" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfVornameVersand" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="3" />
+                        <Label fx:id="lblName3Versand" text="Name 3" visible="false" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfName3Versand" visible="false" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="4" />
+                        <Label text="Adresszusatz" GridPane.columnSpan="3" GridPane.rowIndex="5">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfAdresszusatzVersand" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="5" />
+                        <Label text="Straße" GridPane.columnSpan="2" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfStrasseVersand" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+                        <Label text="PLZ" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfPlzVersand" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                        <Label text="Postfach" GridPane.columnSpan="2" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfPostfachVersand" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+                        <Label text="PLZ - Postfach" GridPane.columnIndex="4" GridPane.rowIndex="7">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfPlzPostfachVersand" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                        <Label fx:id="lblOrtVersand" text="Ort *" GridPane.columnSpan="3" GridPane.rowIndex="8">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfOrtVersand" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="8" />
+                        <Label text="Land" GridPane.columnSpan="3" GridPane.rowIndex="9">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cbLandVersand" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="9" />
+                     </children>
+                  </GridPane>
+               </content>
+            </TitledPane>
+         </panes>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Accordion>
+      <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="165.0" layoutY="545.0" prefHeight="70.0" style="-fx-background-color: none;" vbarPolicy="NEVER" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <content>
+            <HBox fx:id="boxHistorie" spacing="5.0">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding></HBox>
+         </content>
+      </ScrollPane>
+      <Button layoutX="920.0" layoutY="521.0" mnemonicParsing="false" onAction="#onSpeichern" prefWidth="150.0" text="Speichern" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btnCopy" layoutX="1069.0" layoutY="680.0" mnemonicParsing="false" onAction="#onCopy" visible="false" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="180.0" />
+      <Label fx:id="lblInfo" alignment="CENTER" layoutX="350.0" layoutY="684.0" prefHeight="25.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" />
+      <Button layoutX="181.0" layoutY="680.0" mnemonicParsing="false" onAction="#onBestand" prefWidth="100.0" text="Bestand" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" />
+      <Button layoutX="23.0" layoutY="510.0" mnemonicParsing="false" onAction="#onBeenden" prefWidth="150.0" text="Abbrechen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+               </children>
+</AnchorPane>

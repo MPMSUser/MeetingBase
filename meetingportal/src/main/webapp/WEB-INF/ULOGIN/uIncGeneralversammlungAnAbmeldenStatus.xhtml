@@ -1,0 +1,48 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    lang="de">
+
+    <div class="container-80">
+        <div class="row">
+            <div class="col-8">
+                <!-- Ausdruck von Zutrittsdokument ermöglichen -->
+                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.angemeldet}">
+
+                    <p>
+                        <h:commandButton value="#{eclPortalTexteM.holeText('1732')}"
+                            action="#{uServicelineAnfrage.doEKAnzeigen()}" onclick="this.form.target='_blank'"
+                            styleClass="btn-typ-00" />
+                    </p>
+                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereZweitePersonAngemeldet()}">
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText('2047')}"
+                                action="#{uServicelineAnfrage.doEK2Anzeigen()}" onclick="this.form.target='_blank'"
+                                styleClass="btn-typ-00" />
+                        </p>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereMitgliedAlsGastAngemeldet()}">
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText('2048')}"
+                                action="#{uServicelineAnfrage.doEK3Anzeigen()}" onclick="this.form.target='_blank'"
+                                styleClass="btn-typ-00" />
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </div>
+        </div>
+    </div>
+</ui:composition>

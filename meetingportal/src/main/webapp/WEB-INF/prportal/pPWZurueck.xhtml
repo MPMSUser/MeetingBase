@@ -1,0 +1,120 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <f:subview id="pPasswortZurueckOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+    <section id="passwort-zurueck-bereich">
+        <div class="col-4">
+
+            <!-- Überschrift */ -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(1750)}">
+                <p>
+                <h2>
+                    <h:outputText value="#{eclPortalTexteM.holeIText(1750)}" escape="false" />
+
+                </h2>
+                </p>
+            </h:panelGroup>
+            <div class="row">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(1751)}">
+                    <div class="col-8">
+                        <h:outputText value="#{eclPortalTexteM.holeIText(1751)}" escape="false"></h:outputText>
+                    </div>
+                </h:panelGroup>
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('245')}" escape="false">
+                        </h:outputText>
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        <h:inputText id="kennungPWZurueck" value="#{tPasswortVergessenSession.loginKennung}"
+                            maxlength="20" styleClass="input-typ-01"></h:inputText>
+                    </p>
+                </div>
+                <div class="col-2">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('246')}" escape="false">
+                        </h:outputText>
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        <h:inputSecret id="passwortPWZurueck" value="#{tPasswortVergessenSession.passwort}"
+                            styleClass="input-typ-01">
+                        </h:inputSecret>
+                        <span class="spanShowPassword spanShowPassword11">
+                            <i class="fas fa-eye" onclick="showPassword('passwortPWZurueck', '11');"></i>
+                        </span>
+                        <span class="spanHidePassword d-none spanHidePassword11">
+                            <i class="fas fa-eye-slash" onclick="hidePassword('passwortPWZurueck', '11');"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-2">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('247')}" escape="false">
+                        </h:outputText>
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        <h:inputSecret id="passwortBestaetigungPWZurueck"
+                            value="#{tPasswortVergessenSession.passwortBestaetigung}" styleClass="input-typ-01">
+                        </h:inputSecret>
+                        <span class="spanShowPassword spanShowPassword12">
+                            <i class="fas fa-eye" onclick="showPassword('passwortBestaetigungPWZurueck', '12');"></i>
+                        </span>
+                        <span class="spanHidePassword d-none spanHidePassword12">
+                            <i class="fas fa-eye-slash"
+                                onclick="hidePassword('passwortBestaetigungPWZurueck', '12');"></i>
+                        </span>
+                    </p>
+                </div>
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1752')}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('1752')}" escape="false">
+                        </h:outputText>
+                    </p>
+                </h:panelGroup>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h:commandButton value="#{eclPortalTexteM.holeIText(1753)}" id="buttonPPWZurueckZumLogin"
+                        action="#{tPasswortVergessen.doPZumLogin()}" styleClass="btn-typ-01">
+                        <f:ajax execute="@all" render="headerform inhaltsform streamform" onevent="nachAjaxButton" />
+                    </h:commandButton>
+                </div>
+                <div class="col-4 t-right">
+                    <h:commandButton value="#{eclPortalTexteM.holeIText(248)}" id="buttonPPWZurueckSpeichern"
+                        action="#{tPasswortVergessen.doSpeichern()}" styleClass="btn-typ-01">
+                        <f:ajax execute="@all" render="headerform inhaltsform streamform" onevent="nachAjaxButton" />
+                    </h:commandButton>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</ui:composition>

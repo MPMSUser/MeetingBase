@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Tooltip?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btnBeenden" layoutX="14.0" layoutY="749.0" mnemonicParsing="false" onAction="#onBtnBeenden" text="Beenden" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="166.0" layoutX="14.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="1059.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="550.0" layoutX="14.0" layoutY="188.0" stroke="BLACK" strokeType="INSIDE" width="1059.0" />
+      <ScrollPane fx:id="gpAktiveAbstimmung" layoutX="228.0" layoutY="21.0" prefHeight="55.0" prefWidth="834.0" />
+      <Label layoutX="31.0" layoutY="21.0" text="Aktive Abstimmungen" />
+      
+      <TextField fx:id="tfAktiveLokaleAbstimmung" layoutX="228.0" layoutY="80.0" prefHeight="25.0" prefWidth="834.0" />
+      <Label layoutX="31.0" layoutY="84.0" text="Aktive lokale Abstimmung" />
+      
+      <TextField fx:id="tfAktiveElektronischeAbstimmung" layoutX="228.0" layoutY="113.0" prefHeight="25.0" prefWidth="834.0" />
+      <Label layoutX="31.0" layoutY="117.0" text="Aktive elektronische Abstimmung" />
+      
+      <Label layoutX="31.0" layoutY="150.0" text="Zu verarbeitende Abstimmung" />
+      <TextField fx:id="tfZuVerarbeitendeAbstimmung" layoutX="228.0" layoutY="146.0" prefHeight="25.0" prefWidth="834.0" />
+      
+      <Pane fx:id="pnAblauf" layoutX="1078.0" prefHeight="800.0" prefWidth="419.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="779.0" layoutX="11.0" layoutY="11.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
+            <ScrollPane fx:id="gpAblauf" layoutX="21.0" layoutY="21.0" prefHeight="765.0" prefWidth="384.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="pnFunktionABAktivDeaktiv" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <ScrollPane fx:id="spFunktionABAktivDeaktiv" layoutY="35.0" prefHeight="457.0" prefWidth="1044.0" />
+            <Button fx:id="btnFunkionABAktivDeaktivFertig" layoutX="14.0" layoutY="500.0" mnemonicParsing="false" onAction="#onBtnFunkionABAktivDeaktivFertig" text="Fertig" />
+            <Label layoutX="14.0" layoutY="6.0" text="Abstimmungsblock Aktivieren / Deaktivieren" />
+         </children>
+      </Pane>
+      
+       <Pane fx:id="pnFunktionStimmenOhneMarkierungManuell" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label layoutX="14.0" layoutY="6.0" text="Stimmschnipsel einlesen manuell" />
+            <Label layoutX="14.0" layoutY="39.0" text="Auswahl Stimmart" />
+            <ComboBox fx:id="cbFunktionSOMMAuswahlStimmart" layoutX="149.0" layoutY="35.0" prefHeight="25.0" prefWidth="328.0" />
+            <Label layoutX="14.0" layoutY="75.0" text="Eingabe Nummer" />
+            <TextField fx:id="tfFunktionSOMMEingabeNummer" layoutX="149.0" layoutY="71.0" onKeyPressed="#onKeyFunktionSOMMEingabeNummer" prefHeight="25.0" prefWidth="213.0" />
+            <Label layoutX="391.0" layoutY="75.0" text="Stimmzettel" />
+            <TextField fx:id="tfFunktionSOMMStimmzettel" layoutX="470.0" layoutY="71.0" onKeyPressed="#onKeyFunktionSOMMStimmzettel" prefHeight="25.0" prefWidth="83.0" />
+            <Label layoutX="581.0" layoutY="75.0" text="Stimmart (J/N/E/U/NT)" />
+            <TextField fx:id="tfFunktionSOMMStimmart" layoutX="717.0" layoutY="71.0" onKeyPressed="#onKeyFunktionSOMMStimmart" prefHeight="25.0" prefWidth="62.0" />
+            <Button fx:id="btnFunktionSOMMBuchen" layoutX="817.0" layoutY="71.0" mnemonicParsing="false" onAction="#onBtnFunktionSOMMBuchen" text="Buchen" />
+            <Button fx:id="btnFunktionSOMMFelderLeeren" layoutX="900.0" layoutY="71.0" mnemonicParsing="false" onAction="#onBtnFunktionSOMMFelderLeeren" text="Felder leeren" />
+            <Label layoutX="14.0" layoutY="114.0" text="Bestätigung" />
+            <TextField fx:id="tfFunktionSOMMBestaetigung" editable="false" layoutX="149.0" layoutY="110.0" prefHeight="25.0" prefWidth="727.0" />
+            <Label layoutX="14.0" layoutY="152.0" text="Anzahl gel. Karten" />
+            <TextField fx:id="tfFunktionSOMMAnzahlGelKarten" editable="false" layoutX="149.0" layoutY="148.0" prefHeight="25.0" prefWidth="162.0" />
+            <Button fx:id="btnFunktionSOMMZaehlerZuruecksetzen" layoutX="377.0" layoutY="148.0" mnemonicParsing="false" onAction="#onBtnFunktionSOMMZaehlerZuruecksetzen" text="Zähler zurücksetzen" />
+            <ScrollPane fx:id="spFunktionSOMM" layoutX="13.0" layoutY="200.0" prefHeight="279.0" prefWidth="991.0" />
+            <Button fx:id="btnFunktionSOMMLetztenStornieren" layoutX="892.0" layoutY="500.0" mnemonicParsing="false" onAction="#onBtnFunktionSOMMLetztenStornieren" text="Letzten stornieren" />
+            <Button fx:id="btnFunktionSOMMFertig" layoutX="12.0" layoutY="489.0" mnemonicParsing="false" onAction="#onBtnFunktionSOMMFertig" text="Fertig" />
+         </children>
+      </Pane>
+ 
+       
+            
+       <Pane fx:id="pnMBEM" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label fx:id="lblMBEMUeberschrift" layoutX="14.0" layoutY="6.0" text="Markierungsbelege einlesen manuell" />
+            <Label layoutX="14.0" layoutY="36.0" text="Eingabe Nummer" />
+            <TextField fx:id="tfMBEMEingabeNummer" layoutX="149.0" layoutY="32.0" onKeyPressed="#onKeyMBEMEingabeNummer" prefHeight="25.0" prefWidth="213.0" />
+            <Label layoutX="391.0" layoutY="36.0" text="Stimmkarte" />
+            <TextField fx:id="tfMBEMStimmzettel" layoutX="470.0" layoutY="32.0" onKeyPressed="#onKeyMBEMStimmzettel" prefHeight="25.0" prefWidth="83.0" />
+            <Label layoutX="611.0" layoutY="36.0" text="Stapel-Stimmart" />
+            <TextField fx:id="tfMBEMStapelStimmart" layoutX="717.0" layoutY="32.0" onKeyPressed="#onKeyMBEMStapelStimmart" prefHeight="25.0" prefWidth="62.0" />
+            <Button fx:id="btnMBEMBuchen" layoutX="21.0" layoutY="489.0" mnemonicParsing="false" onAction="#onBtnMBEMBuchen" text="Buchen" />
+            <Button fx:id="btnMBEMFelderLeeren" layoutX="900.0" layoutY="32.0" mnemonicParsing="false" onAction="#onBtnMBEMFelderLeeren" text="Felder leeren" />
+            <Label layoutX="14.0" layoutY="75.0" text="Bestätigung" />
+            <TextField fx:id="tfMBEMBestaetigung" editable="false" layoutX="149.0" layoutY="71.0" prefHeight="25.0" prefWidth="727.0" />
+            <ScrollPane fx:id="spMBEMEingabeMarkierungen" layoutX="21.0" layoutY="110.0" prefHeight="369.0" prefWidth="570.0" />
+            <Label layoutX="606.0" layoutY="112.0" text="Anzahl gel. Karten" />
+            <TextField fx:id="tfMBEMAnzahlGelKarten" editable="false" layoutX="723.0" layoutY="108.0" prefHeight="25.0" prefWidth="149.0" />
+            <Button fx:id="btnMBEMZaehlerZuruecksetzen" layoutX="885.0" layoutY="108.0" mnemonicParsing="false" onAction="#onBtnMBEMZaehlerZuruecksetzen" text="Zähler zurücksetzen" />
+            <ScrollPane fx:id="spMBEMProtokoll" layoutX="604.0" layoutY="147.0" prefHeight="332.0" prefWidth="400.0" />
+            <Button fx:id="btnMBEMLetztenStornieren" layoutX="889.0" layoutY="489.0" mnemonicParsing="false" onAction="#onBtnMBEMLetztenStornieren" text="Letzten stornieren" />
+            <Button fx:id="btnMBEMFertig" layoutX="611.0" layoutY="489.0" mnemonicParsing="false" onAction="#onBtnMBEMFertig" text="Fertig" />
+            <Button fx:id="btnMEBMAbbruch" layoutX="170.0" layoutY="489.0" mnemonicParsing="false" onAction="#onBtnMBEMAbbruch" text="Abbruch" />
+            <Button fx:id="btnMBEMLesen" layoutX="803.0" layoutY="32.0" mnemonicParsing="false" onAction="#onBtnMBEMLesen" text="Lesen" />
+         </children>
+      </Pane>
+       
+       
+      <Pane fx:id="pnFunktionDAN" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label layoutX="14.0" layoutY="6.0" text="Details abgegebene Stimmen analysieren und ggf. stornieren" />
+            <ComboBox fx:id="cbDANAnzeige" layoutX="372.0" layoutY="2.0" prefHeight="25.0" prefWidth="277.0" />
+            <Button fx:id="btnDANRefresh" layoutX="670.0" layoutY="2.0" mnemonicParsing="false" onAction="#onBtnDANRefresh" prefHeight="25.0" prefWidth="80.0" text="Refresh" />
+            <Button fx:id="btnDANFehlerErneutVerarbeiten" layoutX="790.0" layoutY="2.0" mnemonicParsing="false" onAction="#onBtnDANFehlerErneutVerarbeiten" prefHeight="25.0" prefWidth="186.0" text="Fehler erneut verarbeiten" />
+            <ScrollPane fx:id="spDANProtokoll" layoutX="14.0" layoutY="29.0" prefHeight="123.0" prefWidth="1010.0" />
+            <Button fx:id="btnDANFertig" layoutX="12.0" layoutY="489.0" mnemonicParsing="false" onAction="#onBtnDANFertig" text="Fertig" />
+            <Pane layoutX="5.0" layoutY="161.0" prefHeight="319.0" prefWidth="1024.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="319.0" layoutX="8.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="1010.0" />
+                  <Label layoutX="14.0" layoutY="15.0" text="Eingabe Nummer zur Analyse" />
+                  <TextField fx:id="tfDANNummerZurAnaylse" layoutX="186.0" layoutY="11.0" onKeyPressed="#onKeyDANNummerZurAnaylse" prefHeight="25.0" prefWidth="213.0" />
+                  <TabPane layoutX="16.0" layoutY="36.0" prefHeight="275.0" prefWidth="994.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab fx:id="tabDANAktionaersdaten" text="Aktionärsdaten">
+                           <content>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="InterneIdent" />
+                                    <Label layoutX="14.0" layoutY="65.0" text="Name" />
+                                    <Label layoutX="16.0" layoutY="90.0" text="Vorname" />
+                                    <Label layoutX="16.0" layoutY="115.0" text="Ort" />
+                                    <Label layoutX="16.0" layoutY="140.0" text="Vertr.name" />
+                                    <Label layoutX="15.0" layoutY="191.0" text="Vertreterort" />
+                                    <Label layoutX="16.0" layoutY="165.0" text="Vertr.vorn." />
+                                    <Label layoutX="833.0" layoutY="14.0" text="Stimmkarten" />
+                                    <Label layoutX="676.0" layoutY="14.0" text="Eintrittskarten" />
+                                    <ScrollPane fx:id="tfDANStimmkarten" layoutX="834.0" layoutY="32.0" prefHeight="198.0" prefWidth="146.0" />
+                                    <ScrollPane fx:id="scpnDANEintrittskarten" layoutX="677.0" layoutY="32.0" prefHeight="200.0" prefWidth="149.0" />
+                                    <TextField fx:id="tfDANInterneIdent" layoutX="93.0" layoutY="10.0" />
+                                    <TextField fx:id="tfDANSammelkartenstatus" layoutX="14.0" layoutY="35.0" prefHeight="25.0" prefWidth="310.0" />
+                                    <TextField fx:id="tfDANName" layoutX="93.0" layoutY="61.0" prefHeight="25.0" prefWidth="231.0" />
+                                    <TextField fx:id="tfDANVorname" layoutX="93.0" layoutY="86.0" prefHeight="25.0" prefWidth="231.0" />
+                                    <TextField fx:id="tfDANOrt" layoutX="93.0" layoutY="111.0" prefHeight="25.0" prefWidth="231.0" />
+                                    <TextField fx:id="tfDANVertreterName" layoutX="93.0" layoutY="136.0" prefHeight="25.0" prefWidth="231.0" />
+                                    <TextField fx:id="tfDANVertreterVorname" layoutX="93.0" layoutY="161.0" prefHeight="25.0" prefWidth="232.0" />
+                                    <TextField fx:id="tfDANVertreterOrt" layoutX="93.0" layoutY="187.0" prefHeight="25.0" prefWidth="231.0" />
+                                    <TextField fx:id="tfDANStimmen" layoutX="446.0" layoutY="10.0" prefHeight="25.0" prefWidth="192.0" />
+                                    <Label layoutX="362.0" layoutY="14.0" text="Stimmen" />
+                                    <TextField fx:id="tfDANAnwesendDelayed" layoutX="446.0" layoutY="35.0" prefHeight="25.0" prefWidth="192.0" />
+                                    <Label layoutX="362.0" layoutY="39.0" text="Anw. Abst." />
+                                    <Label layoutX="362.0" layoutY="65.0" text="Anw.Aktuell" />
+                                    <TextField fx:id="tfDANAnwesendAktuell" layoutX="446.0" layoutY="61.0" prefHeight="25.0" prefWidth="193.0" />
+                                    <Label layoutX="362.0" layoutY="90.0" text="Gattung" />
+                                    <TextField fx:id="tfDANGattung" layoutX="446.0" layoutY="86.0" prefHeight="25.0" prefWidth="192.0" />
+                                 </children>
+                              </Pane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="tabDANUebersichtStimmabgaben" text="Übersicht Stimmabgaben">
+                           <content>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ScrollPane fx:id="scrpnDANUebersichtStimmabgaben" layoutX="7.0" prefHeight="248.0" prefWidth="983.0" />
+                                 </children>
+                              </Pane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="tabDANDetailStimmabgabe" text="Detail Stimmabgabe">
+                           <content>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ScrollPane fx:id="scpnDANDetailStimmabgabe" layoutX="359.0" layoutY="1.0" prefHeight="247.0" prefWidth="632.0" />
+                                    <Label layoutX="14.0" layoutY="14.0" text="Ident" />
+                                    <Label layoutX="14.0" layoutY="40.0" text="Verarbeitet" />
+                                    <Button fx:id="btnDANVor" layoutX="73.0" layoutY="220.0" mnemonicParsing="false" onAction="#onBtnDANVor" text="Vor" />
+                                    <Button fx:id="btnDANZurueck" layoutX="15.0" layoutY="220.0" mnemonicParsing="false" onAction="#onBtnDANZurueck" text="Zurück" />
+                                    <Button fx:id="btnDANStorno" layoutX="112.0" layoutY="220.0" mnemonicParsing="false" onAction="#onBtnDANStorno" text="Storno" />
+                                    <Button fx:id="btnDANAktuellPruefen" layoutX="179.0" layoutY="220.0" mnemonicParsing="false" onAction="#onBtnDANAktuellPruefen" text="Neu verarbeiten" />
+                                    <Label layoutX="14.0" layoutY="67.0" text="Gelesene Nr" />
+                                    <Label layoutX="14.0" layoutY="93.0" text="Wurde Storniert" />
+                                    <Label layoutX="14.0" layoutY="116.0" text="Erteilt auf Weg" />
+                                    <Label layoutX="14.0" layoutY="142.0" text="Zeit gespeichert" />
+                                    <Label layoutX="14.0" layoutY="172.0" text="Zeit abgegeben" />
+                                    <TextField fx:id="tfDANDetailIdent" layoutX="129.0" layoutY="10.0" />
+                                    <TextField fx:id="tfDANDetailVerarbeitet" layoutX="129.0" layoutY="36.0" />
+                                    <TextField fx:id="tfDANDetailGeleseneNr" layoutX="129.0" layoutY="63.0" />
+                                    <TextField fx:id="tfDANDetailWurdeStorniert" layoutX="129.0" layoutY="89.0" />
+                                    <TextField fx:id="tfDANDetailErteiltAufWeg" layoutX="129.0" layoutY="112.0" />
+                                    <TextField fx:id="tfDANDetailZeitGespeichert" layoutX="129.0" layoutY="138.0" />
+                                    <TextField fx:id="tfDANDetailZeitAbgegeben" layoutX="129.0" layoutY="168.0" />
+                                 </children>
+                              </Pane>
+                           </content>
+                        </Tab>
+                      <Tab fx:id="tabDANAktuelleStimmwertung" text="Aktuelle Stimmwertung">
+                           <content>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ScrollPane fx:id="scpnAktuelleStimmwertung" layoutX="14.0" layoutY="2.0" prefHeight="244.0" prefWidth="686.0" />
+                                 </children>
+                              </Pane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+                  <Button fx:id="btnDANClear" layoutX="420.0" layoutY="11.0" mnemonicParsing="false" onAction="#onBtnDANClear" text="Clear" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+ 
+       <Pane fx:id="pnMON" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label fx:id="lblMONUeberschrift" layoutX="14.0" layoutY="6.0" text="Abstimmungsmonitor" />
+            <Button fx:id="btnMONFertig" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBtnMONFertig" text="Fertig" />
+            <ScrollPane layoutX="14.0" layoutY="59.0" prefHeight="129.0" prefWidth="428.0">
+               <content>
+                  <GridPane fx:id="gpMONTablet" prefHeight="90.0" prefWidth="402.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="201.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="201.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+            <Label fx:id="lblMONUeberschriftTablet" layoutX="15.0" layoutY="28.0" text="Status Tablets" />
+            <Button fx:id="btnMONRefreshTablets" layoutX="345.0" layoutY="24.0" mnemonicParsing="false" onAction="#onBtnMONRefreshTablets" text="Refresh Tablets" />
+         </children>
+      </Pane>
+ 
+        <Pane fx:id="pnTEDAT" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label fx:id="lblTEDATUeberschrift" layoutX="14.0" layoutY="6.0" text="Textdatei einlesen" />
+            <Button fx:id="btnTEDATFertig" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBtnTEDATFertig" text="Fertig" />
+            <ScrollPane layoutX="14.0" layoutY="179.0" prefHeight="294.0" prefWidth="1022.0">
+            
+              <content>
+                  <GridPane fx:id="gpTEDATProtokoll" prefHeight="30.0" prefWidth="1020.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1010.0" minWidth="10.0" prefWidth="1010.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            
+            
+            
+              </ScrollPane>
+            <Button fx:id="btnTEDATDateiAuswaehlen" layoutX="13.0" layoutY="33.0" mnemonicParsing="false" onAction="#onBtnTEDATDateiAuswaehlen" text="Datei auswählen" />
+            <Label layoutX="13.0" layoutY="77.0" text="Einzulesende Datei:" />
+            <TextField fx:id="tfTEDATEinzulesendeDatei" layoutX="150.0" layoutY="73.0" prefHeight="25.0" prefWidth="878.0" />
+            <Button fx:id="btnTEDATScannerLesen" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnTEDATScannerLesen" text="Einlesen Scanner-Datei" />
+            <Button fx:id="btnTEDATTabletDatei" layoutX="199.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnTEDATTabletDatei" text="Einlesen Tablet-Datei" />
+            <Button fx:id="btnTEDATScannerLesenDBErst" layoutX="375.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnTEDATScannerLesenDBErst" text="Einlesen Scanner Datenbank (Erstverarbeitung)" />
+            <Button fx:id="btnTEDATScannerLesenDBWieder" layoutX="681.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnTEDATScannerLesenDBWieder" text="Einlesen  Scanner Datenbank (Wiederholung)" />
+         </children>
+      </Pane>
+ 
+ 
+        <Pane fx:id="pnAUSW" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label fx:id="lblAUSWUeberschrift" layoutX="14.0" layoutY="6.0" text="Auswerten">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnAUSWFertig" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBtnAUSWFertig" text="Fertig" />
+            <ScrollPane layoutX="14.0" layoutY="179.0" prefHeight="294.0" prefWidth="1022.0">
+               <content>
+                  <GridPane fx:id="gpAUSWProtokoll" prefHeight="30.0" prefWidth="1020.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="201.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+            <Button fx:id="btnAUSWAuswerten" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnAUSWAuswerten" text="Auswerten starten" />
+            <Button fx:id="btnAUSWArchivieren" layoutX="200.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnAUSWArchivieren" text="Weisungen Archivieren" />
+         </children>
+      </Pane>
+ 
+         <Pane fx:id="pnDRUEX" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="112.0" layoutX="10.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="342.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="121.0" layoutX="10.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="342.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="241.0" layoutX="365.0" layoutY="26.0" stroke="BLACK" strokeType="INSIDE" width="673.0" />
+            <Label fx:id="lblDRUEXUeberschrift" layoutX="14.0" layoutY="6.0" text="Drucken / Exportieren" />
+            <Button fx:id="btnDRUEXFertig" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBtnDRUEXFertig" text="Fertig" />
+            <ScrollPane layoutX="14.0" layoutY="281.0" prefHeight="192.0" prefWidth="1022.0">
+               <content>
+                  <GridPane fx:id="gpDRUEXProtokoll" prefHeight="30.0" prefWidth="1020.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="201.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+            <Button fx:id="btnDRUEXLangfassung" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" onAction="#onBtnDRUEXLangfassung" text="Drucken Langfassung" />
+            <Button fx:id="btnDRUEXKurzfassung" layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#onBtnDRUEXKurzfassung" prefHeight="25.0" prefWidth="130.0" text="Drucken Kurzfassung" />
+            <Button fx:id="btnDRUEXListe" layoutX="14.0" layoutY="105.0" mnemonicParsing="false" onAction="#onBtnDRUEXListe" prefHeight="25.0" prefWidth="130.0" text="Drucken Liste" />
+            <Button fx:id="btnDRUEXPraesentationPDF" layoutX="376.0" layoutY="50.0" mnemonicParsing="false" onAction="#onBtnDRUEXPraesentationPDF" prefHeight="25.0" prefWidth="138.0" text="Präsentation PDF" />
+             <Label layoutX="220.0" layoutY="37.0" text="Form.Nr." />
+            <Label layoutX="220.0" layoutY="74.0" text="Form.Nr." />
+            <Label layoutX="525.0" layoutY="31.0" text="Form.Nr." />
+            <Label layoutX="220.0" layoutY="109.0" text="ListenNr." />
+            <TextField fx:id="tfDRUEXLangfassung" layoutX="281.0" layoutY="33.0" prefHeight="25.0" prefWidth="45.0" />
+            <TextField fx:id="tfDRUEXKurzfassung" layoutX="281.0" layoutY="70.0" prefHeight="25.0" prefWidth="45.0" />
+            <TextField fx:id="tfDRUEXListe" layoutX="281.0" layoutY="105.0" prefHeight="25.0" prefWidth="45.0" />
+            <Button fx:id="btnDRUEXPraesentationPP" layoutX="376.0" layoutY="80.0" mnemonicParsing="false" onAction="#onBtnDRUEXPraesentationPP" prefHeight="25.0" prefWidth="138.0" text="Präsentation PP" />
+            <Button fx:id="btnDRUEXTexteBuehne" layoutX="375.0" layoutY="148.0" mnemonicParsing="false" onAction="#onBtnDRUEXTexteBuehne" prefHeight="25.0" prefWidth="138.0" text="Texte Bünhne" />
+           <Button fx:id="btnDRUEXExport" layoutX="376.0" layoutY="223.0" mnemonicParsing="false" onAction="#onBtnDRUEXExport" prefWidth="202.0" text="Export Stimmabgaben" />
+            <Label layoutX="588.0" layoutY="31.0" text="Dateiname" />
+            <Label layoutX="760.0" layoutY="31.0" text="LW Pfad" />
+            <TextField fx:id="tfDRUEXPraesentationPDFNr" layoutX="522.0" layoutY="50.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXPraesentationPDFDatei" layoutX="587.0" layoutY="50.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXPraesentationPDFPfad" layoutX="759.0" layoutY="49.0" prefHeight="25.0" prefWidth="268.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPNr" layoutX="521.0" layoutY="80.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPDatei" layoutX="586.0" layoutY="80.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPPfad" layoutX="758.0" layoutY="79.0" prefHeight="25.0" prefWidth="268.0" />
+            <TextField fx:id="tfDRUEXTexteBuehneNr" layoutX="521.0" layoutY="149.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXTexteBuehneDatei" layoutX="586.0" layoutY="149.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXTexteBuehnePfad" layoutX="758.0" layoutY="148.0" prefHeight="25.0" prefWidth="268.0" />
+             <TextField fx:id="tfDRUEXExportNr" layoutX="519.0" layoutY="183.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXExportDatei" layoutX="586.0" layoutY="183.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXExportPfad" layoutX="758.0" layoutY="183.0" prefHeight="25.0" prefWidth="268.0" />
+            <Button fx:id="btnDRUEXAusfuehrenJob" layoutX="14.0" layoutY="163.0" mnemonicParsing="false" onAction="#onBtnDRUEXAusfuehrenJob" prefHeight="25.0" prefWidth="130.0" text="Ausführen Job" />
+            <ComboBox fx:id="cbDRUEXJob" layoutX="14.0" layoutY="208.0" prefHeight="25.0" prefWidth="313.0" />
+            <Button fx:id="btnDRUEXExportFuerPP" layoutX="376.0" layoutY="183.0" mnemonicParsing="false" onAction="#onBtnDRUEXExportFuerPP" prefHeight="25.0" prefWidth="138.0" text="Export für PP" />
+            <Button fx:id="btnDRUEXPraesentationPPListe" layoutX="377.0" layoutY="114.0" mnemonicParsing="false" onAction="#onBtnDRUEXPraesentationPPListe" prefHeight="25.0" prefWidth="138.0" text="Präsentation PP Liste" />
+            <TextField fx:id="tfDRUEXPraesentationPPNrListe" layoutX="522.0" layoutY="114.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPDateiListe" layoutX="587.0" layoutY="114.0" prefHeight="25.0" prefWidth="162.0" />
+            <TextField fx:id="tfDRUEXPraesentationPPPfadListe" layoutX="759.0" layoutY="113.0" prefHeight="25.0" prefWidth="268.0" />
+            <Button fx:id="btnDRUEXEdit" layoutX="155.0" layoutY="33.0" mnemonicParsing="false" onAction="#onBtnDRUEXEdit" prefHeight="97.0" />
+            <Button fx:id="btnDRUEXExportOrdner" layoutX="588.0" layoutY="223.0" mnemonicParsing="false" onAction="#onBtnDRUEXExportOrdner" />
+         </children>
+      </Pane>
+
+  
+   
+      <Pane fx:id="pnDELB" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label fx:id="lblDELBUeberschrift" layoutX="14.0" layoutY="6.0" text="Delay Abstimmung Beginn" />
+            <Button fx:id="btnDELBStarten" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnDELBStarten" text="Delay für Abstimmungsbeginn ein" />
+            <Label layoutX="65.0" layoutY="221.0" text="Achtung! Parameter Reload durchführen im Browser!" textFill="#e80505">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      
+      <Pane fx:id="pnDELE" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label fx:id="lblDELEUeberschrift" layoutX="14.0" layoutY="6.0" text="Delay Abstimmung Ende" />
+            <Button fx:id="btnDELEStarten" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnDELEStarten" text="Delay für Abstimmungsende ein" />
+             <Label layoutX="65.0" layoutY="221.0" text="Achtung! Parameter Reload durchführen im Browser!" textFill="#e80505">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      
+      <Pane fx:id="pnDELL" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label fx:id="lblDELLUeberschrift" layoutX="14.0" layoutY="6.0" text="Delay AuflÃ¶sen" />
+            <Button fx:id="btnDELLStarten" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnDELLStarten" text="Delay Auflösen" />
+         </children>
+      </Pane>
+      
+      <Pane fx:id="pnDELA" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label fx:id="lblDELAUeberschrift" layoutX="14.0" layoutY="6.0" text="Delay aus" />
+            <Button fx:id="btnDELAStarten" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#onBtnDELAStarten" text="Delay Ausschalten" />
+            <Label layoutX="65.0" layoutY="221.0" text="Achtung! Parameter Reload durchführen im Browser!" textFill="#e80505">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      
+      
+             <Pane fx:id="pnMONEK" layoutX="21.0" layoutY="200.0" prefHeight="532.0" prefWidth="1044.0">
+         <children>
+            <Label fx:id="lblMONEKUeberschrift" layoutX="14.0" layoutY="6.0" text="Abstimmungsmonitor Eintrittskarten" />
+            <Button fx:id="btnMONEKFertig" layoutX="14.0" layoutY="493.0" mnemonicParsing="false" onAction="#onBtnMONEKFertig" text="Fertig" />
+            <ScrollPane fx:id="scpnMONEK" layoutX="14.0" layoutY="59.0" prefHeight="425.0" prefWidth="1021.0">
+               <content>
+                  <GridPane fx:id="gpMONEKAbstimmungsverhalten" prefHeight="425.0" prefWidth="1019.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="208.0" minWidth="10.0" prefWidth="201.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="201.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+            <Label fx:id="lblMONEKUeberschriftTablet" layoutX="15.0" layoutY="28.0" text="Status Aktionäre" />
+            <Button fx:id="btnMONEKRefreshAktionaersdaten" layoutX="142.0" layoutY="24.0" mnemonicParsing="false" onAction="#onBtnMONEKRefreshAktionaersdaten" text="Refresh gekennzeichnete Aktionärsdaten">
+                <tooltip><Tooltip text="Funktion ausführen, um gekennzeichnete Aktionäre für den Button Refresh Abstummungsverhalten gekennzeichneter Aktionäre vorzubereiten" /></tooltip>
+            </Button>
+            <Button fx:id="btnMONEKRefreshAbstimmungsverhalten" layoutX="400.0" layoutY="24.0" mnemonicParsing="false" onAction="#onBtnMONEKRefreshAbstimmungsverhalten" text="Refresh Abstimmungsverhalten gekennzeichneter Aktionäre" >
+                <tooltip><Tooltip text="Zeigt Abstimmungsverhalten für die gekennzeichneten Aktionäre an. Vorher (mindestens einmal, und bei Änderungen) Refresh gekennzeichnete Aktionärsdaten ausführen." /></tooltip>
+            </Button>
+            <Button fx:id="btnMONEKRefreshAlleStimmabgaben" layoutX="848.0" layoutY="24.0" mnemonicParsing="false" onAction="#onBtnMONEKRefreshAlleStimmabgaben" text="Refresh Alle Stimmabgaben" >
+                <tooltip><Tooltip text="Zeigt alle Stimmabgaben an" /></tooltip>
+            </Button>
+         </children>
+      </Pane>
+      
+      
+   </children>
+</Pane>

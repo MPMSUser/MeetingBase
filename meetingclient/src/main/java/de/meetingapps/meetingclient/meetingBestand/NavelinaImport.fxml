@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+	<right>
+	</right>
+	<center>
+		<AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="listView" layoutY="44.0" prefHeight="200.0" prefWidth="825.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="45.0" />
+            <TextField fx:id="tfNavServerIp" layoutX="10.0" layoutY="14.0" prefHeight="25.0" prefWidth="150.0" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="5.0" />
+            <Button fx:id="btnConnect" minWidth="100.0" mnemonicParsing="false" onAction="#connectDatabase" prefWidth="150.0" style="-fx-background-color: #CD5C5C;" text="Verbinden" AnchorPane.leftAnchor="390.0" AnchorPane.topAnchor="5.0" />
+            <Button fx:id="btnClear" mnemonicParsing="false" onAction="#clearLog" AnchorPane.leftAnchor="560.0" AnchorPane.topAnchor="5.0" />
+				<Button fx:id="btnImport" disable="true" mnemonicParsing="false" onAction="#importData" style="-fx-border-color: #262626; -fx-background-insets: 1; -fx-border-radius: 3; -fx-background-radius: 3;" text="Import" underline="true" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+         </children>
+		</AnchorPane>
+	</center>
+	<right>
+	</right>
+	<right>
+		<ScrollPane fitToHeight="true" hbarPolicy="NEVER">
+			<content>
+				<FlowPane fx:id="flowLayout" alignment="TOP_CENTER" columnHalignment="CENTER" minWidth="400.0" BorderPane.alignment="CENTER">
+					<children>
+                  <VBox alignment="TOP_CENTER">
+                     <children>
+                        <HBox alignment="TOP_CENTER">
+                           <children>
+            						<Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Vorhandene Datenbanken">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="TOP_CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Button fx:id="btnAdd" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#addDatabase" text="Hinzufügen" />
+                              <Button fx:id="btnSave" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#saveDatabases" text="Speichern" />
+                              <Button fx:id="btnCheck" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#checkDatabases" text="Check" visible="false" />
+                              <Button fx:id="btnReset" alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#resetImport" visible="false" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" />
+                     </padding>
+                  </VBox>
+					</children>
+				</FlowPane>
+			</content>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+		</ScrollPane>
+	</right>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets bottom="10.0" right="10.0" top="10.0" />
+   </padding>
+</BorderPane>

@@ -1,0 +1,103 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    lang="de">
+    <!-- Liste Aktienregister-Bestände werden angezeigt -->
+    <h:panelGroup rendered="#{tWillenserklaerungSession.listeARoderMeldungen==1}">
+        <section class="weisung-liste-willenserklaerungen-bereich">
+            <div class="container-80">
+                <div class="row">
+                    <ui:repeat value="#{tWillenserklaerungSession.besitzAREintragListe}" var="besitzAREintrag">
+                        <div class="col-2">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1246')}:" escape="false"
+                                    styleClass="t-bold" />
+                                <span>
+                                </span>
+                                <h:outputText value="#{besitzAREintrag.aktienregisterNummer}" />
+                            </p>
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1247')}:" escape="false"
+                                    styleClass="t-bold" />
+                                <span>
+                                </span>
+                                <h:outputText value="#{besitzAREintrag.aktionaerNameKomplett}" />
+                            </p>
+                            <h:panelGroup rendered="#{tRender.stimmenAnzeigen()==true}">
+                                <p>
+                                    <!-- frühere Text-Nr = 1248 -->
+                                    <h:outputText
+                                        value="#{eclPortalTexteM.holeIText(besitzAREintrag.liefereTextNrGattung())}"
+                                        escape="false" styleClass="t-bold" />
+                                    <span>
+                                    </span>
+                                    <h:outputText value="#{besitzAREintrag.aktionaerStimmenDE}"
+                                        rendered="#{tLanguage.lang == 1}" />
+                                    <h:outputText value="#{besitzAREintrag.aktionaerStimmenEN}"
+                                        rendered="#{tLanguage.lang == 2}" />
+                                </p>
+                            </h:panelGroup>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </div>
+        </section>
+    </h:panelGroup>
+
+    <!-- Liste Meldebestände werden angezeigt -->
+    <h:panelGroup rendered="#{tWillenserklaerungSession.listeARoderMeldungen==2}">
+        <section class="weisung-liste-willenserklaerungen-bereich">
+            <div class="container-80">
+                <div class="row">
+                    <ui:repeat value="#{tWillenserklaerungSession.zugeordneteMeldungFuerAusfuehrungListe}"
+                        var="zugeordneteMeldung">
+                        <div class="col-2">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1254')}:" escape="false"
+                                    styleClass="t-bold" />
+                                <span>
+                                </span>
+                                <h:outputText value="#{zugeordneteMeldung.aktionaersnummerFuerAnzeige}" />
+                            </p>
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1255')}:" escape="false"
+                                    styleClass="t-bold" />
+                                <span>
+                                </span>
+                                <h:outputText value="#{zugeordneteMeldung.aktionaerTitelVornameName}" />
+                            </p>
+                            <p>
+                                <h:panelGroup rendered="#{tRender.stimmenAnzeigen()==true}">
+
+                                    <!-- alter Text: 1256 -->
+                                    <h:outputText
+                                        value="#{eclPortalTexteM.holeIText(zugeordneteMeldung.liefereTextNrGattung())}"
+                                        escape="false" styleClass="t-bold" />
+                                    <span>
+                                    </span>
+                                    <h:outputText value="#{zugeordneteMeldung.aktionaerStimmenDE}"
+                                        rendered="#{tLanguage.lang == 1}" />
+                                    <h:outputText value="#{zugeordneteMeldung.aktionaerStimmenEN}"
+                                        rendered="#{tLanguage.lang == 2}" />
+                                </h:panelGroup>
+                            </p>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </div>
+        </section>
+    </h:panelGroup>
+</ui:composition>

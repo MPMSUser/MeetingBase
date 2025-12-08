@@ -1,0 +1,131 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" template="/WEB-INF/uTemplate.xhtml">
+
+
+    <ui:define name="content">
+        <h:form>
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitKennung.xhtml">
+                <ui:param name="ueberschrift" value="" />
+            </ui:include>
+
+            <!-- Menü -->
+
+            <p:menubar rendered="#{uMenueAuswahlMandantSession.menue()}">
+                <p:submenu label="Nachrichten" styleClass="clearfix"
+                    rendered="#{uMenueAuswahlMandantSession.menueNachrichten()}">
+                    <p:menuitem value="Neue Nachricht" action="#{uMenueAuswahlMandant.doNachrichtSenden()}"
+                        styleClass="clearfix" rendered="#{eclUserLoginM.pruefe_uportal_mailSenden()}" ajax="false">
+                    </p:menuitem>
+                </p:submenu>
+                <p:submenu label="Stammdaten" styleClass="clearfix"
+                    rendered="#{uMenueAuswahlMandantSession.menueStammdaten()}">
+                    <p:submenu label="Nachrichten" class="divMenue"
+                        rendered="#{eclUserLoginM.pruefe_uportal_dLoginHighAdmin()}">
+                        <p:menuitem value="Verwendungscodes"
+                            action="#{uMenueAuswahlMandant.doPflegeNachrichtVerwendungsCode()}" styleClass="clearfix"
+                            rendered="#{eclUserLoginM.pruefe_uportal_dLoginHighAdmin()}" ajax="false">
+                        </p:menuitem>
+                        <p:menuitem value="Basistexte" action="#{uMenueAuswahlMandant.doPflegeNachrichtBasisText()}"
+                            styleClass="clearfix" rendered="#{eclUserLoginM.pruefe_uportal_dLoginHighAdmin()}"
+                            ajax="false">
+                        </p:menuitem>
+                    </p:submenu>
+                </p:submenu>
+                <p:submenu label="Redakteur" styleClass="clearfix"
+                    rendered="#{eclUserLoginM.pruefe_uportal_abfrageRedakteur()}">
+                    <p:menuitem value="Übersicht" action="#{uMenueAuswahlMandant.doRedakteurUebersicht()}"
+                        styleClass="clearfix" ajax="false">
+                    </p:menuitem>
+                </p:submenu>
+                <p:submenu label="Sonstiges" styleClass="clearfix"
+                    rendered="#{uMenueAuswahlMandantSession.menueSonstiges()}">
+                    <p:menuitem value="Passwort ändern" action="#{uMenueAuswahlMandant.doPasswortAendern()}"
+                        ajax="false" styleClass="clearfix">
+                    </p:menuitem>
+                </p:submenu>
+            </p:menubar>
+
+            <!-- Arbeitsbereich Mandantenauswahl -->
+            <h:panelGroup rendered="#{eclUserLoginM.pruefe_uportal_mandantenauswahlErlaubt()}">
+                <div class="divArbeitsbereich">
+                    <table class="divArbeitsbereichUeberschrift">
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftText">
+                                <h:outputLabel value="Auswahl Hauptversammlung" />
+                            </td>
+                            <td class="divArbeitsbereichUeberschriftButton"></td>
+                        </tr>
+                    </table>
+
+
+
+                    <h:panelGroup rendered="#{uMenueAuswahlMandantSession.mandantenZurAuswahlVorhanden}">
+
+                        <p:selectOneMenu value="#{uMenueAuswahlMandantSession.ausgewaehlterMandant}" filter="true"
+                            filterMatchMode="contains">
+                            <f:selectItems value="#{uMenueAuswahlMandantSession.mandantenListeZurAuswahl}" var="mandant"
+                                itemLabel="#{mandant.anzeigeString}" itemValue="#{mandant.lfdIdent}" />
+                        </p:selectOneMenu>
+                        <br />
+                        <table class="divArbeitsbereichUeberschrift">
+                            <tr>
+                                <td class="divArbeitsbereichUeberschriftText"></td>
+                                <td class="divArbeitsbereichUeberschriftButton">
+                                    <h:commandButton value="Ausgewählte Hauptversammlung bearbeiten"
+                                        action="#{uMenueAuswahlMandant.doWeiter()}" styleClass="btnStandard" />
+                                </td>
+                            </tr>
+                        </table>
+
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{!uMenueAuswahlMandantSession.mandantenZurAuswahlVorhanden}">
+                        Derzeit sind keine Hauptversammlungen zum Bearbeiten vorhanden.
+                    </h:panelGroup>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{eclUserLoginM.pruefe_uportal_mailKomplett()}">
+                <!-- Arbeitsbereich - wichtige Aktionen -->
+                <ui:include src="/WEB-INF/ULOGIN/uNachrichtEmpfangenTechnischArbeitsbereich.xhtml">
+                </ui:include>
+
+                <!-- Arbeitsbereich - empfangene Nachrichten -->
+                <ui:include src="/WEB-INF/ULOGIN/uNachrichtEmpfangenArbeitsbereich.xhtml">
+                </ui:include>
+
+                <!-- Arbeitsbereich - gesendete Nachrichten -->
+                <ui:include src="/WEB-INF/ULOGIN/uNachrichtGesendeteArbeitsbereich.xhtml">
+                </ui:include>
+
+                <h:panelGroup rendered="#{blMNachrichten.detailSichtVerfuegbar}">
+                    <!-- Arbeitsbereich - Nachrichten Details -->
+                    <ui:include src="/WEB-INF/ULOGIN/uNachrichtEmpfangenDetailArbeitsbereich.xhtml"></ui:include>
+                </h:panelGroup>
+            </h:panelGroup>
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

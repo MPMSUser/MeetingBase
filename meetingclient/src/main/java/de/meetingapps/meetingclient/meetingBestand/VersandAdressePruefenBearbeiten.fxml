@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="1234.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btnZurueck" layoutX="111.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickedZurueck" prefHeight="58.0" prefWidth="185.0" text="Änderungen nicht Speichern und Zurück" wrapText="true" />
+      <Button fx:id="btnSpeichernWeiter" layoutX="660.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickedSpeichernWeiter" prefHeight="58.0" prefWidth="185.0" text="Speichern und Weiter" />
+      <Button fx:id="btnVerwerfenWeiter" layoutX="403.0" layoutY="652.0" mnemonicParsing="false" onAction="#clickedVerwerfenWeiter" prefHeight="58.0" prefWidth="185.0" text="Verwerfen und Weiter" />
+      <Label layoutX="25.0" layoutY="28.0" text="Eintragung Aktionär">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="318.0" layoutY="62.0" text="Eingetragene Versandadresse">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="608.0" layoutY="136.0" text="Eingegebene Versandadresse">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="893.0" layoutY="136.0" text="Korrigierte Versandadresse">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="25.0" layoutY="107.0" text="Anrede" />
+      <TextField fx:id="tfEAAnrede" editable="false" layoutX="25.0" layoutY="124.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="24.0" layoutY="155.0" text="Titel / Name1" />
+      <TextField fx:id="tfEATitel" editable="false" layoutX="25.0" layoutY="169.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="25.0" layoutY="190.0" text="Nachname / Name2" />
+      <TextField fx:id="tfEAName" editable="false" layoutX="25.0" layoutY="211.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="28.0" layoutY="236.0" text="Vorname / Name3" />
+      <TextField fx:id="tfEAVorname" editable="false" layoutX="25.0" layoutY="253.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="26.0" layoutY="377.0" text="Strasse / Postfach" />
+      <TextField fx:id="tfEAStrasse" editable="false" layoutX="25.0" layoutY="392.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="26.0" layoutY="430.0" text="PLZ" />
+      <TextField fx:id="tfEAPLZ" editable="false" layoutX="77.0" layoutY="426.0" prefHeight="25.0" prefWidth="229.0" />
+      <Label layoutX="27.0" layoutY="447.0" text="Ort" />
+      <TextField fx:id="tfEAOrt" editable="false" layoutX="25.0" layoutY="463.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="28.0" layoutY="496.0" text="Land" />
+      <TextField fx:id="tfEALand" editable="false" layoutX="77.0" layoutY="492.0" prefHeight="25.0" prefWidth="229.0" />
+      <Label layoutX="327.0" layoutY="190.0" text="Zeile 3" />
+      <TextField fx:id="tfEVName" editable="false" layoutX="322.0" layoutY="211.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="319.0" layoutY="236.0" text="Zeile 4" />
+      <TextField fx:id="tfEVVorname" editable="false" layoutX="322.0" layoutY="253.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="316.0" layoutY="377.0" text="Zeile 7" />
+      <TextField fx:id="tfEVStrasse" editable="false" layoutX="317.0" layoutY="392.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="325.0" layoutY="430.0" text="Zeile 8" />
+      <TextField fx:id="tfEVPLZ" editable="false" layoutX="370.0" layoutY="426.0" prefHeight="25.0" prefWidth="229.0" />
+      <Label layoutX="326.0" layoutY="447.0" text="Zeile 9" />
+      <TextField fx:id="tfEVOrt" editable="false" layoutX="322.0" layoutY="463.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="322.0" layoutY="496.0" text="Zeile 10" />
+      <TextField fx:id="tfEVLand" editable="false" layoutX="365.0" layoutY="492.0" prefHeight="25.0" prefWidth="238.0" />
+      <Label layoutX="612.0" layoutY="173.0" text="Zeile 1" />
+      <TextField fx:id="tfMVZeile1" editable="false" layoutX="612.0" layoutY="197.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="615.0" layoutY="236.0" text="Zeile 2" />
+      <TextField fx:id="tfMVZeile2" editable="false" layoutX="612.0" layoutY="253.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="615.0" layoutY="291.0" text="Zeile 3" />
+      <TextField fx:id="tfMVZeile3" editable="false" layoutX="612.0" layoutY="308.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="615.0" layoutY="343.0" text="Zeile 4" />
+      <TextField fx:id="tfMVZeile4" editable="false" layoutX="612.0" layoutY="360.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="614.0" layoutY="396.0" text="Zeile 5" />
+      <TextField fx:id="tfMVZeile5" editable="false" layoutX="612.0" layoutY="413.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="898.0" layoutY="173.0" text="Zeile 1" />
+      <TextField fx:id="tfKVZeile1" layoutX="898.0" layoutY="197.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="901.0" layoutY="236.0" text="Zeile 2" />
+      <TextField fx:id="tfKVZeile2" layoutX="898.0" layoutY="253.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="901.0" layoutY="291.0" text="Zeile 3" />
+      <TextField fx:id="tfKVZeile3" layoutX="898.0" layoutY="308.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="901.0" layoutY="343.0" text="Zeile 4" />
+      <TextField fx:id="tfKVZeile4" layoutX="898.0" layoutY="360.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="900.0" layoutY="396.0" text="Zeile 5" />
+      <TextField fx:id="tfKVZeile5" layoutX="898.0" layoutY="413.0" prefHeight="25.0" prefWidth="281.0" />
+      <RadioButton fx:id="tgEintragungAktionaer" layoutX="33.0" layoutY="532.0" mnemonicParsing="false" text="Eintragung Aktionär verwenden">
+         <toggleGroup>
+            <ToggleGroup fx:id="tggWahl" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="tgEintragungVersandadresse" layoutX="322.0" layoutY="532.0" mnemonicParsing="false" text="Eingetragene Versandadresse verwenden" toggleGroup="$tggWahl" />
+      <RadioButton fx:id="tgManuelleVersandadresse" layoutX="612.0" layoutY="532.0" mnemonicParsing="false" text="Eingegebene Versandadresse verwenden" toggleGroup="$tggWahl" />
+      <RadioButton fx:id="tgKorrigierteVersandadresse" layoutX="900.0" layoutY="532.0" mnemonicParsing="false" text="Korrigierte Versandadresse verwenden" toggleGroup="$tggWahl" />
+      <TextArea fx:id="tfMeldung" editable="false" layoutX="27.0" layoutY="566.0" prefHeight="58.0" prefWidth="1121.0" />
+      <Label layoutX="936.0" layoutY="652.0" text="Satz in Bearbeitung" />
+      <Label layoutX="936.0" layoutY="681.0" text="Von insgesamt Sätzen" />
+      <TextField fx:id="tfSatzInBearbeitung" editable="false" layoutX="1078.0" layoutY="648.0" prefHeight="25.0" prefWidth="103.0" />
+      <TextField fx:id="tfSaetzeInsgesamt" editable="false" layoutX="1078.0" layoutY="677.0" prefHeight="25.0" prefWidth="103.0" />
+      <Label layoutX="348.0" layoutY="36.0" text="Aktionärsnummer" />
+      <Label layoutX="722.0" layoutY="33.0" text="MeldeIdent" />
+      <TextField fx:id="tfAktionaersnummer" editable="false" layoutX="472.0" layoutY="32.0" />
+      <TextField fx:id="tfMeldeIdent" editable="false" layoutX="796.0" layoutY="29.0" />
+      <TextField fx:id="tfEAZusatz2" editable="false" layoutX="25.0" layoutY="348.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="26.0" layoutY="325.0" text="nicht verwendet" />
+      <TextField fx:id="tfEAZusatz1" editable="false" layoutX="25.0" layoutY="296.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="26.0" layoutY="283.0" text="nicht verwendet" />
+      <TextField fx:id="tfEVTitel" editable="false" layoutX="322.0" layoutY="169.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="323.0" layoutY="155.0" text="Zeile 2" />
+      <TextField fx:id="tfEVAnrede" editable="false" layoutX="317.0" layoutY="124.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="323.0" layoutY="107.0" text="Zeile 1" />
+      <TextField fx:id="tfEVName2" editable="false" layoutX="322.0" layoutY="296.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="321.0" layoutY="283.0" text="Zeile 5" />
+      <TextField fx:id="tfEVName3" editable="false" layoutX="317.0" layoutY="348.0" prefHeight="25.0" prefWidth="281.0" />
+      <Label layoutX="319.0" layoutY="334.0" text="Zeile 6" />
+   </children>
+</Pane>

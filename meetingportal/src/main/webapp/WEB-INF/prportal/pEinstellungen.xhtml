@@ -1,0 +1,160 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+	xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+	<!-- ToDo: Noch Eingabefelder einfügen für Code-Eingeben für E-Mail-Bestätigung -->
+
+
+	<f:subview id="pEinstellungenOben">
+		<ui:include src="idetail/idSeiteStart.xhtml" />
+	</f:subview>
+
+	<section id="einstellungen-bereich">
+		<div class="col-6">
+			<h:panelGroup rrendered="#{eclPortalTexteM.pruefeTextVorhanden('1719')}">
+				<p>
+				<h2>
+					<h:outputText value="#{eclPortalTexteM.holeText('1719')}" escape="false" />
+				</h2>
+				</p>
+			</h:panelGroup>
+			<div class="row">
+				<div class="col-8">
+
+					<!-- Hinweistext, falls E-Mail noch nicht bestätigt -->
+					<!-- aDlgVariablen.anzeigeMeldung -->
+					<h:panelGroup rendered="#{tEinstellungenSession.anzeigeMeldung}">
+						<!-- Eigentlicher "Fehler"-Hinweis -->
+						<!-- aDlgVariablen.anzeigeMeldungsText1 -->
+						<h:panelGroup rendered="#{tEinstellungenSession.anzeigeMeldungsText1}">
+							<p>
+								<h:outputText value="#{eclPortalTexteM.holeText('1662')}" escape="false">
+								</h:outputText>
+							</p>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{tEinstellungenSession.anzeigeMeldungsText2}">
+							<p>
+								<h:outputText value="#{eclPortalTexteM.holeText('1663')}" escape="false">
+								</h:outputText>
+							</p>
+						</h:panelGroup>
+
+						<!-- Hinweis, was zu tun ist -->
+						<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1664')}">
+							<p>
+								<h:outputText value="#{eclPortalTexteM.holeText('1664')}" escape="false" />
+							</p>
+						</h:panelGroup>
+
+					</h:panelGroup>
+
+				</div>
+			</div>
+			<!-- E-Mail-Adresse bei Reihenfolge 1 -->
+			<h:panelGroup rendered="#{tRender.reihenfolgeEinstellungen()==1}">
+				<f:subview id="email1">
+					<ui:include src="idetail/idPEinstellungenEMail.xhtml">
+					</ui:include>
+				</f:subview>
+			</h:panelGroup>
+
+			<!-- Passwort -->
+			<f:subview id="passwort0">
+				<ui:include src="idetail/idPEinstellungenPasswort.xhtml">
+				</ui:include>
+			</f:subview>
+
+			<!-- E-Mail-Adresse bei Reihenfolge 0 -->
+			<h:panelGroup rendered="#{tRender.reihenfolgeEinstellungen()==0}">
+				<f:subview id="email2">
+					<ui:include src="idetail/idPEinstellungenEMail.xhtml">
+					</ui:include>
+				</f:subview>
+			</h:panelGroup>
+			<div class="row">
+				<div class="col-8">
+					<!-- aDlgVariablen.anzeigeHinweisHVPortalBestaetigen or aDlgVariablen.anzeigeHinweisAktionaersPortalBestaetigen -->
+					<h:panelGroup
+						rendered="#{eclPortalTexteM.pruefeTextVorhanden('1665') and (tRender.hinweisWeitere1Anzeigen() or tRender.hinweisWeitere2Anzeigen())}">
+						<p>
+							<h:outputText value="#{eclPortalTexteM.holeText('1665')}" escape="false" />
+
+						</p>
+					</h:panelGroup>
+
+
+					<!-- Hinweis 1 bestätigen -->
+					<h:panelGroup rendered="#{tRender.hinweisWeitere1Anzeigen()}">
+						<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1666')}">
+							<p>
+								<h:outputText value="#{eclPortalTexteM.holeText('1666')}" escape="false" />
+							</p>
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1667')}">
+							<p>
+								<h:outputText value="#{eclPortalTexteM.holeText('1667')}" escape="false" />
+							</p>
+						</h:panelGroup>
+
+						<h:panelGrid columns="2">
+							<h:selectBooleanCheckbox id="id6"
+								value="#{tEinstellungenSession.hinweisWeitere1Bestaetigt}">
+							</h:selectBooleanCheckbox>
+							<h:outputLabel value="#{eclPortalTexteM.holeText('1668')}" escape="false">
+							</h:outputLabel>
+						</h:panelGrid>
+					</h:panelGroup>
+
+					<!-- Hinweis 2 bestätigen -->
+					<h:panelGroup rendered="#{tRender.hinweisWeitere2Anzeigen()}">
+						<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1669')}">
+							<p>
+								<h:outputText value="#{eclPortalTexteM.holeText('1669')}" escape="false" />
+							</p>
+						</h:panelGroup>
+
+						<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1670')}">
+							<p>
+								<h:outputText value="#{eclPortalTexteM.holeText('1670')}" escape="false" />
+							</p>
+						</h:panelGroup>
+
+						<h:panelGrid columns="2">
+							<h:selectBooleanCheckbox id="id7"
+								value="#{tEinstellungenSession.hinweisWeitere2Bestaetigt}">
+							</h:selectBooleanCheckbox>
+							<h:outputLabel value="#{eclPortalTexteM.holeText('1671')}" escape="false">
+							</h:outputLabel>
+						</h:panelGrid>
+					</h:panelGroup>
+
+				</div>
+			</div>
+
+
+
+			<f:subview id="iEinstellungenButtons">
+				<ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+			</f:subview>
+
+		</div>
+	</section>
+
+</ui:composition>

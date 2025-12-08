@@ -1,0 +1,52 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <p:column styleClass="colStandard" style="width:25%">
+        <f:facet name="header">Betreff</f:facet>
+        <h:outputLabel value="#{nachricht.betreff}" />
+    </p:column>
+
+    <p:column styleClass="colStandard" style="width:12%">
+        <f:facet name="header">Sendezeitpunkt</f:facet>
+        <h:outputLabel value="#{nachricht.sendezeitpunktAnzeige}" />
+    </p:column>
+
+    <p:column styleClass="colStandard" style="width:12%">
+        <f:facet name="header">Empfänger</f:facet>
+        <h:outputLabel value="#{nachricht.empfaengerName}" />
+    </p:column>
+
+    <p:column styleClass="colStandard" style="width:12%">
+        <f:facet name="header">Emittent</f:facet>
+        <h:outputLabel value="#{nachricht.emittentenName}" />
+    </p:column>
+
+    <p:column styleClass="colStandard" style="width:10%">
+        <h:commandButton value="Details" styleClass="btnKlein"
+            action="#{uNachrichtEmpfangen.doEmpfangenNachrichtenDetails(nachricht)}">
+        </h:commandButton>
+    </p:column>
+
+    <p:column styleClass="colStandard">
+        <h:outputLabel value="Gelesen " rendered="#{nachricht.anzeigeBeimEmpfaengerAusblenden}" />
+        <h:outputLabel value="Bearbeitet" rendered="#{nachricht.mailIstBearbeitetVomEmpfaengerGesetzt==true}" />
+    </p:column>
+    <p:column styleClass="colStandard">
+        <h:outputLabel value="#{nachricht.verwendungsCodeText}" rendered="#{nachricht.technischeNachricht==true}" />
+    </p:column>
+</ui:composition>

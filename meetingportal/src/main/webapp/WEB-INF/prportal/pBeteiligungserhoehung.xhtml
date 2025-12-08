@@ -1,0 +1,928 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:c="jakarta.tags.core" xmlns:fn="jakarta.tags.functions"
+    xmlns:p="http://primefaces.org/ui" xmlns:a="http://xmlns.jcp.org/jsf/passthrough" lang="de">
+
+    <f:subview id="pBeteiligungserhoehungOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <!-- Inhaltsbereich -->
+    <section id="inhalts-bereich">
+        <div class="col-4">
+            <!-- Überschrift */ -->
+            <h:panelGroup rendered="#{pBeteiligungserhoehungSession.beteiligungserhoehungStep=='0'}">
+                <p>
+                <h2>
+                    <h:outputLabel value="Beteiligungserhöhung" escape="false"></h:outputLabel>
+                </h2>
+                </p>
+
+                <p>Schön, dass Sie Ihren Beitrag zu mehr Klimaschutz erhöhen möchten. Gemeinsam können wir die
+                    Erneuerbaren Energien weiter ausbauen und damit den Klimaschutz voranbringen.</p>
+                <h:panelGroup rendered="#{pBestandSession.auffuellBetragDE ne '0,00'}">
+                    <p>
+                        Ich möchte meine Beteiligung um einen Euro Betrag von
+                        <h:inputText id="txtBeteiligungserhoehungBetrag"
+                            value="#{pBeteiligungserhoehungSession.erhoehungsbetragString}"
+                            styleClass="ml-1 input-typ-02 t-right" pt:placeholder="Erhöhungsbetrag (z.B. 50,00)" />
+                        erhöhen.
+                    </p>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{pBestandSession.auffuellBetragDE eq '0,00'}">
+                    <p>
+                        Ich möchte meine Beteiligung um weitere
+                        <h:inputText id="txtBeteiligungserhoehungAnteile"
+                            value="#{pBeteiligungserhoehungSession.weitereAnteileString}"
+                            styleClass="ml-1 input-typ-02 t-right" pt:placeholder="Anzahl (z.B. 10)" /> Geschäftsanteile
+                        erhöhen.
+                    </p>
+                </h:panelGroup>
+                <p>
+                    Ein Geschäftsanteil beträgt 50,00 €.
+                </p>
+                <h:panelGroup rendered="#{pBeteiligungserhoehungSession.berechneteDatenAnzeigen}">
+
+                    <h:panelGroup rendered="#{pBestandSession.auffuellBetragDE eq '0,00'}">
+                        <p>
+                            <b>Ihre Auswahl entspricht einem Euro Betrag von:
+                                <h:outputText value="#{pBeteiligungserhoehungSession.erhoehungsbetragString}" />
+                            </b>
+                        </p>
+                    </h:panelGroup>
+
+                </h:panelGroup>
+
+                <div class="row">
+                    <div class="col-8 t-right">
+                        <h:commandButton value="#{pBeteiligungserhoehungSession.btnBerechnenText}"
+                            action="#{pBeteiligungserhoehung.doBerechnen()}" styleClass="btn-typ-01 d-inline">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                </div>
+
+                <h:panelGroup id="berechnete-daten-bereich"
+                    rendered="#{pBeteiligungserhoehungSession.berechneteDatenAnzeigen}">
+
+                    <p>
+                        Ihre Beteiligungserhöhung reduziert die CO2 Emissionen jährlich um
+                        <h:outputText value="#{pBeteiligungserhoehungSession.co2gespartString}" /> Tonnen.
+                    </p>
+
+                    <div class="row daten-mitgliedschaft-2">
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-8">
+                                    <b>
+                                        <h:outputLabel value="Übersicht Ihrer jetzigen Beteiligung:" escape="false">
+                                        </h:outputLabel>
+                                    </b>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1566)}"
+                                                        escape="false"></h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel value="#{pBestandSession.geschaeftsanteileDE}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1567)}"
+                                                        escape="false"></h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel
+                                                    value="#{pBestandSession.geschaeftsguthabenNominalDE} €" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1568)}"
+                                                        escape="false"></h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel
+                                                    value="#{pBestandSession.geschaeftsguthabenAktuellDE} €" />
+                                            </td>
+                                        </tr>
+                                        <h:panelGroup rendered="#{pBestandSession.auffuellBetragDE ne '0,00'}">
+                                            <tr>
+                                                <td>
+                                                    <b>
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1569)}"
+                                                            escape="false"></h:outputLabel>
+                                                    </b>
+                                                </td>
+                                                <td>
+                                                    <h:outputLabel value="#{pBestandSession.auffuellBetragDE} €" />
+                                                </td>
+                                            </tr>
+                                        </h:panelGroup>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-8">
+                                    <b>
+                                        <h:outputLabel value="Übersicht Ihrer Beteiligung nach Erhöhung:"
+                                            escape="false">
+                                        </h:outputLabel>
+                                    </b>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-8">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1566)}"
+                                                        escape="false"></h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel
+                                                    value="#{pBeteiligungserhoehungSession.geschaeftsanteileNeuDE}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1567)}"
+                                                        escape="false"></h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel
+                                                    value="#{pBeteiligungserhoehungSession.geschaeftsguthabenNominalNeuDE} €" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1568)}"
+                                                        escape="false"></h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel
+                                                    value="#{pBeteiligungserhoehungSession.geschaeftsguthabenAktuellNeuDE} €" />
+                                            </td>
+                                        </tr>
+                                        <h:panelGroup rendered="#{pBestandSession.auffuellBetragDE ne '0,00'}">
+                                            <tr>
+                                                <td>
+                                                    <b>
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1569)}"
+                                                            escape="false"></h:outputLabel>
+                                                    </b>
+                                                </td>
+                                                <td>
+                                                    <h:outputLabel
+                                                        value="#{pBeteiligungserhoehungSession.auffuellBetragNeuDE} €" />
+                                                </td>
+                                            </tr>
+                                        </h:panelGroup>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h:panelGroup rendered="#{pBeteiligungserhoehungSession.berechneteDetailsAnzeigen}">
+                        <div class="row m-top">
+                            <div class="col-8">
+                                <b>
+                                    Detailübersicht für Ihre gewünschte Beteiligungserhöhung nach Einzahlung des
+                                    Auffüllbetrages:
+                                </b>
+                            </div>
+                        </div>
+                        <div class="row daten-mitgliedschaft-2">
+                            <div class="col-5">
+                                <table>
+                                    <tr>
+                                        <td>
+
+                                            Ihre gewünschte Beteiligungserhöhung
+
+                                        </td>
+                                        <td>
+                                            <h:outputLabel
+                                                value="#{pBeteiligungserhoehungSession.erhoehungsbetragString}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            Auffüllbetrag zur Einzahlung<br />(aus Guthabenabschreibung)
+
+                                        </td>
+                                        <td>
+                                            <h:outputLabel value="-#{pBestandSession.auffuellBetragDE}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            Verbleibender Betrag für weitere Geschäftsanteile nach Einzahlung des
+                                            Auffüllbetrages
+
+                                        </td>
+                                        <td>
+                                            <h:outputLabel
+                                                value="#{pBeteiligungserhoehungSession.verwendbarerBetragAnteileGesamtString}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            Verwendbarer Betrag für weitere Geschäftsanteile (Betrag muss durch 50 ohne
+                                            Rest teilbar sein)
+
+                                        </td>
+                                        <td>
+                                            <h:outputLabel
+                                                value="#{pBeteiligungserhoehungSession.verwendbarerBetragAnteileString}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Anzahl weiterer Geschäftsanteile
+                                        </td>
+                                        <td>
+                                            <h:outputLabel value="#{pBeteiligungserhoehungSession.weitereAnteile}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <b>Verwendbarer Beteiligungsbetrag für Ihre Erhöhung</b>
+                                        </td>
+                                        <td>
+                                            <b>
+                                                <h:outputLabel
+                                                    value="#{pBeteiligungserhoehungSession.verwendbarerBetragGesamtString}" />
+                                            </b>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Nicht verwendbarer Restbetrag
+                                        </td>
+                                        <td>
+                                            <h:outputLabel
+                                                value="#{pBeteiligungserhoehungSession.nichtVerwendbarerBetragString}" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <h:panelGroup rendered="#{pBeteiligungserhoehungSession.optimalerBetragString ne '0,00'}">
+                                <div class="col-3 t-center pl-1 border-typ-00">
+                                    <p>
+                                        Sie möchten den nicht verwendbaren Restbetrag für einen weiteren Geschäftsanteil
+                                        nutzen?
+                                    </p>
+                                    <p>
+                                        <b>TIPP</b>
+                                    </p>
+                                    <p>
+                                        Erhöhen Sie einfach Ihren Beteiligungsbetrag oben im Eingabefeld auf
+                                    </p>
+                                    <p>
+                                        <b>
+                                            <h:outputLabel
+                                                value="#{pBeteiligungserhoehungSession.optimalerBetragString} €" />
+                                        </b>
+                                    </p>
+                                </div>
+                            </h:panelGroup>
+                        </div>
+                    </h:panelGroup>
+                    <div class="row">
+                        <div class="col-8">
+                            <p>
+                                <h:selectBooleanCheckbox value="#{pBeteiligungserhoehungSession.okWeitereAnteile}"
+                                    styleClass="mt big-cb"
+                                    rendered="#{pBeteiligungserhoehungSession.weitereAnteile > 0}">
+                                    <f:ajax execute="@all" render="inhaltsform" />
+                                </h:selectBooleanCheckbox>
+                                <h:outputText value="Ich erkläre hiermit, dass ich mich mit "
+                                    rendered="#{pBeteiligungserhoehungSession.weitereAnteile > 0}" />
+                                <h:outputLabel value="#{pBeteiligungserhoehungSession.weitereAnteile}"
+                                    rendered="#{pBeteiligungserhoehungSession.weitereAnteile > 0}" />
+                                <h:outputText value=" weiteren Geschäftsanteilen bei der ku178
+                                Regenerative Energien eG beteilige.
+                                Ein Geschäftsanteil beträgt 50,- €"
+                                    rendered="#{pBeteiligungserhoehungSession.weitereAnteile > 0}" />
+
+                            </p>
+
+                            <p>
+                                <h:selectBooleanCheckbox value="#{pBeteiligungserhoehungSession.confirmPayment}"
+                                    styleClass="mt big-cb"
+                                    rendered="#{pBeteiligungserhoehungSession.weitereAnteile > 0}">
+                                    <f:ajax execute="@all" render="inhaltsform" />
+                                </h:selectBooleanCheckbox>
+
+                                <h:outputText
+                                    value="Ich verpflichte mich, die nach Gesetz und Satzung geschuldeten Einzahlungen auf den/die Geschäftsanteil(e) zu leisten."
+                                    rendered="#{pBeteiligungserhoehungSession.weitereAnteile > 0}" />
+                            </p>
+
+                            <p>
+                                <h:selectBooleanCheckbox value="#{pBeteiligungserhoehungSession.okBeiMinderjaehrig}"
+                                    styleClass="mt big-cb"
+                                    rendered="#{pBeteiligungserhoehung.pruefeObKind() and pBeteiligungserhoehungSession.weitereAnteile > 0}">
+                                    <f:ajax execute="@all" render="inhaltsform" />
+                                </h:selectBooleanCheckbox>
+                                <h:outputText
+                                    value="Ich erkläre hiermit, dass alle erziehungberechtigten Personen der Beteiligungserhöhung zustimmen."
+                                    rendered="#{pBeteiligungserhoehung.pruefeObKind() and pBeteiligungserhoehungSession.weitereAnteile > 0}" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8 t-right">
+                            <h:commandButton value="Weiter" action="#{pBeteiligungserhoehung.doWeiter()}"
+                                styleClass="btn-typ-01 d-inline"
+                                rendered="#{pBeteiligungserhoehungSession.okWeitereAnteile and (pBeteiligungserhoehungSession.confirmPayment and ((pBeteiligungserhoehung.pruefeObKind() and pBeteiligungserhoehungSession.okBeiMinderjaehrig) or !pBeteiligungserhoehung.pruefeObKind())) or pBeteiligungserhoehungSession.weitereAnteile == 0}">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                            <h:commandButton value="Weiter" styleClass="btn-typ-01-disabled d-inline"
+                                rendered="#{(!pBeteiligungserhoehungSession.okWeitereAnteile or !pBeteiligungserhoehungSession.confirmPayment or (pBeteiligungserhoehung.pruefeObKind() and !pBeteiligungserhoehungSession.okBeiMinderjaehrig)) and pBeteiligungserhoehungSession.weitereAnteile > 0}"
+                                disabled="true">
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- === Beteiligungserhöhung Zahlungsart === -->
+            <h:panelGroup rendered="#{pBeteiligungserhoehungSession.beteiligungserhoehungStep=='4'}">
+                <p>
+                <h2>
+                    <h:outputLabel value="Beteiligungserhöhung Einzahlung und Zahlungshinweise" escape="false">
+                    </h:outputLabel>
+                </h2>
+                </p>
+
+                <p>Wählen Sie bitte Ihre gewünschte Zahlungsart aus:
+                </p>
+                <p>
+                    <h:panelGroup rendered="#{pBeteiligungserhoehungSession.erhoehungsbetrag gt 50000}">
+                        <h:selectOneRadio value="#{pBeteiligungserhoehungSession.zahlungsart}" layout="pageDirection">
+                            <f:selectItem itemValue="0"
+                                itemLabel="Überweisung: Ich überweise selbst nach Erhalt der Zulassungsbestätigung auf das darin mitgeteilte Konto der ku178 Regenerative Energien eG." />
+                        </h:selectOneRadio>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{not (pBeteiligungserhoehungSession.erhoehungsbetrag gt 50000)}">
+                        <h:selectOneRadio value="#{pBeteiligungserhoehungSession.zahlungsart}" layout="pageDirection">
+                            <f:selectItem itemValue="0"
+                                itemLabel="Überweisung: Ich überweise selbst nach Erhalt der Zulassungsbestätigung auf das darin mitgeteilte Konto der ku178 Regenerative Energien eG." />
+                            <f:selectItem itemValue="1"
+                                itemLabel="SEPA-Lastschrift-Mandat: Ich möchte, dass die fällige Einzahlung nach Erhalt der Zulassungsbestätigung von der ku178 Regenerative Energien eG mittels Lastschrift eingezogen wird." />
+                            <f:ajax execute="@all" render="inhaltsform" />
+                        </h:selectOneRadio>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{pBeteiligungserhoehungSession.zahlungsart=='1'}" styleClass="mt-2 pl-2">
+
+                        <h:selectOneRadio value="#{pBeteiligungserhoehungSession.sepaKontoAbweichend}"
+                            layout="pageDirection">
+                            <f:selectItem itemValue="false" itemLabel="Mitglied ist Kontoinhaber/ Kontoinhaberin" />
+                            <f:ajax execute="@all" render="inhaltsform" />
+                            <f:selectItem itemValue="true"
+                                itemLabel="Vom Mitglied abweichender Kontoinhaber/ abweichende Kontoinhaberin" />
+                            <f:ajax execute="@all" render="inhaltsform" />
+                        </h:selectOneRadio>
+
+                        <h:panelGroup rendered="#{!pBeteiligungserhoehungSession.sepaKontoAbweichend}"
+                            styleClass="mt-2 pl-2">
+                            <div class="row daten-table-00">
+                                <div class="col-8">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    IBAN
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel value="#{pAktionaersdatenSession.bankIban}"
+                                                    rendered="#{!pAktionaersdatenSession.bankverbindungFehlt}" />
+                                                <h:inputText id="txtSepaSelf"
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoSelfTempIBAN}"
+                                                    rendered="#{pAktionaersdatenSession.bankverbindungFehlt}"
+                                                    styleClass="input-type-01 fs-1_2"
+                                                    a:placeholder="Keine Bankverbindung hinterlegt">
+                                                    <f:ajax event="change" execute="txtSepaSelf" render="inhaltsform"
+                                                        listener="#{pBeteiligungserhoehung.doSetBankSelf()}" />
+                                                </h:inputText>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    Name der Bank
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel value="#{pAktionaersdatenSession.bankBankname}"
+                                                    rendered="#{!pAktionaersdatenSession.bankverbindungFehlt}" />
+                                                <h:inputText id="txtBankNameSelf"
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoSelfTempBank}"
+                                                    rendered="#{pAktionaersdatenSession.bankverbindungFehlt}"
+                                                    styleClass="input-type-01 fs-1_2"
+                                                    a:placeholder="Keine Bankverbindung hinterlegt" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    BIC
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel value="#{pAktionaersdatenSession.bankBic}"
+                                                    rendered="#{!pAktionaersdatenSession.bankverbindungFehlt}" />
+                                                <h:inputText id="txtBicSelf"
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoSelfTempBIC}"
+                                                    rendered="#{pAktionaersdatenSession.bankverbindungFehlt}"
+                                                    styleClass="input-type-01 fs-1_2"
+                                                    a:placeholder="Keine Bankverbindung hinterlegt" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{pBeteiligungserhoehungSession.sepaKontoAbweichend}"
+                            styleClass="mt-2 pl-2">
+                            <div class="row daten-table-00">
+                                <div class="col-8">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <b>Anrede Kontoinhaber/ Kontoinhaberin</b>
+                                            </td>
+                                            <td>
+                                                <h:selectOneMenu
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendAnrede}"
+                                                    styleClass="input-typ-00 fs-1_2">
+                                                    <f:selectItem noSelectionOption="true" itemLabel="" itemValue="0" />
+                                                    <f:selectItem itemLabel="Herr" itemValue="1" />
+                                                    <f:selectItem itemLabel="Frau" itemValue="2" />
+                                                    <f:selectItem itemLabel="divers" itemValue="3" />
+                                                    <f:selectItem itemLabel="Firma" itemValue="4" />
+                                                </h:selectOneMenu>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Titel Kontoinhaber/ Kontoinhaberin</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendTitel}"
+                                                    styleClass="input-type-01 fs-1_2" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Vorname Kontoinhaber/ Kontoinhaberin</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendVorname}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Nachname Kontoinhaber/ Kontoinhaberin</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendNachname}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Straße, Hausnummer</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendStrasse}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Postleitzahl</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendPLZ}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Ort</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendOrt}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Land</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendLand}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>E-Mail</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendEmail}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>IBAN</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText id="txtIbanSepaAbw"
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendIBAN}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld">
+                                                    <f:ajax event="change" execute="txtIbanSepaAbw"
+                                                        render="txtBanknameSepaAbw txtBicSepaAbw"
+                                                        listener="#{pBeteiligungserhoehung.doSetBankSepaAbw()}" />
+                                                </h:inputText>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>Name der Bank</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText id="txtBanknameSepaAbw"
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendBank}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>BIC</b>
+                                            </td>
+                                            <td>
+                                                <h:inputText id="txtBicSepaAbw"
+                                                    value="#{pBeteiligungserhoehungSession.sepaKontoAbweichendBIC}"
+                                                    styleClass="input-type-01 fs-1_2" a:placeholder="*Pflichtfeld" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+
+                        <h:panelGroup styleClass="mt-2 pl-2">
+                            <div class="row">
+                                <h:selectBooleanCheckbox
+                                    value="#{pBeteiligungserhoehungSession.sepaEinzugErmaechtigung}"
+                                    styleClass="big-cb">
+                                    <f:ajax execute="@all" render="inhaltsform" />
+                                </h:selectBooleanCheckbox>
+                                Ich ermächtige die ku178 Regenerative Energien eG, die nach Gesetz und Satzung
+                                fälligen Einzahlungen einmalig von meinem Zahlungsverkehrskonto mittels Lastschrift
+                                einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von der ku178
+                                Regenerative Energien eG auf mein Konto gezogene Lastschrift einzulösen.<br /><br />
+                                <strong>Hinweis:</strong> Ich kann innerhalb von acht Wochen, beginnend mit dem
+                                Belastungsdatum, die
+                                Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut
+                                vereinbarten Bedingungen.
+                            </div>
+                        </h:panelGroup>
+
+
+                    </h:panelGroup>
+
+
+                </p>
+                <div class="row mt-2">
+                    <div class="col-4">
+                        <h:commandButton value="Zurück" action="#{pBeteiligungserhoehung.doStepBack()}"
+                            styleClass="btn-typ-01 d-inline">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                    <div class="col-4 t-right">
+                        <h:commandButton value="Weiter" action="#{pBeteiligungserhoehung.doWeiterZuVorschau()}"
+                            id="btnWeiterZuVorschau" styleClass="btn-typ-01 d-inline"
+                            rendered="#{pBeteiligungserhoehung.checkWeiterBtnSepa() and pBeteiligungserhoehungSession.confirmPayment}">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                        <h:commandButton value="Weiter" styleClass="btn-typ-01-disabled d-inline"
+                            id="btnWeiterZuVorschauDisabled"
+                            rendered="#{!pBeteiligungserhoehung.checkWeiterBtnSepa() or !pBeteiligungserhoehungSession.confirmPayment}"
+                            disabled="true">
+                        </h:commandButton>
+                    </div>
+                </div>
+
+            </h:panelGroup>
+
+
+            <!-- === Beteiligungserhöhung Vorschau === -->
+            <h:panelGroup rendered="#{pBeteiligungserhoehungSession.beteiligungserhoehungStep=='1' }">
+                <div class="row">
+                    <div class="col-8">
+                        <h2>
+                            <h:outputLabel value="Beteiligungserhöhung" escape="false"></h:outputLabel>
+                        </h2>
+                    </div>
+                </div>
+
+                <div class="row mt">
+                    <div class="col-8">
+                        Bitte prüfen Sie die Richtigkeit Ihrer Angaben.
+                    </div>
+                </div>
+
+                <div class="row mt border-bottom p-bottom">
+                    <div class="col-8">
+                        <h5>Anzahl weiterer Geschäftsanteile</h5>
+                        <h:outputLabel value="#{pBeteiligungserhoehung.weitereAnteileStringUebersicht()}"
+                            escape="false">
+                        </h:outputLabel><br /><br />
+                        <h5>Einzahlung</h5>
+                        <strong>Zahlungsart</strong><br />
+                        <h:panelGroup rendered="#{pBeteiligungserhoehungSession.zahlungsart == '0'}">
+                            Überweisung
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{pBeteiligungserhoehungSession.zahlungsart == '1'}">
+                            SEPA Lastschriftmandat<br />
+                            <h:outputLabel
+                                value="#{pBeteiligungserhoehung.showIban(pBeteiligungserhoehungSession.sepaKontoAbweichendIBAN)}"
+                                escape="false" rendered="#{pBeteiligungserhoehungSession.sepaKontoAbweichend}">
+                            </h:outputLabel>
+                            <h:outputLabel value="#{pBeteiligungserhoehung.showIban(pAktionaersdatenSession.bankIban)}"
+                                escape="false"
+                                rendered="#{(not pBeteiligungserhoehungSession.sepaKontoAbweichend) and !pAktionaersdatenSession.isBankverbindungFehlt()}">
+                            </h:outputLabel>
+                            <h:outputLabel value="#{pBeteiligungserhoehung.showIban(pBeteiligungserhoehungSession.sepaKontoSelfTempIBAN)}"
+                                escape="false"
+                                rendered="#{(not pBeteiligungserhoehungSession.sepaKontoAbweichend) and pAktionaersdatenSession.isBankverbindungFehlt()}">
+                            </h:outputLabel>
+                            <h:panelGroup rendered="#{pBeteiligungserhoehungSession.sepaKontoAbweichend}">
+                                <br /><br />
+                                <strong>Abweichender Kontoinhaber</strong>
+                                <br />
+                                <h:outputLabel value="Anrede: #{pBeteiligungserhoehung.anredeString()}" escape="false"
+                                    rendered="#{pBeteiligungserhoehungSession.sepaKontoAbweichendAnrede ne '0'}">
+                                </h:outputLabel>
+                                <h:panelGroup
+                                    rendered="#{pBeteiligungserhoehungSession.sepaKontoAbweichendAnrede ne '0'}">
+                                    <br />
+                                </h:panelGroup>
+                                <h:outputLabel value="Titel: #{pBeteiligungserhoehungSession.sepaKontoAbweichendTitel}"
+                                    escape="false"
+                                    rendered="#{pBeteiligungserhoehungSession.sepaKontoAbweichendTitel ne ''}">
+                                </h:outputLabel>
+                                <h:panelGroup
+                                    rendered="#{pBeteiligungserhoehungSession.sepaKontoAbweichendTitel ne ''}">
+                                    <br />
+                                </h:panelGroup>
+                                <h:outputLabel
+                                    value="Vorname: #{pBeteiligungserhoehungSession.sepaKontoAbweichendVorname}"
+                                    escape="false">
+                                </h:outputLabel><br />
+                                <h:outputLabel
+                                    value="Nachname: #{pBeteiligungserhoehungSession.sepaKontoAbweichendNachname}"
+                                    escape="false">
+                                </h:outputLabel><br />
+                                <h:outputLabel
+                                    value="Straße / Hausnummer: #{pBeteiligungserhoehungSession.sepaKontoAbweichendStrasse}"
+                                    escape="false">
+                                </h:outputLabel><br />
+                                <h:outputLabel
+                                    value="Postleitzahl: #{pBeteiligungserhoehungSession.sepaKontoAbweichendPLZ}"
+                                    escape="false">
+                                </h:outputLabel><br />
+                                <h:outputLabel value="Ort: #{pBeteiligungserhoehungSession.sepaKontoAbweichendOrt}"
+                                    escape="false">
+                                </h:outputLabel><br />
+                                <h:outputLabel value="Land: #{pBeteiligungserhoehungSession.sepaKontoAbweichendLand}"
+                                    escape="false">
+                                </h:outputLabel><br />
+                                <h:outputLabel value="E-Mail: #{pBeteiligungserhoehungSession.sepaKontoAbweichendEmail}"
+                                    escape="false">
+                                </h:outputLabel>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <br /><br />
+                        <h5>Auszahlung</h5>
+                        <h:outputLabel value="#{pBeteiligungserhoehung.showIban(pAktionaersdatenSession.bankIban)}"
+                            escape="false" rendered="#{not pAktionaersdatenSession.isBankverbindungFehlt()}">
+                        </h:outputLabel>
+                        <h:outputLabel value="Keine Bankverbindung hinterlegt" escape="false"
+                            rendered="#{pAktionaersdatenSession.isBankverbindungFehlt()}"></h:outputLabel>
+                    </div>
+                </div>
+
+                <div class="row mt border-bottom p-bottom">
+                    <div class="col-8">
+                        <h5>Satzung</h5>
+                        Für die Beteiligungserhöhung gelten die Bestimmungen der Satzung der ku178 Regenerative
+                        Energien eG.
+                        <ul>
+                            <li>
+                                Die Kündigungsfrist beträgt laut Satzung 3 Jahre zum Ende eines Geschäftsjahres
+                            </li>
+                            <li>
+                                Bei der Mitgliedschaft handelt es sich um eine unternehmerische Beteiligung. Eine
+                                ungünstige
+                                Entwicklung kann bis zum Totalverlust der Geschäftsguthaben führen.
+                            </li>
+                        </ul>
+                        Die Satzung der Genossenschaft ist jederzeit unter <a
+                            href="https://www.ku178.energy/infos-fuer-mitglieder"
+                            target="_blank">www.ku178.energy/infos-fuer-mitglieder</a> abrufbar. Auf Wunsch stellt
+                        ku178 einen
+                        Ausdruck der Satzung zur Verfügung.<br />
+                        <h:selectBooleanCheckbox value="#{pBeteiligungserhoehungSession.okSatzung}"
+                            styleClass="mt big-cb">
+                            <f:ajax execute="@all" render="inhaltsform" />
+                        </h:selectBooleanCheckbox>
+                        Ich habe die <a
+                            href="https://www.ku178.energy/api/contentful/asset/?url=https://assets.ctfassets.net/iiq1xuiitnsl/2KU73dadwuH0HeXhw0OGKn/f3c7052e9db29eaef75b1dd707c9f0c8/Satzung-der-ku178-eG.pdf"
+                            target="_blank">Satzung</a> der ku178 Regenerative Energien eG zur Kenntnis genommen und
+                        bestätige diese.
+                    </div>
+                </div>
+                <div class="row mt border-bottom p-bottom">
+                    <div class="col-8">
+                        <h5>Datenschutz</h5>
+                        <h:selectBooleanCheckbox value="#{pBeteiligungserhoehungSession.okDatenschutz}"
+                            styleClass="mt big-cb">
+                            <f:ajax execute="@all" render="inhaltsform" />
+                        </h:selectBooleanCheckbox>
+                        Ich habe die <a href="https://www.ku178.energy/de-de/datenschutz-bei-ku178/"
+                            target="_blank">Datenschutzbestimmungen</a> gelesen und akzeptiere diese.
+                    </div>
+                </div>
+
+                <div class="row mt">
+                    <div class="col-8">
+                        <h5>Gleich haben Sie es geschafft!</h5>
+                        Mit Klick auf den Button „Beteiligungserhöhung zahlungspflichtig beantragen“ wird Ihr
+                        Erhöhungsantrag an
+                        uns zur abschließenden Bearbeitung übermittelt. Eine Kopie Ihres Antrages wird Ihnen zusätzlich
+                        an die
+                        von Ihnen angegebene E-Mailadresse zugeschickt.
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-2">
+                        <h:commandButton value="Zurück" action="#{pBeteiligungserhoehung.doStepBack()}"
+                            styleClass="btn-typ-01 d-inline">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                    <div class="col-6 t-right">
+                        <h:commandButton value="Beteiligungserhöhung zahlungspflichtig beantragen"
+                            action="#{pBeteiligungserhoehung.doAntrag()}"
+                            rendered="#{pBeteiligungserhoehung.checkAntragErstellenBtn() and pBeteiligungserhoehungSession.okSatzung and pBeteiligungserhoehungSession.okDatenschutz}"
+                            styleClass="btn-typ-01 d-inline">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                        <h:commandButton value="Beteiligungserhöhung zahlungspflichtig beantragen"
+                            rendered="#{!pBeteiligungserhoehung.checkAntragErstellenBtn() or !pBeteiligungserhoehungSession.okSatzung or !pBeteiligungserhoehungSession.okDatenschutz}"
+                            disabled="true" styleClass="btn-typ-01-disabled d-inline">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                </div>
+
+            </h:panelGroup>
+
+            <!-- === Success === -->
+
+            <h:panelGroup rendered="#{pBeteiligungserhoehungSession.beteiligungserhoehungStep=='success' }">
+                <div class="row">
+                    <div class="col-8">
+                        <h2>
+                            <h:outputLabel value="Beteiligungserhöhung" escape="false"></h:outputLabel>
+                        </h2>
+                    </div>
+                </div>
+
+                <br />
+                <div class="row mt">
+                    <div class="col-8">
+                        Vielen Dank. Wir haben Ihren Antrag für den Erwerb weiterer Anteile erhalten.<br /><br />
+                        Nach der Zulassung senden wir Ihnen eine schriftliche Bestätigung mit allen Zahlungsdetails
+                        zu. Eine Kopie Ihres Antrages wird Ihnen in kürze per E-Mail übermittelt.<br /><br />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-8 t-right">
+                        <h:commandButton value="Beenden" action="#{pBeteiligungserhoehung.doClear()}"
+                            styleClass="btn-typ-01 d-inline">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+
+            <!-- === Teilauffuellung === -->
+            <h:panelGroup rendered="#{pBeteiligungserhoehungSession.beteiligungserhoehungStep=='2' }">
+                <p>
+                <h2>
+                    <h:outputLabel value="Beteiligungserhöhung" escape="false"></h:outputLabel>
+                </h2>
+                </p>
+
+                <p>Vielen Dank für Ihr Interesse Ihr aktuelles Geschäftsguthaben aufzufüllen!
+                </p>
+                <p>
+                    Bitte überweisen Sie den Auffüllbetrag i.H.v.
+                    <h:outputLabel value="#{pBeteiligungserhoehungSession.auffuellBetragZuUeberweisenString}" /> € auf
+                    folgendes Konto.
+                </p>
+                <p class="pl-2">
+                    Empfänger: ku178 Regenerative Energien eG<br /> IBAN: DE87 4306 0967 2052 9606 02<br /> BIC:
+                    GENODEM1ku216
+                    <br /> Verwendungszweck: Auffüllung,
+                    <h:outputText value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />,
+                    <h:outputText value="#{eclLoginDatenM.titelVornameName}" />
+                </p>
+                <p>
+                    Eine Druckversion finden Sie in Ihrem Posteingang des Mitgliederportals.
+                </p>
+                <p>
+                    <b>Gut zu wissen:</b><br /> Ihr Geschäftsguthaben, welches sich durch Guthabenabschreibung reduziert
+                    hat, ist nicht dauerhaft gemindert, sondern füllt sich grundsätzlich durch Ausschüttungen von
+                    Dividenden bis zum Erreichen des
+                    Nominalbetrages von 50 € je Geschäftsanteil wieder auf. Die Differenz kann freiwillig ausgeglichen
+                    werden.
+                </p>
+                <p>
+                    Sobald Ihr aktuelles Geschäftsguthaben zum Stichtag der Dividendenausschüttung dem nominalen
+                    Geschäftsguthaben entspricht, erhalten Sie Ihre Dividende ausgezahlt.
+                </p>
+                <div class="row">
+                    <div class="col-8 t-right">
+                        <h:commandButton value="Beenden" action="#{pBeteiligungserhoehung.doClear()}"
+                            styleClass="btn-typ-01 d-inline">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                </div>
+            </h:panelGroup>
+        </div>
+    </section>
+</ui:composition>

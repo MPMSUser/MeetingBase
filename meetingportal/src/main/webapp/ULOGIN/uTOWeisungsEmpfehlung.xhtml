@@ -1,0 +1,350 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+
+    <ui:define name="content">
+        <h:form enctype="multipart/form-data">
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Pflege Tagesordnung, Weisungsempfehlungen" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <div class="divArbeitsbereich">
+
+                <table class="divArbeitsbereichUeberschrift">
+                    <tr>
+                        <td class="divArbeitsbereichUeberschriftText">
+                            <h:outputLabel value="Tagesordnung (mit Weisungsempfehlung)" />
+                        </td>
+                    </tr>
+                </table>
+
+                <p:dataTable value="#{uTOWeisungsEmpfehlungSession.toMitVorschlagListe}" var="abstimmung">
+                    <p:column styleClass="colStandard" style="width:9%">
+                        <f:facet name="header">Auswählen</f:facet>
+                        <h:selectBooleanCheckbox value="#{abstimmung.ausgewaehlt}"
+                            rendered="#{uTOWeisungsEmpfehlungSession.auswahlMoeglich}">
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value="Ausgewählt"
+                            rendered="#{abstimmung.ausgewaehlt and !uTOWeisungsEmpfehlungSession.auswahlMoeglich and !uTOWeisungsEmpfehlungSession.ausgewaehltEmpfehlungAendern}" />
+                    </p:column>
+                    <p:column styleClass="colStandard" style="width:5%">
+                        <f:facet name="header">Interne Ident</f:facet>
+                        <h:outputLabel value="#{abstimmung.ident}" />
+                    </p:column>
+                    <p:column styleClass="colStandard" style="width:6%">
+                        <f:facet name="header">TOP</f:facet>
+                        <h:outputLabel value="#{abstimmung.nummer}#{abstimmung.nummerindex}" />
+                    </p:column>
+                    <p:column styleClass="colStandard">
+                        <f:facet name="header">Bezeichnung</f:facet>
+                        <h:outputLabel value="#{abstimmung.anzeigeBezeichnungKurz}" />
+                    </p:column>
+                    <p:column styleClass="colStandard" style="width:50%">
+                        <f:facet name="header">Empfehlung</f:facet>
+                        <h:outputLabel value="#{abstimmung.vorschlag}"
+                            rendered="#{!(abstimmung.ausgewaehlt and !uTOWeisungsEmpfehlungSession.auswahlMoeglich and uTOWeisungsEmpfehlungSession.ausgewaehltEmpfehlungAendern)}" />
+                        <h:panelGroup
+                            rendered="#{abstimmung.ausgewaehlt and !uTOWeisungsEmpfehlungSession.auswahlMoeglich and uTOWeisungsEmpfehlungSession.ausgewaehltEmpfehlungAendern}">
+                            <h:selectOneRadio value="#{abstimmung.vorschlag}">
+                                <f:selectItem itemValue="." itemLabel="Keine Empf." />
+                                <f:selectItem itemValue="J" itemLabel="Ja" />
+                                <f:selectItem itemValue="N" itemLabel="Nein" />
+                                <f:selectItem itemValue="E" itemLabel="Enthaltung" />
+                            </h:selectOneRadio>
+                        </h:panelGroup>
+                    </p:column>
+
+                </p:dataTable>
+            </div>
+
+            <h:panelGroup rendered="#{uTOWeisungsEmpfehlungSession.ausgewaehltNeuerTOP}">
+                <div class="divArbeitsbereich">
+
+                    <!-- +++++++++++++++neuen TOP einpflegen - mit Mail oder ohne++++++++++++++++++++++ -->
+
+                    <table class="divArbeitsbereichUeberschrift">
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftText">
+                                <h:outputLabel value="Neuen TOP (ggf. mit Empfehlungs-Nachricht) anlegen" />
+                            </td>
+                        </tr>
+                    </table>
+                    <p:panelGrid style="width: 1180px">
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="TOP (z.B. 2. ):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{eclAbstimmungMitVorschlagM.nummer}" maxlength="10" size="10">
+                                </h:inputText>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="TOP-Index (z.B. a) ):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{eclAbstimmungMitVorschlagM.nummerindex}" maxlength="10" size="10">
+                                </h:inputText>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Beschreibung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{eclAbstimmungMitVorschlagM.anzeigeBezeichnungKurz}"
+                                    maxlength="800" size="80"></h:inputText>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Empfehlung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:selectOneRadio id="NeuEmpfehlung" value="#{eclAbstimmungMitVorschlagM.vorschlag}"
+                                    layout="lineDirection">
+                                    <f:selectItem itemLabel="keine Empfehlung" itemValue="." />
+                                    <f:selectItem itemLabel="Ja" itemValue="J" />
+                                    <f:selectItem itemLabel="Nein" itemValue="N" />
+                                    <f:selectItem itemLabel="Enthaltung" itemValue="E" />
+                                </h:selectOneRadio>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                    action="#{uTOWeisungsEmpfehlung.doAbbrechen()}" />
+                            </td>
+                            <td class="divButtonsCenter">
+                                <h:commandButton styleClass="btnStandard"
+                                    value="TOP Speichern (ohne Empfehlungs-Nachricht)"
+                                    action="#{uTOWeisungsEmpfehlung.doTOPSpeichernOhneNachricht()}" />
+                            </td>
+                            <td class="divButtonsRight">
+                                <h:commandButton styleClass="btnStandard"
+                                    value="TOP Speichern (mit anschließender Empfehlungs-Nachricht)"
+                                    action="#{uTOWeisungsEmpfehlung.doTOPSpeichernMitNachricht()}" />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{uTOWeisungsEmpfehlungSession.ausgewaehltNeuerTOPNachricht}">
+
+                <!-- +++++++++++++++neuen TOP einpflegen - mit Mail++++++++++++++++++++++ -->
+
+                <div class="divArbeitsbereich">
+
+                    <table class="divArbeitsbereichUeberschrift">
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftText">
+                                <h:outputLabel value="Empfehlungs-Nachricht zu TOP verschicken" />
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p:panelGrid style="width: 1180px">
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="TOP:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{eclAbstimmungMitVorschlagM.nummer}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="TOP-Index:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{eclAbstimmungMitVorschlagM.nummerindex}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Beschreibung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{eclAbstimmungMitVorschlagM.anzeigeBezeichnungKurz}" />
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Empfehlung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{eclAbstimmungMitVorschlagM.vorschlag}" />
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
+
+                </div>
+
+                <f:subview>
+                    <ui:include src="/WEB-INF/ULOGIN/uNachrichtSendenDetail.xhtml">
+                    </ui:include>
+                </f:subview>
+
+                <table class="divButtonsArbeitsbereich">
+                    <tr>
+                        <td class="divButtonsLeft">
+                            <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                action="#{uTOWeisungsEmpfehlung.doAbbrechen()}" />
+                        </td>
+                        <td class="divButtonsCenter"></td>
+                        <td class="divButtonsRight">
+                            <h:commandButton value="Empfehlung Senden" styleClass="btnStandard"
+                                action="#{uTOWeisungsEmpfehlung.doTOPEmpfehlungSenden()}" />
+                        </td>
+                    </tr>
+                </table>
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{uTOWeisungsEmpfehlungSession.ausgewaehltAendernTOP}">
+                <div class="divArbeitsbereich">
+                    <!-- +++++++++++++++ TOP ändern - nur Text++++++++++++++++++++++ -->
+
+                    <table class="divArbeitsbereichUeberschrift">
+                        <tr>
+                            <td class="divArbeitsbereichUeberschriftText">
+                                <h:outputLabel value="TOP-Daten ändern" />
+                            </td>
+                        </tr>
+                    </table>
+
+                    <p:panelGrid style="width: 1180px">
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="TOP (z.B. 2. ):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{eclAbstimmungMitVorschlagM.nummer}" maxlength="10" size="10">
+                                </h:inputText>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="TOP-Index (z.B. a) ):"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{eclAbstimmungMitVorschlagM.nummerindex}" maxlength="10" size="10">
+                                </h:inputText>
+                            </p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>
+                                <h:outputLabel value="Beschreibung:"></h:outputLabel>
+                            </p:column>
+                            <p:column>
+                                <h:inputText value="#{eclAbstimmungMitVorschlagM.anzeigeBezeichnungKurz}"
+                                    maxlength="800" size="80"></h:inputText>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                    action="#{uTOWeisungsEmpfehlung.doAbbrechen()}" />
+                            </td>
+                            <td class="divButtonsCenter">
+                            </td>
+                            <td class="divButtonsRight">
+                                <h:commandButton value="Speichern" styleClass="btnStandard"
+                                    action="#{uTOWeisungsEmpfehlung.doAendernTOPSpeichern()}" />
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{uTOWeisungsEmpfehlungSession.ausgewaehltEmpfehlungAendern}">
+                <!-- +++++++++++++++Empfehlung ändern - mit Mail++++++++++++++++++++++ -->
+
+                <table class="divArbeitsbereichUeberschrift">
+                    <tr>
+                        <td class="divArbeitsbereichUeberschriftText">
+                            <h:outputLabel value="Empfehlung zu oben ausgewählten TOP(s) ändern" />
+                        </td>
+                    </tr>
+                </table>
+
+                <f:subview>
+                    <ui:include src="/WEB-INF/ULOGIN/uNachrichtSendenDetail.xhtml">
+                    </ui:include>
+                </f:subview>
+
+                <table class="divButtonsArbeitsbereich">
+                    <tr>
+                        <td class="divButtonsLeft">
+                            <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                                action="#{uTOWeisungsEmpfehlung.doAbbrechen()}" />
+                        </td>
+                        <td class="divButtonsCenter">
+                        </td>
+                        <td class="divButtonsRight">
+                            <h:commandButton value="Empfehlung senden" styleClass="btnStandard"
+                                action="#{uTOWeisungsEmpfehlung.doTOPEmpfehlungAendernSenden()}" />
+                        </td>
+                    </tr>
+                </table>
+
+            </h:panelGroup>
+
+
+
+            <h:panelGroup rendered="#{uTOWeisungsEmpfehlungSession.auswahlMoeglich}">
+                <table class="divButtons">
+                    <tr>
+                        <td class="divButtonsLeft">
+                            <h:commandButton value="Neuen TOP anlegen" styleClass="btnStandard"
+                                action="#{uTOWeisungsEmpfehlung.doNeuerTOP()}" />
+                        </td>
+                        <td class="divButtonsCenter">
+                            <h:commandButton value="TOP Ändern" styleClass="btnStandard"
+                                action="#{uTOWeisungsEmpfehlung.doAendernTOP()}" />
+                        </td>
+                        <td class="divButtonsRight">
+                            <h:commandButton value="Empfehlung ändern" styleClass="btnStandard"
+                                action="#{uTOWeisungsEmpfehlung.doEmpfehlungAendern()}" />
+                        </td>
+                    </tr>
+                </table>
+            </h:panelGroup>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

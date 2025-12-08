@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      <VBox spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Hier können alle Weisungen von der Quelle auf das Ziel übernommen werden bei denen 'Nicht-Markiert' eingetragen ist." textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Nach dem Umkopieren muß die Funktion &quot;Sammelkarten-Summen neu berechnen&quot; ausgeführt werden." textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <ScrollPane fx:id="scpnVorgaenge" layoutX="39.0" layoutY="114.0" prefHeight="342.0" prefWidth="765.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+      <HBox alignment="CENTER" layoutX="-3.0" layoutY="449.0" spacing="5.0" AnchorPane.bottomAnchor="105.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <children>
+            <Label text="Weisung umsetzen: (J / N / E / U / NT)" />
+            <Label text="J">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="tfJ" prefHeight="25.0" prefWidth="45.0" />
+            <Label text="N">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="tfN" prefHeight="25.0" prefWidth="45.0" />
+            <Label text="E">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="tfE" prefHeight="25.0" prefWidth="45.0" />
+            <Label text="U">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="tfU" prefHeight="25.0" prefWidth="45.0" />
+            <Label text="Nicht-T">
+               <HBox.margin>
+                  <Insets left="30.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="tfNT" prefHeight="25.0" prefWidth="45.0" />
+         </children>
+      </HBox>
+      <GridPane hgap="30.0" layoutX="-86.0" layoutY="542.0" prefHeight="75.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="115.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnWeiterInitialisieren" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnWeiterInitialisieren" text="Ziel mit&#10;'Nicht-Markiert'&#10;belegen" textAlignment="CENTER" wrapText="true" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <tooltip>
+                  <Tooltip text="Alle bestehenden Weisungen werden überschrieben" />
+               </tooltip></Button>
+            <Button fx:id="btnWeiter" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnWeiter" text="1) Ausgewählten Vorgang prüfen" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <tooltip>
+                  <Tooltip text="Bestehende Weisungen im Ziel-TOP werden nicht überschrieben" />
+               </tooltip></Button>
+            <Button fx:id="btnAusfuehren" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnAusfuehren" text="2) Kopiervorgang ausführen" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+            <Button fx:id="btnSammelkartenSummen" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onBtnSammelkartenSummen" text="3) Sammelkarten-Summen neu berechnen" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+         </children>
+      </GridPane>
+      <Button fx:id="btnAbbrechen" mnemonicParsing="false" onAction="#onBtnAbbrechen" prefWidth="75.0" text="Abbrechen" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+</children>
+</AnchorPane>

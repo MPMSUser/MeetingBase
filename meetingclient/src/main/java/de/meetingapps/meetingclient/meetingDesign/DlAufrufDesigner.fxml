@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane fx:id="rootPane" prefHeight="720.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <HBox spacing="10.0">
+               <children>
+                  <VBox prefWidth="250.0" spacing="2.0">
+                     <children>
+                        <Label text="Laufwerk (z.B. D:)" />
+                        <TextField fx:id="tfLaufwerk" prefHeight="25.0" prefWidth="137.0" promptText="C:" />
+                        <Label text="Mandant:" />
+                        <TextField fx:id="tfMandant" />
+                        <Label text="Dokument-Nummer (=xx)" />
+                        <TextField fx:id="tfDokumentNummer" />
+                        <Button fx:id="btnDesignerAsIsListe" mnemonicParsing="false" onMouseClicked="#onBtnDesignerAsIsListe" prefWidth="250.0" text="Designer As Is Liste" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnDesignerAsIsLabel" mnemonicParsing="false" onMouseClicked="#onBtnDesignerAsIsLabel" prefWidth="250.0" text="Designer As Is Label" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnEkSelbstdruck" mnemonicParsing="false" onMouseClicked="#onBtnEkSelbstdruck" prefWidth="250.0" text="Eintrittskarte Aktionär Selbstdruck" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnEkEmail" mnemonicParsing="false" onMouseClicked="#onBtnEkMail" prefWidth="250.0" text="Eintrttskarte Aktionär Email" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnEkPapier" mnemonicParsing="false" onMouseClicked="#onBtnEkPapier" prefWidth="250.0" text="Eintrittskarte Aktionär Papier" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnEkSelbstdruck" mnemonicParsing="false" onMouseClicked="#onBtnGastSelbstdruck" prefWidth="250.0" text="Gastkarte Selbstdruck" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnGastEmail" mnemonicParsing="false" onMouseClicked="#onBtnGastMail" prefWidth="250.0" text="Gastkarte EMail" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnGastStapel" mnemonicParsing="false" onMouseClicked="#onBtnGastStapel" prefWidth="250.0" text="Gastkarte Stapeldruck" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnAbstimmungAktionaer" mnemonicParsing="false" onMouseClicked="#onBtnAbstimmungAktionaer" prefWidth="250.0" text="Abstimmung Aktionaer" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnMeldeliste01" mnemonicParsing="false" onMouseClicked="#onBtnMeldeliste01" prefWidth="250.0" text="Meldeliste xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnErklaerungen" mnemonicParsing="false" onMouseClicked="#onBtnErklaerungen" prefWidth="250.0" text="Erklaerungen xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnNegativliste" mnemonicParsing="false" onMouseClicked="#onBtnNegativliste" prefWidth="250.0" text="Negativliste xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnStimmausschlussListe" mnemonicParsing="false" onMouseClicked="#onBtnStimmausschlussListe" prefWidth="250.0" text="StimmausschlussListe xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnMailRegistrierungsListe" mnemonicParsing="false" onMouseClicked="#onBtnMailRegistrierungsListe" prefWidth="250.0" text="MailRegistrierungsListe xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnTestBarcodes" mnemonicParsing="false" onMouseClicked="#onBtnTestBarcodes" prefWidth="250.0" text="TestBarcodes xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnTestEinladungen" mnemonicParsing="false" onMouseClicked="#onBtnTestEinladungen" prefWidth="250.0" text="TestEinladungen xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnPraesenzliste" mnemonicParsing="false" onMouseClicked="#onBtnPraesenzliste" prefWidth="250.0" text="Präsenzliste xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnPraesenzZusammenstellung" mnemonicParsing="false" onMouseClicked="#onBtnPraesenzZusammenstellung" prefWidth="250.0" text="PräsenzZusammenstellung xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnPraesenzprotokoll" mnemonicParsing="false" onMouseClicked="#onBtnPraesenzprotokoll" prefWidth="250.0" text="Präsenzprotokoll xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnMeldungStatistik" mnemonicParsing="false" onMouseClicked="#onBtnMeldungStatistik" prefWidth="250.0" text="Meldungen Statistik xx" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox prefWidth="250.0" spacing="2.0">
+                     <children>
+                        <Button fx:id="btnSammelkartenKurz" mnemonicParsing="false" onMouseClicked="#onBtnSammelkartenKurz" prefWidth="250.0" text="Sammelk. Kurzübersicht xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnSammelkartenMitWeisung" mnemonicParsing="false" onMouseClicked="#onBtnSammelkartenMitWeisung" prefWidth="250.0" text="Sammelk. MitWeisungübersicht xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnSammelkartenMitAktionaeren" mnemonicParsing="false" onMouseClicked="#onBtnSammelkartenMitAktionaeren" prefWidth="250.0" text="Sammelk. MitAktionären xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnWeisungssummen" mnemonicParsing="false" onMouseClicked="#onBtnWeisungssummen" prefWidth="250.0" text="Weisungssummen xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnKontrollisteWeisungen" mnemonicParsing="false" onMouseClicked="#onKontrollisteWeisungen" prefWidth="250.0" text="KontrollisteWeisungen xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnGastkartenListe" mnemonicParsing="false" onMouseClicked="#onGastkartenListe" prefWidth="250.0" text="Gastkarten Liste xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnGastkartenUebersichtListe" mnemonicParsing="false" onMouseClicked="#onGastkartenUebersichtListe" prefWidth="250.0" text="Gastkarten übersicht Liste xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnAbstimmungErgebnisListe" mnemonicParsing="false" onMouseClicked="#onAbstimmungErgebnisListe" prefWidth="250.0" text="AbstimmungErgebnisListe xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnAbstimmungVorleseblatt" mnemonicParsing="false" onMouseClicked="#onAbstimmungVorleseblatt" prefWidth="250.0" text="AbstimmungVorleseblatt xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnAbstimmungZwischenblatt" mnemonicParsing="false" onMouseClicked="#onAbstimmungZwischenblatt" prefWidth="250.0" text="Abstimmung Zwischenblatt xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnSammelanmeldebogen" mnemonicParsing="false" onMouseClicked="#onSammelanmeldebogen" prefWidth="250.0" text="Sammelanmeldebogen xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnDatenpflegeku178" mnemonicParsing="false" onMouseClicked="#onDatenpflegeku178" prefWidth="250.0" text="Datenpflege ku178 xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnAnschreibenPasswort" mnemonicParsing="false" onMouseClicked="#onAnschreibenPasswort" prefWidth="250.0" text="Anschreiben Passwort xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnFragenMitteilungen" mnemonicParsing="false" onMouseClicked="#onFragenMitteilungen" prefWidth="250.0" text="Fragen Mitteilungen xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnBestaetigungWeisung" mnemonicParsing="false" onMouseClicked="#onBestaetigungWeisung" prefWidth="250.0" text="Bestätigung Weisungsabgabe ohne TOP xx" wrapText="true" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnVollmachtsformular" mnemonicParsing="false" onMouseClicked="#onVollmachtsformular" prefWidth="250.0" text="Vollmachtsformular xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnVerzeichnisVereinZusammenstellung" mnemonicParsing="false" onMouseClicked="#onVerzeichnisVereinZusammenstellung" prefWidth="250.0" text="Verz. Verein Zusammenst xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnVerzeichnisVereinListe" mnemonicParsing="false" onMouseClicked="#onVerzeichnisVereinListe" prefWidth="250.0" text="Verz. Verein Liste xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnBestaetigungWeisungMitTop" mnemonicParsing="false" onMouseClicked="#onBestaetigungWeisungMitTop" prefWidth="250.0" text="Bestätigung Weisungsabgabe mit TOP xx" wrapText="true" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnEkFreiwilligeAnmeldung" mnemonicParsing="false" onMouseClicked="#onEKFreiwilligeAnmeldung" prefWidth="250.0" text="Eintrittskarte Freiwillige Anmeldung xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnFormularErstzugang" mnemonicParsing="false" onMouseClicked="#onFormularErstzugang" prefWidth="250.0" text="Formulardruck bei Erstzugang xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnTestDruckerzuordnung" mnemonicParsing="false" onMouseClicked="#onTestDruckerzuordnung" prefWidth="250.0" text="Testformular Druckerzuordnung xx" VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnKonsistenzpruefung" mnemonicParsing="false" onMouseClicked="#onKonsistenzpruefung" prefWidth="250.0" text="Konsistenzprüfung" />
+                        <Button fx:id="btnStimmkarten" mnemonicParsing="false" onMouseClicked="#onStimmkarten" prefWidth="250.0" text="Stimmkarten" />
+                     </children>
+                     <padding>
+                        <Insets top="19.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefWidth="250.0" spacing="2.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets top="19.0" />
+                     </padding>
+                     <children>
+                        <Button fx:id="btnVeranstaltungsmanagement" mnemonicParsing="false" onMouseClicked="#onVeranstaltungsmanagement" prefWidth="250.0" text="Veranstaltungsmanagement" />
+                        <Button fx:id="btnBatch" mnemonicParsing="false" onMouseClicked="#onBatch" prefWidth="250.0" text="Batch" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" top="5.0" />
+               </padding>
+            </HBox>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

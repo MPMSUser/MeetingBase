@@ -1,0 +1,94 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <f:subview id="pAuswahlOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+    <!-- Inhaltsbereich -->
+    <section id="inhalts-bereich">
+        <div class="col-4">
+
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1523')}">
+                <p>
+                <h2>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1523)}" escape="false"></h:outputLabel>
+                </h2>
+                </p>
+            </h:panelGroup>
+
+            <div class="row">
+
+                <p>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1524)}" escape="false">
+                    </h:outputLabel>
+                </p>
+
+            </div>
+
+            <div class="row">
+                <div class="col-8" id="col-co2">
+                    <div class="card-img">
+                        <p>
+                            Sie erzielen mit ihrer Mitgliedschaft jährlich eine<br/>
+                            Einsparung von 
+                            <b>
+                                <h:outputLabel value="#{tPermanentSession.co2ErsparnisDE}" escape="false">
+                                </h:outputLabel>
+                            </b> Tonnen CO<sub>2</sub>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt">
+                <div class="col-4" id="col-angebot">
+                    <div>
+                        <div class="card-img">
+
+                        </div>
+                        <div>
+                            <p>
+                                <a href="https://www.ku178.energy/de-de/mitglieder-strom/" target="_blank"
+                                    class="link-typ-00">Tarif berechnen</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4" id="col-present">
+                    <div>
+                        <div class="card-img">
+
+                        </div>
+                        <div>
+                            <p>
+                                <a href="https://www.ku178.energy/de-de/genossenschaft/ku178-anteile-verschenken/" target="_blank"
+                                    class="link-typ-00">Anteile verschenken</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <f:subview id="iauswahlPerButtons">
+                <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+            </f:subview>
+        </div>
+    </section>
+
+</ui:composition>

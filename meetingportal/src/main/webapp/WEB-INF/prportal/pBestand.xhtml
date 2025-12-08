@@ -1,0 +1,383 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <f:subview id="pBestandOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <!-- Inhaltsbereich -->
+    <section id="inhalts-bereich" class="daten-mitgliedschaft">
+        <div class="col-4">
+            <!-- Überschrift */ -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1564')}">
+                <p>
+                <h2>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1564)}" escape="false"></h:outputLabel>
+                </h2>
+                </p>
+            </h:panelGroup>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="row">
+                        <div class="col-8">
+                            <b>
+                                <h:outputLabel value="#{eclPortalTexteM.holeIText(1565)}" escape="false">
+                                </h:outputLabel>
+                            </b>
+                            <h:outputLabel value="#{pBestandSession.standDatum}" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <table>
+                                <tr>
+                                    <td>
+                                        <b>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1566)}" escape="false">
+                                            </h:outputLabel>
+                                        </b>
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="#{pBestandSession.geschaeftsanteileDE}" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1567)}" escape="false">
+                                            </h:outputLabel>
+                                        </b>
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="#{pBestandSession.geschaeftsguthabenNominalDE} €" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <b>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1568)}" escape="false">
+                                            </h:outputLabel>
+                                        </b>
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="#{pBestandSession.geschaeftsguthabenAktuellDE} €" />
+                                    </td>
+                                </tr>
+                                <h:panelGroup rendered="#{pBestandSession.auffuellBetragDE ne '0,00'}">
+                                    <tr>
+                                        <td>
+                                            <b>
+                                                <h:outputLabel value="#{eclPortalTexteM.holeIText(1569)}"
+                                                    escape="false"></h:outputLabel>
+                                            </b>
+                                        </td>
+                                        <td>
+                                            <h:outputLabel value="#{pBestandSession.auffuellBetragDE} €" />
+                                        </td>
+                                    </tr>
+                                </h:panelGroup>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-4">
+                    <h:panelGroup rendered="#{pBestandSession.kuendigungVorhanden}">
+
+                        <div class="row">
+                            <div class="col-8">
+                                <b>
+                                    Folgende Kündigungen liegen vor:
+                                </b>
+                            </div>
+                        </div>
+                        <ui:repeat value="#{pBestandSession.aktienregisterBestandsaenderungen}" var="bestandsAenderung"
+                            id="schleifeAenderung">
+                            <div class="row">
+                                <div class="col-8">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1570)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel value="#{bestandsAenderung.veranlasstAm}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1571)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel value="#{bestandsAenderung.veraenderungAktienDE}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1572)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel value="#{bestandsAenderung.wirksamZum}" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h:panelGroup
+                                    rendered="#{!bestandsAenderung.laufende_ruecknahme and !pBestandSession.kuendigungInBearbeitung}">
+                                    <div class="col-8">
+                                        <h:commandButton value="Zur Rücknahme der Kündigung"
+                                            styleClass="btn-typ-01 w-100"
+                                            action="#{pBestand.doKuendigungsRuecknahme(bestandsAenderung)}">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup
+                                    rendered="#{pBestandSession.kuendigungInBearbeitung and bestandsAenderung.laufende_ruecknahme}">
+                                    <div class="col-8">
+                                        <p class="btn-typ-03">Kündigungsrücknahme beantragt</p>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup
+                                    rendered="#{pBestandSession.kuendigungInBearbeitung and !bestandsAenderung.laufende_ruecknahme}">
+                                    <div class="col-8">
+                                        <p class="btn-typ-03">Andere Kündigungsrücknahme wird geprüft</p>
+                                    </div>
+                                </h:panelGroup>
+                            </div>
+                        </ui:repeat>
+                    </h:panelGroup>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <h3>
+                        Sie reduzieren aktuell mit Ihrer ku178-Mitgliedschaft die CO<sub>2</sub>-Emissionen jährlich um
+                        <h:outputLabel value="#{tPermanentSession.co2ErsparnisDE}" escape="false"></h:outputLabel>
+                        Tonnen.
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    Wollen Sie noch mehr für den Klimaschutz tun?
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <h:commandLink value="Hier" action="#{pBestand.doBeteiligungserhoehung()}">
+                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                    </h:commandLink> können Sie Ihre Beteiligung erhöhen.
+                    <br />
+                    <a href="https://www.ku178.energy/de-de/mitglieder-strom/" target="_blank">Hier</a> können Sie 100% Windstrom
+                    beziehen.
+                    <br /> Verschaffen Sie sich einen Überblick, wie viel CO<sub>2</sub> Sie einsparen können: <a
+                        href="https://www.ku178.energy/de-de/impact-rechner/" target="_blank">Zum CO<sub>2</sub>-Rechner</a>.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col8">
+                    <h:graphicImage library="prm1" name="images/banner_mitgliedschaft.webp" />
+                </div>
+            </div>
+            <!--<h:panelGroup rendered="#{pBestandSession.weiterePersonenVorhanden}">
+                    <h:panelGroup rendered="#{pBestandSession.hinterlegteAnsprechpartnerVorhanden}">
+                        <div class="row">
+                            <div class="col-8">
+                                <b>
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1573)}" escape="false">
+                                    </h:outputLabel>
+                                </b>
+                            </div>
+                            <ui:repeat value="#{pBestandSession.hinterlegteAnprechpartner}" var="weiterePerson" id="schleifeAnsprechpartner">
+                                <div class="col-8">
+                                    <h:outputLabel value="#{weiterePerson.vorname} #{weiterePerson.nachname}" escape="false">
+                                    </h:outputLabel>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{pBestandSession.vollmachtenVorhanden}">
+                        <div class="row">
+                            <div class="col-8">
+                                <b>
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1574)}" escape="false">
+                                    </h:outputLabel>
+                                </b>
+                            </div>
+                            <ui:repeat value="#{pBestandSession.vollmachten}" var="weiterePerson" id="schleifeVollmachten">
+                                <div class="col-8">
+                                    <h:outputLabel value="#{weiterePerson.vorname} #{weiterePerson.nachname}" escape="false">
+                                    </h:outputLabel>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{pBestandSession.postempfaengerVorhanden}">
+                        <div class="row">
+                            <div class="col-8">
+                                <b>
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1575)}" escape="false">
+                                    </h:outputLabel>
+                                </b>
+                            </div>
+                            <ui:repeat value="#{pBestandSession.postempfaenger}" var="weiterePerson" id="schleifePostempfaenger">
+                                <div class="col-8">
+                                    <h:outputLabel value="#{weiterePerson.vorname} #{weiterePerson.nachname}" escape="false">
+                                    </h:outputLabel>
+                                </div>
+                            </ui:repeat>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>-->
+        </div>
+    </section>
+    <h:panelGroup rendered="#{pBestandSession.showKuendigungModal}">
+        <div id="kuendigungs-modal" class="modal">
+            <div class="modal-content slide-in-left">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <h3>
+                                Kündigung zurücknehmen
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row fs-1">
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-8">
+                                    <p>
+                                        Sie können Ihre Kündigung innerhalb der dreijährigen Kündigungsfrist und
+                                        rechtzeitig vor dem Wirksamwerden der Kündigung bei der Genossenschaft im
+                                        Einverständnis mit der Genossenschaft zurücknehmen. Über das Einverständnis der
+                                        Genossenschaft erhalten
+                                        Sie eine schriftliche Mitteilung und das mitgliedschaftliche Vertragsverhältnis
+                                        wird fortgesetzt.
+                                        <br /><br /> Möchten Sie Ihre Kündigung zurücknehmen?
+                                    </p>
+                                </div>
+                                <div class="col-8">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1570)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel
+                                                    value="#{pBestandSession.gewaehlteBestandsaenderung.veranlasstAm}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1571)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel
+                                                    value="#{pBestandSession.gewaehlteBestandsaenderung.veraenderungAktienDE}" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <b>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1572)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <h:outputLabel
+                                                    value="#{pBestandSession.gewaehlteBestandsaenderung.wirksamZum}" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h:commandButton value="Zurück" action="#{pBestand.doZurueckKuendigung}" styleClass="btn-typ-01">
+                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                    </h:commandButton>
+                    <h:commandButton value="Kündigung zurücknehmen" action="#{pBestand.doKuendigungZuruecknehmen}"
+                        styleClass="btn-typ-01 fl-right">
+                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                    </h:commandButton>
+                </div>
+            </div>
+        </div>
+    </h:panelGroup>
+    <h:panelGroup rendered="#{pBestandSession.showKuendigungErfolgModal}">
+        <div id="kuendigungs-erfolg-modal" class="modal">
+            <div class="modal-content slide-in-left">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <h3>
+                                Kündigung zurücknehmen
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="row fs-1">
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-8">
+                                    <p>
+                                        Vielen Dank für Ihre Erklärung zur Rücknahme Ihrer Kündigung(en).
+                                        <br /><br /><b>Nächste Schritte:</b>
+                                        <br /><br />Mit dem Einverständnis der Genossenschaft wird das
+                                        mitgliedschaftliche Vertragsverhältnis fortgesetzt. Sie erhalten eine
+                                        schriftliche Mitteilung.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h:commandButton value="OK" action="#{pBestand.doKuendigungRuecknahmeEnde}" styleClass="btn-typ-01">
+                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                    </h:commandButton>
+                </div>
+            </div>
+        </div>
+    </h:panelGroup>
+</ui:composition>

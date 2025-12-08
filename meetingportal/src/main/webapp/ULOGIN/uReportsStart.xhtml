@@ -1,0 +1,836 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+
+    <ui:define name="content">
+        <h:form enctype="multipart/form-data">
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Report Auswahl Parameter" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+
+			<div class="divArbeitsbereich">
+				<table class="divArbeitsbereichUeberschrift">
+					<tr>
+						<td class="divArbeitsbereichUeberschriftText"><h:outputLabel
+								value="#{uReportsSession.ueberschrift}" /></td>
+						<td class="divArbeitsbereichUeberschriftButton">
+							<h:panelGroup
+								rendered="#{uReportsSession.startButtonBenutzen==true}">
+								<h:commandButton value="Start" styleClass="btnStandard"
+									action="#{uReports.doStart}"
+									rendered="#{uReportsSession.reportAnzeigeSeiteAufrufen}"
+									onclick="this.form.target='_self'" />
+								<h:commandButton value="Start" styleClass="btnStandard"
+									action="#{uReports.doStartDirektanzeige}"
+									rendered="#{uReportsSession.reportDirektAufrufen}"
+									onclick="this.form.target='_blank'" />
+							</h:panelGroup></td>
+					</tr>
+				</table>
+				<p>
+					<h:outputLabel value="#{uReportsSession.startText}" />
+				</p>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==101}">
+					<!-- weisungsSummenMitAuswahl -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Auch 'verdeckte (z.B. Deutsche Bank)' ausgeben (vor HV nicht an Kunden weitergeben!)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox
+								value="#{uReportsSession.geheimeWeisungenAusgeben}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel
+								value="Nur für diese SammelIdent drucken (leer=alle)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.druckNurSammelkartenIdent}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Nur für diese Gruppe drucken (leer=alle)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.druckNurGruppe}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==106}">
+					<!-- Meldeliste -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Sortierung"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteSortierung}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Sortiert nach meldeIdent" itemValue="1" />
+								<f:selectItem itemLabel="Sortiert nach Name" itemValue="2" />
+								<f:selectItem itemLabel="Sortiert nach Aktien absteigend"
+									itemValue="3" />
+								<f:selectItem itemLabel="Sortiert nach Ek-Nr" itemValue="4" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Selektion 1"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteKlasse}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Aktionäre" itemValue="1" />
+								<f:selectItem itemLabel="Gäste" itemValue="0" />
+							</h:selectOneRadio>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Selektion 2 (bei Aktionären)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteSelektion}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="nur Aktionärsmeldungen" itemValue="1" />
+								<f:selectItem itemLabel="nur Sammelkarten" itemValue="2" />
+								<f:selectItem itemLabel="alle" itemValue="3" />
+							</h:selectOneRadio>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==107}">
+					<!-- Negativliste (Präsenz) -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Art"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.negativlisteArt}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Alle noch nie präsenten" itemValue="1" />
+								<f:selectItem itemLabel="Alle derzeit nicht präsenten"
+									itemValue="2" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Sortierung"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteSortierung}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Sortiert nach meldeIdent" itemValue="1" />
+								<f:selectItem itemLabel="Sortiert nach Name" itemValue="2" />
+								<f:selectItem itemLabel="Sortiert nach Aktien absteigend"
+									itemValue="3" />
+								<f:selectItem itemLabel="Sortiert nach Ek-Nr" itemValue="4" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Selektion 1"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteKlasse}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Aktionäre" itemValue="1" />
+								<f:selectItem itemLabel="Gäste" itemValue="0" />
+							</h:selectOneRadio>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Selektion 2 (bei Aktionären)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteSelektion}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="nur Aktionärsmeldungen" itemValue="1" />
+								<f:selectItem itemLabel="nur Sammelkarten" itemValue="2" />
+								<f:selectItem itemLabel="alle" itemValue="3" />
+							</h:selectOneRadio>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==108}">
+					<!-- Negativliste (Anmeldungen) mit Auswahl-->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Sortierung"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio
+								value="#{uReportsSession.negativlisteSortierung}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Sortiert nach Aktionärsnummer"
+									itemValue="1" />
+								<f:selectItem itemLabel="Sortiert nach Name" itemValue="2" />
+								<f:selectItem itemLabel="Sortiert nach Aktien absteigend"
+									itemValue="3" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Ab Aktienzahl (leer=alle)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.negativlisteAktienzahl}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel
+								value="Die größten (0=alle; nur bei Sortierung nach Aktien absteigend zulässig))">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.negativlisteGroesste}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==111}">
+					<!-- Willenserklärungen (Alle, mit Auswahl)-->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Selektion"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.nurInternetWK}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="alle" itemValue="1" />
+								<f:selectItem itemLabel="ohne reine Interneterklärungen"
+									itemValue="2" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel
+								value="Ab Datum (leer=alle, sonst: JJJJ.MM.TT HH:MM:SS bzw. Teile)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.druckenAb}" maxlength="20"
+								size="20"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==112}">
+					<!-- Willenserklärungen (Alle, mit Auswahl)-->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Aktionärsnummer (Namensaktien) / Eintrittskartennummer (Inhaberaktien)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.aktionaersNummer}"
+								maxlength="30" size="30">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup
+					rendered="#{uReportsSession.reportNummer==115 or
+                    uReportsSession.reportNummer==117 or uReportsSession.reportNummer==119}">
+					<!-- Sammelkarten (mit Auswahl) Reports-->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Auch 'verdeckte (z.B. Deutsche Bank)' ausgeben (vor HV nicht an Kunden weitergeben!)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox
+								value="#{uReportsSession.geheimeWeisungenAusgeben}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel
+								value="Selektion: Druck nur für Sammelkartenident (leer=alle)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.selektionIdent}"
+								maxlength="5" size="5"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel
+								value="Selektion: Druck nur für Gruppe (leer=alle)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.selektionGruppe}"
+								maxlength="5" size="5">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup
+					rendered="#{uReportsSession.reportNummer==121
+                    or uReportsSession.reportNummer==123}">
+					<!-- Sammelkarten (mit Auswahl) Export-->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Auch 'verdeckte (z.B. Deutsche Bank)' ausgeben (vor HV nicht an Kunden weitergeben!)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox
+								value="#{uReportsSession.geheimeWeisungenAusgeben}" />
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==124}">
+					<!-- Gästeliste -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Listenart"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.gaestelisteArt}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Übersicht" itemValue="1" />
+								<f:selectItem itemLabel="Präsenz" itemValue="2" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel
+								value="Zugangsdaten (Passwörter) (nur bei Übersicht)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox
+								value="#{uReportsSession.gaestelistePasswoerter}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Sortierung"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio
+								value="#{uReportsSession.gaestelisteSortierung}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Zutrittsnummer" itemValue="1" />
+								<f:selectItem itemLabel="Name" itemValue="2" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Selektierung (nur bei Präsenz)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.gaestelisteSelektion}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Alle" itemValue="1" />
+								<f:selectItem itemLabel="Aktuell präsente" itemValue="2" />
+								<f:selectItem itemLabel="Alle jemals präsente" itemValue="3" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==129}">
+					<!-- Kontrollliste Weisungen-->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Ab Datum (leer=alle, sonst: JJJJ.MM.TT HH:MM:SS, bzw. Teile)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText
+								value="#{uReportsSession.kontrollisteWeisungenDruckenAb}"
+								maxlength="19" size="19"></h:inputText>
+						</p:column>
+
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup
+					rendered="#{uReportsSession.reportNummer==130 or uReportsSession.reportNummer==131}">
+					<!-- Elektronischer Einladungsversand-->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Stichtag bis zu dem Registrierung erfolgt sein soll (TT.MM.JJJJ oder leer=alle)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.mailRegistrierungBis}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==132}">
+					<!-- Sonder-Report: Arbeitsplatzstatistik-->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Startzeit (JJJJ.MM.JJ HH:MM:SS)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.statistikStartZeit}"
+								maxlength="20" size="20">
+							</h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Zeitslot Länge"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.statistikZeitSlotLaenge}"
+								maxlength="20" size="20">
+							</h:inputText>
+						</p:column>
+
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==133}">
+					<!-- Sonder-Report: Eintrittskarten-Barcodes -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Ab Nummer EK"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.vonNummerEK}"
+								maxlength="20" size="22"></h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Bis Nummer EK"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.bisNummerEK}"
+								maxlength="20" size="22"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Ab Nummer SK"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.vonNummerSK}"
+								maxlength="20" size="22"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Eintrittskarten-Index für EK (leer=keiner)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.nebenNummerEK}"
+								maxlength="2" size="4"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==134}">
+					<!-- Sonder-Report: Einladungs-Barcodes -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Ab Nummer Aktionär"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.vonNummerAktionaer}"
+								maxlength="20" size="22">
+							</h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Bis Nummer Aktionär"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.bisNummerAktionaer}"
+								maxlength="20" size="22">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==136}">
+					<!-- Basis-Set Abgleich -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Ausgangsset"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.vergleichAusgangsset}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel
+								value="Vergleichsset (es werden ggf. die Daten vom Ausgangsset ins Vergleichsset übernommen)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.vergleichVergleichsset}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+						</p:column>
+						<p:column>
+							<br />
+							<h:outputLabel
+								value="Achtung: wenn eines der folgenden Felder angehakt wird, werden die Basis-Set automatisch aktualisiert. Wenn keines der Felder angehakt wird, erfolgt lediglich ein Vergleich und die Ausgabe eines Protokolls">
+							</h:outputLabel>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Seitenname / Bezeichnung übernehmen"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox
+								value="#{uReportsSession.seiteBezeichnungUebernehmen}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Fehlende Einträge übernehmen"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox
+								value="#{uReportsSession.fehlendeEintraegeUebernehmen}" />
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==137}">
+					<!-- Freiwillige Anmeldungen -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Selektion"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio
+								value="#{uReportsSession.freiwilligeAnmeldungenTeilnehmemerSelektion}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Alle 'Aktiven'" itemValue="1" />
+								<f:selectItem itemLabel="Alle angemeldeten" itemValue="2" />
+								<f:selectItem itemLabel="Alle abgemeldeten" itemValue="3" />
+								<f:selectItem itemLabel="Präsenz-Angemeldete" itemValue="4" />
+								<f:selectItem itemLabel="Virtuell-Angemeldete" itemValue="5" />
+							</h:selectOneRadio>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==138}">
+					<!-- Veranstaltungen -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Veranstaltungs-Nr."></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.veranstaltungsNr}"
+								maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Selektion"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio
+								value="#{uReportsSession.veranstaltungenTeilnehmerSelektion}"
+								layout="pageDirection">
+								<f:selectItem itemLabel="Alle 'Aktiven'" itemValue="1" />
+								<f:selectItem itemLabel="Alle angemeldeten" itemValue="2" />
+								<f:selectItem itemLabel="Alle abgemeldeten" itemValue="3" />
+							</h:selectOneRadio>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup
+					rendered="#{uReportsSession.reportNummer==146 or uReportsSession.reportNummer==147or uReportsSession.reportNummer==148}">
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Import-Datei:"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.importDateiname}"
+								maxlength="150" size="60">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==151}">
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Import-Datei:"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.importDateiname}"
+								maxlength="150" size="60">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==149}">
+					<!-- Erstregistrierung Portal -->
+					<p:panelGrid
+						columnClasses="panel25FirstColumn, panel25SecondColumn"
+						columns="2" style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Registriert bis (TT.MM.JJJJ HH:MM:SS):"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.registriertBis}"
+								maxlength="150" size="60">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==153}">
+					<!-- Veranstaltungen - Detailteilnehmerlisten -->
+					<h:panelGroup rendered="#{uReportsSession.liefereVeranstaltungenReportAuswahlIstLeer()==true}">
+						<h:outputLabel value="Keine Reports aktiv" />
+					</h:panelGroup>
+					<h:panelGroup rendered="#{uReportsSession.liefereVeranstaltungenReportAuswahlIstLeer()==false}">
+							<p:dataTable value="#{uReportsSession.veranstaltungenReportAuswahl}" var="reportZurAuswahl">
+
+								<p:column styleClass="colStandard" style="width:20%">
+									<f:facet name="header">
+									</f:facet>
+									<h:commandButton value="Auswählen" styleClass="btnNeutral"
+										action="#{uReports.doVeranstaltungManagementDetailAusfuehren(reportZurAuswahl)}"
+										onclick="this.form.target='_self'" />
+								</p:column>
+
+								<p:column>
+									<f:facet name="header" styleClass="colStandard" style="width:80%">
+										<h:outputText value="Report" />
+										<!-- style="float: left"-->
+									</f:facet>
+									<h:outputText value="#{reportZurAuswahl.elementBezeichnung}" />
+								</p:column>
+							</p:dataTable>
+					</h:panelGroup>
+				</h:panelGroup>
+
+
+
+			</div>
+
+		</h:form>
+    </ui:define>
+</ui:composition>

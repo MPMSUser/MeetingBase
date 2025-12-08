@@ -1,0 +1,121 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+	xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+	<tr>
+		<td>
+			<h:panelGroup rendered="#{eclVeranstaltungenM.zeigeInterneInfo}">
+				<br />
+				<h:outputLabel
+					value="===================Element Id #{parameterElement1.identElement} Typ #{parameterElement1.elementTyp} ==================" />
+				<br />
+				<h:outputLabel value="=====Element anzeigen = #{parameterElement1.elementAnzeigen()}" />
+				<br />
+			</h:panelGroup>
+
+			<h:panelGroup rendered="#{parameterElement1.elementAnzeigen()}">
+
+				<h:panelGroup rendered="#{parameterElement1.elementTyp==1}">
+					<!-- Überschrift -->
+					<h1>
+						<h:outputLabel value="#{parameterElement1.textExtern}" escape="false" />
+					</h1>
+					<br />
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{parameterElement1.elementTyp==2}">
+					<!-- Text -->
+					<h:outputLabel value="#{parameterElement1.textExtern}" escape="false" />
+					<br />
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{parameterElement1.elementTyp==3}">
+					<!-- Eingabefeld Anzahl-->
+					<h:panelGroup rendered="#{parameterElement1.textExtern!=''}">
+						<h:outputLabel value="#{parameterElement1.textExtern}" escape="false" />
+					</h:panelGroup>
+					<h:inputText value="#{parameterElement1.eingabeWert}" maxlength="6" size="6"></h:inputText>
+					<h:panelGroup rendered="#{parameterElement1.textExternNach!=''}">
+						<h:outputLabel value="#{parameterElement1.textExternNach}" escape="false" />
+					</h:panelGroup>
+					<br />
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{parameterElement1.elementTyp==4}">
+					<!-- Eingabefeld String-->
+					<h:panelGroup rendered="#{parameterElement1.textExtern!=''}">
+						<h:outputLabel value="#{parameterElement1.textExtern}" escape="false" />
+					</h:panelGroup>
+					<h:inputText value="#{parameterElement1.eingabeWert}" maxlength="#{parameterElement1.maximalWert}"
+						size="#{parameterElement1.minimalWert}"></h:inputText>
+					<h:panelGroup rendered="#{parameterElement1.textExternNach!=''}">
+						<h:outputLabel value="#{parameterElement1.textExternNach}" escape="false" />
+					</h:panelGroup>
+					<br />
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{parameterElement1.elementTyp==5}">
+					<ui:repeat value="#{parameterElement1.veranstaltungenElementDetailListe}" var="detailElement">
+						<h:selectBooleanCheckbox value="#{detailElement.geradeSelektiert}">
+							<f:ajax render="veranstaltungsbereich1" />
+						</h:selectBooleanCheckbox>
+						<h:outputLabel value="#{detailElement.textExtern} " escape="false" />
+						<br />
+					</ui:repeat>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{parameterElement1.elementTyp==6 and parameterElement1.elementDesign==2}">
+					<!-- Radiobutton vertikal-->
+					<h:selectOneRadio value="#{parameterElement1.eingabeWert}" layout="pageDirection">
+						<f:selectItems value="#{parameterElement1.selectItemListeFuerRadiobutton}" var="item"
+							itemLabel="#{item.itemLabel}" itemValue="#{item.itemValue}" />
+						<f:ajax render="veranstaltungsbereich1" />
+					</h:selectOneRadio>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{parameterElement1.elementTyp==6 and parameterElement1.elementDesign==1}">
+					<!-- Radiobutton horizontal-->
+					<h:selectOneRadio value="#{parameterElement1.eingabeWert}" layout="lineDirection">
+						<f:selectItems value="#{parameterElement1.selectItemListeFuerRadiobutton}" var="item"
+							itemLabel="#{item.itemLabel}" itemValue="#{item.itemValue}" />
+						<f:ajax render="veranstaltungsbereich1" />
+					</h:selectOneRadio>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{eclVeranstaltungenM.zeigeInterneInfo}">
+					<br />
+					<h:outputLabel
+						value="=====parameterElement1.pruefeObElementeVorhanden() #{parameterElement1.pruefeObElementeVorhanden()}" />
+					<br />
+				</h:panelGroup>
+
+
+				<!-- Schleife für alle Elemente -->
+				<h:panelGroup id="veranstaltungsbereich1">
+					<h:panelGroup rendered="#{parameterElement1.pruefeObElementeVorhanden()==true}">
+						<ui:repeat value="#{parameterElement1.veranstaltungenElementListe}" var="element2">
+							<ui:include src="iVeranstaltungenIElement2.xhtml">
+								<ui:param name="parameterElement2" value="#{element2}" />
+							</ui:include>
+						</ui:repeat>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+
+		</td>
+	</tr>
+</ui:composition>

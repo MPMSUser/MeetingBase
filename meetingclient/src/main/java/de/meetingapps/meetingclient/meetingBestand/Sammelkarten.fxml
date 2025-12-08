@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      <Button fx:id="btnDetailsAnzeigen" layoutX="14.0" layoutY="743.0" mnemonicParsing="false" onAction="#clickedBtnDetailsAnzeigen" prefHeight="30.0" prefWidth="230.0" text="Details anzeigen" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnSammelkartendatenAendern" layoutX="221.0" layoutY="743.0" mnemonicParsing="false" onAction="#clickedBtnSammelkartendatenAendern" prefHeight="30.0" prefWidth="230.0" text="Sammelkartendaten ändern" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="260.0" />
+      <ScrollPane fx:id="scpnUebersicht" fitToHeight="true" fitToWidth="true" layoutX="14.0" layoutY="49.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="45.0" />
+      <Button fx:id="btnVertreterEintrittskarten" layoutX="477.0" layoutY="743.0" mnemonicParsing="false" onAction="#clickedBtnVertreterEintrittskarten" prefHeight="30.0" prefWidth="230.0" text="Vertreter / Eintrittskarten" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="505.0" />
+      <HBox spacing="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <CheckBox fx:id="cbNurAktiveAnzeigen" mnemonicParsing="false" onAction="#onCbNurAktiveAnzeigen" selected="true" text="Nur aktive Sammelkarten anzeigen" />
+            <CheckBox fx:id="cbNullBestaende" mnemonicParsing="false" onAction="#onCbNullBestaende" selected="true" text="0-Bestände ausblenden" />
+         </children>
+      </HBox>
+      <Button fx:id="btnNeueSammelkarteAnlegen" layoutX="893.0" layoutY="743.0" mnemonicParsing="false" onAction="#clickedBtnNeueSammelkarteAnlegen" prefHeight="30.0" prefWidth="230.0" text="Neue Sammelkarte anlegen" AnchorPane.bottomAnchor="65.0" AnchorPane.rightAnchor="285.0" />
+      <Button fx:id="btnBearbeitungKopfweisungen" layoutX="221.0" layoutY="786.0" mnemonicParsing="false" onAction="#clickedBtnBearbeitungKopfweisungen" prefHeight="30.0" prefWidth="230.0" text="Bearbeitung Kopfweisungen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="260.0" />
+      <Button fx:id="btnKonsistenzpruefungSammelkarten" layoutX="1178.0" layoutY="786.0" mnemonicParsing="false" onAction="#clickedBtnKonsistenzpruefungSammelkarten" prefHeight="30.0" prefWidth="230.0" text="Konsistenzprüfung Sammelkarten" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0" />
+      <Button fx:id="btnStapelUmbuchungen" layoutX="14.0" layoutY="786.0" mnemonicParsing="false" onAction="#clickedBtnStapelUmbuchungen" prefHeight="30.0" prefWidth="230.0" text="Stapel-Umbuchungen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnZuordnenEKAlle" layoutX="1178.0" layoutY="743.0" mnemonicParsing="false" onAction="#clickedZuordnenEKAlle" prefHeight="30.0" prefWidth="230.0" text="Zuordnung EK für alle Sammelkarten" AnchorPane.bottomAnchor="65.0" AnchorPane.rightAnchor="40.0" />
+      <Button fx:id="btnSammelkartenNeuStandard" layoutX="893.0" layoutY="789.0" mnemonicParsing="false" onAction="#onBtnSammelkartenNeuStandard" prefHeight="30.0" prefWidth="230.0" text="Sammelkarten Standard anlegen" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="285.0" />
+      <Button fx:id="btnInaktiveWeisungenAktivieren" layoutX="504.0" layoutY="714.0" mnemonicParsing="false" onAction="#clickedBtnInaktiveWeisungenAktivieren" prefHeight="30.0" prefWidth="230.0" text="Inaktive Weisungen aktivieren" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="505.0" />
+</children>
+</AnchorPane>

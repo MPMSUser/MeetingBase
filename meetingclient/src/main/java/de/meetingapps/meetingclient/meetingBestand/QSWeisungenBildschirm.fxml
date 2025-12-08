@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      <Label layoutX="26.0" layoutY="25.0" prefHeight="25.0" text="Nächste Nummer" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0" />
+      <TextField fx:id="tfNaechsteNummer" layoutX="167.0" layoutY="21.0" onKeyPressed="#onKeyNaechsteNummer" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="1100.0" AnchorPane.topAnchor="25.0" />
+      <Label layoutX="421.0" layoutY="25.0" prefHeight="25.0" prefWidth="120.0" text="Angezeigte Nummer" AnchorPane.leftAnchor="450.0" AnchorPane.topAnchor="25.0" />
+      <TextField fx:id="tfAngezeigteNummer" editable="false" layoutX="538.0" layoutY="21.0" AnchorPane.leftAnchor="580.0" AnchorPane.rightAnchor="670.0" AnchorPane.topAnchor="25.0" />
+      <ScrollPane fx:id="scrpnWeisungen" layoutX="24.0" layoutY="175.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="185.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+      <Label layoutX="28.0" layoutY="66.0" prefHeight="25.0" text="Name, Vorname" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="65.0" />
+      <Label layoutX="27.0" layoutY="99.0" prefHeight="25.0" text="Ort" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="105.0" />
+      <Label layoutX="27.0" layoutY="136.0" prefHeight="25.0" text="Aktien" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="145.0" />
+      <TextField fx:id="tfNameVorname" editable="false" layoutX="167.0" layoutY="62.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="1100.0" AnchorPane.topAnchor="65.0" />
+      <TextField fx:id="tfOrt" editable="false" layoutX="167.0" layoutY="95.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="1100.0" AnchorPane.topAnchor="105.0" />
+      <TextField fx:id="tfAktien" editable="false" layoutX="167.0" layoutY="132.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="1100.0" AnchorPane.topAnchor="145.0" />
+      <Label layoutX="1013.0" layoutY="25.0" prefHeight="25.0" text="Sammelkarte" AnchorPane.rightAnchor="420.0" AnchorPane.topAnchor="25.0" />
+      <TextField fx:id="tfSammelkarte" editable="false" layoutX="1128.0" layoutY="21.0" AnchorPane.leftAnchor="1100.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0" />
+</children>
+</AnchorPane>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="500.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="lblSammelkarten">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <HBox alignment="TOP_CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="35.0" prefWidth="150.0" text="Nächste Präsenz:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <Label fx:id="lblAktuellePraesenzNr" alignment="CENTER" prefHeight="35.0" prefWidth="150.0" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets left="25.0" right="25.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="TOP_CENTER">
+         <children>
+            <Button fx:id="btnPraesenzFeststellen" mnemonicParsing="false" onAction="#clickedBtnPraesenzFeststellen" prefHeight="35.0" prefWidth="150.0" text="Präsenz feststellen" />
+            <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnAbbrechen" cancelButton="true" mnemonicParsing="false" onAction="#clickedBtnAbbrechen" prefHeight="35.0" prefWidth="150.0" text="Abbrechen" />
+         </children>
+         <VBox.margin>
+            <Insets left="25.0" right="25.0" />
+         </VBox.margin>
+      </HBox>
+      <Label fx:id="lblMeldung" text="Label">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnDrucken" mnemonicParsing="false" onAction="#onBtnDrucken" prefHeight="35.0" text="Drucken" />
+      <Region maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-style: hidden hidden solid hidden;" VBox.vgrow="ALWAYS" />
+      <Button fx:id="btnGesamtabgang" mnemonicParsing="false" onAction="#onBtnGesamtabgang" prefHeight="25.0" prefWidth="129.0" text="Gesamtabgang" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="50.0" right="50.0" top="15.0" />
+   </padding>
+</VBox>

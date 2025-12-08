@@ -1,0 +1,233 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+
+    <f:subview id="pNachrichtenOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+    <!-- Inhaltsbereich -->
+    <section id="inhalts-bereich">
+        <div class="col-4">
+
+            <!-- Überschrift  -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1548')}">
+                <p>
+                <h2>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1548)}" escape="false">
+                    </h:outputLabel>
+                </h2>
+                </p>
+            </h:panelGroup>
+
+            <!-- Starttext -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1549')}">
+                <p>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1549)}" escape="false">
+                    </h:outputLabel>
+                </p>
+            </h:panelGroup>
+
+            <div class="row d-flex border-grau-dunkel border-radius-10">
+
+                <div class="col-3 nachrichten">
+                    <!-- Nachrichtenliste -->
+
+                    <ui:repeat value="#{tNachrichtenSession.empfangeneNachrichten}" var="nachricht"
+                        id="schleifeNachrichten">
+
+                        <h:panelGroup rendered="#{nachricht.anzeigeBeimEmpfaengerGelesen==0}">
+                            <h:commandLink action="#{tNachrichten.doNachrichtAnzeigen(nachricht)}">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                <div class="nachricht-vorschau-container t-bold">
+                                    <div class="nachricht-vorschau-header">
+                                    </div>
+                                    <div class="nachricht-vorschau-body">
+                                        <h:outputText value="#{nachricht.liefereSendezeitpunkt()}" />
+                                    </div>
+                                    <div class="nachricht-vorschau-footer">
+                                        <!-- Betreff mit Vor- und Nach-Text, soweit vorhanden -->
+                                        <h:panelGroup rendered="#{nachricht.betreffTextNrVor!=0}">
+                                            <h:panelGroup
+                                                rendered="#{eclPortalTexteM.pruefeITextVorhanden(nachricht.betreffTextNrVor)}">
+                                                <h:outputLabel
+                                                    value="#{eclPortalTexteM.holeIText(nachricht.betreffTextNrVor)}"
+                                                    escape="false"></h:outputLabel>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <h:outputText value="#{nachricht.betreff}" />
+                                        <h:panelGroup rendered="#{nachricht.betreffTextNrNach!=0}">
+                                            <h:panelGroup
+                                                rendered="#{eclPortalTexteM.pruefeITextVorhanden(nachricht.betreffTextNrNach)}">
+                                                <h:outputLabel
+                                                    value="#{eclPortalTexteM.holeIText(nachricht.betreffTextNrNach)}"
+                                                    escape="false"></h:outputLabel>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                            </h:commandLink>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{nachricht.anzeigeBeimEmpfaengerGelesen==1}">
+                            <h:commandLink action="#{tNachrichten.doNachrichtAnzeigen(nachricht)}">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                <h:panelGroup rendered="#{!nachricht.detailNachrichtWirdAngezeigt}">
+                                    <div class="nachricht-vorschau-container">
+                                        <div class="nachricht-vorschau-header"></div>
+                                        <div class="nachricht-vorschau-body">
+                                            <h:outputText value="#{nachricht.liefereSendezeitpunkt()}" />
+                                        </div>
+                                        <div class="nachricht-vorschau-footer">
+                                            <!-- Betreff mit Vor- und Nach-Text, soweit vorhanden -->
+                                            <h:panelGroup rendered="#{nachricht.betreffTextNrVor!=0}">
+                                                <h:panelGroup
+                                                    rendered="#{eclPortalTexteM.pruefeITextVorhanden(nachricht.betreffTextNrVor)}">
+                                                    <h:outputLabel
+                                                        value="#{eclPortalTexteM.holeIText(nachricht.betreffTextNrVor)}"
+                                                        escape="false"></h:outputLabel>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <h:outputText value="#{nachricht.betreff}" />
+                                            <h:panelGroup rendered="#{nachricht.betreffTextNrNach!=0}">
+                                                <h:panelGroup
+                                                    rendered="#{eclPortalTexteM.pruefeITextVorhanden(nachricht.betreffTextNrNach)}">
+                                                    <h:outputLabel
+                                                        value="#{eclPortalTexteM.holeIText(nachricht.betreffTextNrNach)}"
+                                                        escape="false"></h:outputLabel>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{nachricht.detailNachrichtWirdAngezeigt}">
+                                    <div class="nachricht-vorschau-container-angezeigt">
+                                        <div class="nachricht-vorschau-header"></div>
+                                        <div class="nachricht-vorschau-body">
+                                            <h:outputText value="#{nachricht.liefereSendezeitpunkt()}" />
+                                        </div>
+                                        <div class="nachricht-vorschau-footer">
+                                            <!-- Betreff mit Vor- und Nach-Text, soweit vorhanden -->
+                                            <h:panelGroup rendered="#{nachricht.betreffTextNrVor!=0}">
+                                                <h:panelGroup
+                                                    rendered="#{eclPortalTexteM.pruefeITextVorhanden(nachricht.betreffTextNrVor)}">
+                                                    <h:outputLabel
+                                                        value="#{eclPortalTexteM.holeIText(nachricht.betreffTextNrVor)}"
+                                                        escape="false"></h:outputLabel>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <h:outputText value="#{nachricht.betreff}" />
+                                            <h:panelGroup rendered="#{nachricht.betreffTextNrNach!=0}">
+                                                <h:panelGroup
+                                                    rendered="#{eclPortalTexteM.pruefeITextVorhanden(nachricht.betreffTextNrNach)}">
+                                                    <h:outputLabel
+                                                        value="#{eclPortalTexteM.holeIText(nachricht.betreffTextNrNach)}"
+                                                        escape="false"></h:outputLabel>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </div>
+                                    </div>
+                                </h:panelGroup>
+                            </h:commandLink>
+                        </h:panelGroup>
+
+
+
+                    </ui:repeat>
+
+
+                </div>
+                <div class="col-5">
+                    <h:panelGroup rendered="#{tNachrichtenSession.nachrichtDetailWirdAngezeigt}">
+                        <div class="row">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1550')}">
+                                <p>
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1550)}" escape="false">
+                                    </h:outputLabel>
+                                </p>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{tNachrichtenSession.nachrichtDetailMailTextTextNrVor!=0}">
+                                <h:panelGroup
+                                    rendered="#{eclPortalTexteM.pruefeITextVorhanden(tNachrichtenSession.nachrichtDetailMailTextTextNrVor)}">
+                                    <h:outputLabel
+                                        value="#{eclPortalTexteM.holeIText(tNachrichtenSession.nachrichtDetailMailTextTextNrVor)}"
+                                        escape="false"></h:outputLabel>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:outputText value="#{tNachrichtenSession.nachrichtDetailText}" escape="false" />
+                            <h:panelGroup rendered="#{tNachrichtenSession.nachrichtDetailMailTextTextNrNach!=0}">
+                                <h:panelGroup
+                                    rendered="#{eclPortalTexteM.pruefeITextVorhanden(tNachrichtenSession.nachrichtDetailMailTextTextNrNach)}">
+                                    <h:outputLabel
+                                        value="#{eclPortalTexteM.holeIText(tNachrichtenSession.nachrichtDetailMailTextTextNrNach)}"
+                                        escape="false"></h:outputLabel>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </div>
+                        <div class="row">
+                            <!-- Funktionsbuttons -->
+                            <div class="col-1_3">
+                                <h:panelGroup
+                                    rendered="#{tNachrichtenSession.nachrichtDetailFunktionsButton1TextNr!=0}">
+                                    <h:commandButton
+                                        value="#{eclPortalTexteM.holeIText(tNachrichtenSession.nachrichtDetailFunktionsButton1TextNr)}"
+                                        action="#{tNachrichten.doNachrichtFunktionsbutton1(nachricht)}"
+                                        styleClass="btn-typ-01">
+                                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                    <br />
+                                </h:panelGroup>
+                            </div>
+                            <div class="col-1_3">
+                                <h:panelGroup
+                                    rendered="#{tNachrichtenSession.nachrichtDetailFunktionsButton2TextNr!=0}">
+                                    <h:commandButton
+                                        value="#{eclPortalTexteM.holeIText(tNachrichtenSession.nachrichtDetailFunktionsButton2TextNr)}"
+                                        action="#{tNachrichten.doNachrichtFunktionsbutton2(nachricht)}"
+                                        styleClass="btn-typ-01">
+                                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                    <br />
+                                </h:panelGroup>
+                            </div>
+                            <div class="col-1_3">
+                                <!-- Button Nachricht löschen -->
+                                <h:commandButton value="#{eclPortalTexteM.holeIText(1558)}"
+                                    action="#{tNachrichten.doNachrichtLoeschen()}" styleClass="btn-typ-01">
+                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                </div>
+
+            </div>
+
+            <!-- Endetext -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1551')}">
+                <p>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1551)}" escape="false"></h:outputLabel>
+                </p>
+            </h:panelGroup>
+
+        </div>
+    </section>
+
+</ui:composition>

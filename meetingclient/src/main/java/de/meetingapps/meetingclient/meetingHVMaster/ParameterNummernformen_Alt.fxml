@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="729.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="526.0" />
+      <ScrollPane fx:id="pnNummernformen" layoutX="20.0" layoutY="41.0" prefHeight="282.0" prefWidth="499.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="729.0" layoutX="549.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="941.0" />
+      <TabPane layoutX="555.0" layoutY="230.0" prefHeight="476.0" prefWidth="929.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+         <Tab text="Parameter (Mandantenabhängig)">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="412.0" prefWidth="929.0">
+                     <children>
+                        <ScrollPane layoutX="7.0" prefHeight="411.0" prefWidth="918.0">
+                           <content>
+                              <Pane prefHeight="407.0" prefWidth="519.0">
+                                 <children>
+                                    <Label layoutX="33.0" layoutY="34.0" text="HV-Ident-Nr (maximal 8 Stellen)" />
+                                    <Label layoutX="33.0" layoutY="77.0" text="Kontrollzahl 3 Stellen" />
+                                    <Label layoutX="33.0" layoutY="111.0" text="Kontrollzahl 2 Stellen" />
+                                    <Label layoutX="33.0" layoutY="146.0" text="Kontrollzahl 1 Stelle" />
+                                    <TextField fx:id="tfHVIdent" layoutX="259.0" layoutY="30.0" />
+                                    <TextField fx:id="tfKontrollzahl3" layoutX="259.0" layoutY="73.0" prefHeight="25.0" prefWidth="89.0" />
+                                    <TextField fx:id="tfKontrollzahl2" layoutX="259.0" layoutY="107.0" prefHeight="25.0" prefWidth="89.0" />
+                                    <TextField fx:id="tfKontrollzahl1" layoutX="259.0" layoutY="142.0" prefHeight="25.0" prefWidth="89.0" />
+                                 </children>
+                              </Pane>
+                           </content></ScrollPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+         <Tab text="Nummernkreise">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="412.0" prefWidth="929.0">
+                     <children>
+                        <ScrollPane layoutX="7.0" prefHeight="411.0" prefWidth="918.0">
+                           <content>
+                              <Pane prefHeight="407.0" prefWidth="913.0">
+                                 <children>
+                                    <GridPane hgap="10.0" layoutX="14.0" layoutY="14.0" prefHeight="368.0" prefWidth="892.0">
+                                      <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="179.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="119.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Eintrittskarten-Nr" GridPane.columnIndex="1" />
+                                          <Label text="Gastkarten-Nr" GridPane.columnIndex="2" />
+                                          <Label text="Stimmkarten-Nr" GridPane.columnIndex="3" />
+                                          <Label text="Voter-Nr" GridPane.columnIndex="4" />
+                                          <Label text="Persönliche Ident-Nr" GridPane.columnIndex="5" />
+                                          <Label text="Länge Kartennummer" GridPane.rowIndex="1" />
+                                          <Label text="Auch Alphanumerisch" GridPane.rowIndex="2" />
+                                          <Label text="Nummernkreis gesamt von" GridPane.rowIndex="3" />
+                                          <Label text="Nummernkreis gesamt bis" GridPane.rowIndex="4" />
+                                          <Label text="Nummernkreis manuell von" GridPane.rowIndex="5" />
+                                          <Label text="Nummernkreis manuell bis" GridPane.rowIndex="6" />
+                                          <Label text="Nummernkreis Auto von" GridPane.rowIndex="7" />
+                                          <Label text="Nummernkreis Auto bis" GridPane.rowIndex="8" />
+                                          <Label text="Nummernkreis Sammelk. von" GridPane.rowIndex="9" />
+                                          <Label text="Nummernkreis Sammelk. bis" GridPane.rowIndex="10" />
+                                          <TextField fx:id="tfEKLaenge" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="cbEKAlpha" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="tfEKVonGesamt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tfEKBisGesamt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextField fx:id="tfEKVonManuell" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <TextField fx:id="tfEKBisManuell" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextField fx:id="tfEKVonAuto" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <TextField fx:id="tfEKBisAuto" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <TextField fx:id="tfEKSammelkVon" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <TextField fx:id="tfEKSammelkBis" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                          <TextField fx:id="tfGKLaenge" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="cbGKAlpha" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                          <TextField fx:id="tfGKVonGesamt" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tfGKBisGesamt" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                          <TextField fx:id="tfGKVonManuell" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                          <TextField fx:id="tfGKBisManuell" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                          <TextField fx:id="tfGKVonAuto" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                          <TextField fx:id="tfGKBisAuto" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                          <TextField fx:id="tfSKLaenge" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="cbSKAlpha" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                          <TextField fx:id="tfSKVonGesamt" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tfSKBisGesamt" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                          <TextField fx:id="tfSKVonManuell" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                          <TextField fx:id="tfSKBisManuell" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                          <TextField fx:id="tfSKVonAuto" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                          <TextField fx:id="tfSKBisAuto" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                          <TextField fx:id="tfSKSLaenge" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                          <CheckBox fx:id="cbSKSAlpha" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                          <TextField fx:id="tfSKSVonGesamt" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                          <TextField fx:id="tfSKSBisGesamt" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                          <TextField fx:id="tfPILaenge" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <Label layoutX="14.0" layoutY="385.0" text="Hinweis: Nummernkreis Auto für Stimmkarten-Nr, möglicherweise nicht verwendet?" />
+                                 </children>
+                              </Pane>
+                           </content></ScrollPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+         <Tab text="Stimmkarten-Subkreise">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="412.0" prefWidth="929.0">
+                     <children>
+                        <ScrollPane layoutX="7.0" prefHeight="411.0" prefWidth="918.0">
+                           <content>
+                              <Pane prefHeight="407.0" prefWidth="913.0">
+                                 <children>
+                                    <GridPane fx:id="gridPaneStimmkartenSub" hgap="10.0" layoutX="14.0" layoutY="14.0" prefHeight="308.0" prefWidth="727.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="10.0" prefWidth="221.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="105.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Gattung 1" GridPane.rowIndex="1" />
+                                          <Label text="Gattung 2" GridPane.rowIndex="3" />
+                                          <Label text="Gattung 3 (derzeit nicht implementiert)" wrapText="true" GridPane.rowIndex="5" />
+                                          <Label text="Gattung 4 (derzeit nicht implementiert)" wrapText="true" GridPane.rowIndex="7" />
+                                          <Label text="Gattung 5 (derzeit nicht implementiert)" wrapText="true" GridPane.rowIndex="9" />
+                                          <Label prefHeight="34.0" prefWidth="100.0" text="1: von / bis" wrapText="true" GridPane.columnIndex="1" />
+                                          <Label text="2: von/bis" GridPane.columnIndex="2" />
+                                          <Label text="3: von/bis" GridPane.columnIndex="3" />
+                                          <Label text="4: von/bis" GridPane.columnIndex="4" />
+                                          <Label text="Virtuell von/bis" GridPane.columnIndex="5" />
+                                       </children>
+                                    </GridPane>
+                                    <Label layoutX="15.0" layoutY="327.0" prefHeight="77.0" prefWidth="880.0" text="Hinweis: diese Nummernkreise dienen dazu, um - bei unterschiedlichen Gattungen - beim Tausch beliebig die Ausgabe des zur jeweiligen Gattung passenden Stimmmaterials  maschinell zu überprüfen. Es können jeweils 4 verschiedene Stimmaterialien zugeordnet werden (von/bis 0 keine Zuordnung), zusätzlich die App-interne bzw. Online-Stimmkarte. Sie dürfen sich nicht überschneiden, und müssen innerhalb des &quot;Manuellen&quot; Nummernkreises der Stimmkarten im Tab &quot;Nummernkreise&quot; sein. Bitte auch die &quot;nicht verwendeten&quot; und &quot;nicht implemeniterten&quot; mit einem Dummy-Kreis füllen!" wrapText="true" />
+                                 </children>
+                              </Pane>
+                           </content></ScrollPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+           <Tab text="Parameter">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane layoutX="7.0" prefHeight="409.0" prefWidth="918.0">
+                           <content>
+                              <Pane prefHeight="359.0" prefWidth="733.0">
+                                 <children>
+                                    <Label layoutX="32.0" layoutY="32.0" text="Ja - Kodierung" />
+                                    <Label layoutX="32.0" layoutY="65.0" text="Nein - Kodierung" />
+                                    <Label layoutX="32.0" layoutY="99.0" text="Enthaltung - Kodierung" />
+                                    <TextField fx:id="tfJa" layoutX="198.0" layoutY="28.0" prefHeight="25.0" prefWidth="71.0" />
+                                    <TextField fx:id="tfNein" layoutX="198.0" layoutY="61.0" prefHeight="25.0" prefWidth="71.0" />
+                                    <TextField fx:id="tfEnthaltung" layoutX="198.0" layoutY="95.0" prefHeight="25.0" prefWidth="71.0" />
+                                    <Label layoutX="406.0" layoutY="32.0" text="Prüfziffernverfahren" />
+                                    <Pane layoutX="406.0" layoutY="58.0" prefHeight="82.0" prefWidth="317.0">
+                                       <children>
+                                          <RadioButton fx:id="rbPruefzifferEKSK" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Prüfziffer nur für EK/SK-Teil berechnen">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="tgPruefzifferTeil" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="rbPruefzifferGesamt" layoutX="14.0" layoutY="43.0" mnemonicParsing="false" text="Prüfziffer nur für gesamte Nummer berechnen" toggleGroup="$tgPruefzifferTeil" />
+                                       </children>
+                                    </Pane>
+                                    <Pane layoutX="406.0" layoutY="163.0" prefHeight="128.0" prefWidth="324.0">
+                                       <children>
+                                          <RadioButton fx:id="rbPruefziffer1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Modulo 10, Wichtung 39713, Differenz auf 10">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="tgPruefzifferBerechnung" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="rbPruefziffer2" layoutX="14.0" layoutY="40.0" mnemonicParsing="false" text="Modulo 10, Wichtung 31313, Differenz auf 10" toggleGroup="$tgPruefzifferBerechnung" />
+                                          <RadioButton fx:id="rbPruefziffer3" layoutX="14.0" layoutY="65.0" mnemonicParsing="false" text="Modulo 10, Wichtung 39713" toggleGroup="$tgPruefzifferBerechnung" />
+                                          <RadioButton fx:id="rbPruefziffer4" layoutX="14.0" layoutY="89.0" mnemonicParsing="false" text="Modulo 10, Wichtung 31313" toggleGroup="$tgPruefzifferBerechnung" />
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </content></ScrollPane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Kodierung Kombi">
+                <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fx:id="pnKombi" layoutX="7.0" prefHeight="375.0" prefWidth="918.0" />
+                        <Label layoutX="22.0" layoutY="389.0" prefHeight="49.0" prefWidth="903.0" text="Hinweis: 1.) Wird nur verwendet, wenn einstellige Klassifizierung gewählt wurde. 2.) Jeder Kombicode von 0 bis 9 darf maximal einmal verwendet werden. 3.) Nicht-definierte Kombinationen müssen leer sein." wrapText="true" />
+                     </children></AnchorPane>
+            </content>
+         </Tab>
+           <Tab text="Kodierung Klasse, Art">
+             <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane layoutX="7.0" prefHeight="373.0" prefWidth="918.0">
+                           <content>
+                              <GridPane prefHeight="330.0" prefWidth="706.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="201.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.0" minWidth="10.0" prefWidth="82.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="77.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="219.0" minWidth="10.0" prefWidth="219.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Kartenklasse">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="Kartenart" GridPane.columnIndex="3">
+                                     <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                        </Label>
+                                    <Label text="Eintrittskartennummer" GridPane.rowIndex="1" />
+                                    <Label text="Gastkartennummer" GridPane.rowIndex="2" />
+                                    <Label text="Stimmkartennummer" GridPane.rowIndex="3" />
+                                    <Label text="Voternummer" GridPane.rowIndex="4" />
+                                    <Label text="App-Identifikation" GridPane.rowIndex="5" />
+                                    <Label text="Persönliche Ident" GridPane.rowIndex="6" />
+                                    <Label text="Eintrittskartennummer mit Index" GridPane.rowIndex="7" />
+                                    <Label text="Erstzugang" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                                    <Label text="Stimmkartenetikett" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                                    <Label text="Wiederzugang" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                                    <Label text="Abgang" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                                    <Label text="Vollmacht an Dritte erteilen" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                                    <Label text="Vollmacht an Dritte empfangen" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                                    <Label text="Stimmabschnittsnummer" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                                    <Label text="Vollmacht/Weisung an SRV" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                                    <TextField fx:id="tfEintrittskartennummer" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="tfGastkartennummer" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="tfStimmkartennummer" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="tfStimmkartennummerSecond" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="tfAppIdent" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <TextField fx:id="tfPersonenIdent" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <TextField fx:id="tfEintrittskartennummerMitIndex" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <TextField fx:id="tfErstzugang" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                                    <TextField fx:id="tfStimmkartenEtikett" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                                    <TextField fx:id="tfWiederzugang" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                                    <TextField fx:id="tfAbgang" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                                    <TextField fx:id="tfVollmachtAnDritteErteilen" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                                    <TextField fx:id="tfVollmachtAnDritteEmpfangen" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                                    <TextField fx:id="tfStimmabschnittsnummer" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                                    <TextField fx:id="tfVollmachtWeisungSRV" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+                                 </children>
+                              </GridPane>
+                           </content></ScrollPane>
+                        <Label layoutX="14.0" layoutY="389.0" prefHeight="54.0" prefWidth="770.0" text="Hinweise: 1. ) Wird nur verwendet, wenn zweistellige Klassifizierung ausgewählt ist. Muß aber in jedem Fall gepflegt werden (auch bei einstelliger Klassifizierung)! 2.) Kartenklassen müssen (auch wenn nicht verwendet) jeweils eindeutig mit 0 bis 9 belegt werden. Kartenarten analog." wrapText="true" />
+                     </children></AnchorPane>
+            </content>
+        </Tab>
+          <Tab text="Klasse, Art -&gt; Nummernform">
+              <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="399.0" prefWidth="929.0">
+                     <children>
+                        <ScrollPane fx:id="pnKlasseArt" layoutX="7.0" prefHeight="363.0" prefWidth="918.0" />
+                        <Label layoutX="23.0" layoutY="378.0" prefHeight="51.0" prefWidth="897.0" text="Hinweise: 1.) Muß gefüllt werden für einstellige und zweistellige Klassifizierung. 2.) Eintragen der Nummernform-Ident, die für die jeweilige Klasse/Art verwendet werden soll. 3.) Leeres Feld = keine Nummernform eingetragen. 4.) In Superform muß (!) die Nummernform-Ident eingetragen werden, die verwendet werden soll, wenn in einer Art der jeweiligen Klasse keine Nummernform-Ident eingetragen ist." wrapText="true" />
+                     </children></AnchorPane>
+            </content>
+        </Tab>
+        </tabs>
+      </TabPane>
+      <Label layoutX="20.0" layoutY="14.0" text="Nummernformen">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="555.0" layoutY="26.0" text="Aktives Set">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="comboAktivesSet" layoutX="657.0" layoutY="24.0" prefHeight="25.0" prefWidth="825.0" />
+      <Label layoutX="555.0" layoutY="61.0" text="Beschreibung">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="tfBeschreibung" layoutX="659.0" layoutY="53.0" prefHeight="103.0" prefWidth="825.0" />
+      <RadioButton fx:id="rbEinstellig" layoutX="556.0" layoutY="203.0" mnemonicParsing="false" text="Einstellige Klassifizierung (&quot;Kombi&quot;)">
+         <toggleGroup>
+            <ToggleGroup fx:id="tgKlassifizierung" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbZweistellig" layoutX="818.0" layoutY="203.0" mnemonicParsing="false" text="Zweistellige Klassifizierung (Klasse, Art)" toggleGroup="$tgKlassifizierung" />
+      <Button fx:id="btnNeueNummernform" layoutX="20.0" layoutY="705.0" mnemonicParsing="false" onAction="#onBtnNeueNummernform" text="Neue Nummernform" />
+      <Button fx:id="btnAendernNummernform" layoutX="173.0" layoutY="705.0" mnemonicParsing="false" onAction="#onBtnAendernNummernform" text="Ändern Nummernform" />
+      <Label layoutX="555.0" layoutY="175.0" text="Mandant">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfMandant" layoutX="660.0" layoutY="173.0" prefHeight="25.0" prefWidth="106.0" />
+      <Label layoutX="783.0" layoutY="177.0" text="(0 = Mandantenübergreifend)" />
+      <GridPane layoutX="20.0" layoutY="327.0" prefHeight="340.0" prefWidth="499.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="a = Aktionsnummer - Kombicode" />
+            <Label text="b = Aktionsnummer - Klasse" GridPane.rowIndex="1" />
+            <Label text="c = Aktionsnummer - Art" GridPane.rowIndex="2" />
+            <Label text="d = Stimmkarten-Sub-Nummernkreis" GridPane.rowIndex="3" />
+            <Label text="e =HV-IdentNr (Länge wie Parameter)" GridPane.rowIndex="4" />
+            <Label text="fff = Mandantenummer" GridPane.rowIndex="5" />
+            <Label text="ggg = Kontrollzahl 3 Stellen (lt. Parameter)" GridPane.rowIndex="6" />
+            <Label text="hh = Kontrollzahl 2 Stellen (lt. Parameter)" GridPane.rowIndex="7" />
+            <Label text="jj = Stimmzettelnummer" GridPane.rowIndex="9" />
+            <Label text="i = Kontrollzahl 1 Stelle (lt. Parameter)" GridPane.rowIndex="8" />
+            <Label text="k = Prüfziffer" GridPane.rowIndex="10" />
+            <Label text="l = ignorieren" GridPane.rowIndex="11" />
+            <Label prefHeight="36.0" prefWidth="250.0" text="m = Identifikationssnummer (S-Nr / E-Nr etc.)" wrapText="true" GridPane.rowIndex="12" />
+            <Label text="o = Stimmart" GridPane.columnIndex="1" />
+            <Label text="p = Trennzeichen &quot;-&quot;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="nn = Identifikationsnummer - Index" GridPane.rowIndex="13" />
+            <Label text="q = Gattung" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <TextField fx:id="tfFehlermeldung" layoutX="14.0" layoutY="755.0" prefHeight="25.0" prefWidth="1475.0" />
+      <Button fx:id="btnSpeichernSet" layoutX="565.0" layoutY="705.0" mnemonicParsing="false" onAction="#onBtnSpeichernSet" text="Speichern" />
+      <Button fx:id="btnNeuesSet" layoutX="672.0" layoutY="705.0" mnemonicParsing="false" onAction="#onBtnNeuesSet" text="Neues Set" />
+   </children>
+</Pane>

@@ -1,0 +1,107 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Vollmachtsprüfung (erweitert)" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+
+            <div class="divArbeitsbereich">
+
+
+                <h:selectOneRadio id="auswahl" value="#{uWorkflowSession.anzeigeErwWorkflow}" layout="lineDirection">
+                    <f:selectItem itemLabel="geprüft und akzeptiert" itemValue="1" />
+                    <f:selectItem itemLabel="geprüft und abgelehnt" itemValue="2" />
+                    <f:selectItem itemLabel="zur Wiedervorlage" itemValue="3" />
+                    <f:selectItem itemLabel="nicht als Nachweis verwenden" itemValue="4" />
+                </h:selectOneRadio>
+                <br />
+
+                <h:outputLabel value="oder: Mitglieds-Nr. (Vollmachtgeber): "></h:outputLabel>
+                <h:inputText value="#{uWorkflowSession.sucheMitgliedsnummer}" maxlength="20" size="20"></h:inputText>
+                <br /> <br />
+
+                <!--
+                    <h:selectBooleanCheckbox
+                        value="#{uWorkflowSession.anzeigeNurUnQS}" />
+                    Qualitätsgesicherte Vorgänge ausblenden<br />
+                    -->
+
+                <h:commandButton value="Refresh Anzeige" action="#{uWorkflow.doRefreshErweitert()}"
+                    class="btnCommand" />
+                <br /> <br />
+
+            </div>
+
+
+            <!-- Anzeigen Suchergebnis -->
+            <div class="divArbeitsbereich">
+                <p class="divArbeitsbereichUeberschriftText">
+                    <h:outputLabel value="Geprüfte Dokumente"></h:outputLabel>
+                </p>
+
+
+                <h:dataTable value="#{uWorkflowSession.listSuchergebnis}" var="bestWorkflow"
+                    columnClasses="tblPersonC00, tblPersonC01, tblPersonC02, tblPersonC03, tblPersonC04"
+                    rowClasses="leftText" styleClass="tblPerson">
+                    <h:column>
+                        <h:commandButton value="Details" action="#{uWorkflow.doDetailsErweitert(bestWorkflow)}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dateiname" style="float: left" />
+                        </f:facet>
+                        <h:outputText value="#{bestWorkflow.dateinameBestaetigung}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Mitgliedsnummer" style="float: left" />
+                        </f:facet>
+                        <h:outputText value="#{bestWorkflow.zuAktionaersnummer}" />
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status" style="float: left" />
+                        </f:facet>
+                        <h:outputText value="#{bestWorkflow.pruefStatusErgebnisVolltext}" />
+                        <h:panelGroup rendered="#{bestWorkflow.storniert}">
+                            <br />
+                            <h:outputText value="Vollmacht ist widerrufen" />
+                        </h:panelGroup>
+                    </h:column>
+
+                </h:dataTable>
+                <br />
+            </div>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

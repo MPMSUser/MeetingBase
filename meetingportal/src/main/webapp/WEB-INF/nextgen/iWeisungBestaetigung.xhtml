@@ -1,0 +1,154 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+    <f:subview id="iWeisungBestaetigungOben">
+        <ui:include src="idetail/idSeiteStartModals.xhtml" />
+    </f:subview>
+
+    <div class="modal-body">
+        <div class="container-fluid">
+
+            <f:subview id="iWeisungBestaetigungBestaende">
+                <ui:include src="idetail/idDurchfuehrenFuerBestand.xhtml" />
+            </f:subview>
+
+
+            <ui:include src="idetail/idAbstimmungenShowAgenda.xhtml">
+            </ui:include>
+
+            <h:panelGroup rendered="#{eclParamM.gegenantragsText==3 and eclAbstimmungenListeM.gegenantraegeVorhanden}">
+                <h:panelGroup rendered="#{tWillenserklaerungSession.ausgewaehlteAktion=='4'}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('423')}" styleClass="row mt-2">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('423')}" escape="false">
+                                </h:outputText>
+                            </p>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tWillenserklaerungSession.ausgewaehlteAktion=='5'}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('424')}" styleClass="row mt-2">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('424')}" escape="false">
+                                </h:outputText>
+                            </p>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tWillenserklaerungSession.ausgewaehlteAktion=='10'}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('425')}" styleClass="row mt-2">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('425')}" escape="false">
+                                </h:outputText>
+                            </p>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tWillenserklaerungSession.ausgewaehlteAktion=='11'}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('426')}" styleClass="row mt-2">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('426')}" escape="false">
+                                </h:outputText>
+                            </p>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{eclAbstimmungenListeM.gegenantraegeVorhanden}">
+                <f:subview id="weisungBestaetigung">
+                    <ui:include src="idetail/idAbstimmungenShowGegen.xhtml">
+                    </ui:include>
+                </f:subview>
+            </h:panelGroup>
+
+
+            <h:panelGroup rendered="#{tWillenserklaerungSession.ausgewaehlteAktion=='4'}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('427')}" styleClass="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('427')}" escape="false">
+                            </h:outputText>
+                        </p>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tWillenserklaerungSession.ausgewaehlteAktion=='5'}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('428')}" styleClass="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('428')}" escape="false">
+                            </h:outputText>
+                        </p>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tWillenserklaerungSession.ausgewaehlteAktion=='10'}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('429')}" styleClass="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('429')}" escape="false">
+                            </h:outputText>
+                        </p>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tWillenserklaerungSession.ausgewaehlteAktion=='11'}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('430')}" styleClass="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('430')}" escape="false">
+                            </h:outputText>
+                        </p>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tRender.renderBerechtigtZurAbgabeBeiBestaetigung()}" styleClass="row mt-2">
+                <div class="col">
+                    <h:selectBooleanCheckbox value="#{tWillenserklaerungSession.bestaetigtDassBerechtigt}"
+                        styleClass="form-check-input" id="cbWeisungBestBerechtigt">
+                    </h:selectBooleanCheckbox>
+                    <!-- TKTKTK -->
+                    <h:outputLabel value="#{tRender.textBerechtigtZurAbgabe()}" styleClass="form-check-label"
+                        for="cbWeisungBestBerechtigt"></h:outputLabel>
+                </div>
+            </h:panelGroup>
+        </div>
+    </div>
+
+    <f:subview id="iWeisungBestaetigungButtons">
+        <ui:include src="idetail/idSeiteButtonsUntenModals.xhtml">
+            <ui:param name="modalShowBtnRight" value="false" />
+            <ui:param name="modalStaticBtnRight" value="false" />
+            <ui:param name="modalShowBtnLeft" value="false" />
+            <ui:param name="modalStaticBtnLeft" value="false" />
+        </ui:include>
+    </f:subview>
+
+</ui:composition>

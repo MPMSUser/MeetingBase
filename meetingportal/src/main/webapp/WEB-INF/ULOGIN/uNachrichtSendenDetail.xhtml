@@ -1,0 +1,313 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de">
+
+
+    <!-- Arbeitsbereich Empfänger -->
+    <div class="divArbeitsbereich">
+        <table class="divArbeitsbereichUeberschrift">
+            <tr>
+                <td class="divArbeitsbereichUeberschriftText">
+                    <h:outputLabel value="Auswahl Empfänger" />
+                </td>
+                <td class="divArbeitsbereichUeberschriftButton"></td>
+            </tr>
+        </table>
+
+        <p:panelGrid columns="2" columnClasses="sendenFirstColumn, sendenSecondColumn" border="1">
+            <!-- Empfänger Service-Provider - immer -->
+            <h:panelGroup rendered="#{uNachrichtSendenSession.empfaengerBOVorhanden()==true}">
+                <h:panelGroup>
+                    <h:selectBooleanCheckbox id="empfaengerBOAnzeigen"
+                        value="#{uNachrichtSendenSession.empfaengerBOAnzeigen}">
+                        <f:ajax render="empfaengerBO" />
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel value="Empfänger beim Service-Provider anzeigen" />
+                </h:panelGroup>
+                <h:panelGroup id="empfaengerBO">
+                    <h:panelGroup rendered="#{uNachrichtSendenSession.empfaengerBOAnzeigen}">
+                        <p:dataTable value="#{uNachrichtSendenSession.empfaengerBO}" var="user">
+                            <p:column width="8%">
+                                <h:selectBooleanCheckbox value="#{user.ausgewaehlt}">
+                                </h:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{user.name}" />
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- Empfänger Emittenten -->
+            <h:panelGroup rendered="#{uNachrichtSendenSession.empfaengerEmittentenVorhanden()==true}">
+                <h:selectBooleanCheckbox id="empfaengerEmittentenAlle"
+                    value="#{uNachrichtSendenSession.empfaengerEmittentenAlleAusgewaehlt}">
+                </h:selectBooleanCheckbox>
+                <h:outputLabel value="An alle Empfänger bei Emittenten senden" />
+                <br />
+
+                <h:selectBooleanCheckbox id="empfaengerEmittentenAnzeigen"
+                    value="#{uNachrichtSendenSession.empfaengerEmittentenAnzeigen}">
+                    <f:ajax render="empfaengerEmittenten" />
+                </h:selectBooleanCheckbox>
+                <h:outputLabel value="Empfänger bei Emittenten anzeigen" />
+                <br />
+                <h:panelGroup id="empfaengerEmittenten">
+                    <h:panelGroup rendered="#{uNachrichtSendenSession.empfaengerEmittentenAnzeigen}">
+                        <p:dataTable value="#{uNachrichtSendenSession.empfaengerEmittenten}" var="user">
+                            <p:column width="8%">
+                                <h:selectBooleanCheckbox value="#{user.ausgewaehlt}">
+                                </h:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{user.name}" />
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- Empfänger Dritte -->
+            <h:panelGroup rendered="#{uNachrichtSendenSession.empfaengerDritteVorhanden()==true}">
+
+                <h:selectBooleanCheckbox id="empfaengerDritteAlle"
+                    value="#{uNachrichtSendenSession.empfaengerDritteAlleAusgewaehlt}">
+                </h:selectBooleanCheckbox>
+                <h:outputLabel value="An alle Empfänger bei Dritten senden" />
+                <br />
+
+                <h:selectBooleanCheckbox id="empfaengerDritteAnzeigen"
+                    value="#{uNachrichtSendenSession.empfaengerDritteAnzeigen}">
+                    <f:ajax render="empfaengerDritte" />
+                </h:selectBooleanCheckbox>
+                <h:outputLabel value="Empfänger bei Dritten anzeigen" />
+                <br />
+                <h:panelGroup id="empfaengerDritte">
+                    <h:panelGroup rendered="#{uNachrichtSendenSession.empfaengerDritteAnzeigen}">
+                        <p:dataTable value="#{uNachrichtSendenSession.empfaengerDritte}" var="user">
+                            <p:column width="8%">
+                                <h:selectBooleanCheckbox value="#{user.ausgewaehlt}">
+                                </h:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{user.name}" />
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- Empfänger Insti -->
+            <h:panelGroup rendered="#{uNachrichtSendenSession.empfaengerInstiVorhanden()==true}">
+
+                <h:selectBooleanCheckbox id="empfaengerInstiAlle"
+                    value="#{uNachrichtSendenSession.empfaengerInstiAlleAusgewaehlt}">
+                </h:selectBooleanCheckbox>
+                <h:outputLabel value="An alle Empfänger bei Anlegern senden" />
+                <br />
+
+                <h:panelGroup rendered="#{eclParamM.mandantIstAusgewaehlt()==true}">
+                    <h:selectBooleanCheckbox id="empfaengerInstiAlleMitBestand"
+                        value="#{uNachrichtSendenSession.empfaengerInstiAlleMitBestandAusgewaehlt}">
+                    </h:selectBooleanCheckbox>
+                    <h:outputLabel value="An alle Empfänger bei Anlegern mit Bestand senden" />
+                    <br />
+                </h:panelGroup>
+
+
+                <h:selectBooleanCheckbox id="empfaengerInstiAnzeigen"
+                    value="#{uNachrichtSendenSession.empfaengerInstiAnzeigen}">
+                    <f:ajax render="empfaengerInsti" />
+                </h:selectBooleanCheckbox>
+                <h:outputLabel value="Empfänger bei Anlegern anzeigen" />
+                <br />
+                <h:panelGroup id="empfaengerInsti">
+                    <h:panelGroup rendered="#{uNachrichtSendenSession.empfaengerInstiAnzeigen}">
+                        <p:dataTable value="#{uNachrichtSendenSession.empfaengerInsti}" var="user">
+                            <p:column width="8%">
+                                <h:selectBooleanCheckbox value="#{user.ausgewaehlt}">
+                                </h:selectBooleanCheckbox>
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="#{user.name}" />
+                            </p:column>
+                            <p:column>
+                                <h:outputLabel value="Bestand vorhanden" rendered="#{user.bestandVorhanden}" />
+                            </p:column>
+
+                        </p:dataTable>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <br />
+            </h:panelGroup>
+        </p:panelGrid>
+    </div>
+
+    <!-- Arbeitsbereich Mailinhalt -->
+    <div class="divArbeitsbereich">
+        <table class="divArbeitsbereichUeberschrift">
+            <tr>
+                <td class="divArbeitsbereichUeberschriftText">
+                    <h:outputLabel value="Nachrichten-Inhalt" />
+                </td>
+                <td class="divArbeitsbereichUeberschriftButton"></td>
+            </tr>
+        </table>
+
+        <p:panelGrid style="width: 1180px">
+            <p:row rendered="#{uNachrichtSendenSession.auswahlVerwendungsCodeMoeglich}">
+                <p:column>
+                    <!-- Verwendungscodes -->
+                    <h:outputLabel value="Verwendungs-Code:"></h:outputLabel>
+                </p:column>
+                <p:column>
+                    <table class="tableSendenZwei">
+                        <tr>
+                            <td>
+                                <h:selectOneMenu value="#{uNachrichtSendenSession.ausgewaehlterVerwendungsCode}">
+                                    <f:selectItems value="#{uNachrichtSendenSession.verwendungsCodes}"
+                                        var="verwendungsCode" itemLabel="#{verwendungsCode.beschreibung}"
+                                        itemValue="#{verwendungsCode.ident}" />
+                                </h:selectOneMenu>
+                            </td>
+                            <td class="tableRechts">
+                                <h:commandButton value="Verwendungscode-Basistext übernehmen"
+                                    action="#{uNachrichtSenden.doVerwendungsCodeUebernehmen()}"
+                                    styleClass="btnNeutral" />
+                            </td>
+                        </tr>
+                    </table>
+                </p:column>
+            </p:row>
+            <p:row>
+                <p:column>
+                    <!-- Basistexte -->
+                    <h:outputLabel value="Basis-Text:"></h:outputLabel>
+                </p:column>
+                <p:column>
+                    <table class="tableSendenZwei">
+                        <tr>
+                            <td>
+                                <h:selectOneMenu value="#{uNachrichtSendenSession.ausgewaehlterBasisText}">
+                                    <f:selectItems value="#{uNachrichtSendenSession.basisTexte}" var="basisText"
+                                        itemLabel="#{basisText.beschreibung}" itemValue="#{basisText.ident}" />
+                                </h:selectOneMenu>
+                            </td>
+                            <td class="tableRechts">
+                                <h:commandButton value="Basistext übernehmen" styleClass="btnNeutral"
+                                    action="#{uNachrichtSenden.doBasisTextUebernehmen()}" />
+                            </td>
+                        </tr>
+                    </table>
+                </p:column>
+            </p:row>
+
+            <p:row>
+
+                <p:column>
+                    <!-- Betreff -->
+                    <h:outputLabel value="Betreff:"></h:outputLabel>
+                </p:column>
+                <p:column>
+                    <h:inputText value="#{uNachrichtSendenSession.betreff}" maxlength="80" size="60"></h:inputText>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column>
+                    <!-- Mailtext -->
+                    <h:outputLabel value="Nachrichten-Text:"></h:outputLabel>
+                </p:column>
+                <p:column>
+                    <h:inputTextarea rows="6" cols="80" value="#{uNachrichtSendenSession.mailText}"></h:inputTextarea>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column colspan="2">
+                    <!-- Vollen Text auch in EMail -->
+                    <h:panelGroup>
+                        <h:selectBooleanCheckbox id="textInEMail" value="#{uNachrichtSendenSession.vollenTextInEMail}">
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value="Vollständigen Betreff und Text der Nachricht auch in E-Mail aufnehmen" />
+                    </h:panelGroup>
+                </p:column>
+            </p:row>
+
+
+        </p:panelGrid>
+    </div>
+
+    <!-- Arbeitsbereich Anhänge -->
+    <div class="divArbeitsbereich">
+        <table class="divArbeitsbereichUeberschrift">
+            <tr>
+                <td class="divArbeitsbereichUeberschriftText">
+                    <h:outputLabel value="Datei(en) an Nachricht anhängen" />
+                </td>
+                <td class="divArbeitsbereichUeberschriftButton"></td>
+            </tr>
+        </table>
+
+        <table class="tableArbeitsbereich">
+            <tr>
+                <td>
+                    <h:inputFile id="file" styleClass="btnNeutral" validator="#{uNachrichtSendenSession.pruefeDatei}"
+                        value="#{uNachrichtSendenSession.dateiAnhang}" />
+                </td>
+                <td>
+                    <h:outputLabel value="Beschreibung: " />
+                    <h:inputText value="#{uNachrichtSendenSession.dateiAnhangBeschreibung}" maxlength="80" size="60">
+                    </h:inputText>
+                </td>
+                <td class="tableRechts">
+                    <h:commandButton value="Anhängen" styleClass="btnNeutral"
+                        action="#{uNachrichtSenden.doDateiAnhaengen()}" />
+                </td>
+            </tr>
+        </table>
+
+        <h:panelGroup rendered="#{uNachrichtSendenSession.anhangListeIstLeer()==false}">
+            <table class="divArbeitsbereichUeberschrift">
+                <tr>
+                    <td class="divArbeitsbereichUeberschriftText">
+                        <h:outputLabel value="Bereits angehängte Dateien" />
+                    </td>
+                    <td class="divArbeitsbereichUeberschriftButton"></td>
+                </tr>
+            </table>
+
+            <p:dataTable value="#{uNachrichtSendenSession.anhangListe}" var="anhang">
+                <p:column styleClass="colStandard" width="25%">
+                    <f:facet name="header">Dateiname</f:facet>
+                    <h:outputText value="#{anhang.dateiname}" />
+                </p:column>
+                <p:column styleClass="colStandard">
+                    <f:facet name="header">Beschreibung</f:facet>
+                    <h:outputText value="#{anhang.beschreibung}" />
+                </p:column>
+            </p:dataTable>
+
+
+        </h:panelGroup>
+
+    </div>
+</ui:composition>

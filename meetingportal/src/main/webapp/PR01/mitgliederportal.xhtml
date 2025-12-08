@@ -1,0 +1,196 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:c="jakarta.tags.core" xmlns:fn="jakarta.tags.functions"
+    xmlns:p="http://primefaces.org/ui" lang="de">
+
+<f:view>
+
+    <h:head>
+        <title>ku178 Mitgliederportal</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <meta name="msapplication-TileColor" content="#{eclParamM.kachelFarbe}" />
+        <meta name="theme-color" content="#{eclParamM.themeFarbe}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="#{resource['prm1:icons/favicon-32x32.png']}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="#{resource['prm1:icons/favicon-16x16.png']}" />
+    </h:head>
+
+
+    <!-- === Custom Style Sheet Kunde === -->
+    <h:outputStylesheet library="prm1" name="css/ku178_mitglieder.css?v=1.6.3" />
+    <h:outputStylesheet library="font-awesome" name="css/fa.css?v=1.6.3" />
+
+
+    <!--
+    <f:subview id="idStyleEinstellungen">
+        <ui:include src="/WEB-INF/stdportal/idetail/idStyleEinstellungen.xhtml" />
+    </f:subview>
+-->
+
+    <h:body>
+        <p:remoteCommand name="browserSchliessen" id="browserSchliessen" action="#{tLoginLogout.doBrowserSchliessen}" />
+        <div id="wrapper">
+            <div id="inhalt">
+                <f:metadata>
+                    <!-- Achtung - die folgende Reihenfolge ist zwingend, sonst funktioniert die
+                    "Aktivierungsprozedur" bei Portalstart nicht richtig -->
+                    <f:viewParam name="zeit" value="#{tSessionVerwaltung.zeit}" />
+                    <f:viewParam name="hvjahr" value="#{tSessionVerwaltung.hvjahr}" />
+                    <f:viewParam name="hvnummer" value="#{tSessionVerwaltung.hvnummer}" />
+                    <f:viewParam name="datenbereich" value="#{tSessionVerwaltung.datenbereich}" />
+                    <f:viewParam name="mandant" value="#{tSessionVerwaltung.mandant}" />
+                    <f:viewParam name="sprache" value="#{tLanguage.sprache}" />
+                    <f:viewParam name="test" value="#{tSessionVerwaltung.test}" />
+                    <f:viewParam name="nummer" value="#{tLoginLogoutSession.loginKennung}" />
+                    <f:viewParam name="p" value="#{tLoginLogoutSession.loginPasswort}" />
+                    <f:viewParam name="per" value="#{tSessionVerwaltung.permanentPortal}" />
+                    <f:viewParam name="la" value="#{tSessionVerwaltung.linkArt}" />
+                    <f:viewParam name="bestaetigungscode" value="#{tSessionVerwaltung.bestaetigungsCode}" />
+                    <f:viewParam name="fcode" value="#{tMenueSession.deepLinkPMenueFunktionscode}" />
+                    <f:viewParam name="fcodesub" value="#{tMenueSession.deepLinkPMenueFunktionscodeSub}" />
+                </f:metadata>
+
+                <h:outputScript library="prm1" name="js/custom.js?v=1.6.2" />
+                <h:outputScript library="std" name="js/jquery.min.js?v=1.6.2" />
+                <h:outputScript library="prm1" name="js/pdf-lib.min.js?v=1.6.2" />
+                <h:outputScript library="prm1" name="js/pdfobject.min.js?v=1.6.2" />
+                <h:outputScript library="prm1" name="js/base.min.js?v=1.6.2" />
+                <h:outputScript library="prm1" name="js/custompdf.js?v=1.6.2" />
+
+                <noscript>
+                    <section id="no-script-bereich">
+                        <div class="container-full">
+                            <div class="row">
+                                <div class="col-8">
+                                    <p>
+                                        In Ihrer Browser-Konfiguration ist JavaScript deaktiviert. In dieser
+                                        Konfiguration sind wesentliche Teile dieses Portals nicht
+                                        funktionsfähig.
+                                    </p>
+                                    <p>
+                                        Bitte aktivieren Sie JavaScript,
+                                        bevor Sie weiterarbeiten.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </noscript>
+
+                <!-- id=headerform zwingend erforderlich als Ajax-Renderpunkt -->
+                <h:form id="headerform">
+                    <header id="header-bereich" class="container-full" onclick="hide_mobile_menu();">
+                        <div class="row">
+                            <div class="col-4">
+                                <h:graphicImage library="prm1" name="images/logo.webp" />
+                            </div>
+                            <div class="col-4">
+                                <!-- <h:panelGroup rendered="#{tSeitensteuerungSession.logoutAnzeigen==true}">
+                                    <h2>Mitgliederportal</h2>
+                                </h:panelGroup> -->
+                            </div>
+                        </div>
+                    </header>
+                    <h:panelGroup rendered="#{tSeitensteuerungSession.logoutAnzeigen==true}">
+                        <div id="sub-header-bereich" class="col-8" onclick="hide_mobile_menu();">
+                            <div class="row">
+
+                                <div class="col-4">
+                                    <h:outputText value="#{eclPortalTexteM.holeText('957')}" escape="false"
+                                        rendered="#{eclLoginDatenM.liefereKennungArt()==2}" />
+                                    <h:outputText value="#{eclPortalTexteM.holeText('956')}" escape="false"
+                                        rendered="#{eclLoginDatenM.liefereKennungArt()==1}" />
+                                    <h:outputText value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />
+                                    <br />
+                                    <h:outputText value="#{eclLoginDatenM.titelVornameName}" />
+                                </div>
+                                <div class="col-4">
+
+                                    <h:panelGroup
+                                        rendered="#{tRender.logoutObenOderUnten()==1 and tSeitensteuerungSession.logoutAnzeigen==true}">
+                                        <!-- Button, wenn beim Logout Portal verlassen werden soll -->
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonOben1"
+                                            action="#{tLoginLogout.doLogoutVerlassen()}" styleClass="btn-typ-00"
+                                            rendered="#{tSeitensteuerungSession.logoutSeiteVerlassenAnzeigen}">
+                                        </h:commandButton>
+
+                                        <!-- Button, wenn beim Logout zur Login-Seite zurückgekehrt wird -->
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonOben2"
+                                            action="#{tLoginLogout.doLogout}" onclick="setLogoutButtonClicked()"
+                                            styleClass="btn-typ-00"
+                                            rendered="#{tSeitensteuerungSession.logoutNormalAnzeigen}">
+                                        </h:commandButton>
+
+                                        <!-- Button, wenn auf Login-Seite zur Aufrufseite angezeigt werden soll -->
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('859')}" id="buttonOben3"
+                                            action="#{tLoginLogout.doBeenden()}" styleClass="btn-typ-00"
+                                            rendered="#{tSeitensteuerungSession.endeButtonAnzeigen}">
+                                        </h:commandButton>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </h:form>
+
+                <!-- id=inhaltsform zwingend erforderlich als Ajax-Renderpunkt -->
+                <h:form id="inhaltsform">
+                    <ui:include src="/WEB-INF/prportal/pInhalt.xhtml" />
+                </h:form>
+
+                <!-- === Info-Modal === -->
+                <f:subview id="idInfoModal">
+                    <ui:include src="/WEB-INF/prportal/idetail/idInfoModal.xhtml" />
+                </f:subview>
+
+                <!-- === Loading-Modal === -->
+                <f:subview id="idLoadingModal">
+                    <ui:include src="/WEB-INF/prportal/idetail/idLoadingModal.xhtml" />
+                </f:subview>
+
+                <!-- === Fragen-Modal === -->
+                <f:subview id="idFragenModal">
+                    <ui:include src="/WEB-INF/prportal/idetail/idFragenModal.xhtml" />
+                </f:subview>
+            </div>
+
+
+            <a id="link-fragen" href="#" onclick="showModal('fragen-modal');"><i class="fas fa-question-circle"></i></a>
+
+            <!-- id=footerform zwingend erforderlich als Ajax-Renderpunkt -->
+            <h:form id="footerform">
+                <ui:include src="/WEB-INF/prportal/pFooter.xhtml" />
+            </h:form>
+
+            <!-- === CookieHint === -->
+            <h:panelGroup rendered="#{eclParamM.cookieHinweis==1}">
+                <f:subview id="idCookieHint">
+                    <ui:include src="/WEB-INF/stdportal/idetail/idCookieHint.xhtml" />
+                </f:subview>
+            </h:panelGroup>
+
+        </div>
+        <script>
+            setStickyFooter();
+            window.addEventListener('resize', setStickyFooter);
+        </script>
+    </h:body>
+</f:view>
+
+</html>

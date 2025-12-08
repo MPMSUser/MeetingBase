@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane fx:id="rootPane" prefHeight="500.0" prefWidth="1045.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21">
+   <children>
+      <TableView fx:id="tableView" layoutX="15.0" layoutY="14.0" prefHeight="200.0" prefWidth="650.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+        <columns>
+          <TableColumn fx:id="colLabel" prefWidth="130.0" text="Issuer Label" />
+          <TableColumn fx:id="colStatus" prefWidth="130.0" text="Status" />
+            <TableColumn fx:id="colFor" prefWidth="130.0" text="For" />
+            <TableColumn fx:id="colAgainst" prefWidth="130.0" text="Against" />
+            <TableColumn fx:id="colAbstain" prefWidth="130.0" text="Abstain" />
+        </columns>
+      </TableView>
+      <ScrollPane layoutX="666.0" layoutY="15.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="680.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+        <content>
+            <VBox fx:id="boxHistory" />
+        </content>
+      </ScrollPane>
+      <Button fx:id="btnCreate" layoutX="797.0" layoutY="392.0" mnemonicParsing="false" prefWidth="100.0" text="Datei erstellen" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btnSend" layoutX="803.0" layoutY="447.0" mnemonicParsing="false" prefWidth="100.0" text="Senden" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btnClose" layoutX="65.0" layoutY="447.0" mnemonicParsing="false" text="Abbrechen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+   </children>
+</AnchorPane>

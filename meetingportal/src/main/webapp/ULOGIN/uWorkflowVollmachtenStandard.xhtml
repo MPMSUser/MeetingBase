@@ -1,0 +1,662 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Vollmachtsprüfung" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <h:panelGroup rendered="#{uWorkflowSession.basisStatus==0}">
+                <div class="divArbeitsbereich">
+
+                    <h:commandButton value="Nächstes Dokument bearbeiten"
+                        action="#{uWorkflow.doNaechstesDokumentStandard()}" class="btnBreit" />
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{uWorkflowSession.basisStatus==1}">
+                <div class="divArbeitsbereich">
+
+                    <!-- neu zuzuordnendes Papier-Dokument anzeigen (Quelle: #{eclBestWorkflowM.subverzeichnis}) -->
+                    <h:panelGroup rendered="#{eclBestWorkflowM.dateinameBestaetigung!=''}">
+                    <h:commandButton value="PDF #{eclBestWorkflowM.dateinameBestaetigung} anzeigen"
+                        action="#{uWorkflow.doPDFAnzeigenStandard()}" class="btnBreit"
+                        onclick="this.form.target='_blank'" />
+                    <br />
+                    </h:panelGroup>
+
+
+					<!-- Anzeigen bereits vorhandene/zugeordnete Vorgänge Papier und Digital-->
+					<h:panelGroup rendered="#{uWorkflowSession.liefereVorhandeneVorgaengeVorhanden()==true}">
+                    <h:dataTable value="#{uWorkflowSession.vorhandeneVorgaenge}" var="vorgang"
+                        columnClasses="tbl3SpaltenC00, tbl3SpaltenC01, tbl3SpaltenC02" rowClasses="leftText"
+                        styleClass="tbl3Spalten">
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Inhalt / Dokument" style="float: left" />
+                            </f:facet>
+                            <h:panelGroup rendered="#{vorgang.art==0}">
+                            	<!-- per Papier eingegangener Nachweis, bzw. bereits vorhandener tbl_vorlaeufigeVollmacht -->
+                            	<b><h:outputText value="Per Papier eingegangenes Dokument" /></b><br />
+                            	<h:outputText value="#{vorgang.eclBestWorkflow.dateinameBestaetigung}" />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{vorgang.art==1}">
+                            	<!-- per Internet eingegangener Nachweis -->
+                            	<b><h:outputText value="Hochgeladener Nachweis" /></b><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterZusatz}" />
+                            	<br /><br />
+                               </h:panelGroup>
+                            <h:panelGroup rendered="#{vorgang.art==2}">
+                            	<!-- per Internet eingegangener Bevollmächtigter -->
+                            	<b><h:outputText value="Bevollmächtigter" /></b><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterTitel}" /><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterVorname} " />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterName}" /><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterZusatz}" /><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterStrasse}" /><br />
+ 	                          	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterPlz} " />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterOrt}" /><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterMail}" /><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.liefereVertreterArtText()}" /><br />
+                            	<h:panelGroup rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterArt==1}">
+   		                          	<h:outputText value="Nr.: #{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterId}" /><br />
+									<h:panelGroup
+										rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterAusRegisterGeladen==true}">
+										<h:outputText value="Daten zu dieser Nummer:" />
+										<br />
+										<h:outputText
+											value="#{vorgang.eclVorlaeufigeVollmachtEingabe.ausRegisterVorname} " />
+										<h:outputText
+											value="#{vorgang.eclVorlaeufigeVollmachtEingabe.ausRegisterName}" />
+										<br />
+										<h:outputText
+											value="#{vorgang.eclVorlaeufigeVollmachtEingabe.ausRegisterStrasse} " />
+											<br />
+										<h:outputText
+											value="#{vorgang.eclVorlaeufigeVollmachtEingabe.ausRegisterPLZ} " />
+										<h:outputText
+											value="#{vorgang.eclVorlaeufigeVollmachtEingabe.ausRegisterOrt} " />
+
+									</h:panelGroup>
+									<h:panelGroup
+										rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterAusRegisterGeladen==false}">
+										<h:outputText value="Nummer nicht bekannt" />
+										<br />
+									</h:panelGroup>
+								</h:panelGroup>
+                            	<h:panelGroup rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterArt==8}">
+   		                          	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterArtBeiSonstige}" /><br />
+                            	</h:panelGroup>
+                            	<br />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{vorgang.art==3}">
+                            	<!-- per Internet eingegangener Gesetzlicher Vertreter -->
+                            	<b><h:outputText value="Gesetzlicher Vertreter" /><br /></b>
+                           	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterTitel}" /><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterVorname} " />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterName}" /><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterZusatz}" /><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterStrasse}" /><br />
+ 	                          	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterPlz} " />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterOrt}" /><br />
+                            	<h:outputText value="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterMail}" /><br />
+                            	<br />
+                            </h:panelGroup>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Prüfstatus" style="float: left" />
+                            </f:facet>
+                            <h:panelGroup rendered="#{vorgang.art==0}">
+                            	<!-- per Papier eingegangener Nachweis -->
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{vorgang.art==1 or vorgang.art==2 or vorgang.art==3}">
+                            	<!-- per Internet eingegangener Nachweis -->
+                            	<h:panelGroup rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.wurdeStorniert==1}">
+ 		                               <h:outputText value="Gelöscht/Widerrufen am #{vorgang.eclVorlaeufigeVollmachtEingabe.stornierungsDatumAnzeige()}"/>
+ 		                               <br />
+                            	</h:panelGroup>
+								<h:outputText
+									value="Erteilt am #{vorgang.eclVorlaeufigeVollmachtEingabe.eingabeDatumAnzeige()}" />
+								<br />
+								<h:panelGroup rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.pruefstatus==0}">
+ 	                               <h:outputText value="Bisher nicht geprüft"/>
+                            	</h:panelGroup>
+                            	<h:panelGroup rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.pruefstatus==101}">
+ 	                               <h:outputText value="Bereits geprüft"/>
+                            	</h:panelGroup>
+                            	<h:panelGroup rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.pruefstatus==102}">
+ 	                               <h:outputText value="Auf Wiedervorlage" />
+                            	</h:panelGroup>
+                            	
+                            	<h:panelGroup rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.wurdeStorniert==1 and vorgang.eclVorlaeufigeVollmachtEingabe.pruefstatusStorno==0}">
+ 	                               <h:outputText value=" - Storno noch nicht geprüft" />
+                            	</h:panelGroup>
+                            </h:panelGroup>
+                         </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Aktionen" style="float: left" />
+                            </f:facet>
+							<h:panelGroup rendered="#{vorgang.art==0}">
+								<!-- per Papier eingegangener Nachweis -->
+								<h:commandButton
+									value="PDF  anzeigen"
+									action="#{uWorkflow.doVorgangPDFAnzeigen(vorgang)}" 
+									onclick="this.form.target='_blank'" />
+								<br />
+							</h:panelGroup>
+							<h:panelGroup rendered="#{vorgang.art==1}">
+                            	<!-- per Internet eingegangener Nachweis -->
+								<h:commandButton
+									value="Datei anzeigen"
+									action="#{uWorkflow.doVorgangDateiAnzeigen(vorgang)}" 
+									onclick="this.form.target='_blank'" />
+								<br />
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{vorgang.art==2}">
+                            	<!-- per Internet eingegangener Bevollmächtigter -->
+								<h:panelGroup
+									rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.wurdeStorniert==0}">
+									<h:panelGroup
+										rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterAusRegisterGeladen==true}">
+										<h:commandButton value="Mitgliedsnummer als Vertreter übernehmen"
+											action="#{uWorkflow.doVorgangAlsVertreterUebernehmenNr(vorgang)}" />
+										<br />
+									</h:panelGroup>
+
+									<h:panelGroup
+										rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterArt==1}">
+										<h:commandButton value="Name als Mitglieds-Name Vertreter übernehmen"
+											action="#{uWorkflow.doVorgangAlsVertreterUebernehmenName(vorgang)}" />
+										<br />
+									</h:panelGroup>
+									
+									<h:panelGroup
+										rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.vertreterArt!=1}">
+										<h:commandButton value="Als Vertreter übernehmen"
+											action="#{uWorkflow.doVorgangAlsVertreterUebernehmen(vorgang)}" />
+										<br />
+									</h:panelGroup>
+									
+								</h:panelGroup>
+                             </h:panelGroup>
+                            <h:panelGroup rendered="#{vorgang.art==3}">
+                            	<!-- per Internet eingegangener Gesetzlicher Vertreter -->
+								<h:panelGroup
+									rendered="#{vorgang.eclVorlaeufigeVollmachtEingabe.wurdeStorniert==0}">
+									<h:commandButton value="Als Vertreter übernehmen"
+										action="#{uWorkflow.doVorgangAlsGesetzlUebernehmen(vorgang)}" />
+									<br />
+								</h:panelGroup>
+                            </h:panelGroup>
+                        </h:column>
+					
+					</h:dataTable>
+					
+					</h:panelGroup>
+					
+					
+
+
+
+                    <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+                        style="width: 1180px">
+                        <p:column>
+                            <h:outputLabel value="Mitgliedsnummer (Vollmachtgeber):"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.zuAktionaersnummer}" maxlength="20" size="20">
+                            </h:inputText>
+                            <h:commandButton value="Daten holen" action="#{uWorkflow.doGeberHolen()}"
+                                class="btnNeutral" />
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="Name (Vollmachtgeber):"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="#{eclBestWorkflowM.nameMitglied}"></h:outputLabel>
+                        </p:column>
+
+                        <p:column>
+                        </p:column>
+                        <p:column>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Bevollmächtigter:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                        </p:column>
+
+                        <!--
+                            <p:column>
+                                <h:outputLabel value="Behandeln als:"></h:outputLabel>
+                            </p:column>
+                            -->
+                        <!--
+                            <p:column>
+                                <h:selectOneRadio
+                                    value="#{eclBestWorkflowM.vollmachtOderNachweis}"
+                                    layout="lineDirection">
+                                    <f:selectItem itemLabel="Vollmacht mit Zugang" itemValue="1" />
+                                    <f:selectItem itemLabel="Nachweis ohne Zugang" itemValue="2" />
+                                </h:selectOneRadio>
+                            </p:column>
+                            -->
+
+                        <p:column>
+                            <h:outputLabel value="Ist ein gesetzlicher Vertreter:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectBooleanCheckbox value="#{eclBestWorkflowM.gesetzlicherVertreter}">
+                            </h:selectBooleanCheckbox>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Mitgliedsnummer/Kennung (Vollmachtnehmer):"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.kennung}" maxlength="20" size="20"
+                                rendered="#{eclBestWorkflowM.kennungGeladen==false}"></h:inputText>
+                            <h:commandButton value="Daten holen" action="#{uWorkflow.doNehmerHolen()}"
+                                class="btnNeutral" rendered="#{eclBestWorkflowM.kennungGeladen==false}" />
+
+                            <h:panelGroup rendered="#{eclBestWorkflowM.kennungGeladen==true}">
+                                <h:outputLabel value="#{eclBestWorkflowM.kennung}  "></h:outputLabel>
+                                <h:commandButton value="Daten leeren" action="#{uWorkflow.doNehmerClear()}"
+                                    class="btnNeutral" />
+                                <br />
+                                <h:outputLabel value="#{eclBestWorkflowM.hinweisAnzahlVollmachten}  "></h:outputLabel>
+                            </h:panelGroup>
+                        </p:column>
+
+
+                        <p:column>
+                            <h:outputLabel value="Bevollmächtigter ist:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectOneRadio value="#{eclBestWorkflowM.mitgliedOderSonstiger}" layout="lineDirection">
+                                <f:selectItem itemLabel="Mitglied" itemValue="1" />
+                                <f:selectItem itemLabel="Sonstiger" itemValue="2" />
+                            </h:selectOneRadio>
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="Sonstiger wie folgt:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.bevollmaechtigterArtText}" maxlength="60" size="100">
+                            </h:inputText>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Titel:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.bevollmaechtigterTitel}" maxlength="30" size="30"
+                                rendered="#{eclBestWorkflowM.kennungGeladen==false}"></h:inputText>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Name:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.bevollmaechtigterName}" maxlength="80" size="60"
+                                rendered="#{eclBestWorkflowM.kennungGeladen==false}"></h:inputText>
+                            <h:commandButton value="Suchen Name Mitglied" action="#{uWorkflow.doNameMitgliedSuchen()}"
+                                class="btnNeutral" rendered="#{eclBestWorkflowM.kennungGeladen==false}" />
+                            <h:commandButton value="Suchen Name Sonstige" action="#{uWorkflow.doNameSonstigeSuchen()}"
+                                class="btnNeutral" rendered="#{eclBestWorkflowM.kennungGeladen==false}" />
+
+                            <h:outputLabel value="#{eclBestWorkflowM.bevollmaechtigterName}  "
+                                rendered="#{eclBestWorkflowM.kennungGeladen==true}"></h:outputLabel>
+
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Vorname:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.bevollmaechtigterVorname}" maxlength="80" size="60"
+                                rendered="#{eclBestWorkflowM.kennungGeladen==false}"></h:inputText>
+                            <h:outputLabel value="#{eclBestWorkflowM.bevollmaechtigterVorname}  "
+                                rendered="#{eclBestWorkflowM.kennungGeladen==true}"></h:outputLabel>
+
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Strasse:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.bevollmaechtigterStrasse}" maxlength="80" size="60"
+                                rendered="#{eclBestWorkflowM.kennungGeladen==false}"></h:inputText>
+                            <h:outputLabel value="#{eclBestWorkflowM.bevollmaechtigterStrasse}  "
+                                rendered="#{eclBestWorkflowM.kennungGeladen==true}"></h:outputLabel>
+
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="PLZ:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.bevollmaechtigterPlz}" maxlength="20" size="20"
+                                rendered="#{eclBestWorkflowM.kennungGeladen==false}"></h:inputText>
+                            <h:outputLabel value="#{eclBestWorkflowM.bevollmaechtigterPlz}  "
+                                rendered="#{eclBestWorkflowM.kennungGeladen==true}"></h:outputLabel>
+
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Ort:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.bevollmaechtigterOrt}" maxlength="80" size="60"
+                                rendered="#{eclBestWorkflowM.kennungGeladen==false}"></h:inputText>
+                            <h:outputLabel value="#{eclBestWorkflowM.bevollmaechtigterOrt}  "
+                                rendered="#{eclBestWorkflowM.kennungGeladen==true}"></h:outputLabel>
+
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="E-Mail:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.bevollmaechtigterEMail}" maxlength="100" size="60">
+                            </h:inputText>
+                            <h:commandButton value="Suchen E-Mail" action="#{uWorkflow.doEmailSuchen()}"
+                                class="btnNeutral" />
+                        </p:column>
+
+                        <p:column>
+                        </p:column>
+                        <p:column>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Datum der Vollmacht:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.eingabeDatum}" maxlength="50" size="50">
+                            </h:inputText>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Ort der Vollmacht:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputText value="#{eclBestWorkflowM.eingabeOrt}" maxlength="50" size="50"></h:inputText>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Aktion:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectOneRadio id="freigabe" value="#{eclBestWorkflowM.pruefstatusErgebnis}"
+                                layout="pageDirection">
+                                <f:selectItem itemLabel="geprüft und akzeptiert" itemValue="1" />
+                                <f:selectItem itemLabel="geprüft und abgelehnt" itemValue="2" />
+
+                                <f:selectItem itemLabel="zur Wiedervorlage" itemValue="3" />
+                                <f:selectItem itemLabel="nicht als Nachweis/Vollmacht verwenden" itemValue="4" />
+                            </h:selectOneRadio>
+                        </p:column>
+
+                        <p:column>
+                            <h:outputLabel value="Abgelehnt weil:"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:selectOneRadio value="#{eclBestWorkflowM.abgelehntWeil}" layout="pageDirection">
+                                <f:selectItem
+                                    itemLabel="Es liegt keine gültige Bevollmächtigung vor. Der auf der eingereichten Vollmacht als Bevollmächtigter genannte vertritt bereits die max. zulässige Anzahl an Mitgliedern."
+                                    itemValue="1" />
+                                <f:selectItem
+                                    itemLabel="Es liegt keine gültige Bevollmächtigung vor. Die eingereichte Vollmacht enthält nicht plausible Angaben zum bevollmächtigten Vertreter."
+                                    itemValue="2" />
+                                <f:selectItem
+                                    itemLabel="Es liegt keine gültige Bevollmächtigung vor. Der auf der eingereichten Vollmacht als Bevollmächtigter genannte ist nicht zur Vertretung berechtigt (gemäß § 43 Abs. 5 GenG in Verbindung mit § 21 Abs. 4 der Satzung)."
+                                    itemValue="3" />
+                                <f:selectItem
+                                    itemLabel="Es liegt keine gültige Bevollmächtigung vor. Die eingereichte Vollmacht enthält nicht die erforderliche/n Unterschrift/en."
+                                    itemValue="4" />
+                                <f:selectItem
+                                    itemLabel="Es liegt keine gültige Bevollmächtigung vor. Die eingereichte Vollmacht ist nicht lesbar."
+                                    itemValue="5" />
+                                <f:selectItem
+                                    itemLabel="Es liegt keine gültige Bevollmächtigung vor. Auf der eingereichten Vollmacht wurden weder eine E-Mail-Adresse noch eine Postanschrift des Bevollmächtigten angegeben."
+                                    itemValue="6" />
+                                <f:selectItem itemLabel="Sonstiges - bitte wenden Sie sich an die Mitgliederbetreuung"
+                                    itemValue="7" />
+                                <f:selectItem itemLabel="Sonstiges - siehe Begründung" itemValue="8" />
+                            </h:selectOneRadio>
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="Begründung (für Mitglied):"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputTextarea rows="4" cols="80" value="#{eclBestWorkflowM.abgelehntWeilText}">
+                            </h:inputTextarea>
+                        </p:column>
+                        <p:column>
+                            <h:outputLabel value="Kommentar (intern):"></h:outputLabel>
+                        </p:column>
+                        <p:column>
+                            <h:inputTextarea rows="4" cols="80" value="#{eclBestWorkflowM.kommentar}"></h:inputTextarea>
+                        </p:column>
+
+                    </p:panelGrid>
+                    <br />
+                    <br />
+
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Abbrechen" action="#{uWorkflow.doAbbrechenStandard()}"
+                                    class="btnStandard" onclick="this.form.target='_self'" />
+                                <br />
+                            </td>
+                            <td class="divButtonsCenter">
+                                <h:commandButton value="Speichern und Dokument weiterem Mitglied zuordnen"
+                                    action="#{uWorkflow.doSpeichernFortsetzenStandard()}" class="btnStandard"
+                                    onclick="this.form.target='_self'" />
+                            </td>
+                            <td class="divButtonsRight">
+                                <h:commandButton value="Erledigt ohne Veränderung" action="#{uWorkflow.doSpeichernStandardOhneVeraenderung()}"
+                                    class="btnStandard" onclick="this.form.target='_self'" />
+	                            <br /><br />
+                                <h:commandButton value="Speichern" action="#{uWorkflow.doSpeichernStandard()}"
+                                    class="btnStandard" onclick="this.form.target='_self'" />
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+
+            </h:panelGroup>
+
+            <!-- Anzeigen Info-Bereich bereits erteilte Vollmachten -->
+            <h:panelGroup rendered="#{uWorkflowSession.anzeigeInfoBereich==1}">
+                <br /> <br />
+                <div class="divArbeitsbereich">
+                    <p class="divArbeitsbereichUeberschriftText">
+                        <h:outputLabel value="Vom Mitglied bereits ausgestellte und eingegangene Vollmachten">
+                        </h:outputLabel>
+                    </p>
+                    <h:dataTable value="#{uWorkflowSession.bestWorkflowVorlVollmachtListe}" var="vollmacht"
+                        columnClasses="tbl3SpaltenC00, tbl3SpaltenC01, tbl3SpaltenC02" rowClasses="leftText"
+                        styleClass="tbl3Spalten">
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Status / Datum" style="float: left" />
+                            </f:facet>
+                            <h:outputText rendered="#{vollmacht.eclBestWorkflow.pruefstatusErgebnis==1}"
+                                value="geprüft und akzeptiert" />
+                            <h:outputText rendered="#{vollmacht.eclBestWorkflow.pruefstatusErgebnis==2}"
+                                value="geprüft und abgelehnt" />
+                            <h:outputText rendered="#{vollmacht.eclBestWorkflow.pruefstatusErgebnis==3}"
+                                value="geprüft und wiedervorlage" />
+                            <h:outputText rendered="#{vollmacht.eclBestWorkflow.pruefstatusErgebnis==4}"
+                                value="Kein Nachweis/Vollmacht)" />
+
+                            <br />
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.storniert==0}"
+                                value="Aktive Vollmacht" />
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.storniert==1}"
+                                value="Vollmacht wurde widerrufen" />
+
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.abgelehntWeil==1}"
+                                value="Der Bevollmächtigte vertritt bereits die max. zulässige Anzahl an Mitgliedern" />
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.abgelehntWeil==2}"
+                                value="Die Vollmacht enthält nicht plausible Angaben zum bevollmächtigten Vertreter" />
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.abgelehntWeil==3}"
+                                value="Der Bevollmächtigte ist nicht zur Vertretung berechtigt (gemäß § 43 Abs. 5 GenG in Verbindung mit § 21 Abs. 4 der Satzung" />
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.abgelehntWeil==4}"
+                                value="Unterschrift/en fehlen bzw. nicht korrekt" />
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.abgelehntWeil==5}"
+                                value="Die Vollmacht ist nicht lesbar" />
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.abgelehntWeil==6}"
+                                value="E-Mail-Adresse fehlt" />
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.abgelehntWeil==7}"
+                                value="Bitte wenden Sie sich an die Mitgliederbetreuung" />
+                            <h:outputText rendered="#{vollmacht.eclVorlVollmacht.abgelehntWeil==8}" value="Sonstiges" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Bevollmächtigter" />
+                            </f:facet>
+                            <h:outputText value="#{vollmacht.eclVorlVollmacht.bevollmaechtigterName}" /><br />
+                            <h:outputText value="#{vollmacht.eclVorlVollmacht.bevollmaechtigterVorname}" /><br />
+                            <h:outputText value="#{vollmacht.eclVorlVollmacht.bevollmaechtigterOrt}" /><br />
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Stornieren" styleClass="btnNeutral"
+                                rendered="#{vollmacht.eclVorlVollmacht.storniert==0}"
+                                action="#{uWorkflow.doStornierenStandard(vollmacht)}" />
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:panelGroup>
+
+            <!-- Anzeigen Info-Bereich Suche nach Namen Aktionär -->
+            <h:panelGroup rendered="#{uWorkflowSession.anzeigeInfoBereich==2}">
+                <br /> <br />
+                <div class="divArbeitsbereich">
+                    <p class="divArbeitsbereichUeberschriftText">
+                        <h:outputLabel value="Ergebnis Namenssuche Mitglied"></h:outputLabel>
+                    </p>
+                    <h:dataTable value="#{uWorkflowSession.aktienregisterArray}" var="aktienregister"
+                        columnClasses="tbl3SpaltenC00, tbl3SpaltenC01, tbl3SpaltenC02" rowClasses="leftText"
+                        styleClass="tbl3Spalten">
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nummer" style="float: left" />
+                            </f:facet>
+                            <h:outputText value="#{aktienregister.aktionaersnummer}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name" />
+                            </f:facet>
+                            <h:outputText
+                                value="#{aktienregister.name1} #{aktienregister.name2} #{aktienregister.name3}" /><br />
+                            <h:outputText value="#{aktienregister.nachname} #{aktienregister.vorname} " /><br />
+                            <h:outputText value="#{aktienregister.strasse} " /><br />
+                            <h:outputText value="#{aktienregister.postleitzahl} #{aktienregister.ort} " /><br />
+                        </h:column>
+                        <h:column>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:panelGroup>
+
+            <!-- Anzeigen Info-Bereich Suche nach Namen Person -->
+            <h:panelGroup rendered="#{uWorkflowSession.anzeigeInfoBereich==3}">
+                <br /> <br />
+                <div class="divArbeitsbereich">
+                    <p class="divArbeitsbereichUeberschriftText">
+                        <h:outputLabel value="Ergebnis Namenssuche Vertreter"></h:outputLabel>
+                    </p>
+                    <h:dataTable value="#{uWorkflowSession.personenNatJurArray}" var="personenNatJur"
+                        columnClasses="tbl3SpaltenC00, tbl3SpaltenC01, tbl3SpaltenC02" rowClasses="leftText"
+                        styleClass="tbl3Spalten">
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Kennung" style="float: left" />
+                            </f:facet>
+                            <h:outputText value="#{personenNatJur.loginKennung}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name" />
+                            </f:facet>
+                            <h:outputText value="#{personenNatJur.name} #{personenNatJur.vorname} " /><br />
+                            <h:outputText value="#{personenNatJur.strasse} " /><br />
+                            <h:outputText value="#{personenNatJur.plz} #{personenNatJur.ort} " /><br />
+                        </h:column>
+                        <h:column>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:panelGroup>
+
+            <!-- Anzeigen Info-Bereich Suche nach Mail-Adressen -->
+            <h:panelGroup rendered="#{uWorkflowSession.anzeigeInfoBereich==4}">
+                <br /> <br />
+                <div class="divArbeitsbereich">
+                    <p class="divArbeitsbereichUeberschriftText">
+                        <h:outputLabel value="Ergebnis Suche E-Mail"></h:outputLabel>
+                    </p>
+                    <h:dataTable value="#{uWorkflowSession.loginDatenArray}" var="loginDaten"
+                        columnClasses="tbl3SpaltenC00, tbl3SpaltenC01, tbl3SpaltenC02" rowClasses="leftText"
+                        styleClass="tbl3Spalten">
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Kennung" style="float: left" />
+                            </f:facet>
+                            <h:outputText value="#{loginDaten.loginKennung}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="E-Mail" />
+                            </f:facet>
+                            <h:outputText value="#{loginDaten.eMailFuerVersand} " /><br />
+                        </h:column>
+                        <h:column>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:panelGroup>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

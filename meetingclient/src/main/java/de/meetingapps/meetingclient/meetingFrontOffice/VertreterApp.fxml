@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fx:id="scrpnVertreter" layoutX="815.0" layoutY="42.0" prefHeight="549.0" prefWidth="221.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+      <Button fx:id="btnVollmachtSpeichern" layoutX="106.0" layoutY="348.0" mnemonicParsing="false" onAction="#onBtnVollmachtSpeichern" text="Vollmacht Speichern">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="btnLetzteVollmacht" layoutX="446.0" layoutY="348.0" mnemonicParsing="false" onAction="#onBtnLetzteVollmacht" text="Letzte Vollmacht">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="btnAbbruch" layoutX="596.0" layoutY="475.0" mnemonicParsing="false" onAction="#onBtnAbbruch" text="Abbruch">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Label fx:id="lblName" layoutX="106.0" layoutY="138.0" prefHeight="17.0" prefWidth="103.0" text="Name">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="lblVorname" layoutX="106.0" layoutY="184.0" prefHeight="17.0" prefWidth="103.0" text="Vorname">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label fx:id="lblOrt" layoutX="106.0" layoutY="225.0" prefHeight="35.0" prefWidth="187.0" text="Ort (ohne PLZ):">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <TextField fx:id="tfName" layoutX="272.0" layoutY="132.0" prefHeight="39.0" prefWidth="533.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="tfVorname" layoutX="272.0" layoutY="178.0" prefHeight="39.0" prefWidth="533.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField fx:id="tfOrt" layoutX="272.0" layoutY="223.0" prefHeight="39.0" prefWidth="533.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Label fx:id="lblFehlerMeldung" layoutX="106.0" layoutY="462.0" prefHeight="127.0" prefWidth="478.0" wrapText="true">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
+   </children>
+</Pane>

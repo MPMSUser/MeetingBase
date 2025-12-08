@@ -1,0 +1,8 @@
+.classpath
+.project
+.settings
+.metadata
+/target/
+/dist/
+/bin/
+/license-header.txt

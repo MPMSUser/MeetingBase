@@ -1,0 +1,67 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    lang="de">
+    <section id="abstimmung-table-bereich">
+        <h:panelGroup rendered="#{eclAbstimmungenListeM.gegenantraegeVorhanden}">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-6 t-bold">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('93')}" />
+                        </p>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                </div>
+                <ui:repeat value="#{eclAbstimmungenListeM.gegenantraegeListeM}" var="abstimmung">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-1">
+                                <h:panelGroup rendered="#{abstimmung.nummerUnterdruecken==false}">
+                                    <h:outputText value="#{abstimmung.nummer}" rendered="#{tLanguage.lang ==1}" />
+                                    <h:outputText value="#{abstimmung.nummerEN}" rendered="#{tLanguage.lang ==2}" />
+                                </h:panelGroup>
+                                <span>
+                                </span>
+                                <h:outputText value="#{abstimmung.nummerindex}" rendered="#{tLanguage.lang == 1}" />
+                                <h:outputText value="#{abstimmung.nummerindexEN}" rendered="#{tLanguage.lang == 2}" />
+                            </div>
+                            <div class="col-7">
+                                <h:outputText value="#{abstimmung.anzeigeBezeichnungLang}"
+                                    rendered="#{tLanguage.lang == 1}" escape="false" />
+                                <h:outputText value="#{abstimmung.anzeigeBezeichnungLangEN}"
+                                    rendered="#{tLanguage.lang == 2}" escape="false" />
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <h:panelGroup rendered="#{!abstimmung.ueberschrift}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('108')}"
+                                        rendered="#{abstimmung.gewaehlt=='J'}" />
+                                    <h:outputText value="#{eclPortalTexteM.holeText('109')}"
+                                        rendered="#{abstimmung.gewaehlt=='N'}" />
+                                    <h:outputText value="#{eclPortalTexteM.holeText('110')}"
+                                        rendered="#{abstimmung.gewaehlt=='E'}" />
+                                </p>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </ui:repeat>
+            </div>
+        </h:panelGroup>
+    </section>
+</ui:composition>

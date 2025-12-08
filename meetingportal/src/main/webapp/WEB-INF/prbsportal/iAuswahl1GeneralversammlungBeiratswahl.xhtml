@@ -1,0 +1,150 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+	xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+	xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+	xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+	<f:subview id="iAuswahl1GeneralversammlungBeiratswahlOben">
+		<ui:include src="idetail/idSeiteStart.xhtml" />
+	</f:subview>
+
+
+
+	<!-- Beiratswahl noch nicht möglich -->
+	<h:panelGroup rendered="#{!tAuswahl1Session.beiratswahlMoeglich}">
+		<div class="container-80">
+			<div class="row">
+				<div class="col-8  btn-w-100">
+					<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2139')}"><!-- 1970 -->
+						<p>
+							<h:outputText value="#{eclPortalTexteM.holeText('2139')}" escape="false"></h:outputText>
+						</p>
+					</h:panelGroup>
+				</div>
+			</div>
+		</div>
+	</h:panelGroup>
+
+	<!-- +++++++++++++++++++++ Beiratswahl generell möglich +++++++++++++++++++++++ -->
+	<h:panelGroup rendered="#{tAuswahl1Session.beiratswahlMoeglich}">
+		<div class="container-80">
+			<!-- kein eigener Bestand vorhanden -->
+			<h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.eigenerAREintragVorhanden==false}">
+				<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2140')}"><!-- 1971 -->
+					<p>
+						<h:outputText value="#{eclPortalTexteM.holeText('2140')}" escape="false"></h:outputText>
+
+					</p>
+				</h:panelGroup>
+			</h:panelGroup>
+
+
+
+			<!-- eigener Bestand vorhanden, d.h. Anmeldung und Vollmacht und Briefwahl möglich -->
+			<h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.eigenerAREintragVorhanden==true}">
+
+				<!-- +++++++++SRV möglich +++++ -->
+
+
+				<!-- Starttext -->
+				<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2141')}"><!-- 571 -->
+					<p>
+						<h:outputText value="#{eclPortalTexteM.holeText('2141')}" escape="false"></h:outputText>
+
+					</p>
+				</h:panelGroup>
+				<!-- SRV noch nicht erteilt -->
+				<h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereSRVNeuMoeglich()}">
+					<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2142')}"><!-- 572 -->
+						<p>
+							<h:outputText value="#{eclPortalTexteM.holeText('2142')}" escape="false"></h:outputText>
+
+						</p>
+					</h:panelGroup>
+					<!--Bttuon SRV erteilen (Erstmalig) -->
+					<p>
+						<h:commandButton value="#{eclPortalTexteM.holeText('2143')}"
+							action="#{tGeneralversammlung.doSRVErteilen()}" styleClass="btn-typ-00" id="i111btnsrv1">
+							<!--573 --> <!--  ????????????????? -->
+							<f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+						</h:commandButton>
+
+					</p>
+
+				</h:panelGroup>
+				<!-- SRV bereits erteilt -->
+				<h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereSRVNeuMoeglich()==false}">
+
+
+					<!--Bttuon SRV ändern -->
+					<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2144')}"><!-- 575 -->
+						<p>
+							<h:outputText value="#{eclPortalTexteM.holeText('2144')}" escape="false"></h:outputText>
+
+						</p>
+					</h:panelGroup>
+					<!-- 
+						<p>
+						 							<h:commandButton value="#{eclPortalTexteM.holeText('2145')}"
+								action="#{tGeneralversammlung.doSRVAendern()}"
+								styleClass="btn-typ-00" id="i111btnsrv2">
+								<f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+							</h:commandButton>
+
+						</p>
+						-->
+					<!--Button SRV stornieren -->
+					<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2146')}"><!-- 577 -->
+						<p>
+							<h:outputText value="#{eclPortalTexteM.holeText('2146')}" escape="false"></h:outputText>
+
+						</p>
+					</h:panelGroup>
+					<!-- 
+						<p>
+							<h:commandButton value="#{eclPortalTexteM.holeText('2147')}"
+								action="#{tGeneralversammlung.doSRVStornieren()}"
+								styleClass="btn-typ-00" id="i111btnsrvwahl3">
+								<f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+							</h:commandButton>
+						</p>
+						-->
+
+				</h:panelGroup>
+
+
+
+			</h:panelGroup>
+			<!-- Ende von Anmeldung möglich weil eigener Bestand -->
+
+			<!-- Endtext -->
+			<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2148')}"><!-- 1972 -->
+				<p>
+					<h:outputText value="#{eclPortalTexteM.holeText('2148')}" escape="false"></h:outputText>
+
+				</p>
+			</h:panelGroup>
+		</div>
+	</h:panelGroup>
+
+
+
+	<!-- Buttons -->
+	<f:subview id="iAuswahl1GeneralversammlungBeiratswahlButtons">
+		<ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+	</f:subview>
+
+</ui:composition>

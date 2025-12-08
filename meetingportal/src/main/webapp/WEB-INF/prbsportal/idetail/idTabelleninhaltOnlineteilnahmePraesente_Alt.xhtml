@@ -1,0 +1,72 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+
+    <h:column>
+        <section class="bereits-angemeldet-bereich">
+            <!-- Starttext Vollmachten an Dritte vorhanden -->
+            <ui:repeat value="#{besitzJeKennung.zugeordneteMeldungenBevollmaechtigtListe}" var="meldung">
+                <div class="row">
+                    <div class="col-3">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1014')}" escape="false"></h:outputText>
+                            <h:outputText value="#{mitglied.aktionaersnummerFuerAnzeige}" escape="false"></h:outputText>
+                            <br />
+                            <h:outputText value="#{mitglied.aktionaerTitelVornameName}" escape="false"></h:outputText>
+                            <br />
+                            <h:outputText value="#{mitglied.aktionaerOrt}" escape="false"></h:outputText>
+                            <h:panelGroup rendered="#{tRender.stimmenAnzeigen() and (mitglied.gattung==1)}">
+                                <br />
+                                <h:outputText value="#{eclPortalTexteM.holeText('21')}" escape="false" />
+                                <br />
+                                <h:outputLabel value="#{mitglied.aktionaerStimmenDE}"
+                                    rendered="#{tLanguage.lang == 1}" />
+                                <h:outputLabel value="#{mitglied.aktionaerStimmenEN}" rendered="#{tLanguage.lang == 2}">
+                                </h:outputLabel>
+                                <br />
+                                <h:outputText value="#{eclPortalTexteM.holeText('22')}" escape="false"></h:outputText>
+                            </h:panelGroup>
+                        </p>
+                    </div>
+                    <div class="col-5">
+                        <h:panelGroup rendered="#{mitglied.bereitsPraesent}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1056')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1056')}" escape="false" />
+                                    <br />
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{!mitglied.bereitsPraesent}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1057')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1057')}" escape="false" />
+                                    <br />
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </div>
+                </div>
+            </ui:repeat>
+        </section>
+    </h:column>
+
+
+</ui:composition>

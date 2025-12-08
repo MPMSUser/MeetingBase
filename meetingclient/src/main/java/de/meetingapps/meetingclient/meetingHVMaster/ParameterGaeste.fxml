@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TabPane fx:id="tbPaneAnnzeige" layoutY="36.0" onMouseClicked="#onTpChanged" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="100.0" tabMaxWidth="140.0" tabMinWidth="20.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab fx:id="tpLogin" text="Eingabemaske allgemein">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <content>
+                                        <GridPane prefHeight="628.0" prefWidth="1091.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.0" minWidth="10.0" prefWidth="303.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="134.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <padding>
+                                                <Insets top="5.0" />
+                                            </padding>
+                                            <children>
+                                                <TextField GridPane.columnIndex="1" />
+                                                <Label text="Mail verschicken bei Gastkartenausstellung" />
+                                                <TextField fx:id="tfMailVerschickenGK" GridPane.columnIndex="1" />
+                                                <Label text="1=Mail mit Gastkarte als Anhang (über System)" GridPane.columnIndex="2" GridPane.columnSpan="3" />
+                                                <Label text="bcc-Adresse 1" GridPane.rowIndex="4" />
+                                                <Label text="bcc-Adresse 2" GridPane.rowIndex="5" />
+                                                <Label text="Anzeige Button &quot;Speichern&quot;" GridPane.rowIndex="7" />
+                                                <TextField fx:id="tfBccAdresse1" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="4" />
+                                                <TextField fx:id="tfBccAdresse2" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5" />
+                                                <TextField fx:id="tfButtonSpeichernAnzeigen" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                <Label text="0=nein, 1=ja" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                                <TextField fx:id="tfButtonSpeichernDruckenAnzeigen" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                                <Label text="0=nein, 1=ja" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                    <Label text="2=Mail als reine Bestätigung (über System)" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                                    <Label text="4=Mail als reine Bestätigung auf Quittungsseite zum Lokal verschicken" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                                    <Label text="Anzeige Button &quot;Speichern und Sofortdruck&quot;" GridPane.rowIndex="8" />
+                                            </children>
+                                        </GridPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="tpAllgemein" text="Eingabefelder">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <ScrollPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <content>
+                                        <GridPane prefHeight="639.0" prefWidth="1091.0">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="303.0" minWidth="10.0" prefWidth="303.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="134.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <padding>
+                                                <Insets top="5.0" />
+                                            </padding>
+                                            <children>
+                                                <TextField fx:id="tfFeldVornameVerwenden" prefHeight="25.0" prefWidth="88.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <TextField fx:id="tfFeldZusatz1Verwenden" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                <TextField fx:id="tfFeldZusatz2Verwenden" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                                <TextField fx:id="tfFeldLandVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                                <TextField fx:id="tfFeldZuHaendenVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <TextField fx:id="tfFeldOrtVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                                                <TextField fx:id="tfFeldMailadresseVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                                                <TextField fx:id="tfFeldGruppeVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                                                <TextField fx:id="tfFeldVipVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                                                <TextField fx:id="tfFeldZuHaendenBezeichnung" GridPane.columnIndex="1" GridPane.rowIndex="19" />
+                                                <Label text="Anrede" GridPane.rowIndex="1" />
+                                                <Label text="0=nicht anzeige, 1=Eingabe ermöglichen, 2=Eingabe zwingend" GridPane.columnIndex="3" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                                                <TextField fx:id="tfFeldAnredeVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="Titel" GridPane.rowIndex="2" />
+                                                <TextField fx:id="tfFeldTitelVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <TextField fx:id="tfFeldNameVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <TextField fx:id="tfFeldZusatz1Bezeichnung" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+                                    <Label text="Mailadresse" GridPane.rowIndex="13" />
+                                    <Label text="Ort" GridPane.rowIndex="12" />
+                                    <Label text="PLZ" GridPane.rowIndex="11" />
+                                    <Label text="Land" GridPane.rowIndex="10" />
+                                    <Label text="Straße" GridPane.rowIndex="9" />
+                                    <Label text="Zusatz 2" GridPane.rowIndex="8" />
+                                    <Label text="Zusatz 1" GridPane.rowIndex="7" />
+                                    <Label text="zu Händen von" GridPane.rowIndex="6" />
+                                    <Label text="Vorname" GridPane.rowIndex="5" />
+                                    <Label text="Name" GridPane.rowIndex="4" />
+                                    <Label text="Adelstitel" GridPane.rowIndex="3" />
+                                    <Label text="VIP" GridPane.rowIndex="17" />
+                                    <Label text="Ausstellungsgrund" GridPane.rowIndex="16" />
+                                    <Label text="Gruppe" GridPane.rowIndex="15" />
+                                    <Label text="Kommunikationssprache" GridPane.rowIndex="14" />
+                                    <Label text="Feldbezeichnung &quot;Zusatz 2&quot;" GridPane.rowIndex="21" />
+                                    <Label text="Feldbezeichnung &quot;Zusatz 1&quot;" GridPane.rowIndex="20" />
+                                    <Label text="Feldbezeichnung &quot;zu Händen&quot;" GridPane.rowIndex="19" />
+                                    <TextField fx:id="tfFeldAdelstitelVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="tfFeldAusstellungsgrundVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                                    <TextField fx:id="tfFeldKommunikationsspracheVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                                    <TextField fx:id="tfFeldPLZVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                                    <TextField fx:id="tfFeldStrasseVerwenden" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                    <TextField fx:id="tfFeldZusatz2Bezeichnung" GridPane.columnIndex="1" GridPane.rowIndex="21" />
+                                    <TextField fx:id="tfFeldAnredeVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                    <Label text="uLogin" GridPane.columnIndex="1" />
+                                    <Label text="Internetservice" GridPane.columnIndex="2" />
+                                    <TextField fx:id="tfFeldTitelVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                    <TextField fx:id="tfFeldAdelstitelVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                                    <TextField fx:id="tfFeldNameVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                                    <TextField fx:id="tfFeldVornameVerwendenPortal" prefHeight="25.0" prefWidth="88.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                    <TextField fx:id="tfFeldZuHaendenVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                    <TextField fx:id="tfFeldZusatz1VerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                                    <TextField fx:id="tfFeldZusatz2VerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                                    <TextField fx:id="tfFeldStrasseVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                                    <TextField fx:id="tfFeldLandVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                                    <TextField fx:id="tfFeldPLZVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                                    <TextField fx:id="tfFeldOrtVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="12" />
+                                    <TextField fx:id="tfFeldMailadresseVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="13" />
+                                    <TextField fx:id="tfFeldKommunikationsspracheVerwendenPortal" GridPane.columnIndex="2" GridPane.rowIndex="14" />
+                                            </children>
+                                        </GridPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <Button fx:id="btnSpeichern" layoutX="29.0" layoutY="845.0" maxWidth="150.0" mnemonicParsing="false" onAction="#clickedSpeichern" prefWidth="150.0" text="Speichern / Beenden" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+        <Button fx:id="btnBeendenOhneSpeichern" layoutX="210.0" layoutY="845.0" mnemonicParsing="false" onAction="#clickedBeendenOhneSpeichern" prefWidth="150.0" text="Beenden ohne Speichern" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="180.0" />
+    </children>
+</AnchorPane>

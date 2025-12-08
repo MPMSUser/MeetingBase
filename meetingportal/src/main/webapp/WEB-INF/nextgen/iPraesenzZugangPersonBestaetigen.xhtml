@@ -1,0 +1,110 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+
+    <f:subview id="iPraesenzZugangPersonBestaetigenOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <!-- Warnhinweis Briefwahl -->
+    <h:panelGroup rendered="#{tPraesenzZugangAbgangSession.hinweisWeisungsStornierungAnzeigen==true}">
+        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1066')}">
+            <p class="pText">
+                <h:outputText value="#{eclPortalTexteM.holeText('1066')}" escape="false" />
+                <br /> <br />
+            </p>
+        </h:panelGroup>
+
+        <h:panelGroup
+            rendered="#{eclBesitzGesamtAuswahl1M.liefereZugangNurAlsAktionaerMoeglich()==false and eclParamM.aktionaerAlsGastMitBriefwahl==true}">
+
+            <!-- Zugangsbutton ermöglichen, wenn Online-Teilnahme aktiv -->
+            <h:panelGroup rendered="#{tAuswahlSession.onlineteilnahmeAngebotenUB==true}">
+
+                <!-- Starttext -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1199')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('1199')}" escape="false" />
+                        <br />
+                    </p>
+                </h:panelGroup>
+
+                <!-- Zugangsbutton Gast -->
+                <p class="pText pMenu">
+                    <h:commandButton value="#{eclPortalTexteM.holeText('1200')}"
+                        action="#{tPraesenzZugangAbgang.doZugangGast()}" styleClass="btnFunktionAuswahl">
+                        <f:ajax execute="@all" render="@form streamform" onevent="nachAjaxButton" />
+                    </h:commandButton>
+                    <br /> <br />
+                </p>
+
+            </h:panelGroup>
+        </h:panelGroup>
+
+    </h:panelGroup>
+
+
+    <!-- Starttext -->
+    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1077')}">
+        <p class="pText">
+            <h:outputText value="#{eclPortalTexteM.holeText('1077')}" escape="false" />
+            <br /> <br />
+        </p>
+    </h:panelGroup>
+
+
+    <h:panelGroup rendered="#{tPraesenzZugangAbgangSession.hinweisWeisungsStornierungAnzeigen==true}">
+        <p class="pText pMenu">
+            <h:commandButton
+                value="#{eclPortalTexteM.holeText('1078')}#{eclPersonenListeM.aktuellerTeilnehmer.name}, #{eclPersonenListeM.aktuellerTeilnehmer.ort}#{eclPortalTexteM.holeText('1079')}"
+                action="#{tPraesenzZugangAbgang.doPersonBestaetigenZugangUndBuchen}" styleClass="btnFunktionAuswahl"
+                onclick="this.form.target='_self'">
+                <f:ajax execute="@all" render="seite" />
+            </h:commandButton>
+            <br /> <br />
+        </p>
+    </h:panelGroup>
+    <h:panelGroup rendered="#{tPraesenzZugangAbgangSession.hinweisWeisungsStornierungAnzeigen==false}">
+        <p class="pText pMenu">
+            <h:commandButton
+                value="#{eclPortalTexteM.holeText('1080')}#{eclPersonenListeM.aktuellerTeilnehmer.name}, #{eclPersonenListeM.aktuellerTeilnehmer.ort}#{eclPortalTexteM.holeText('1081')}"
+                action="#{tPraesenzZugangAbgang.doPersonBestaetigenZugangUndBuchen}" styleClass="btnFunktionAuswahl"
+                onclick="this.form.target='_self'">
+                <f:ajax execute="@all" render="seite" />
+            </h:commandButton>
+            <br /> <br />
+        </p>
+    </h:panelGroup>
+
+
+    <!-- Endetext -->
+    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1082')}">
+        <p class="pText">
+            <h:outputText value="#{eclPortalTexteM.holeText('1082')}" escape="false" />
+            <br /> <br />
+        </p>
+    </h:panelGroup>
+
+
+    <br />
+    <br />
+    <f:subview id="iPraesenzZugangPersonBestaetigenButtons">
+        <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+    </f:subview>
+
+</ui:composition>

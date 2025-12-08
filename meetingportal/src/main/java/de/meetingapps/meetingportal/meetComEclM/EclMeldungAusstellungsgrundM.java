@@ -1,0 +1,83 @@
+/*
+ *  Copyright 2025 Better Orange IR & HV AG
+ *
+ *  Licensed under the Meetingbase License (the "License");
+ *  Vou may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package de.meetingapps.meetingportal.meetComEclM;
+
+import java.io.Serializable;
+
+import de.meetingapps.meetingportal.meetComEntities.EclMeldungAusstellungsgrund;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Named;
+
+@SessionScoped
+@Named
+public class EclMeldungAusstellungsgrundM implements Serializable {
+    private static final long serialVersionUID = 13434130248480493L;
+
+    private int mandant;
+    private int meldungsIdent;
+    private String ausstellungsGrundKuerzel;
+    private String kommentar;
+
+    /*Nicht Bestandteil dieser Table, aber im Hinblick auf meldung enthalten*/
+    private String beschreibung; /*Aus EclAusstellungsgrund*/
+
+    public void copyFrom(EclMeldungAusstellungsgrund pMeldungAusstellungsgrund) {
+        mandant = pMeldungAusstellungsgrund.mandant;
+        meldungsIdent = pMeldungAusstellungsgrund.meldungsIdent;
+        ausstellungsGrundKuerzel = pMeldungAusstellungsgrund.ausstellungsGrundKuerzel;
+        kommentar = pMeldungAusstellungsgrund.kommentar;
+        beschreibung = pMeldungAusstellungsgrund.beschreibung;
+    }
+
+    public int getMandant() {
+        return mandant;
+    }
+
+    public void setMandant(int mandant) {
+        this.mandant = mandant;
+    }
+
+    public int getMeldungsIdent() {
+        return meldungsIdent;
+    }
+
+    public void setMeldungsIdent(int meldungsIdent) {
+        this.meldungsIdent = meldungsIdent;
+    }
+
+    public String getAusstellungsGrundKuerzel() {
+        return ausstellungsGrundKuerzel;
+    }
+
+    public void setAusstellungsGrundKuerzel(String ausstellungsGrundKuerzel) {
+        this.ausstellungsGrundKuerzel = ausstellungsGrundKuerzel;
+    }
+
+    public String getKommentar() {
+        return kommentar;
+    }
+
+    public void setKommentar(String kommentar) {
+        this.kommentar = kommentar;
+    }
+
+    public String getBeschreibung() {
+        return beschreibung;
+    }
+
+    public void setBeschreibung(String beschreibung) {
+        this.beschreibung = beschreibung;
+    }
+
+}

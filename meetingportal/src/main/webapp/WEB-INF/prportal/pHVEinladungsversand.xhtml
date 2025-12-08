@@ -1,0 +1,98 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+    <f:subview id="pHVEinladungsversandOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+
+    <!-- Inhaltsbereich -->
+    <section id="inhalts-bereich">
+        <div class="col-4">
+            <!-- Überschrift */ -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1643')}">
+                <p>
+                <h2>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1643)}" escape="false"></h:outputLabel>
+                </h2>
+                </p>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{pHVEinladungsversandSession.registrierungZulaessig==false}">
+                <!-- nicht Möglich -->
+                <p>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1650)}" escape="false"></h:outputLabel>
+                </p>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{pHVEinladungsversandSession.registrierungZulaessig==true}">
+                <!-- Starttext -->
+                <p>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1644)}" escape="false"></h:outputLabel>
+                    <h:outputLabel value="#{pHVEinladungsversandSession.mailAdresse}"></h:outputLabel>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1647)}" escape="false"></h:outputLabel>
+                </p>
+
+
+
+
+                <!-- Auswahl -->
+
+                <div class="newsletter-wahl-btn">
+                    <h:selectOneRadio id="auswahlHVEinladung" value="#{pHVEinladungsversandSession.auswahl}"
+                        layout="pageDirection">
+                        <!-- Mail -->
+                        <f:selectItem itemLabel="#{eclPortalTexteM.holeIText(1646)}" itemValue="2" />
+                        <!-- Post -->
+                        <f:selectItem itemLabel="#{eclPortalTexteM.holeIText(1645)}" itemValue="1" />
+                    </h:selectOneRadio>
+                </div>
+
+
+                <!-- Endetext -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1648')}">
+                    <p>
+                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1648)}" escape="false"></h:outputLabel>
+                    </p>
+                </h:panelGroup>
+
+
+                <!--  Button Senden -->
+                <div class="row">
+                    <div class="col-4">
+                        <h:commandButton value="#{eclPortalTexteM.holeIText(1655)}"
+                            id="buttonHVEinladungsversandAbbrechen" action="#{pHVEinladungsversand.doAbbrechen()}"
+                            styleClass="btn-typ-01">
+
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                    <div class="col-4 t-right">
+                        <h:commandButton value="#{eclPortalTexteM.holeIText(1649)}" id="buttonHVEinladungsversandSenden"
+                            action="#{pHVEinladungsversand.doSenden()}" styleClass="btn-typ-01">
+
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+        </div>
+    </section>
+</ui:composition>

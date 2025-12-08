@@ -1,0 +1,208 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    xmlns:f="jakarta.faces.core" lang="de">
+    <h:panelGroup styleClass="row" rendered="#{besitzJeKennung.besitzIstUrsprungVonKennung==false}">
+        <div class="col">
+            <p>
+
+                <!-- <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1226')}">
+                    <h:outputText value="#{eclPortalTexteM.holeText('1226')}" escape="false" />
+                </h:panelGroup>
+                <h:outputText value="#{besitzAREintrag.aktienregisterNummer}" escape="false" />
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1227')}">
+                    <h:outputText value="#{eclPortalTexteM.holeText('1227')}" escape="false" />
+                </h:panelGroup>
+
+
+                <br /> -->
+                <h:outputText value="#{besitzAREintrag.aktionaerNameKomplett}" escape="false" />
+                <br />
+                <h:outputText value="#{besitzAREintrag.aktionaerOrt}" escape="false" />
+                <br />
+                <h:panelGroup rendered="#{tRender.stimmenAnzeigen()==true}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(besitzAREintrag.textNrVorAktien)}">
+                        <h:outputText value="#{eclPortalTexteM.holeIText(besitzAREintrag.textNrVorAktien)}"
+                            escape="false" />
+                    </h:panelGroup>
+                    <h:outputText value="#{besitzAREintrag.aktionaerStimmenDE}" rendered="#{tLanguage.lang == 1}" />
+                    <h:outputText value="#{besitzAREintrag.aktionaerStimmenEN}" rendered="#{tLanguage.lang == 2}" />
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1229')}">
+                        <h:outputText value="#{eclPortalTexteM.holeText('1229')}" escape="false" />
+                    </h:panelGroup>
+                </h:panelGroup>
+
+            </p>
+        </div>
+    </h:panelGroup>
+
+    <h:panelGroup rendered="#{besitzAREintrag.angemeldet==false and besitzAREintrag.bestandIstNullBestand()==false}">
+
+        <!-- Falls Aktienregisterbestand noch nicht angemeldet -->
+        <p>
+            <h:panelGroup rendered="#{tSession.portalErstanmeldungIstMoeglich==true}">
+                <h:outputText value="#{eclPortalTexteM.holeText('1235')}" escape="false" />
+            </h:panelGroup>
+            <h:panelGroup rendered="#{tSession.portalErstanmeldungIstMoeglich==false}">
+                <h:outputText value="#{eclPortalTexteM.holeText('1236')}" escape="false" />
+            </h:panelGroup>
+        </p>
+
+
+        <h:panelGroup rendered="#{tSession.portalErstanmeldungIstMoeglich==true}">
+            <!-- Buttons fürs Anmelden -->
+            <div class="container">
+                <h:panelGroup rendered="#{eclParamM.erklAnPos1==1}">
+                    <!-- Eintrittskarte -->
+                    <f:subview id="iANMEintrittskarte1">
+                        <ui:include src="idAuswahlANMEintrittskarte.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos1==2}">
+                    <!-- Briefwahl -->
+                    <f:subview id="iANMBriefwahl1">
+                        <ui:include src="idAuswahlANMBriefwahl.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos1==3}">
+                    <!-- SRV -->
+                    <f:subview id="iANMSRV1">
+                        <ui:include src="idAuswahlANMSRV.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclParamM.erklAnPos2==1}">
+                    <!-- Eintrittskarte -->
+                    <f:subview id="iANMEintrittskarte2">
+                        <ui:include src="idAuswahlANMEintrittskarte.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos2==2}">
+                    <!-- Briefwahl -->
+                    <f:subview id="iANMBriefwahl2">
+                        <ui:include src="idAuswahlANMBriefwahl.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos2==3}">
+                    <!-- SRV -->
+                    <f:subview id="iANMSRV2">
+                        <ui:include src="idAuswahlANMSRV.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclParamM.erklAnPos3==1}">
+                    <!-- Eintrittskarte -->
+                    <f:subview id="iANMEintrittskarte3">
+                        <ui:include src="idAuswahlANMEintrittskarte.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos3==2}">
+                    <!-- Briefwahl -->
+                    <f:subview id="iANMBriefwahl3">
+                        <ui:include src="idAuswahlANMBriefwahl.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos3==3}">
+                    <!-- SRV -->
+                    <f:subview id="iANMSRV3">
+                        <ui:include src="idAuswahlANMSRV.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclParamM.erklAnPos4==1}">
+                    <!-- Eintrittskarte -->
+                    <f:subview id="iANMEintrittskarte4">
+                        <ui:include src="idAuswahlANMEintrittskarte.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos4==2}">
+                    <!-- Briefwahl -->
+                    <f:subview id="iANMBriefwahl4">
+                        <ui:include src="idAuswahlANMBriefwahl.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos4==3}">
+                    <!-- SRV -->
+                    <f:subview id="iANMSRV4">
+                        <ui:include src="idAuswahlANMSRV.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclParamM.erklAnPos5==1}">
+                    <!-- Eintrittskarte -->
+                    <f:subview id="iANMEintrittskarte5">
+                        <ui:include src="idAuswahlANMEintrittskarte.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos5==2}">
+                    <!-- Briefwahl -->
+                    <f:subview id="iANMBriefwahl5">
+                        <ui:include src="idAuswahlANMBriefwahl.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{eclParamM.erklAnPos5==3}">
+                    <!-- SRV -->
+                    <f:subview id="iANMSRV5">
+                        <ui:include src="idAuswahlANMSRV.xhtml" />
+                    </f:subview>
+                </h:panelGroup>
+            </div>
+        </h:panelGroup>
+    </h:panelGroup>
+
+
+    <!-- Falls Aktienregisterbestand bereits angemeldet -->
+    <h:panelGroup rendered="#{besitzAREintrag.angemeldet==true and besitzAREintrag.bestandIstNullBestand()==false}">
+        <ui:repeat value="#{besitzAREintrag.zugeordneteMeldungenListe}" var="meldung"
+            id="schleifeBesitzAREintragZugeordneteMeldungen">
+            <section class="section-willenserklaerung">
+                <h:panelGroup rendered="#{meldung.willenserklaerungenVorhanden}">
+                    <div class="col">
+                        <div class="row">
+                            <div class="card card-detail">
+                                <div class="card-body">
+                                    <div class="container-fluid">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('129')}" />
+                                            <h:outputText value="#{eclPortalTexteM.holeText('130')}"
+                                                rendered="#{meldung.bereitsPraesent}" />
+                                            <h:outputText
+                                                value="#{eclPortalTexteM.holeText('131')} #{meldung.aktionaerStimmenDE}"
+                                                rendered="#{tLanguage.lang == 1 and tRender.stimmenAnzeigen()==true}" />
+                                            <h:outputText
+                                                value="#{eclPortalTexteM.holeText('131')} #{meldung.aktionaerStimmenEN}"
+                                                rendered="#{tLanguage.lang == 2 and tRender.stimmenAnzeigen()==true}" />
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('141')}">
+                                                <h:outputText value="#{eclPortalTexteM.holeText('141')}" escape="false">
+                                                </h:outputText>
+                                            </h:panelGroup>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </h:panelGroup>
+                <f:subview id="iMeldungenEigenerARBestandWillenserkl">
+                    <ui:include src="idAuswahlMeldZugWillenserklList.xhtml" />
+                </f:subview>
+                <f:subview id="iMeldungenEigenerARBestandWeitereWillenserkl">
+                    <ui:include src="idAuswahlMeldWeitereWillenserkl.xhtml" />
+                </f:subview>
+            </section>
+        </ui:repeat>
+    </h:panelGroup>
+</ui:composition>

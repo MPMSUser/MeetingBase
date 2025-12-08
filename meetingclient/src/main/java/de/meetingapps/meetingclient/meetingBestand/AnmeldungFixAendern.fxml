@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="lbl1" layoutX="66.0" layoutY="53.0" prefHeight="17.0" prefWidth="101.0" text="Anzahl neu" />
+      <Button fx:id="btnStornieren" layoutX="66.0" layoutY="92.0" mnemonicParsing="false" onAction="#clickedBtnStornieren" text="Ja, Ändern auf Fix" />
+      <Button fx:id="btnAbbruch" layoutX="215.0" layoutY="92.0" mnemonicParsing="false" onAction="#clickedAbbruch" text="Abbruch" />
+      <TextField fx:id="tfAnzahlNeu" layoutX="175.0" layoutY="49.0" />
+   </children>
+</Pane>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="rootPane" prefHeight="300.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fitToWidth="true" layoutX="15.0" layoutY="14.0" prefWidth="350.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <content>
+            <VBox fx:id="boxHistory" />
+         </content>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </ScrollPane>
+      <Label alignment="BOTTOM_CENTER" layoutX="390.0" layoutY="39.0" prefHeight="20.0" text="Code" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="50.0" />
+      <ComboBox fx:id="cbCxlRsnCd" disable="true" layoutX="390.0" layoutY="56.0" prefHeight="25.0" prefWidth="150.0" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="70.0" />
+      <Label alignment="BOTTOM_CENTER" layoutX="399.0" layoutY="102.0" prefHeight="20.0" text="Cancellation Reason" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="115.0" />
+      <TextArea fx:id="taCxlRsn" disable="true" layoutX="365.0" layoutY="130.0" prefHeight="70.0" prefWidth="150.0" AnchorPane.leftAnchor="380.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="135.0" />
+      <Button fx:id="btnClose" layoutX="21.0" layoutY="261.0" mnemonicParsing="false" text="Abbrechen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnCreate" disable="true" layoutX="639.0" layoutY="227.0" mnemonicParsing="false" onAction="#onCreate" prefWidth="100.0" text="Datei erstellen" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btnSend" disable="true" layoutX="647.0" layoutY="260.0" mnemonicParsing="false" onAction="#onSend" prefWidth="100.0" text="Senden" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      <ScrollPane fx:id="scpnUebersicht" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="14.0" layoutY="11.0" maxHeight="170.0" prefHeight="170.0" vbarPolicy="NEVER" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0" />
+      <TabPane fx:id="tabPaneGesamt" layoutX="14.0" layoutY="195.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="195.0">
+        <tabs>
+          <Tab fx:id="tabDetails" text="Details">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <GridPane prefHeight="530.0" prefWidth="1320.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="363.0" minWidth="10.0" percentWidth="30.0" prefWidth="363.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="800.0" minWidth="10.0" percentWidth="60.0" prefWidth="691.0" />
+                                    <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="800.0" minWidth="10.0" percentWidth="5.0" prefWidth="691.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="50.0" minHeight="1.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Label text="Ident" />
+                                    <TextField fx:id="tfIdent" editable="false" maxWidth="-Infinity" prefHeight="25.0" prefWidth="116.0" GridPane.columnIndex="1" />
+                                    <Label text="Aktiv" GridPane.rowIndex="1" />
+                                    <CheckBox fx:id="cbAktiv" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label text="Bezeichnung der Sammelkarte" GridPane.rowIndex="2" />
+                                    <TextField fx:id="tfBezeichnung" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Ort" GridPane.rowIndex="3" />
+                                    <TextField fx:id="tfOrt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="Kommentar" GridPane.rowIndex="4" />
+                                    <TextField fx:id="tfKommentar" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label text="Gattung" GridPane.rowIndex="5" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                                       <children>
+                                          <ComboBox fx:id="cbGattungNr" prefHeight="25.0" prefWidth="70.0" />
+                                          <ComboBox fx:id="cbGattungKuerzel" prefHeight="25.0" prefWidth="61.0" />
+                                          <TextField fx:id="tfGattungLang" prefWidth="300.0" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Sammelkartenart" GridPane.rowIndex="6" GridPane.valignment="CENTER" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.valignment="CENTER">
+                                       <children>
+                                          <RadioButton fx:id="cbKIAV" mnemonicParsing="false" text="KIAV">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="tgSammelkartenart" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="cbSRV" mnemonicParsing="false" text="Stimmrechtsvertreter" toggleGroup="$tgSammelkartenart" />
+                                          <RadioButton fx:id="cbOrga" mnemonicParsing="false" text="Organisatorisch" toggleGroup="$tgSammelkartenart" />
+                                          <RadioButton fx:id="cbBriefwahl" mnemonicParsing="false" text="Briefwahl" toggleGroup="$tgSammelkartenart" />
+                                          <RadioButton fx:id="cbDauervollmacht" mnemonicParsing="false" text="Dauervollmacht" toggleGroup="$tgSammelkartenart" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Unterstützte Weisungstypen" GridPane.rowIndex="8" />
+                                    <Label text="Gruppe (!)" GridPane.rowIndex="7">
+                                       <tooltip>
+                                          <Tooltip text="Sammelkartenauswertungen können nach dieser Gruppe selektiert werden" />
+                                       </tooltip>
+                                    </Label>
+                                    <TextField fx:id="tfGruppe" maxWidth="-Infinity" prefHeight="25.0" prefWidth="74.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                       <children>
+                                          <CheckBox fx:id="cbOhneWeisung" mnemonicParsing="false" text="ohne Weisung" />
+                                          <CheckBox fx:id="cbDedizierteWeisung" mnemonicParsing="false" text="dedizierte Weisung" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Ist Standard" GridPane.rowIndex="9" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                       <children>
+                                          <CheckBox fx:id="cbImInternet" mnemonicParsing="false" text="im Internet-Service (!)">
+                                             <tooltip>
+                                                <Tooltip text="Für SRV- und Briefwahl-Sammelkarten gilt: jeweils genau 1 Sammelkarte muß markiert sein" />
+                                             </tooltip>
+                                          </CheckBox>
+                                          <CheckBox fx:id="cbImPapier" mnemonicParsing="false" text="im Papierprozess (!)">
+                                             <tooltip>
+                                                <Tooltip text="Für SRV- und Briefwahl-Sammelkarten gilt: jeweils genau 1 Sammelkarte muß markiert sein" />
+                                             </tooltip>
+                                          </CheckBox>
+                                          <CheckBox fx:id="cbVerlassenHV" mnemonicParsing="false" text="beim Verlassen der HV (!)">
+                                             <tooltip>
+                                                <Tooltip text="Genau 1 Sammelkarte muß markiert sein" />
+                                             </tooltip>
+                                          </CheckBox>
+                                       </children>
+                                    </HBox>
+                                    <Label text="Vertreter auf HV für Vollmacht anbieten (!)" wrapText="true" GridPane.rowIndex="10">
+                                       <tooltip>
+                                          <Tooltip text="Wenn markiert, wird der Vertreter dieser Sammelkarte bei der Vertretererfassung in der Vertreterliste angeboten" />
+                                       </tooltip>
+                                    </Label>
+                                    <CheckBox fx:id="cbVertreterAnbieten" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                                    <Label text="Weitergabe der Weisungen an Dritte vor der HV" wrapText="true" GridPane.rowIndex="11" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                       <children>
+                                          <RadioButton fx:id="cbWeitergabeInGesamtsumme" mnemonicParsing="false" text="nur in Gesamtsumme">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="tgWeitergabe" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="cbWeitergabeJeSammelkartenSumme" mnemonicParsing="false" text="nur in Summe je Sammelkarte" toggleGroup="$tgWeitergabe" />
+                                          <RadioButton fx:id="cbWeitergabeNichtErlaubt" mnemonicParsing="false" text="nicht erlaubt" toggleGroup="$tgWeitergabe" />
+                                          <RadioButton fx:id="cbWeitergabeUneingeschraenkt" mnemonicParsing="false" text="uneingeschränkt erlaubt" toggleGroup="$tgWeitergabe" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="Offenlegung des Namens" wrapText="true" GridPane.rowIndex="12" />
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                                       <children>
+                                          <RadioButton fx:id="cbMitOffenlegung" mnemonicParsing="false" text="mit Offenlegung">
+                                             <toggleGroup>
+                                                <ToggleGroup fx:id="tgOffenlegung" />
+                                             </toggleGroup>
+                                          </RadioButton>
+                                          <RadioButton fx:id="cbOhneOffenlegung" mnemonicParsing="false" text="ohne Offenlegung" toggleGroup="$tgOffenlegung" />
+                                          <RadioButton fx:id="cbOffenlegungWieParameter" mnemonicParsing="false" text="wie Parameter" toggleGroup="$tgOffenlegung" />
+                                       </children>
+                                    </HBox>
+                                    <Button fx:id="btnSRV" alignment="CENTER" contentDisplay="CENTER" disable="true" mnemonicParsing="false" onAction="#onBtnSRV" text="SRV" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                                 </children>
+                              </GridPane>
+                           </content>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </ScrollPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+          </Tab>
+          <Tab fx:id="tabVertreterEks" text="Vertreter/EKs">
+               <content>
+                  <ScrollPane fitToHeight="true" fitToWidth="true">
+                     <content>
+                        <AnchorPane>
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="297.0" layoutX="711.0" layoutY="228.0" stroke="BLACK" strokeType="INSIDE" width="559.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="297.0" layoutX="7.0" layoutY="230.0" stroke="BLACK" strokeType="INSIDE" width="573.0" />
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" layoutX="5.0" layoutY="7.0" stroke="BLACK" strokeType="INSIDE" width="1370.0" />
+                              <Label layoutX="14.0" layoutY="14.0" text="Vertreter">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <ScrollPane fx:id="pnVertreter" layoutX="14.0" layoutY="53.0" prefHeight="139.0" prefWidth="1299.0" />
+                              <Button fx:id="btnVertreter" layoutX="161.0" layoutY="15.0" mnemonicParsing="false" onAction="#onBtnVertreter" text="Neuen Vertreter eingeben" />
+                              <Label layoutX="18.0" layoutY="242.0" text="Eintrittskarten">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnNeueEintrittskarte" layoutX="161.0" layoutY="244.0" mnemonicParsing="false" onAction="#onBtnNeueEintrittskarte" text="Neue Eintrittskarte zuordnen" />
+                              <Label layoutX="732.0" layoutY="242.0" text="Stimmkarten">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Label>
+                              <ScrollPane fx:id="pnEintrittskarten" layoutX="18.0" layoutY="279.0" prefHeight="239.0" prefWidth="548.0" />
+                              <ScrollPane fx:id="pnStimmkarten" layoutX="732.0" layoutY="276.0" prefHeight="239.0" prefWidth="527.0" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+            <Tab fx:id="tabWeisungssummen" text="Weisungsssummen">
+              <content>
+                <AnchorPane>
+                     <children>
+                        <ScrollPane fx:id="scpnWeisungen" fitToHeight="true" fitToWidth="true" layoutY="7.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="tabAktiv" text="Meldungen (Aktiv)">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <ScrollPane fx:id="scpnMeldungenAktiv" fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabInaktiv" text="Inaktiv">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <ScrollPane fx:id="scpnMeldungenInaktiv" fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabWiderrufen" text="Widerrufen">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <ScrollPane fx:id="scpnMeldungenWiderrufen" fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tagGeaendert" text="Geändert">
+               <content>
+                  <AnchorPane>
+                     <children>
+                        <ScrollPane fx:id="scpnMeldungenGeaendert" fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="btnSpeichern" layoutX="14.0" layoutY="833.0" mnemonicParsing="false" onAction="#onBtnSpeichern" prefHeight="25.0" prefWidth="165.0" text="Beenden / Speichern" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnUmbuchen" layoutX="490.0" layoutY="833.0" mnemonicParsing="false" onAction="#clickedUmbuchen" prefHeight="30.0" prefWidth="325.0" text="Stapel-Buchung für ausgewählte Aktionäre" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="500.0" />
+      <Button fx:id="btnAktivieren" layoutX="973.0" layoutY="718.0" mnemonicParsing="false" onAction="#clickedAktivieren" prefHeight="30.0" prefWidth="325.0" text="Ausgewählte Aktionäre aktiv setzen" />
+</children>
+</AnchorPane>

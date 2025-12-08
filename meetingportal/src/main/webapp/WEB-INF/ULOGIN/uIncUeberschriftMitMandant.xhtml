@@ -1,0 +1,50 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    lang="de">
+
+
+    <table class="divUeberschrift">
+        <tr>
+            <td class="divUeberschriftText">
+                <h:outputLabel value="#{ueberschrift}" />
+            </td>
+            <td class="divUeberschriftMandant">
+                <h:outputLabel value="Kennung: #{eclUserLoginM.kennung}" /><br />
+                <h:outputLabel value="HV am #{eclParamM.getHVDatum()}"
+                    rendered="#{eclParamM.mandantIstAusgewaehlt()==true}" /> <br />
+                <h:outputLabel value="#{eclParamM.getMandantString()} #{eclParamM.getEmittentName()}"
+                    rendered="#{eclParamM.mandantIstAusgewaehlt()==true}" /><br />
+                <h:panelGroup
+                    rendered="#{eclParamM.mandantIstAusgewaehlt()==true and eclParamM.liefereDatenbestandIstProduktiv()==false}">
+                    <h1>Testdaten</h1>
+                </h:panelGroup>
+            </td>
+            <td class="divUeberschriftZurueck">
+                <h:commandButton value="Zurück" action="#{uMenue.doZurueck()}" styleClass="btnStandard"
+                    rendered="#{zurueck=='1'}" onclick="this.form.target='_self'" />
+            </td>
+
+        </tr>
+    </table>
+
+    <h:panelGroup rendered="#{uSession.fehlermeldung!=''}">
+        <div class="divFehlermeldung">
+            <h:outputLabel value="#{uSession.fehlermeldung}"></h:outputLabel>
+        </div>
+    </h:panelGroup>
+
+</ui:composition>

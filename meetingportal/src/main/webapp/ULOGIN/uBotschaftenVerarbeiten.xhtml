@@ -1,0 +1,347 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+
+    <ui:define name="content">
+        <h:form enctype="multipart/form-data">
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Botschaften verarbeiten" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <div class="divArbeitsbereich">
+
+                <table class="divArbeitsbereichUeberschrift">
+                    <tr>
+                        <td class="divArbeitsbereichUeberschriftText">
+                            <h:outputLabel value="" />
+                        </td>
+                        <td class="divArbeitsbereichUeberschriftButton">
+                            <h:commandButton value="Refresh Anzeige" action="#{uBotschaftenVerarbeiten.doRefresh()}"
+                                styleClass="btnStandard" />
+                        </td>
+                    </tr>
+                </table>
+
+                <p:dataTable value="#{uBotschaftenVerarbeitenSession.botschaftenListe}" var="botschaft">
+                    <p:column styleClass="colStandard" style="width:30%">
+                        <f:facet name="header">Botschaft</f:facet>
+                        <table>
+                            <tr>
+                                <td>
+                                    <h:outputLabel value="Nr.:" />
+                                </td>
+                                <td>
+                                    <h:outputLabel value="#{botschaft.mitteilungIdent}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputLabel value="Kennung:" />
+                                </td>
+                                <td>
+                                    <h:outputLabel value="#{botschaft.loginKennungAnzeige}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputLabel value="Name:" />
+                                </td>
+                                <td>
+                                    <h:outputLabel value="#{botschaft.nameWortmelder}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputLabel value="Botschaftsart:" />
+                                </td>
+                                <td>
+                                    <h:panelGroup rendered="#{botschaft.liefereLangTextVorhanden()}">
+                                        <h:outputLabel value="Textfeld" /><br />
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{botschaft.liefereVideodateiVorhanden()}">
+                                        <h:outputLabel value="Videodatei" /><br />
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{botschaft.liefereTextdateiVorhanden()}">
+                                        <h:outputLabel value="Textdatei" /><br />
+                                    </h:panelGroup>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputLabel value="Eingereichte Datei:"
+                                        rendered="#{botschaft.liefereDateiVorhanden()}" />
+                                </td>
+                                <td>
+                                    <h:outputLabel value="#{botschaft.dateiname}"
+                                        rendered="#{botschaft.liefereDateiVorhanden()}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:commandButton value="Langtext anzeigen"
+                                        action="#{uBotschaftenVerarbeiten.doLangtextAnzeigen(botschaft)}"
+                                        rendered="#{botschaft.liefereLangTextVorhanden() and botschaft.langTextAnzeigen==false}"
+                                        styleClass="btnStandard" />
+                                </td>
+                                <td>
+                                    <h:inputTextarea row="10" value="#{botschaft.mitteilungLangtext}" readonly="true"
+                                        rendered="#{botschaft.langTextAnzeigen}" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputLabel value="Unterlage:"
+                                        rendered="#{uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}" />
+                                </td>
+                                <td>
+                                    <h:panelGroup rendered="#{botschaft.liefereDateiVorhanden()}">
+                                        <h:panelGroup
+                                            rendered="#{uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                            <h:panelGroup rendered="#{botschaft.verweisAufUnterlagenident==0}">
+                                                <h:outputLabel
+                                                    value="Noch keine Unterlage erstellt. Vor dem Bereitstellen der Datei muß eine Unterlage erstellt werden!" />
+                                                <br />
+                                                <h:commandButton value="Unterlage erstellen"
+                                                    action="#{uBotschaftenVerarbeiten.doUnterlageErstellen(botschaft)}"
+                                                    styleClass="btnStandard" />
+                                                <br />
+
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{botschaft.verweisAufUnterlagenident!=0}">
+                                                <h:outputLabel value="#{botschaft.verweisAufUnterlagenident}" />
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{botschaft.liefereDateiVorhanden()==false}">
+                                        <h:panelGroup
+                                            rendered="#{uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                            <h:outputLabel value="Text muß manuell weiterverarbeitet werden!" />
+                                            <br />
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputLabel value="Video-o.D.:"
+                                        rendered="#{botschaft.liefereVideodateiVorhanden()}" />
+                                    <h:outputLabel value="Datei:" rendered="#{botschaft.liefereTextdateiVorhanden()}" />
+                                </td>
+                                <td>
+                                    <h:panelGroup rendered="#{botschaft.verweisAufUnterlagenident!=0}">
+
+                                        <h:panelGroup rendered="#{botschaft.zugeordnetePortalUnterlage.dateiname==''}">
+                                            <h:outputLabel value="Noch keine Datei bereitgestellt" />
+                                            <br />
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{botschaft.zugeordnetePortalUnterlage.dateiname!=''}">
+                                            <h:panelGroup rendered="#{botschaft.liefereVideodateiVorhanden()}">
+                                                <h:commandButton value="Video-o.D. anzeigen"
+                                                    action="#{uBotschaftenVerarbeiten.doStreamAnschauen(botschaft)}"
+                                                    styleClass="btnStandard" />
+                                                <br />
+                                                <h:panelGroup
+                                                    rendered="#{botschaft.liefereFreigegebenOeffentlicherLinkErstellt()==false and uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                                    <h:commandButton value="Öffentlichen Link freigeben"
+                                                        action="#{uBotschaftenVerarbeiten.doOeffentlichenLinkFreigeben(botschaft)}"
+                                                        styleClass="btnStandard" />
+                                                    <br />
+                                                </h:panelGroup>
+                                                <h:panelGroup
+                                                    rendered="#{botschaft.liefereFreigegebenOeffentlicherLinkErstellt()==true}">
+                                                    <h:outputLabel value="Öffentlicher Link vorhanden" />
+                                                    <br />
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{botschaft.liefereTextdateiVorhanden()}">
+                                                <h:commandButton value="Pdf anzeigen"
+                                                    action="#{uBotschaftenVerarbeiten.doPdfAnzeigen(botschaft)}"
+                                                    styleClass="btnStandard" onclick="this.form.target='_blank'" />
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h:outputLabel value="Angezeigter Status" />
+                                </td>
+                                <td>
+                                    <h:outputLabel value="Aktueller Status:" /><br />
+                                    <h:outputLabel
+                                        value="Funktioniert noch nicht! #{eclPortalTexteM.holeText(botschaft.liefereStatusText())}"
+                                        escape="false" /><br />
+                                    <h:panelGroup rendered="#{uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                        <br />
+                                        <h:outputLabel value="Neuer Status:" /><br />
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1914)}"
+                                            action="#{uBotschaftenVerarbeiten.doStatusSetzen(botschaft,7)}"
+                                            styleClass="btnStandard" /><br />
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1950)}"
+                                            action="#{uBotschaftenVerarbeiten.doStatusSetzen(botschaft,21)}"
+                                            styleClass="btnStandard" /><br />
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1951)}"
+                                            action="#{uBotschaftenVerarbeiten.doStatusSetzen(botschaft,22)}"
+                                            styleClass="btnStandard" /><br />
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1952)}"
+                                            action="#{uBotschaftenVerarbeiten.doStatusSetzen(botschaft,23)}"
+                                            styleClass="btnStandard" /><br />
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1953)}"
+                                            action="#{uBotschaftenVerarbeiten.doStatusSetzen(botschaft,24)}"
+                                            styleClass="btnStandard" /><br />
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1954)}"
+                                            action="#{uBotschaftenVerarbeiten.doStatusSetzen(botschaft,25)}"
+                                            styleClass="btnStandard" /><br />
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1955)}"
+                                            action="#{uBotschaftenVerarbeiten.doStatusSetzen(botschaft,26)}"
+                                            styleClass="btnStandard" /><br />
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1915)}"
+                                            action="#{uBotschaftenVerarbeiten.doStatusSetzen(botschaft,0)}"
+                                            styleClass="btnStandard" /><br />
+                                    </h:panelGroup>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </p:column>
+                    <p:column styleClass="colStandard" style="width:30%">
+                        <f:facet name="header">Dateien</f:facet>
+                        <h:panelGroup rendered="#{botschaft.interneVerarbeitungLaufend==0}">
+                            <h:outputLabel value="Verarbeitung noch nicht erfolgt" />
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{botschaft.interneVerarbeitungLaufend==1}">
+                            <h:outputLabel value="Verarbeitung läuft gerade" />
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{botschaft.interneVerarbeitungLaufend==3}">
+                            <h:outputLabel value="Datei wird gerade hochgeladen" />
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{botschaft.interneVerarbeitungLaufend==2}">
+                            <h:panelGroup rendered="#{botschaft.liefereDateiVorhanden()}">
+                                <p:dataTable value="#{botschaft.weitereVersionen}" var="dateien">
+                                    <p:column styleClass="colStandard" style="width:60%">
+                                        <h:panelGroup rendered="#{dateien.version==0}">
+                                            <h:outputLabel value="Ursprungsversion" />
+                                            <br />
+                                            <h:outputLabel
+                                                value="#{dateien.internerDateiname}.#{dateien.internerDateizusatz}" />
+                                            <br />
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{dateien.version!=0}">
+                                            <h:outputLabel value="Version Nr. #{dateien.version}" />
+                                            <br />
+                                            <h:outputLabel value="QuellDatei-Name #{dateien.dateiname}" />
+                                            <br />
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{dateien.liefereFreigegebenDurchAktionaer()==true}">
+                                            <h:outputLabel value="Durch Aktionär freigegeben" />
+                                            <br />
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{dateien.liefereFreigegebenDurchGesellschaft()==true}">
+                                            <h:outputLabel value="Durch Gesellschaft freigegeben" />
+                                            <br />
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{dateien.liefereFreigegebenHochgeladen()==true}">
+                                            <h:outputLabel value="Zu Video-o.D.-Provider Hochgeladen"
+                                                rendered="#{botschaft.liefereVideodateiVorhanden()}" />
+                                            <h:outputLabel value="Als PDF bereitgestellt"
+                                                rendered="#{botschaft.liefereTextdateiVorhanden()}" />
+                                            <br />
+                                        </h:panelGroup>
+                                        <h:panelGroup
+                                            rendered="#{dateien.liefereFreigegebenOeffentlicherLinkErstellt()==true}">
+                                            <h:outputLabel value="Öffentlicher Link erstellt" />
+                                            <br />
+                                        </h:panelGroup>
+                                    </p:column>
+                                    <p:column styleClass="colStandard" style="width:40%">
+                                        <h:panelGroup
+                                            rendered="#{dateien.liefereFreigegebenDurchGesellschaft()==false}">
+                                            <h:commandButton value="Freigabe (Gesellschaft)"
+                                                action="#{uBotschaftenVerarbeiten.doFreigabgeGesellschaft(dateien)}"
+                                                styleClass="btnStandard" />
+                                            <br />
+                                        </h:panelGroup>
+                                        <h:panelGroup
+                                            rendered="#{dateien.liefereFreigegebenHochgeladen()==false and botschaft.verweisAufUnterlagenident!=0 and uMenueSession.menueVirtuelleHV_botschaftenBearbeiten()}">
+                                            <h:commandButton value="Zu Video-o.D.-Provider hochladen"
+                                                action="#{uBotschaftenVerarbeiten.doStreamHochladen(botschaft, dateien)}"
+                                                styleClass="btnStandard"
+                                                rendered="#{botschaft.liefereVideodateiVorhanden()}" />
+                                            <h:commandButton value="PDF bereitstellen"
+                                                action="#{uBotschaftenVerarbeiten.doPDFBereitstellen(botschaft, dateien)}"
+                                                styleClass="btnStandard"
+                                                rendered="#{botschaft.liefereTextdateiVorhanden()}" />
+                                            <br />
+                                        </h:panelGroup>
+                                        <h:commandButton value="Download"
+                                            action="#{uBotschaftenVerarbeiten.doDownload(dateien)}"
+                                            onclick="this.form.target='_blank'" styleClass="btnStandard" />
+
+                                    </p:column>
+                                </p:dataTable>
+                                <h:panelGroup>
+                                    <!-- validator="#{uBotschaftenVerarbeitenSession.pruefeDatei}"  -->
+                                    <h:inputFile id="file" styleClass="btnNeutral"
+                                        value="#{botschaft.dateiHochladen}" />
+                                    <br />
+                                    <h:commandButton value="Neue Version Uploaden"
+                                        action="#{uBotschaftenVerarbeiten.doNeueVersionUploaden(botschaft)}"
+                                        styleClass="btnStandard" />
+                                    <br />
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </p:column>
+
+                </p:dataTable>
+
+                <table class="divButtonsArbeitsbereich">
+                    <tr>
+                        <td class="divButtonsLeft">
+                            <h:commandButton value="Liste öffentlicher Links downloaden" styleClass="btnStandard"
+                                action="#{uBotschaftenVerarbeiten.doListeOeffentlicherLinks()}" />
+                        </td>
+                        <td class="divButtonsCenter">
+                        </td>
+                        <td class="divButtonsRight">
+                        </td>
+                    </tr>
+                </table>
+
+                <!--
+                        IFrame zum Anzeigen des ausgewählten Videos
+                    -->
+                <section id="stream-show-bereich" class="col-8">
+                    <h:panelGroup rendered="#{uBotschaftenVerarbeitenSession.iframe_src != ''}">
+                        <iframe src="#{uBotschaftenVerarbeitenSession.iframe_src}" allowfullscreen="allowfullscreen"
+                            webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen"
+                            allow="autoplay"></iframe>
+                    </h:panelGroup>
+                </section>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

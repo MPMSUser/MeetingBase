@@ -1,0 +1,107 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="Suche Gastkarte" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <div class="divArbeitsbereich">
+
+
+                <h:panelGrid columns="3">
+                    <h:outputLabel value="Suche nach Gastkarten-Nr"></h:outputLabel>
+                    <h:inputText value="#{uGastkarteSession.sucheGastNr}" maxlength="10" size="12"></h:inputText>
+                    <h:commandButton value="Suchen" styleClass="btnNeutral" action="#{uGastkarte.doSuchenNr()}" />
+
+                    <h:panelGroup>
+                        <br />
+                        <h:outputLabel value="oder"></h:outputLabel>
+                        <br />
+                    </h:panelGroup>
+                    <h:outputLabel value=""></h:outputLabel>
+                    <h:outputLabel value=""></h:outputLabel>
+
+                    <h:outputLabel value="Suche nach Name"></h:outputLabel>
+                    <h:inputText value="#{uGastkarteSession.sucheGastName}" maxlength="80" size="82"></h:inputText>
+                    <h:commandButton value="Suchen" styleClass="btnNeutral" action="#{uGastkarte.doSuchenName()}" />
+                </h:panelGrid>
+
+            </div>
+
+            <h:panelGroup rendered="#{uGastkarteSession.anzeigeSeite!=0}">
+                <div class="divArbeitsbereich">
+
+                    <h:dataTable value="#{eclGastListeM.gastListeM}" var="gast"
+                        columnClasses="tblPersonC00, tblPersonC01, tblPersonC02, tblPersonC03, tblPersonC04"
+                        rowClasses="leftText" styleClass="tblPerson">
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Name" style="float: left" />
+                            </f:facet>
+                            <h:outputText value="#{gast.name}" />
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Vorname" style="float: left" />
+                            </f:facet>
+                            <h:outputText value="#{gast.vorname}" />
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ort" style="float: left" />
+                            </f:facet>
+                            <h:outputText value="#{gast.ort}" />
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Auswählen" styleClass="btnNeutral"
+                                action="#{uGastkarte.doAuswaehlen(gast)}" />
+                        </h:column>
+                    </h:dataTable>
+                    <br /> <br />
+                    <table class="divButtonsArbeitsbereich">
+                        <tr>
+                            <td class="divButtonsLeft">
+                                <h:commandButton value="Zurück" styleClass="btnStandard"
+                                    rendered="#{uGastkarteSession.rueckwaerts}" action="#{uGastkarte.doZurueck()}" />
+                            </td>
+                            <td class="divButtonsCenter"></td>
+                            <td class="divButtonsRight">
+                                <h:commandButton styleClass="btnStandard" value="Vor"
+                                    rendered="#{uGastkarteSession.vorwaerts}" action="#{uGastkarte.doVor()}" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </h:panelGroup>
+        </h:form>
+    </ui:define>
+</ui:composition>

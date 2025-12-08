@@ -1,0 +1,1240 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <f:subview id="pAktionaersdatenOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <!-- Inhaltsbereich -->
+    <section id="inhalts-bereich">
+        <div class="col-4">
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1720')}">
+                <p>
+                <h2>
+                    <h:outputText value="#{eclPortalTexteM.holeText('1720')}" escape="false" />
+                </h2>
+                </p>
+            </h:panelGroup>
+            <div class="meine-daten-bereich">
+                <div class="row">
+                    <div class="col-4">
+                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1577)}" escape="false">
+                        </h:outputLabel>
+                        <h:outputLabel value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />
+                    </div>
+                    <div class="col-4">
+                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1578)}" escape="false">
+                        </h:outputLabel>
+                        <h:outputLabel value="#{pAktionaersdatenSession.aktionaerSeit}" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="meine-daten-header">
+                            <div class="col-8">
+                                <!-- Stift-Icon -->
+                                <h:commandLink id="buttonAnschriftAendern"
+                                    action="#{pAktionaersdaten.doAnschriftAendern()}"
+                                    rendered="#{pAktionaersdatenSession.renderAnschriftUndBankverbindungAendern()==true}">
+                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    <i class="fas fa-edit f-schwarz"></i>
+                                </h:commandLink>
+                                <h:outputLabel value="#{eclPortalTexteM.holeIText(1579)}" escape="false">
+                                </h:outputLabel>
+
+                                <!-- Hinweis-Icon -->
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.aktionaersdatenAenderungInArbeit}">
+                                    <div class="tooltip">
+                                        <i class="fas fa-minus-circle warning error-big"></i>
+                                        <div class="tooltiptext">Änderung in Bearbeitung</div>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.aktionaersdatenAenderungFehlerhaft}">
+                                    <div class="tooltip">
+                                        <i class="fas fa-exclamation-circle error error-big"></i>
+                                        <div class="tooltiptext">Daten fehlerhaft</div>
+                                    </div>
+                                </h:panelGroup>
+
+
+                            </div>
+                        </div>
+                        <div class="meine-daten-body">
+                            <div class="col-8">
+                                <h:outputLabel value="#{pAktionaersdatenSession.aktionaerVorname}" />
+
+                                <h:outputLabel value=" #{pAktionaersdatenSession.aktionaerNachname}" />
+                                <br />
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.aktionaerAdresszusatz != ''}">
+                                    <h:outputLabel value="#{pAktionaersdatenSession.aktionaerAdresszusatz}" />
+                                    <br />
+                                </h:panelGroup>
+                                <h:outputLabel value="#{pAktionaersdatenSession.aktionaerStrasse}" />
+                                <br />
+                                <h:outputLabel value="#{pAktionaersdatenSession.aktionaerPLZ}" />
+                                <h:outputLabel value=" #{pAktionaersdatenSession.aktionaerOrt} " />
+                                <br />
+                                <h:outputLabel value="#{pAktionaersdatenSession.aktionaerLand} " />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="meine-daten-header">
+                            <div class="col-8">
+                                <!-- Stift-Icon -->
+                                <h:commandLink id="buttonKontaktdatenAendern"
+                                    action="#{pAktionaersdaten.doKontaktdatenAendern()}">
+                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    <i class="fas fa-edit f-schwarz"></i>
+                                </h:commandLink>
+                                <h:outputLabel value="#{eclPortalTexteM.holeIText(1580)}" escape="false">
+                                </h:outputLabel>
+
+                                <!-- Hinweis-Icon -->
+                                <h:panelGroup
+                                    rendered="#{pAktionaersdatenSession.telefonAenderungInArbeit or pAktionaersdatenSession.emailAenderungInArbeit}">
+                                    <div class="tooltip">
+                                        <i class="fas fa-minus-circle warning error-big"></i>
+                                        <div class="tooltiptext">Änderung in Bearbeitung</div>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup
+                                    rendered="#{pAktionaersdatenSession.telefonAenderungFehlerhaft or pAktionaersdatenSession.emailAenderungFehlerhaft}">
+                                    <div class="tooltip">
+                                        <i class="fas fa-exclamation-circle error error-big"></i>
+                                        <div class="tooltiptext">Daten fehlerhaft</div>
+                                    </div>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                        <div class="meine-daten-body">
+                            <div class="col-8">
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.aktionaerTelefon1!=''}">
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1586)}" escape="false">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{pAktionaersdatenSession.aktionaerTelefon1}" />
+                                    <br />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.aktionaerTelefon2!=''}">
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1587)}" escape="false">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{pAktionaersdatenSession.aktionaerTelefon2}" />
+                                    <br />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.aktionaerTelefon3!=''}">
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1588)}" escape="false">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{pAktionaersdatenSession.aktionaerTelefon3}" />
+                                    <br />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.aktionaerTelefon4!=''}">
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1745)}" escape="false">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{pAktionaersdatenSession.aktionaerTelefon4}" />
+                                    <br />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.aktionaerEmail!=''}">
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1589)}" escape="false">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{pAktionaersdatenSession.aktionaerEmail}" />
+                                    <br />
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.emailWeichtAb}">
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1608)}" escape="false">
+                                    </h:outputLabel>
+                                    <h:outputLabel value="#{pAktionaersdatenSession.aktionaerEmailPortal}" />
+                                    <br />
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1609)}" escape="false">
+                                    </h:outputLabel>
+                                    <br />
+
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============Zugeordnete Personen - Name/Geboren/Steuer-ID===================================== -->
+                <div class="row">
+                    <div class="col-8">
+                        <div class="meine-daten-header">
+                            <div class="row">
+                                <div class="col-1_3">
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1581)}" escape="false">
+                                    </h:outputLabel>
+                                </div>
+                                <div class="col-1_3">
+                                    <!-- Stift-Icon -->
+                                    <h:panelGroup rendered="#{pAktionaersdatenSession.zugeordnetePersonVorhanden  and 
+                                        pAktionaersdatenSession.geburtsdatumDarfGeaendertWerden and 
+                                        pAktionaersdatenSession.renderGeburtsdatumAendernZulaessig()}">
+                                        <!-- der Button in der Überschrift für Ändern wird nur angezeigt, wenn genau 1 Person zugeordnet ist -->
+                                        <h:commandLink id="buttonGeburtsdatumAendern"
+                                            action="#{pAktionaersdaten.doGeburtsdatumAendern()}">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                            <i class="fas fa-edit f-schwarz"></i>
+                                        </h:commandLink>
+                                    </h:panelGroup>
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1582)}" escape="false">
+                                    </h:outputLabel>
+
+                                    <!-- Hinweis-Icon -->
+                                    <h:panelGroup rendered="#{pAktionaersdatenSession.geburtsdatumAenderungInArbeit}">
+                                        <div class="tooltip">
+                                            <i class="fas fa-minus-circle warning error-big"></i>
+                                            <div class="tooltiptext">Änderung in Bearbeitung</div>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{pAktionaersdatenSession.geburtsdatumAenderungFehlerhaft}">
+                                        <div class="tooltip">
+                                            <i class="fas fa-exclamation-circle error error-big"></i>
+                                            <div class="tooltiptext">Daten fehlerhaft</div>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{pAktionaersdatenSession.geburtsdatumFehlt and
+                                        pAktionaersdatenSession.renderErinnerungGeburtsdatumFehltAnzeigen()==true}">
+                                        <div class="tooltip">
+                                            <i class="fas fa-exclamation-circle error error-big"></i>
+                                            <div class="tooltiptext">Geburtsdatum fehlt</div>
+                                        </div>
+                                    </h:panelGroup>
+                                </div>
+                                <div class="col-1_3">
+                                    <!-- Stift-Icon -->
+                                    <h:panelGroup rendered="#{pAktionaersdatenSession.zugeordnetePersonVorhanden and 
+                                         pAktionaersdatenSession.steuerIdDarfGeaendertWerden and
+                                         pAktionaersdatenSession.renderSteuerIdAendernZulaessig()}">
+                                        <!-- der Button in der Überschrift für Ändern wird nur angezeigt, wenn genau 1 Person zugeordnet ist -->
+                                        <h:commandLink id="buttonSteuerIdAendern"
+                                            action="#{pAktionaersdaten.doSteuerIdAendern()}">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                            <i class="fas fa-edit f-schwarz"></i>
+                                        </h:commandLink>
+                                    </h:panelGroup>
+                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1583)}" escape="false">
+                                    </h:outputLabel>
+
+                                    <!-- Hinweis-Icon -->
+                                    <h:panelGroup rendered="#{pAktionaersdatenSession.steuerIdAenderungInArbeit}">
+                                        <div class="tooltip">
+                                            <i class="fas fa-minus-circle warning error-big"></i>
+                                            <div class="tooltiptext">Änderung in Bearbeitung</div>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{pAktionaersdatenSession.steuerIdAenderungFehlerhaft}">
+                                        <div class="tooltip">
+                                            <i class="fas fa-exclamation-circle error error-big"></i>
+                                            <div class="tooltiptext">Daten fehlerhaft</div>
+                                        </div>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{pAktionaersdatenSession.steuerIdFehlt and
+                                        pAktionaersdatenSession.renderErinnerungSteuerIdFehltAnzeigen()==true}">
+                                        <div class="tooltip">
+                                            <i class="fas fa-exclamation-circle error error-big"></i>
+                                            <div class="tooltiptext">Steuer-ID fehlt</div>
+                                        </div>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ============Zugeordnete Personen - Name/Geboren/Steuer-ID - Schleife / Inhalt============================== -->
+                        <div class="meine-daten-body-1">
+                            <h:panelGroup
+                                rendered="#{pAktionaersdatenSession.zugeordnetePersonVorhanden==false and pAktionaersdatenSession.zugeordnetePersonenVorhanden==false}">
+                                <!-- keine zugeordneten Personen vorhanden, ggf. Fehlertext anzeigen -->
+                                <div class="row">
+                                    <div class="col-1_3">
+                                        <!-- Platzhalter Name -->
+                                        <h:outputLabel value=" " />
+                                    </div>
+                                    <div class="col-1_3">
+                                        <!-- Geburtsdatum -->
+                                        <h:panelGroup rendered="#{pAktionaersdatenSession.geburtsdatumFehlt and
+                                        pAktionaersdatenSession.renderErinnerungGeburtsdatumFehltAnzeigen()==true}">
+                                            <!-- Meldung immer über Mitgliederbetreuung, da keine Person eingetragen -->
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1742)}" escape="false" />
+                                        </h:panelGroup>
+                                    </div>
+                                    <div class="col-1_3">
+                                        <!-- Steuer-ID -->
+                                        <h:panelGroup rendered="#{pAktionaersdatenSession.steuerIdFehlt and
+                                        pAktionaersdatenSession.renderErinnerungSteuerIdFehltAnzeigen()==true}">
+                                            <!-- Meldung immer über Mitgliederbetreuung, da keine Person eingetragen -->
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1744)}" escape="false" />
+                                        </h:panelGroup>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+                            <h:panelGroup
+                                rendered="#{pAktionaersdatenSession.zugeordnetePersonVorhanden or pAktionaersdatenSession.zugeordnetePersonenVorhanden}">
+                                <ui:repeat value="#{pAktionaersdatenSession.zugeordneteWeiterPersonen}" var="person"
+                                    id="schleifeWeiterePersonen0">
+                                    <div class="row">
+                                        <div class="col-1_3">
+                                            <h:outputLabel value="#{person.liefereNameKomplett()}" />
+                                        </div>
+                                        <div class="col-1_3">
+                                            <h:outputLabel value="#{person.geburtsdatum}" />
+                                            <h:panelGroup
+                                                rendered="#{person.geburtsdatum=='' and pAktionaersdatenSession.renderErinnerungGeburtsdatumFehltAnzeigen()==true}">
+                                                <!-- Text anzeigen, wenn Geburtsdatum nicht vorhanden -->
+                                                <h:panelGroup
+                                                    rendered="#{pAktionaersdatenSession.renderGeburtsdatumAendernZulaessig()==false}">
+                                                    <!-- Meldung über Mitgliederbetreuung -->
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1742)}"
+                                                        escape="false" />
+                                                </h:panelGroup>
+                                                <h:panelGroup
+                                                    rendered="#{pAktionaersdatenSession.renderGeburtsdatumAendernZulaessig()==true}">
+                                                    <!-- Bitte eingeben -->
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1741)}"
+                                                        escape="false" />
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{pAktionaersdatenSession.zugeordnetePersonenVorhanden 
+                                                		and (person.geburtsdatumDarfGeaendertWerden()==true)
+                                                 		and pAktionaersdatenSession.renderGeburtsdatumAendernZulaessig()}">
+                                                <h:commandLink id="buttonGeburtsdatumAendernMehrere"
+                                                    action="#{pAktionaersdaten.doGeburtsdatumAendernMehrere(person)}">
+                                                    <f:ajax execute="@all" render="inhaltsform"
+                                                        onevent="nachAjaxButton" />
+                                                    <i class="fas fa-edit f-schwarz"></i>
+                                                </h:commandLink>
+                                            </h:panelGroup>
+                                        </div>
+                                        <div class="col-1_3">
+                                            <h:outputLabel value="#{person.steuerId}" />
+                                            <h:panelGroup
+                                                rendered="#{person.steuerId=='' and pAktionaersdatenSession.renderErinnerungSteuerIdFehltAnzeigen()==true}">
+                                                <!-- Text anzeigen, wenn SteuerID nicht vorhanden -->
+                                                <h:panelGroup
+                                                    rendered="#{pAktionaersdatenSession.renderSteuerIdAendernZulaessig()==false}">
+                                                    <!-- Meldung über Mitgliederbetreuung -->
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1744)}"
+                                                        escape="false" />
+                                                </h:panelGroup>
+                                                <h:panelGroup
+                                                    rendered="#{pAktionaersdatenSession.renderSteuerIdAendernZulaessig()==true}">
+                                                    <!-- Bitte eingeben -->
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1743)}"
+                                                        escape="false" />
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup rendered="#{pAktionaersdatenSession.zugeordnetePersonenVorhanden and 
+                                                (person.steuerIdDarfGeaendertWerden()==true) and
+                                                pAktionaersdatenSession.renderSteuerIdAendernZulaessig()==true}">
+                                                <h:commandLink id="buttonSteuerIdAendernMehrere"
+                                                    action="#{pAktionaersdaten.doSteuerIdAendernMehrere(person)}">
+                                                    <f:ajax execute="@all" render="inhaltsform"
+                                                        onevent="nachAjaxButton" />
+                                                    <i class="fas fa-edit f-schwarz"></i>
+                                                </h:commandLink>
+                                            </h:panelGroup>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+                <!-- =========================Bankverbindung========================================= -->
+                <div class="row">
+                    <div class="col-4">
+                        <div class="meine-daten-header">
+                            <div class="col-8">
+                                <!-- Stift-Icon -->
+                                <h:commandLink id="buttonBankverbindungAendern"
+                                    action="#{pAktionaersdaten.doBankverbindungAendern()}"
+                                    rendered="#{pAktionaersdatenSession.renderAnschriftUndBankverbindungAendern()==true}">
+                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    <i class="fas fa-edit f-schwarz"></i>
+                                </h:commandLink>
+                                <h:outputLabel value="#{eclPortalTexteM.holeIText(1584)}" escape="false">
+                                </h:outputLabel>
+
+                                <!-- Hinweis-Icon -->
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.bankverbindungAenderungInArbeit}">
+                                    <i class="fas fa-miunus-circle warning"></i>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.bankverbindungAenderungInArbeit}">
+                                    <div class="tooltip">
+                                        <i class="fas fa-minus-circle warning error-big"></i>
+                                        <div class="tooltiptext">Änderung in Bearbeitung</div>
+                                    </div>
+                                </h:panelGroup>
+                                <h:panelGroup
+                                    rendered="#{pAktionaersdatenSession.bankverbindungFehlt and pAktionaersdatenSession.renderErinnerungBankverbindungFehltAnzeigen()==true}">
+                                    <div class="tooltip">
+                                        <i class="fas fa-exclamation-circle error error-big"></i>
+                                        <div class="tooltiptext">Bankverbindung fehlt</div>
+                                    </div>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                        <div class="meine-daten-body">
+                            <div class="col-8">
+                                <h:panelGroup
+                                    rendered="#{pAktionaersdatenSession.bankverbindungFehlt and pAktionaersdatenSession.renderErinnerungBankverbindungFehltAnzeigen()==true}">
+                                    <!-- Text anzeigen, wenn Bank nicht eingegeben -->
+                                    <h:panelGroup
+                                        rendered="#{pAktionaersdatenSession.renderAnschriftUndBankverbindungAendern()==false}">
+                                        <!-- Meldung über Mitgliederbetreuung -->
+                                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1740)}" escape="false" />
+                                    </h:panelGroup>
+                                    <h:panelGroup
+                                        rendered="#{pAktionaersdatenSession.renderAnschriftUndBankverbindungAendern()==true}">
+                                        <!-- Bitte eingeben -->
+                                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1739)}" escape="false" />
+                                    </h:panelGroup>
+                                </h:panelGroup>
+
+                                <h:outputLabel value="#{pAktionaersdatenSession.bankAktionaersname}" />
+                                <br />
+                                <h:outputLabel value="#{pAktionaersdatenSession.bankIban}" />
+                                <br />
+                                <h:outputLabel value="#{pAktionaersdatenSession.bankBankname}" />
+                                <br />
+                                <h:outputLabel value="#{pAktionaersdatenSession.bankBic}" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ========================Vollmacht/Postempfänger==================================== -->
+                    <div class="col-4">
+                        <div class="meine-daten-header">
+                            <div class="col-8">
+                                <h:outputLabel value="#{eclPortalTexteM.holeIText(1585)}" escape="false">
+                                </h:outputLabel>
+                            </div>
+                        </div>
+                        <div class="meine-daten-body">
+                            <div class="col-8">
+                                <h:panelGroup rendered="#{pAktionaersdatenSession.vollmachtenPostempfaengerVorhanden}">
+                                    <ui:repeat value="#{pAktionaersdatenSession.vollmachtenPostempfaenger}" var="person"
+                                        id="schleifeVollmachtenPostempfaenger">
+                                        <h:outputLabel value="#{person.liefereNameKomplett()}" />
+                                        <br />
+                                        <h:outputLabel value="#{person.strasse}" />
+                                        <br />
+                                        <h:outputLabel value="#{person.plz} #{person.ort}" />
+                                        <br />
+                                        <br />
+                                    </ui:repeat>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ab hier pro Forma rein für Änderung der Anschrift -->
+                <!-- *************************************Sub-Fenster Anschrift**************************************************** -->
+                <div id="anschrift-aendern-modal" class="modal d-none">
+                    <div class="modal-content slide-in-left">
+                        <div class="modal-body">
+                            <!--<span class="close close01" onclick="hideModal('anschrift-aendern-modal');"><i
+                                        class="fas fa-times"></i></span>-->
+                            <h:panelGroup rendered="#{pAktionaersdatenSession.aendAnschriftAktiv}">
+                                <script>
+                                    showModal('anschrift-aendern-modal');
+                                </script>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h3>Änderungen Ihrer Daten</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h4>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1577)}" escape="false">
+                                            </h:outputLabel>
+                                            <h:outputLabel value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>
+                                            <b>Bisherige Adresse</b>
+                                        </p>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1591)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText
+                                                        value="#{pAktionaersdatenSession.aktionaerAdresszusatz}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1592)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aktionaerStrasse}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1593)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aktionaerPLZ}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1594)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aktionaerOrt}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1595)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aktionaerLand}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>
+                                            <b>Neue Adresse</b>
+                                        </p>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1591)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aendAdresszusatz}"
+                                                        escape="false" maxlength="30" autocomplete="off"
+                                                        styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1592)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aendStrasse}"
+                                                        escape="false" maxlength="99" autocomplete="off"
+                                                        styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1593)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText id="txtAendPlz"
+                                                        value="#{pAktionaersdatenSession.aendPLZ}" escape="false"
+                                                        autocomplete="off" styleClass="input-type-01">
+                                                        <f:ajax event="change" execute="txtAendPlz" render="txtAendOrt"
+                                                            listener="#{pAktionaersdaten.doSetAendOrt()}" />
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1594)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText id="txtAendOrt"
+                                                        value="#{pAktionaersdatenSession.aendOrt}" escape="false"
+                                                        maxlength="30" autocomplete="off" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1595)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:selectOneMenu value="#{pAktionaersdatenSession.aendLandNummer}"
+                                                        styleClass="input-type-01">
+                                                        <f:selectItems value="#{pAktionaersdatenSession.aendLandListe}"
+                                                            var="land" itemValue="#{land.id}"
+                                                            itemLabel="#{land.nameDE}" />
+                                                    </h:selectOneMenu>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1597)}"
+                                            id="buttonAnschriftAendernAbbrechen"
+                                            action="#{pAktionaersdaten.doAnschriftAendernAbbrechen()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1596)}"
+                                            id="buttonAnschriftAendernSpeichern"
+                                            action="#{pAktionaersdaten.doAnschriftAendernSpeichern()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- *************************************Sub-Fenster Kontaktdaten**************************************************** -->
+                <div id="kontaktdaten-aendern-modal" class="modal d-none">
+                    <div class="modal-content slide-in-left">
+                        <div class="modal-body">
+                            <!--<span class="close close01" onclick="hideModal('anschrift-aendern-modal');"><i
+                                        class="fas fa-times"></i></span>-->
+                            <h:panelGroup rendered="#{pAktionaersdatenSession.aendKontaktdatenAktiv}">
+                                <script>
+                                    showModal('kontaktdaten-aendern-modal');
+                                </script>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h3>Änderungen Ihrer Daten</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h4>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1577)}" escape="false">
+                                            </h:outputLabel>
+                                            <h:outputLabel value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>
+                                            <b>Bisherige Kontaktdaten</b>
+                                        </p>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1586)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aktionaerTelefon1}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1587)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aktionaerTelefon2}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1588)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aktionaerTelefon3}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1745)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aktionaerTelefon4}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1589)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aktionaerEmail}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <h:panelGroup rendered="#{pAktionaersdatenSession.emailWeichtAb}">
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1608)}"
+                                                            escape="false">
+                                                        </h:outputLabel>
+                                                        <br />
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1609)}"
+                                                            escape="false">
+                                                        </h:outputLabel>
+                                                    </h:panelGroup>
+                                                </td>
+                                                <td>
+                                                    <h:panelGroup rendered="#{pAktionaersdatenSession.emailWeichtAb}">
+                                                        <h:inputText
+                                                            value="#{pAktionaersdatenSession.aktionaerEmailPortal}"
+                                                            escape="false" disabled="true" styleClass="input-type-01">
+                                                        </h:inputText>
+                                                    </h:panelGroup>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>
+                                            <b>Neue Kontaktdaten</b>
+                                        </p>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1586)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aendTelefon1}"
+                                                        escape="false" maxlength="30" styleClass="input-type-01">
+
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1587)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aendTelefon2}"
+                                                        escape="false" maxlength="30" styleClass="input-type-01">
+
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1588)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aendTelefon3}"
+                                                        escape="false" maxlength="30" styleClass="input-type-01">
+
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1745)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aendTelefon4}"
+                                                        escape="false" maxlength="30" styleClass="input-type-01">
+
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1589)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aendEmail}"
+                                                        escape="false" maxlength="99" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1597)}"
+                                            id="buttonKontaktdatenAendernAbbrechen"
+                                            action="#{pAktionaersdaten.doKontaktdatenAendernAbbrechen()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1596)}"
+                                            id="buttonKontaktdatenAendernSpeichern"
+                                            action="#{pAktionaersdaten.doKontaktdatenAendernSpeichern()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="email-bestaetigung-code-modal" class="modal d-none">
+                    <div class="modal-content slide-in-left">
+                        <div class="modal-body">
+                            <!--<span class="close close01" onclick="hideModal('anschrift-aendern-modal');"><i
+                                        class="fas fa-times"></i></span>-->
+                            <h:panelGroup
+                                rendered="#{pAktionaersdatenSession.isAendBestaetigungscodeEingeben() == true}">
+                                <div class="row">
+                                    <div class="col-8">
+
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1605')}">
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1605)}" escape="false">
+                                            </h:outputLabel>
+                                        </h:panelGroup>
+                                        <h:outputLabel value="#{pAktionaersdatenSession.aendEmail}" escape="false" />
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1606')}">
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1606)}" escape="false">
+                                            </h:outputLabel>
+                                        </h:panelGroup>
+
+
+                                        <h:panelGroup
+                                            rendered="#{pAktionaersdatenSession.aendBestaetigungscodeZusatztextAnzeigen == true}">
+                                            <div class="col-8 error">
+                                                <p>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1654)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </p>
+                                            </div>
+                                        </h:panelGroup>
+
+
+                                        <div class="col-8">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeIText(1607)}"
+                                                            escape="false">
+                                                        </h:outputLabel>
+                                                    </td>
+                                                    <td>
+                                                        <h:inputText
+                                                            value="#{pAktionaersdatenSession.aendBestaetigungscode}"
+                                                            escape="false" styleClass="input-type-01">
+                                                        </h:inputText>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1597)}"
+                                            id="buttonBestaetigungsCodeAbbrechen"
+                                            action="#{pAktionaersdaten.doBestaetigungsCodeAbbrechen}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1596)}"
+                                            id="buttonBestaetigungsCodeSpeichern"
+                                            action="#{pAktionaersdaten.doBestaetigungsCodeSpeichern}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+
+                <h:panelGroup rendered="#{pAktionaersdatenSession.isAendBestaetigungscodeEingeben() == true}">
+                    <script>
+                        hideModal('loading-modal');
+                        hideModal('info-modal');
+                        var modal = "email-bestaetigung-code-modal";
+                        showModal(modal);
+                    </script>
+                </h:panelGroup>
+
+
+
+                <!-- *************************************Sub-Fenster Geburtsdatum**************************************************** -->
+                <div id="geburtsdatum-aendern-modal" class="modal d-none">
+                    <div class="modal-content slide-in-left">
+                        <div class="modal-body">
+                            <!--<span class="close close01" onclick="hideModal('anschrift-aendern-modal');"><i
+                                        class="fas fa-times"></i></span>-->
+                            <h:panelGroup rendered="#{pAktionaersdatenSession.aendGeburtsdatumAktiv}">
+                                <script>
+                                    showModal('geburtsdatum-aendern-modal');
+                                </script>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h3>Änderungen Ihrer Daten</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h4>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1577)}" escape="false">
+                                            </h:outputLabel>
+                                            <h:outputLabel value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />
+                                            <br />
+                                            <h:outputLabel
+                                                value="#{pAktionaersdatenSession.aendName} #{pAktionaersdatenSession.aendVorname}" />
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <p>
+                                            <b>Ihr Geburtsdatum</b>
+                                        </p>
+                                        <h:inputText value="#{pAktionaersdatenSession.aendGeburtsdatum}" escape="false"
+                                            styleClass="input-type-01">
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1597)}"
+                                            id="buttonGeburtsdatumAendernAbbrechen"
+                                            action="#{pAktionaersdaten.doGeburtsdatumAendernAbbrechen()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1596)}"
+                                            id="buttonGeburtsdatumAendernSpeichern"
+                                            action="#{pAktionaersdaten.doGeburtsdatumAendernSpeichern()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- *************************************Sub-Fenster SteuerID**************************************************** -->
+                <div id="steuerid-aendern-modal" class="modal d-none">
+                    <div class="modal-content slide-in-left">
+                        <div class="modal-body">
+                            <!--<span class="close close01" onclick="hideModal('anschrift-aendern-modal');"><i
+                                        class="fas fa-times"></i></span>-->
+                            <h:panelGroup rendered="#{pAktionaersdatenSession.aendSteuerIdAktiv}">
+                                <script>
+                                    showModal('steuerid-aendern-modal');
+                                </script>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h3>Änderungen Ihrer Daten</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h4>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1577)}" escape="false">
+                                            </h:outputLabel>
+                                            <h:outputLabel value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />
+                                            <br />
+                                            <h:outputLabel
+                                                value="#{pAktionaersdatenSession.aendName} #{pAktionaersdatenSession.aendVorname}" />
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>
+                                            <b>Ihre Steuer-Id</b> (Steuerliche Identifikationsnummer)
+                                        </p>
+                                        <h:inputText value="#{pAktionaersdatenSession.aendSteuerId}" escape="false"
+                                            maxlength="11" styleClass="input-type-01">
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1597)}"
+                                            id="buttonSteuerIdAendernAbbrechen"
+                                            action="#{pAktionaersdaten.doSteuerIdAendernAbbrechen()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1596)}"
+                                            id="buttonSteuerIdAendernSpeichern"
+                                            action="#{pAktionaersdaten.doSteuerIdAendernSpeichern()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- *************************************Sub-Fenster Bankverbindung**************************************************** -->
+                <div id="bankverbindung-aendern-modal" class="modal d-none">
+                    <div class="modal-content slide-in-left">
+                        <div class="modal-body">
+                            <!--<span class="close close01" onclick="hideModal('anschrift-aendern-modal');"><i
+                                        class="fas fa-times"></i></span>-->
+                            <h:panelGroup rendered="#{pAktionaersdatenSession.aendBankverbindungAktiv}">
+                                <script>
+                                    showModal('bankverbindung-aendern-modal');
+                                </script>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h3>Änderungen Ihrer Daten</h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8">
+                                        <h4>
+                                            <h:outputLabel value="#{eclPortalTexteM.holeIText(1577)}" escape="false">
+                                            </h:outputLabel>
+                                            <h:outputLabel value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>
+                                            <b>Bisherige Bankverbindung</b>
+                                        </p>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="Kontoinhaber" escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.bankAktionaersname}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1603)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.bankIban}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1602)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.bankBankname}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1604)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.bankBic}"
+                                                        escape="false" disabled="true" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>
+                                            <b>Neue Bankverbindung</b>
+                                        </p>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="Kontoinhaber" escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText value="#{pAktionaersdatenSession.aendAktionaersname}"
+                                                        escape="false" maxlength="200" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1603)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText id="txtAendIBAN"
+                                                        value="#{pAktionaersdatenSession.aendIban}" escape="false"
+                                                        maxlength="50" styleClass="input-type-01">
+                                                        <f:ajax event="change" execute="txtAendIBAN"
+                                                            render="txtAendBankname txtAendBankBic"
+                                                            listener="#{pAktionaersdaten.doSetAendBank()}" />
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1602)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText id="txtAendBankname"
+                                                        value="#{pAktionaersdatenSession.aendBankname}" escape="false"
+                                                        maxlength="100" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1604)}"
+                                                        escape="false">
+                                                    </h:outputLabel>
+                                                </td>
+                                                <td>
+                                                    <h:inputText id="txtAendBankBic"
+                                                        value="#{pAktionaersdatenSession.aendBic}" escape="false"
+                                                        maxlength="30" styleClass="input-type-01">
+                                                    </h:inputText>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1597)}"
+                                            id="buttonBankverbindungAendernAbbrechen"
+                                            action="#{pAktionaersdaten.doBankverbindungAendernAbbrechen()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                    <div class="col-4">
+                                        <h:commandButton value="#{eclPortalTexteM.holeIText(1596)}"
+                                            id="buttonBankverbindungdatenAendernSpeichern"
+                                            action="#{pAktionaersdaten.doBankverbindungAendernSpeichern()}"
+                                            styleClass="btn-typ-01">
+
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </div>
+                                </div>
+
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</ui:composition>

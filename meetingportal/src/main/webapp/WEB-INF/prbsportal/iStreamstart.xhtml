@@ -1,0 +1,122 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <f:subview id="iStreamStartOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <section id="stream-start-bereich">
+        <div class="container-80">
+            <div class="row">
+                <div class="col-8">
+                    <h:panelGroup rendered="#{tAuswahlSession.streamAktiv}">
+                        <!-- Stream ist gerade aktiv -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('796')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('796')}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{!tAuswahlSession.streamAktiv}">
+                        <!-- Stream ist gerade inaktiv -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('797')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('797')}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <h:panelGroup rendered="#{tAuswahlSession.streamAktiv}">
+
+                        <!-- Stream-Starten-Button-Bereich -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('798')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('798')}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{eclParamM.streamAnbieter==12}">
+                            <p>
+                                <h:commandButton action="#{aControllerStream.starteStreamFull}"
+                                    value="#{eclPortalTexteM.holeText('799')}" escape="false" styleClass="btn-typ-00">
+                                </h:commandButton>
+                            </p>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{eclParamM.streamAnbieter!=12}">
+                            <p>
+                                <h:commandButton action="#{tStream.starteStream}"
+                                    value="#{eclPortalTexteM.holeText('799')}" escape="false" styleClass="btn-typ-00">
+                                    <!-- Rendered das Panel neu in dem der Stream angezeigt wird -->
+                                    <f:ajax execute="@all" render="inhaltsform streamform"
+                                        onevent="nachAjaxButtonStreamstart"></f:ajax>
+                                </h:commandButton>
+                            </p>
+                            <!-- 
+			<p>
+				<h:commandButton action="#{tStream.starteStreamNeuesFenster}"
+					value="Neuer Text Stream in neuem Fenster#{eclPortalTexteM.holeText('799')}" escape="false"
+					styleClass="btnFunktionAuswahl"
+					onclick="this.form.target='_blank'">
+						<f:ajax render="kompletteSeite"></f:ajax>
+				</h:commandButton>
+				 
+			</p>
+			-->
+                        </h:panelGroup>
+
+
+                        <h:panelGroup rendered="#{eclParamM.streamAnbieter2!=0}">
+                            <p>
+                                <h:commandButton action="#{tStream.starteStream2()}"
+                                    value="#{eclPortalTexteM.holeText('907')}" escape="false" styleClass="btn-typ-00">
+                                    <!-- Rendered das Panel neu in dem der Stream angezeigt wird -->
+                                    <f:ajax execute="@all" render="inhaltsform streamform"
+                                        onevent="nachAjaxButtonStreamstart"></f:ajax>
+                                </h:commandButton>
+                            </p>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('800')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('800')}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+
+                    </h:panelGroup>
+
+
+
+
+                    <!-- Endetext -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('804')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('804')}" escape="false" />
+                        </p>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <f:subview id="iStreamStartButtons">
+        <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+    </f:subview>
+</ui:composition>

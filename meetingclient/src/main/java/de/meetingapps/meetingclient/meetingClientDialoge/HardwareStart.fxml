@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="128.0" layoutX="21.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="962.0" />
+      <Label layoutX="34.0" layoutY="21.0" text="Server">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfServerArt" editable="false" layoutX="134.0" layoutY="17.0" prefHeight="25.0" prefWidth="228.0" />
+      <TextField fx:id="tfServerBezeichnung" editable="false" layoutX="368.0" layoutY="17.0" prefHeight="25.0" prefWidth="607.0" />
+      <Label layoutX="33.0" layoutY="52.0" text="Set">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfSetNummer" editable="false" layoutX="133.0" layoutY="48.0" prefHeight="25.0" prefWidth="104.0" />
+      <TextField fx:id="tfSetBezeichnung" editable="false" layoutX="257.0" layoutY="48.0" prefHeight="25.0" prefWidth="717.0" />
+      <Label layoutX="34.0" layoutY="84.0" text="Klasse">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfKlassenNr" editable="false" layoutX="133.0" layoutY="80.0" prefHeight="25.0" prefWidth="104.0" />
+      <TextField fx:id="tfKlassenBezeichnung" editable="false" layoutX="257.0" layoutY="80.0" prefHeight="25.0" prefWidth="717.0" />
+      <Label layoutX="35.0" layoutY="116.0" text="Arbeitsplatz">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfArbeitsplatz" editable="false" layoutX="133.0" layoutY="112.0" prefHeight="25.0" prefWidth="104.0" />
+      <TextField fx:id="tfBenutzer" editable="false" layoutX="437.0" layoutY="111.0" prefHeight="25.0" prefWidth="197.0" />
+      <Label layoutX="373.0" layoutY="117.0" text="Benutzer">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfRuecksetzen" editable="false" layoutX="905.0" layoutY="111.0" prefHeight="25.0" prefWidth="68.0" />
+      <Label layoutX="725.0" layoutY="116.0" text="Lokale Daten zurücksetzen">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="128.0" layoutX="21.0" layoutY="150.0" stroke="BLACK" strokeType="INSIDE" width="962.0" />
+      <Label layoutX="33.0" layoutY="160.0" text="Datenbank">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfDBNummer" editable="false" layoutX="104.0" layoutY="155.0" prefHeight="25.0" prefWidth="46.0" />
+      <TextField fx:id="tfDBText" editable="false" layoutX="162.0" layoutY="155.0" prefHeight="25.0" prefWidth="692.0" />
+      <TextField fx:id="tfDBPfad" editable="false" layoutX="104.0" layoutY="184.0" prefHeight="25.0" prefWidth="751.0" />
+      <Label layoutX="33.0" layoutY="217.0" text="WebService">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfWebNummer" editable="false" layoutX="104.0" layoutY="212.0" prefHeight="25.0" prefWidth="46.0" />
+      <TextField fx:id="tfWebText" editable="false" layoutX="162.0" layoutY="212.0" prefHeight="25.0" prefWidth="692.0" />
+      <TextField fx:id="tfWebPfad" editable="false" layoutX="104.0" layoutY="242.0" prefHeight="25.0" prefWidth="751.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="162.0" layoutX="19.0" layoutY="287.0" stroke="BLACK" strokeType="INSIDE" width="962.0" />
+      <Label layoutX="31.0" layoutY="299.0" text="Label-Printer IP">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfLabelPrinterIP" editable="false" layoutX="144.0" layoutY="294.0" prefHeight="25.0" prefWidth="607.0" />
+      <Label layoutX="763.0" layoutY="299.0" text="Bon-Drucker aktiv">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfBonDruckerAktiv" editable="false" layoutX="876.0" layoutY="294.0" prefHeight="25.0" prefWidth="68.0" />
+      <Label layoutX="31.0" layoutY="329.0" text="Arbeits-Pfad">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfArbeitspfad" editable="false" layoutX="144.0" layoutY="324.0" prefHeight="25.0" prefWidth="632.0" />
+      <Label layoutX="31.0" layoutY="359.0" text="Sicherungspfad 1">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfSicherungspfad1" editable="false" layoutX="144.0" layoutY="354.0" prefHeight="25.0" prefWidth="632.0" />
+      <Label layoutX="31.0" layoutY="388.0" text="Sicherungspfad 2">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfSicherungspfad2" editable="false" layoutX="144.0" layoutY="383.0" prefHeight="25.0" prefWidth="632.0" />
+      <Button fx:id="btnStarten" layoutX="22.0" layoutY="592.0" mnemonicParsing="false" onAction="#btnStartenClicked" text="Bearbeitung Starten">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnBeenden" layoutX="161.0" layoutY="592.0" mnemonicParsing="false" onAction="#btnBeendenClicked" text="Beenden">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="128.0" layoutX="20.0" layoutY="458.0" stroke="BLACK" strokeType="INSIDE" width="962.0" />
+      <Label layoutX="31.0" layoutY="467.0" text="Emittent">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfEmittentNummer" editable="false" layoutX="130.0" layoutY="463.0" prefHeight="25.0" prefWidth="104.0" />
+      <TextField fx:id="tfEmittentBezeichnung" editable="false" layoutX="254.0" layoutY="463.0" prefHeight="25.0" prefWidth="717.0" />
+      <Label layoutX="31.0" layoutY="501.0" text="HV-Jahr">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfHVJahr" editable="false" layoutX="130.0" layoutY="496.0" prefHeight="25.0" prefWidth="104.0" />
+      <Label layoutX="257.0" layoutY="501.0" text="HV-Nr">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfHVNummer" editable="false" layoutX="298.0" layoutY="496.0" prefHeight="25.0" prefWidth="75.0" />
+      <Label layoutX="437.0" layoutY="501.0" text="Datenbereich">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfDatenbereich" editable="false" layoutX="516.0" layoutY="496.0" prefHeight="25.0" prefWidth="75.0" />
+      <TextField fx:id="tfVersion" editable="false" layoutX="439.0" layoutY="591.0" prefHeight="25.0" prefWidth="546.0" />
+      <Label layoutX="31.0" layoutY="420.0" text="Zertif.-Pfad">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfZertifikatspfad" editable="false" layoutX="144.0" layoutY="415.0" prefHeight="25.0" prefWidth="632.0" />
+   </children>
+</Pane>

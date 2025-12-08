@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane fx:id="scpnErgebnis" layoutX="30.0" layoutY="162.0" prefHeight="427.0" prefWidth="1050.0" />
+      <TextArea fx:id="tfEingabe" layoutX="33.0" layoutY="38.0" prefHeight="92.0" prefWidth="872.0" wrapText="true" />
+      <Label fx:id="lbFehler" layoutX="33.0" layoutY="108.0" prefHeight="43.0" prefWidth="1043.0" textFill="#dd0a0a" wrapText="true" />
+      <Button fx:id="btnEinladungScanCode" layoutX="33.0" layoutY="173.0" mnemonicParsing="false" onAction="#onBtnEinladungScanCode" prefHeight="75.0" prefWidth="263.0" text="Einladung - Scan-Barcode" />
+      <Button fx:id="btnEinladungInternetCode" layoutX="33.0" layoutY="269.0" mnemonicParsing="false" onAction="#onBtnEinladungInternetCode" prefHeight="75.0" prefWidth="263.0" text="Einladung - Internet QR-Code" />
+      <Button fx:id="btnAktionaersnummer" layoutX="33.0" layoutY="363.0" mnemonicParsing="false" onAction="#onBtnAktionaersnummer" prefHeight="75.0" prefWidth="263.0" text="Aktionärsnummer" />
+      <Button fx:id="btnEintrittskartenNummer" layoutX="435.0" layoutY="173.0" mnemonicParsing="false" onAction="#onBtnEintrittskartenNummer" prefHeight="75.0" prefWidth="263.0" text="Eintrittskarten-Nummer" />
+      <Button fx:id="btnStimmkartenNummer" layoutX="435.0" layoutY="269.0" mnemonicParsing="false" onAction="#onBtnStimmkartenNummer" prefHeight="75.0" prefWidth="263.0" text="Stimmkarten-Nummer" />
+      <Button fx:id="btnNameMeldebestand" layoutX="813.0" layoutY="173.0" mnemonicParsing="false" onAction="#onBtnNameMeldebestand" prefHeight="75.0" prefWidth="263.0" text="Name - nur Meldebestand" />
+      <Button fx:id="btnNameAktienregister" layoutX="813.0" layoutY="269.0" mnemonicParsing="false" onAction="#onBtnNameAktienregister" prefHeight="75.0" prefWidth="263.0" text="Name - Aktienregister" />
+      <Button fx:id="btnAppCode" layoutX="435.0" layoutY="363.0" mnemonicParsing="false" onAction="#onBtnAppCode" prefHeight="75.0" prefWidth="263.0" text="App-QR-Code" />
+      <Button fx:id="btnNeueGastkarte" layoutX="33.0" layoutY="523.0" mnemonicParsing="false" onAction="#onBtnNeueGastkarte" prefHeight="75.0" prefWidth="263.0" text="Neue Gastkarte" />
+      <Button fx:id="btnKIAV" layoutX="813.0" layoutY="523.0" mnemonicParsing="false" onAction="#onBtnKIAV" prefHeight="75.0" prefWidth="263.0" text="KIAV / Sammelkarten" />
+      <Button fx:id="btnAkkreditierung" layoutX="435.0" layoutY="523.0" mnemonicParsing="false" onAction="#onBtnAkkreditierung" prefHeight="75.0" prefWidth="263.0" text="Akkreditierung" />
+      <Button fx:id="btnClear" layoutX="920.0" layoutY="38.0" mnemonicParsing="false" onAction="#onBtnClear" prefHeight="92.0" prefWidth="166.0" text="Zurücksetzen" />
+      <Button fx:id="btnVereinspraesenz" layoutX="813.0" layoutY="363.0" mnemonicParsing="false" onAction="#onBtnVereinspraesenz" prefHeight="75.0" prefWidth="263.0" text="Vereinspräsenz" />
+      <Button fx:id="btnTagungsausweis" layoutX="813.0" layoutY="443.0" mnemonicParsing="false" onAction="#onBtnTagungsausweis" prefHeight="75.0" prefWidth="263.0" text="Tagungsausweis (ku178)" />
+      <Label fx:id="lblSuchbegriff" layoutX="33.0" layoutY="14.0" text="Suchbegriff:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblSuchenNach" layoutX="33.0" layoutY="143.0" text="Suchen nach:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

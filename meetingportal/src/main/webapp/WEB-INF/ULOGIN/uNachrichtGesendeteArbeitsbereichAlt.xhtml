@@ -1,0 +1,68 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <div class="divArbeitsbereich">
+
+        <table class="divArbeitsbereichUeberschrift">
+            <tr>
+                <td class="divArbeitsbereichUeberschriftText">
+                    <h:outputLabel value="Gesendete Nachrichten" />
+                </td>
+                <td class="divArbeitsbereichUeberschriftButton">
+                    <h:commandButton value="Refresh" action="#{uNachrichtEmpfangen.doEmpfangenNachrichtenRefresh()}"
+                        styleClass="btnStandard">
+                    </h:commandButton>
+                </td>
+            </tr>
+        </table>
+
+        <h:selectBooleanCheckbox id="empfangeneMailsAnzeigen" value="#{blMNachrichten.nachrichtenSendebereichAnzeigen}">
+            <f:ajax render="gesendeteNachrichtenBereich" />
+        </h:selectBooleanCheckbox>
+        <h:outputLabel
+            value="Gesendete Nachrichten (#{blMNachrichten.liefereGesendeteNachrichtenAnzahl()} insgesamt) anzeigen" />
+        <br />
+        <h:panelGroup id="gesendeteNachrichtenBereich">
+            <h:panelGroup rendered="#{blMNachrichten.nachrichtenSendebereichAnzeigen}">
+
+                <h:selectBooleanCheckbox value="#{blMNachrichten.nurUnbearbeiteteGesendeteNachrichtenAnzeigen}">
+                    <f:ajax render="gesendeteNachrichten" />
+                </h:selectBooleanCheckbox>
+                <h:outputLabel value="Vom Empfänger Bearbeitete / gelesene Nachrichten nicht anzeigen" />
+                <br />
+                <h:panelGroup id="gesendeteNachrichten">
+                    <h:panelGroup rendered="#{blMNachrichten.nurUnbearbeiteteGesendeteNachrichtenAnzeigen==false}">
+                        <h:panelGroup rendered="#{blMNachrichten.liefereGesendeteNachrichtenVorhanden()==true}">
+
+                            <p:dataTable value="#{blMNachrichten.gesendeteNachrichtenListe}" var="nachricht">
+
+                                <ui:include src="uNachrichtEmpfangenElement.xhtml">
+                                </ui:include>
+                            </p:dataTable>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{blMNachrichten.liefereGesendeteNachrichtenVorhanden()==false}">
+                            Keine Nachrichten vorhanden.
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+        <br /> <br />
+
+    </div>
+</ui:composition>

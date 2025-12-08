@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane prefHeight="724.0" prefWidth="1120.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane fx:id="tabPane" layoutY="36.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE" tabMinWidth="356.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+            <Tab id="1" text="Emittent">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <GridPane hgap="15.0" layoutX="15.0" layoutY="8.0" vgap="2.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="151.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="80.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="75.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="80.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="75.0" />
+                              <ColumnConstraints minWidth="10.0" prefWidth="20.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="80.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="128.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="128.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="128.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="25.0" prefHeight="30.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="15.0" prefHeight="60.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="15.0" prefHeight="60.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints vgrow="ALWAYS" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Emittent kurz" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfBezeichnungKurz" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+                              <Label text="Emittent lang" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfBezeichnungLang" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" text="Verwendung der Emittenten Bezeichnung" GridPane.columnIndex="7" GridPane.columnSpan="3">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox spacing="15.0" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                                 <children>
+                                    <VBox alignment="CENTER" spacing="2.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label text="Portal">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cbPortal" focusTraversable="false" maxWidth="1.7976931348623157E308" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="2.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label text="App">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cbApp" focusTraversable="false" maxWidth="1.7976931348623157E308" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="2.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label text="Formulare">
+                                             <font>
+                                                <Font name="System Bold" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="cbFormular" focusTraversable="false" maxWidth="1.7976931348623157E308" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label text="Abteilung" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfAbteilung" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="4" />
+                              <Label text="Straße" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfStrasse" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5" />
+                              <Label text="PLZ" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfPlz" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label text="Ort" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="tfOrt" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+                              <Label text="Land" GridPane.rowIndex="7">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ComboBox fx:id="cbLand" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="7" />
+                              <Label fx:id="lblPfad" text="Pfad" GridPane.rowIndex="9">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfPfad" promptText="Beispiel: \Emittent\HV_Jahr_Meldedaten_PDF" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="9" />
+                              <Button fx:id="btnPfad" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onPfad" text="Ordner" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                              <Label text="Mail-Verteiler Consultant" GridPane.rowIndex="10">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfConsultant" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="10" />
+                              <Label text="Telefon" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfTelefon" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+                              <Label text="Fax" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfFax" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                              <Label text="E-Mail" GridPane.columnIndex="6" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfEmail" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+                              <ScrollPane fx:id="scrollPane_Isin" fitToHeight="true" fitToWidth="true" prefHeight="250.0" GridPane.columnIndex="6" GridPane.columnSpan="4" GridPane.rowIndex="7" GridPane.rowSpan="5">
+                                 <content>
+                                    <HBox fx:id="hBoxScrollPane" spacing="15.0">
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </HBox>
+                                 </content>
+                                 <GridPane.margin>
+                                    <Insets top="13.0" />
+                                 </GridPane.margin>
+                              </ScrollPane>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="2" text="Hauptversammlung">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <GridPane hgap="15.0" layoutX="15.0" layoutY="13.0" vgap="2.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="151.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="80.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="75.0" />
+                            <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="80.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="75.0" />
+                              <ColumnConstraints minWidth="10.0" prefWidth="20.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="140.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="108.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="108.0" />
+                              <ColumnConstraints hgrow="ALWAYS" minWidth="30.0" prefWidth="108.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="25.0" prefHeight="30.0" valignment="BOTTOM" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                            <RowConstraints minHeight="30.0" prefHeight="50.0" valignment="CENTER" />
+                              <RowConstraints minHeight="15.0" prefHeight="60.0" valignment="CENTER" />
+                              <RowConstraints minHeight="30.0" valignment="CENTER" vgrow="ALWAYS" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Art" GridPane.columnSpan="3" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <ComboBox fx:id="cbArt" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="1" />
+                              <Label text="Veranstaltungsort" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <TextField fx:id="tfHVLocation" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+                              <Label text="Straße" GridPane.columnSpan="3" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <TextField fx:id="tfHVStrasse" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="3" />
+                              <Label text="PLZ" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <TextField fx:id="tfHVPlz" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label text="HV Ort" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="tfHVOrt" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+                              <Label text="Land" GridPane.columnSpan="3" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <ComboBox fx:id="cbHVLand" editable="true" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5" />
+                              <Label text="Datum Bundesanzeiger" GridPane.columnIndex="6" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfBundesanzeiger" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="1" />
+                              <Label text="Veranstaltungsdatum" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="dpHVDatum" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="2" />
+                              <Label text="Beginn" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfHVBeginn" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="3" />
+                              <Label text="Einlass" GridPane.columnIndex="6" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tfHVEinlass" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="4" />
+                              <Label text="letzter Anmeldetag" GridPane.columnIndex="6" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <DatePicker fx:id="dpHVLetzterAnm" maxWidth="1.7976931348623157E308" GridPane.columnIndex="7" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                            <TitledPane animated="false" text="Zugriff *" GridPane.columnSpan="10" GridPane.rowIndex="7">
+                              <content>
+                                <AnchorPane>
+                                       <children>
+                                          <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <CheckBox fx:id="cbBerConsultant" mnemonicParsing="false" text="Consultant" />
+                                                <CheckBox fx:id="cbBerAnmeldeErfassung" mnemonicParsing="false" text="Anmeldestelle (Erfassung)" GridPane.columnIndex="1" />
+                                                <CheckBox fx:id="cbBerAnmeldeMaster" mnemonicParsing="false" text="Anmeldestelle (Master)" GridPane.columnIndex="2" />
+                                                <CheckBox fx:id="cbBerAdministrator" mnemonicParsing="false" text="Administrator" GridPane.columnIndex="3" />
+                                                <CheckBox fx:id="cbBerHotline" mnemonicParsing="false" text="Hotline" GridPane.columnIndex="4" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </TitledPane>
+                           </children>
+                        </GridPane>
+                        <Accordion layoutX="15.0" layoutY="454.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="500.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         <Tab id="3" text="Kapital">
+               <content>
+                  <ScrollPane fitToHeight="true" fitToWidth="true">
+                     <content>
+                        <GridPane fx:id="gpKapital" gridLinesVisible="true">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="275.0" prefWidth="275.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="150.0" prefWidth="200.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="150.0" prefWidth="200.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="150.0" prefWidth="200.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="150.0" prefWidth="200.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="250.0" minWidth="150.0" prefWidth="200.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button fx:id="btnKapitalRefresh" mnemonicParsing="false" onAction="#clickedBtnKapitalRefresh" text="Refresh Euro-Werte" GridPane.halignment="CENTER">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </Button>
+                              <Label text="Kapital - Stück Aktien" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Kapital - Euro" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Kapital vermindert - Stück Aktien  (ggf. Kapital eintragen)" wrapText="true" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Kapital vermindert - Euro  (ggf. Kapital eintragen)" wrapText="true" GridPane.rowIndex="5">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Wert einer Aktie" GridPane.rowIndex="6">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Anzahl Nachkommastellen Kapital" GridPane.rowIndex="7">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="449.0" text="Haupt ISIN" GridPane.rowIndex="8">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Immer neue Eintrittskartennummer vergeben" wrapText="true" GridPane.rowIndex="9">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Zugangsbuchung möglich" wrapText="true" GridPane.rowIndex="10">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin></Label>
+                              <Label text="Eigene Aktien" GridPane.rowIndex="11">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <TextFlow fx:id="flowFehler" prefHeight="25.0" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" />
+      <Button fx:id="btnBeenden" layoutX="27.0" layoutY="679.0" mnemonicParsing="false" onAction="#onBeenden" prefHeight="25.0" prefWidth="120.0" text="Beenden" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnSpeichern" mnemonicParsing="false" onAction="#onSpeichern" prefHeight="25.0" prefWidth="120.0" text="Speichern" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+   </children>
+</AnchorPane>

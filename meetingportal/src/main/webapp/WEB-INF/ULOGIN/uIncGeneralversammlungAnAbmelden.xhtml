@@ -1,0 +1,503 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" lang="de">
+    <div class="container-80">
+        <div class="row">
+            <div class="col-8">
+                <!-- Text wenn bereits angemeldet -->
+                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.angemeldet}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('597')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('597')}" escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!-- Text wenn bereits abgemeldet -->
+                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.abgemeldet}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('598')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('598')}" escape="false"></h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!-- Text wenn weder an- noch abgemeldet -->
+                <h:panelGroup rendered="#{!eclBesitzGesamtAuswahl1M.anOderAbgemeldet}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('606')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('606')}" escape="false"></h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('599')}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('599')}" escape="false"></h:outputText>
+
+                    </p>
+                </h:panelGroup>
+
+                <!-- An-Abmeldung über Portal - normalablauf -->
+                <h:panelGroup rendered="#{eclParamM.liefereFreiwilligeAnmeldungNurPapier()==false}">
+                    <!-- Anmeldung mit Vollmacht möglich -->
+                    <h:panelGroup rendered="#{tSession.portalVollmachtDritteIstMoeglich}">
+                        <h:panelGroup
+                            rendered="#{!eclBesitzGesamtAuswahl1M.zweiPersonenZulaessig and eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich}">
+                            <!-- nur eine Person -->
+                            <h:panelGroup rendered="#{tRender.freiwillingAnmeldenPraesenzOderOnline()==false}">
+                                <!-- J/N/Vertreter -->
+                                <h:selectOneRadio id="anabmelden0a" value="#{eclBesitzGesamtAuswahl1M.anmeldung}"
+                                    layout="pageDirection">
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextEinePerson)}"
+                                        itemValue="1" />
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextAbmelden)}"
+                                        itemValue="2" />
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVertreter)}"
+                                        itemValue="4" />
+                                    <f:ajax render="gvAnAbMeldenVertreterEingabe" />
+                                </h:selectOneRadio>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{tRender.freiwillingAnmeldenPraesenzOderOnline()==true}">
+                                <!-- J - physisch / j-online /N/Vertreter -->
+                                <h:selectOneRadio id="anabmelden0b" value="#{eclBesitzGesamtAuswahl1M.anmeldung}"
+                                    layout="pageDirection">
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextEinePerson)}"
+                                        itemValue="1" />
+                                    <f:selectItem itemLabel="#{eclPortalTexteM.holeText('1723')}" itemValue="5" />
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextAbmelden)}"
+                                        itemValue="2" />
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVertreter)}"
+                                        itemValue="4" />
+                                    <f:ajax render="gvAnAbMeldenVertreterEingabe" />
+                                </h:selectOneRadio>
+                            </h:panelGroup>
+
+                        </h:panelGroup>
+
+                        <h:panelGroup
+                            rendered="#{eclBesitzGesamtAuswahl1M.zweiPersonenZulaessig and eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich}">
+                            <!-- nur eine Person -->
+                            <h:selectOneRadio id="anabmelden2" value="#{eclBesitzGesamtAuswahl1M.anmeldung}"
+                                layout="pageDirection">
+                                <f:selectItem
+                                    itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextEinePerson)}"
+                                    itemValue="1" />
+                                <f:selectItem itemLabel="#{eclPortalTexteM.holeText('712')}" itemValue="3" />
+                                <f:selectItem
+                                    itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextAbmelden)}"
+                                    itemValue="2" />
+                                <f:selectItem
+                                    itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVertreter)}"
+                                    itemValue="4" />
+                                <f:ajax render="gvAnAbMeldenVertreterEingabe" />
+                            </h:selectOneRadio>
+
+                        </h:panelGroup>
+
+                        <h:panelGroup
+                            rendered="#{!eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich}">
+                            <h:panelGroup rendered="#{!eclBesitzGesamtAuswahl1M.zweiPersonenZulaessig}">
+                                <!-- nur eine Person -->
+                                <h:selectOneRadio id="anabmelden3a" value="#{eclBesitzGesamtAuswahl1M.anmeldung}"
+                                    layout="pageDirection">
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextEinePerson)}"
+                                        itemValue="1" />
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextAbmelden)}"
+                                        itemValue="2" />
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVertreter)}"
+                                        itemValue="4" />
+                                    <f:ajax render="gvAnAbMeldenVertreterEingabe" />
+                                </h:selectOneRadio>
+                            </h:panelGroup>
+
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.zweiPersonenZulaessig}">
+                                <!-- auch zwei Personen -->
+                                <h:selectOneRadio id="anabmelden3b" value="#{eclBesitzGesamtAuswahl1M.anmeldung}"
+                                    layout="pageDirection">
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextEinePerson)}"
+                                        itemValue="1" />
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextZweiPersonen)}"
+                                        itemValue="3" />
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextAbmelden)}"
+                                        itemValue="2" />
+                                    <f:selectItem
+                                        itemLabel="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVertreter)}"
+                                        itemValue="4" />
+                                    <f:ajax render="gvAnAbMeldenVertreterEingabe" />
+                                </h:selectOneRadio>
+                            </h:panelGroup>
+
+                            <!-- Sondertext - gesetzlicher Vertreter erforderlich -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1003')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1003')}" escape="false">
+                                    </h:outputText>
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <!-- Vertretereingabe -->
+                        <h:panelGroup id="gvAnAbMeldenVertreterEingabe">
+                            <h:panelGroup
+                                rendered="#{eclParamM.liefereFreiwilligeAnmeldungMitVertretereingabe()==true}">
+                                <!-- normale Vollmacht -->
+                                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anmeldung=='4'}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2032')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('2032')}" escape="false">
+                                            </h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                    <section id="gvVollmacht-bereich">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2033')}"
+                                                            escape="false"></h:outputLabel>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <h:inputText id="GVVollmachtName"
+                                                            value="#{eclBesitzGesamtAuswahl1M.nameVertreter1}"
+                                                            maxlength="60" size="50"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2034')}"
+                                                            escape="false"></h:outputLabel>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <h:inputText id="GVVollmachtOrt"
+                                                            value="#{eclBesitzGesamtAuswahl1M.ortVertreter1}"
+                                                            maxlength="60" size="50"></h:inputText>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </h:panelGroup>
+                                <!-- gesetzlicher Vertreter - eine Person-->
+                                <h:panelGroup
+                                    rendered="#{eclBesitzGesamtAuswahl1M.anmeldung=='1' and eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich==false}">
+                                    <h:panelGroup
+                                        rendered="#{eclPortalTexteM.pruefeITextVorhanden(eclBesitzGesamtAuswahl1M.gruppenTextVertreter1nur1)}">
+                                        <p>
+                                            <h:outputText
+                                                value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVertreter1nur1)}"
+                                                escape="false"></h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                    <section id="gvVollmachtGes-bereich">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2036')}"
+                                                            escape="false"></h:outputLabel>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <h:inputText id="GVVollmachtGesName"
+                                                            value="#{eclBesitzGesamtAuswahl1M.nameVertreter1}"
+                                                            maxlength="60" size="50"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2037')}"
+                                                            escape="false"></h:outputLabel>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <h:inputText id="GVVollmachtGesOrt"
+                                                            value="#{eclBesitzGesamtAuswahl1M.ortVertreter1}"
+                                                            maxlength="60" size="50"></h:inputText>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </h:panelGroup>
+                                <!-- gesetzlicher Vertreter - zwei Personen-->
+                                <h:panelGroup
+                                    rendered="#{eclBesitzGesamtAuswahl1M.anmeldung=='3' and eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich==false}">
+                                    <h:panelGroup
+                                        rendered="#{eclPortalTexteM.pruefeITextVorhanden(eclBesitzGesamtAuswahl1M.gruppenTextVertreter1)}">
+                                        <p>
+                                            <h:outputText
+                                                value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVertreter1)}"
+                                                escape="false"></h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                    <section id="gvVollmachtGes1-bereich">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2039')}"
+                                                            escape="false"></h:outputLabel>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <h:inputText id="GVVollmachtGes1Name"
+                                                            value="#{eclBesitzGesamtAuswahl1M.nameVertreter1}"
+                                                            maxlength="60" size="50"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2040')}"
+                                                            escape="false"></h:outputLabel>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <h:inputText id="GVVollmachtGes1Ort"
+                                                            value="#{eclBesitzGesamtAuswahl1M.ortVertreter1}"
+                                                            maxlength="60" size="50"></h:inputText>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <h:panelGroup
+                                        rendered="#{eclPortalTexteM.pruefeITextVorhanden(eclBesitzGesamtAuswahl1M.gruppenTextVertreter2)}">
+                                        <p>
+                                            <h:outputText
+                                                value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVertreter2)}"
+                                                escape="false"></h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                    <section id="gvVollmachtGes2-bereich">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2042')}"
+                                                            escape="false"></h:outputLabel>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <h:inputText id="GVVollmachtGes2Name"
+                                                            value="#{eclBesitzGesamtAuswahl1M.nameVertreter2}"
+                                                            maxlength="60" size="50"></h:inputText>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-3">
+                                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2043')}"
+                                                            escape="false"></h:outputLabel>
+                                                    </div>
+                                                    <div class="col-5">
+                                                        <h:inputText id="GVVollmachtGes2Ort"
+                                                            value="#{eclBesitzGesamtAuswahl1M.ortVertreter2}"
+                                                            maxlength="60" size="50"></h:inputText>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </h:panelGroup>
+                                <!-- gesetzlicher Vertreter - Gastkarte für Zweite Person-->
+                                <h:panelGroup
+                                    rendered="#{eclBesitzGesamtAuswahl1M.anmeldung=='1' and eclBesitzGesamtAuswahl1M.gastkarteFuerZweitePersonZulaessig==true}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2056')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('2056')}" escape="false">
+                                            </h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                    <h:panelGrid columns="2" styleClass="gridTop tableCheckbox">
+                                        <h:selectBooleanCheckbox id="gvAnmeldenGastkarteFuerZweitePerson"
+                                            value="#{eclBesitzGesamtAuswahl1M.gastkarteFuerZweitePerson}">
+                                            <f:ajax render="gvAnAbMeldenZweitePersonEingabe" />
+                                        </h:selectBooleanCheckbox>
+                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2057')}" escape="false">
+                                        </h:outputLabel>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                                <!-- Eingabe Daten zweite Person -->
+                                <h:panelGroup id="gvAnAbMeldenZweitePersonEingabe">
+                                    <h:panelGroup
+                                        rendered="#{eclBesitzGesamtAuswahl1M.anmeldung=='1' and eclBesitzGesamtAuswahl1M.gastkarteFuerZweitePerson}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2041')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('2041')}"
+                                                    escape="false">
+                                                </h:outputText>
+                                            </p>
+                                        </h:panelGroup>
+                                        <section id="gvZweitePerson-bereich">
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <h:outputLabel value="#{eclPortalTexteM.holeText('2042')}"
+                                                                escape="false"></h:outputLabel>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <h:inputText id="GVZweitePersonName"
+                                                                value="#{eclBesitzGesamtAuswahl1M.nameVertreter2}"
+                                                                maxlength="60" size="50"></h:inputText>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-3">
+                                                            <h:outputLabel value="#{eclPortalTexteM.holeText('2043')}"
+                                                                escape="false"></h:outputLabel>
+                                                        </div>
+                                                        <div class="col-5">
+                                                            <h:inputText id="GVZweitePersonOrt"
+                                                                value="#{eclBesitzGesamtAuswahl1M.ortVertreter2}"
+                                                                maxlength="60" size="50"></h:inputText>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+
+                                <!-- gesetzlicher Vertreter - Gastkarte für Mitglied selbst-->
+                                <h:panelGroup
+                                    rendered="#{(eclBesitzGesamtAuswahl1M.anmeldung=='1' or eclBesitzGesamtAuswahl1M.anmeldung=='3') and eclBesitzGesamtAuswahl1M.gastkarteFuerMitgliedZulaessig==true}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2044')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('2044')}" escape="false">
+                                            </h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                    <h:panelGrid columns="2" styleClass="gridTop tableCheckbox">
+                                        <h:selectBooleanCheckbox id="gvAnmeldenGastkarte"
+                                            value="#{eclBesitzGesamtAuswahl1M.gastkarteFuerMitglied}">
+                                        </h:selectBooleanCheckbox>
+                                        <h:outputLabel value="#{eclPortalTexteM.holeText('2045')}" escape="false">
+                                        </h:outputLabel>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                    </h:panelGroup>
+
+
+                    <!-- Anmeldung nur ohne Vollmacht möglich (Identisch zum vorigen Bock, nur ohne "4" selectItem, und IDs ändern)-->
+                    <h:panelGroup rendered="#{tSession.portalVollmachtDritteIstMoeglich==false}">
+                        <h:panelGroup
+                            rendered="#{!eclBesitzGesamtAuswahl1M.zweiPersonenZulaessig and eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich}">
+                            <!-- nur eine Person -->
+
+                            <!-- nur Ja oder Nein -->
+                            <h:panelGroup rendered="#{tRender.freiwillingAnmeldenPraesenzOderOnline()==false}">
+                                <h:selectOneRadio id="anabmeldenA1A" value="#{eclBesitzGesamtAuswahl1M.anmeldung}"
+                                    layout="pageDirection">
+                                    <f:selectItem itemLabel="#{eclPortalTexteM.holeText('600')}" itemValue="1" />
+                                    <f:selectItem itemLabel="#{eclPortalTexteM.holeText('601')}" itemValue="2" />
+                                </h:selectOneRadio>
+                            </h:panelGroup>
+
+                            <!-- Online/Phsysisch oder Nein -->
+                            <h:panelGroup rendered="#{tRender.freiwillingAnmeldenPraesenzOderOnline()==true}">
+                                <h:selectOneRadio id="anabmeldenA1B" value="#{eclBesitzGesamtAuswahl1M.anmeldung}"
+                                    layout="pageDirection">
+                                    <f:selectItem itemLabel="#{eclPortalTexteM.holeText('600')}" itemValue="1" />
+                                    <f:selectItem itemLabel="#{eclPortalTexteM.holeText('1723')}" itemValue="5" />
+                                    <f:selectItem itemLabel="#{eclPortalTexteM.holeText('601')}" itemValue="2" />
+                                </h:selectOneRadio>
+                            </h:panelGroup>
+
+                        </h:panelGroup>
+
+                        <h:panelGroup
+                            rendered="#{eclBesitzGesamtAuswahl1M.zweiPersonenZulaessig and eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich}">
+                            <!-- nur eine Person -->
+                            <h:selectOneRadio id="anabmeldenA2" value="#{eclBesitzGesamtAuswahl1M.anmeldung}"
+                                layout="pageDirection">
+                                <f:selectItem itemLabel="#{eclPortalTexteM.holeText('711')}" itemValue="1" />
+                                <f:selectItem itemLabel="#{eclPortalTexteM.holeText('712')}" itemValue="3" />
+                                <f:selectItem itemLabel="#{eclPortalTexteM.holeText('601')}" itemValue="2" />
+                            </h:selectOneRadio>
+
+                        </h:panelGroup>
+
+                        <h:panelGroup
+                            rendered="#{!eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich}">
+                            <!-- nur eine Person -->
+                            <h:selectOneRadio id="anabmeldenA3" value="#{eclBesitzGesamtAuswahl1M.anmeldung}"
+                                layout="pageDirection">
+                                <f:selectItem itemLabel="#{eclPortalTexteM.holeText('1002')}" itemValue="1" />
+                                <f:selectItem itemLabel="#{eclPortalTexteM.holeText('601')}" itemValue="2" />
+                            </h:selectOneRadio>
+
+                            <!-- Sondertext - gesetzlicher Vertreter erforderlich -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1003')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1003')}" escape="false">
+                                    </h:outputText>
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                </h:panelGroup>
+
+                <!-- An-Abmeldung über Papier - nur Anzeige eines Buttons -->
+                <h:panelGroup rendered="#{eclParamM.liefereFreiwilligeAnmeldungNurPapier()==true}">
+                    <p>
+                        <h:commandButton value="#{eclPortalTexteM.holeText('2020')}"
+                            action="#{tGeneralversammlung.doAnmeldeformularAnzeigen()}"
+                            onclick="this.form.target='_blank'" styleClass="btn-typ-00" />
+                    </p>
+                </h:panelGroup>
+
+                <!-- Gruppen-spezifischer Text  liefereGruppenTextStartAnAbmeldung -->
+                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.gruppenTextStartAnAbmeldung!=0}">
+                    <h:panelGroup
+                        rendered="#{eclPortalTexteM.pruefeITextVorhanden(eclBesitzGesamtAuswahl1M.gruppenTextStartAnAbmeldung)}">
+                        <p>
+                            <h:outputText
+                                value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextStartAnAbmeldung)}"
+                                escape="false"></h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('602')}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('602')}" escape="false"></h:outputText>
+
+                    </p>
+                </h:panelGroup>
+
+            </div>
+        </div>
+    </div>
+
+</ui:composition>

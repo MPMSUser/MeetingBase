@@ -1,0 +1,62 @@
+/*
+ *  Copyright 2025 Better Orange IR & HV AG
+ *
+ *  Licensed under the Meetingbase License (the "License");
+ *  Vou may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+package de.meetingapps.meetingportal.meetComEntities;
+
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlType;
+
+@XmlRootElement(name = "InhaberImport")
+@XmlType(propOrder = { "eclInhaberImportXmlHeader", "eclInhaberImportGesellschaft" })
+public class EclInhaberImport {
+
+    private EclInhaberImportXmlHeader eclInhaberImportXmlHeader;
+
+    private EclInhaberImportGesellschaft eclInhaberImportGesellschaft;
+
+    public EclInhaberImport() {
+
+    }
+
+    public EclInhaberImport(EclInhaberImportXmlHeader xmlHeader, EclInhaberImportGesellschaft eclInhaberImportGesellschaft) {
+        super();
+        this.eclInhaberImportXmlHeader = xmlHeader;
+        this.eclInhaberImportGesellschaft = eclInhaberImportGesellschaft;
+    }
+
+    @XmlElement(name = "XMLHeader")
+    public EclInhaberImportXmlHeader getEclInhaberImportXmlHeader() {
+        return eclInhaberImportXmlHeader;
+    }
+
+    public void setEclInhaberImportXmlHeader(EclInhaberImportXmlHeader eclInhaberImportXmlHeader) {
+        this.eclInhaberImportXmlHeader = eclInhaberImportXmlHeader;
+    }
+
+    @XmlElement(name = "Gesellschaft")
+    public EclInhaberImportGesellschaft getEclInhaberImportGesellschaft() {
+        
+        return eclInhaberImportGesellschaft;
+    }
+
+    public void setEclInhaberImportGesellschaft(EclInhaberImportGesellschaft eclInhaberImportGesellschaft) {
+        this.eclInhaberImportGesellschaft = eclInhaberImportGesellschaft;
+    }
+
+    @Override
+    public String toString() {
+        return "EclInhaberImport [xmlHeader=" + eclInhaberImportXmlHeader + ", eclInhaberImportGesellschaft=" + eclInhaberImportGesellschaft + "]";
+    }
+
+}

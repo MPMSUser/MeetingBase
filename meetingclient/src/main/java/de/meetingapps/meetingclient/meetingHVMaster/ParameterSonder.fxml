@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane fx:id="tbPaneAnnzeige" layoutY="36.0" onMouseClicked="#onTpChanged" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="100.0" tabMaxWidth="140.0" tabMinWidth="100.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="tpAllgemein" text="Allgemein">
+               <content>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="598.0" prefWidth="1207.0">
+                     <content>
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="358.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="86.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="10.0" prefWidth="219.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                           <children>
+                              <Label text="Zweiter Mandant - Nr" />
+                              <Label text="ku178: hier den Mandant eintragen, der für die Beiratswahl verknüpft wird. " GridPane.columnIndex="2" GridPane.columnSpan="3" />
+                              <Label text="Zweiter Mandant - HV-Jahr" GridPane.rowIndex="1" />
+                              <Label text="Zweiter Mandant - Laufende Nummer" GridPane.rowIndex="2" />
+                              <TextField fx:id="tfZweiterMandantLfdNr" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="Zweiter Mandant - Datenbank" GridPane.rowIndex="3" />
+                              <TextField fx:id="tfZweiterMandantDB" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="tfZweiterMandantNr" GridPane.columnIndex="1" />
+                              <TextField fx:id="tfZweiterMandantHVJahr" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </content>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </ScrollPane>
+               </content>
+          </Tab>
+         <Tab fx:id="tpPortalApp" text="Portal/App&#9;">
+               <content>
+                  <ScrollPane>
+                     <content>
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="358.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="86.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="10.0" prefWidth="219.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                            </rowConstraints>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                           <children>
+                              <Label text="Variante Dialogablauf" />
+                              <Label text="0=Standard, 1=ku178 Genossenschaft" GridPane.columnIndex="2" GridPane.columnSpan="3" />
+                              <Label text="Login-IP-Tracking" GridPane.rowIndex="20" />
+                              <CheckBox fx:id="cbIpTracking" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="20" />
+                              <TextField fx:id="tfVarianteDialogablauf" GridPane.columnIndex="1" />
+                              <Label text="ku178: Dialogveranstaltungen im Portal aktiv" GridPane.rowIndex="2" />
+                              <Label text="Passwortvergessen-Verfahren Ablauf" GridPane.rowIndex="18" />
+                              <Label text="0=Standard; 1=ku178 (Geburtsdatum)" GridPane.columnIndex="2" GridPane.rowIndex="18" />
+                              <TextField fx:id="tfVerfahrenPasswortVergessenAblauf" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                              <TextField fx:id="tfBeiratswahl" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="0=nicht aktiv; &lt;0 Pos in Menü / Anzeige aber nicht aktiv &gt;0 Anzeige und Aktiv (max. 7)" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="2" />
+                              <Label text="ku178: Generalversammlung Anmeldung im Portal aktiv" GridPane.rowIndex="4" />
+                              <Label text="ku178: Unterlagen im Portal aktiv" GridPane.rowIndex="7" />
+                              <Label text="ku178: Einstellungen im Portal aktiv" GridPane.rowIndex="8" />
+                              <TextField fx:id="tfGeneralversammlung" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="tfUnterlagen" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <TextField fx:id="tfEinstellungen" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <Label text="Raw-Liveabstimmung aktiv" GridPane.rowIndex="23" />
+                              <TextField fx:id="tfNurRawLiveAbstimmung" GridPane.columnIndex="1" GridPane.rowIndex="23" />
+                              <Label text="0=nein (Standard) 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="23" />
+                              <Label text="Anzeige Stimmen/Aktien im Portal" GridPane.rowIndex="24" />
+                              <Label text="0=nein (z.B. für 1 Person 1 Vote), 1=Standard" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="24" />
+                              <TextField fx:id="tfAnzeigeStimmen" GridPane.columnIndex="1" GridPane.rowIndex="24" />
+                              <Label text="ku178: Generalversammlung Teilnahme im Portal aktiv" GridPane.rowIndex="6" />
+                              <TextField fx:id="tfGeneralversammlungTeilnahme" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <Label text="ku178: Generalversammlung Teilnahme Gast aktiv" GridPane.rowIndex="9" />
+                              <TextField fx:id="tfGeneralversammlungGast" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                              <Label text="Online Teilnahme Gast in separatem Menü" GridPane.rowIndex="26" />
+                              <TextField fx:id="tfOnlineTeilnahmeGastInSeparatemMenue" GridPane.columnIndex="1" GridPane.rowIndex="26" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="26" />
+                              <Label text="Online-Teilnahme nur für freiwillig angemeldete" GridPane.rowIndex="27" />
+                              <Label text="0=nein (Standard), 1=ja" GridPane.columnIndex="2" GridPane.rowIndex="27" />
+                              <TextField fx:id="tfOnlineTeilnahmeNurFuerFreiwilligAngemeldete" GridPane.columnIndex="1" GridPane.rowIndex="27" />
+                             <Label text="Freiwillig anmelden" GridPane.rowIndex="33" />
+                              <TextField fx:id="tfFreiwillingAnmeldenPraesenzOderOnline" GridPane.columnIndex="1" GridPane.rowIndex="33" />
+                              <Label text="0=J/N; 1=Online/Physisch/Nein" GridPane.columnIndex="2" GridPane.rowIndex="33" />
+                              <Label text="Veranstaltungen: Quittung" GridPane.rowIndex="29" />
+                              <Label text="Veranstaltungen: Personenzahl eingeben" GridPane.rowIndex="30" />
+                              <Label text="Veranstaltungen: je Gruppe Multiauswahl" GridPane.rowIndex="31" />
+                              <TextField fx:id="tfVeranstaltungMailVerschicken" GridPane.columnIndex="1" GridPane.rowIndex="29" />
+                              <TextField fx:id="tfVeranstaltungPersonenzahlEingeben" GridPane.columnIndex="1" GridPane.rowIndex="30" />
+                              <TextField fx:id="tfVeranstaltungMehrfachAuswaehlbarJeGruppe" GridPane.columnIndex="1" GridPane.rowIndex="31" />
+                              <Label text="0=keine; 1=Mail; 2=Mail mit Anhang 3=individuelles Ticket per Mailanhang (und Selbstdruckmöglichkeit)" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="29" />
+                              <Label text="0=nein, 1=ja" GridPane.columnIndex="2" GridPane.rowIndex="30" />
+                              <Label text="0=nein, 1=ja" GridPane.columnIndex="2" GridPane.rowIndex="31" />
+                              <Label text="Dialogversammlung aktiv" GridPane.rowIndex="11" />
+                              <TextField fx:id="tfDialogveranstaltungAktiv" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="11" />
+                              <Label text="ku178: Beiratswahl im Portal aktiv" GridPane.rowIndex="3" />
+                              <TextField fx:id="tfDialogveranstaltung" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="ku178: Generalversammlung Briefwahl im Portal aktiv" GridPane.rowIndex="5" />
+                              <TextField fx:id="tfGeneralversammlungBriefwahl" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <Label text="Freiwillig anmelden: EK-Druck ermöglichen" GridPane.rowIndex="39" />
+                              <TextField fx:id="tfFreiwilligeAnmeldungEKDruckMoeglich" GridPane.columnIndex="1" GridPane.rowIndex="39" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="39" />
+                              <Label text="Anmelden nur auf Postweg" GridPane.rowIndex="40" />
+                              <TextField fx:id="tfFreiwilligeAnmeldungNurPapier" GridPane.columnIndex="1" GridPane.rowIndex="40" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="40" />
+                              <Label text="Freiwillige Anmeldung: Vertretereingabe möglich" GridPane.rowIndex="41" />
+                              <TextField fx:id="tfFreiwilligeAnmeldungMitVertretereingabe" GridPane.columnIndex="1" GridPane.rowIndex="41" />
+                              <Label text="0=nein, 1=freiwillig, 2=Pflicht, 3=ku178" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="41" />
+                              <Label text="Freiwillige Anmeldung: Minderjährige" GridPane.rowIndex="43" />
+                              <TextField fx:id="tfFreiwilligeAnmeldungZweiPersonenFuerMinderjaehrigeMoeglich" GridPane.columnIndex="1" GridPane.rowIndex="43" />
+                              <Label text="0=normal 1 Person, 1=Zwei Personen, 2=Zwei Personen + Gastkarte Kind" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="43" />
+
+                              <Label text="Bei Abstimmung: Berechtigung separat prüfen" GridPane.rowIndex="45" />
+                              <TextField fx:id="tfOnlineAbstimmungBerechtigungSeparatPruefen" GridPane.columnIndex="1" GridPane.rowIndex="45" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="45" />
+                              <Label text="Mitglieder-Hybrid-Versammlung aktiv" GridPane.rowIndex="46" />
+                              <TextField fx:id="tfHybridTeilnahmeAktiv" GridPane.columnIndex="1" GridPane.rowIndex="46" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="46" />
+                              <Label text="Freiwillig anmelden Gattung 1" GridPane.rowIndex="34" />
+                              <Label text="Freiwillig anmelden Gattung 2" GridPane.rowIndex="35" />
+                              <Label text="Freiwillig anmelden Gattung 3" GridPane.rowIndex="36" />
+                              <Label text="Freiwillig anmelden Gattung 4" GridPane.rowIndex="37" />
+                              <Label text="Freiwillig anmelden Gattung 5" GridPane.rowIndex="38" />
+                              <CheckBox fx:id="cbFreiwilligeAnmeldungAktivFuerGattung1" GridPane.columnIndex="1" GridPane.rowIndex="34" />
+                              <CheckBox fx:id="cbFreiwilligeAnmeldungAktivFuerGattung2" GridPane.columnIndex="1" GridPane.rowIndex="35" />
+                              <CheckBox fx:id="cbFreiwilligeAnmeldungAktivFuerGattung3" GridPane.columnIndex="1" GridPane.rowIndex="36" />
+                              <CheckBox fx:id="cbFreiwilligeAnmeldungAktivFuerGattung5" GridPane.columnIndex="1" GridPane.rowIndex="38" />
+                              <CheckBox fx:id="cbFreiwilligeAnmeldungAktivFuerGattung4" GridPane.columnIndex="1" GridPane.rowIndex="37" />
+                              <Label text="Dialogversammlung aktiv Gattung 1" GridPane.rowIndex="12" />
+                              <Label text="Dialogversammlung aktiv Gattung 2" GridPane.rowIndex="13" />
+                              <Label text="Dialogversammlung aktiv Gattung 3" GridPane.rowIndex="14" />
+                              <Label text="Dialogversammlung aktiv Gattung 4" GridPane.rowIndex="15" />
+                              <Label text="Dialogversammlung aktiv Gattung 5" GridPane.rowIndex="16" />
+                              <CheckBox fx:id="cbVeranstaltungenAktivFuerGattung1" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+                              <CheckBox fx:id="cbVeranstaltungenAktivFuerGattung2" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+                              <CheckBox fx:id="cbVeranstaltungenAktivFuerGattung3" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                              <CheckBox fx:id="cbVeranstaltungenAktivFuerGattung4" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                              <CheckBox fx:id="cbVeranstaltungenAktivFuerGattung5" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                           </children>
+                        </GridPane>
+                     </content>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </ScrollPane>
+               </content>
+          </Tab>
+         <Tab fx:id="tpPortalApp" text="Remote-Register">
+               <content>
+                  <ScrollPane fitToHeight="true" fitToWidth="true">
+                     <content>
+                        <GridPane>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" prefWidth="358.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="213.0" minWidth="10.0" prefWidth="86.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="10.0" prefWidth="219.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints />
+                           </rowConstraints>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                           <children>
+                              <Label text="Register-Anbindung aktiv" />
+                              <Label text="Register-Anbindung Oberfläche" GridPane.rowIndex="1" />
+                              <Label text="Register Anbindung Check bei Login" GridPane.rowIndex="2" />
+                              <TextField fx:id="tfRegisterAnbindung" GridPane.columnIndex="1" />
+                              <TextField fx:id="tfRegisterAnbindungOberflaeche" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="tfRegisterAnbindungCheckBeiLogin" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="0=nein (Standard) 1=GenossenschaftSys" GridPane.columnIndex="2" />
+                              <Label text="0=nein (Standard) 1=ku178" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label text="0=nein (Standard) 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label text="Hinweis 1 bestätigen" GridPane.rowIndex="3" />
+                              <Label text="Hinweis 2 bestätigen" GridPane.rowIndex="4" />
+                              <TextField fx:id="tfBestaetigenHinweisP1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="tfBestaetigenHinweisP2" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label text="api_client_id" GridPane.rowIndex="12" />
+                              <Label text="api_client_secret" GridPane.rowIndex="13" />
+                              <Label text="api_base_url" GridPane.rowIndex="14" />
+                              <Label text="api_key_id" GridPane.rowIndex="15" />
+                              <Label text="api_jwt_expiration_time" GridPane.rowIndex="16" />
+                              <Label text="Dateiname Key" GridPane.rowIndex="17" />
+                              <Label text="api_ping_url" GridPane.rowIndex="18" />
+                              <Label text="apiku178_url" GridPane.rowIndex="19" />
+                              
+                                    <TextField fx:id="tfApi_client_id" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="12" />
+                              <TextField fx:id="tfApi_client_secret" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="13" />
+                              <TextField fx:id="tfApi_base_url" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="14" />
+                              <TextField fx:id="tfApi_key_id" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="15" />
+                              <TextField fx:id="tfApi_jwt_expiration_time" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                              <TextField fx:id="tfApi_key_name" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                              <TextField fx:id="tfApi_ping_url" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                              <TextField fx:id="tfApiku178_url" GridPane.columnIndex="1" GridPane.rowIndex="19" />
+                              
+                                    <Label text="In HV-Portal keine Einstellungen für Aktionäre aktivieren" GridPane.rowIndex="6" />
+                              <Label text="In HV-Portal keine E-Mail und Passwortpflege für Aktionäre" GridPane.rowIndex="7" />
+                              <Label text="0=nein, 1=Einstellungen sind nicht möglich" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="6" />
+                              <Label text="0=nein, 1=Pflege ist nicht möglich" GridPane.columnIndex="2" GridPane.columnSpan="4" GridPane.rowIndex="7" />
+                              <TextField fx:id="tfInHVPortalKeineEinstellungenFuerAktionaere" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="tfInHVPortalKeineEmailUndKeinPasswortFuerAktionaere" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label text="Sprung von Remote-Reg. zum HV-Portal" GridPane.rowIndex="9" />
+                              <Label text="Sprung vom HV-Portal zum Remote-Reg." GridPane.rowIndex="10" />
+                              <TextField fx:id="tfRegisterAnbindungZurHV" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                              <TextField fx:id="tfRegisterAnbindungVonHV" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                              <Label text="0=nein, 1=Ja" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                           </children>
+                        </GridPane>
+                     </content>
+                  </ScrollPane>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="btnSpeichern" layoutX="29.0" layoutY="761.0" mnemonicParsing="false" onAction="#clickedSpeichern" text="Speichern / Beenden" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+   </children>
+</AnchorPane>

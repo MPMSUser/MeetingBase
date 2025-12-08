@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      <ScrollPane fx:id="scpnUebersicht" layoutX="14.0" layoutY="160.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="150.0" />
+      <Label layoutX="23.0" layoutY="41.0" text="interne Sammel-Ident" />
+      <TextField fx:id="tfSammelIdent" layoutX="211.0" layoutY="37.0" />
+      <Button fx:id="btnEinlesen" layoutX="411.0" layoutY="37.0" mnemonicParsing="false" onAction="#onBtnEinlesen" text="Einlesen" />
+      <Button fx:id="btnAbbrechen" layoutX="515.0" layoutY="37.0" mnemonicParsing="false" onAction="#onBtnAbbrechen" text="Abbrechen" />
+      <Button fx:id="btnSpeichern" layoutX="624.0" layoutY="37.0" mnemonicParsing="false" onAction="#onBtnSpeichern" text="Kopfweisungen zurückspeichern" />
+      <TextField fx:id="tfSammelName" editable="false" layoutX="211.0" layoutY="78.0" prefHeight="25.0" prefWidth="738.0" />
+      <Label layoutX="23.0" layoutY="117.0" text="Gespeicherte Summe Aktien" />
+      <TextField fx:id="tfSummeAktienSammelkarte" editable="false" layoutX="211.0" layoutY="113.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="tfSummeAktienEinzelaktionaere" editable="false" layoutX="718.0" layoutY="113.0" prefHeight="25.0" prefWidth="211.0" />
+      <Label layoutX="524.0" layoutY="117.0" prefHeight="17.0" prefWidth="238.0" text="Summe Aktien Einzelaktionäre" />
+      <Button fx:id="btnSummeUebernehmen" layoutX="967.0" layoutY="113.0" mnemonicParsing="false" onAction="#onBtnSummeUebernehmen" prefHeight="25.0" prefWidth="331.0" text="Summe Einzelaktionäre übernehmen" />
+      <Button fx:id="btnAllesUebernehmen" layoutX="967.0" layoutY="29.0" mnemonicParsing="false" onAction="#onBtnAllesUebernehmen" prefHeight="72.0" prefWidth="331.0" text="Alle Detailwerte in Kopf übernehmen (Weisungen und Summen)" wrapText="true" />
+      <Button fx:id="btnRefreshChecksummen" layoutX="14.0" layoutY="743.0" mnemonicParsing="false" onAction="#onBtnRefreshChecksummen" text="Checksummen in Liste aktualisieren" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+</children>
+</AnchorPane>

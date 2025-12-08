@@ -1,0 +1,223 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" xmlns:c="jakarta.tags.core" lang="de">
+
+<h:head>
+    <title>Internetservice zur Versammlung</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="msapplication-TileColor" content="#{eclParamM.kachelFarbe}" />
+    <meta name="theme-color" content="#{eclParamM.themeFarbe}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="#{resource['std:icons/favicon-32x32.png']}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="#{resource['std:icons/favicon-16x16.png']}" />
+
+    <style>
+        body {
+            --col-primary: #{eclParamM.farbeHeader};
+            --col-btn-primary-text: #{eclParamM.logoMindestbreite};
+            --col-secondary: #{eclParamM.farbeHintergrundLogoutBtn};
+            --col-btn-secondary-text: #{eclParamM.farbeSchriftLogoutBtn};
+            --col-third: #{eclParamM.farbeRahmenLogoutBtn};
+            --col-btn-third-text: #{eclParamM.breiteRahmenLogoutBtn};
+            --col-primary-rgb: #{eclParamM.radiusRahmenLogoutBtn};
+            --col-secondary-rgb: #{eclParamM.stilRahmenLogoutBtn};
+            --col-third-rgb: #{eclParamM.farbeHintergrundLogoutBtnHover};
+        }
+    </style>
+
+    <link rel="stylesheet" href="#{resource['nextgen:css/bootstrap.min.css']}" />
+    <link rel="stylesheet" href="#{resource['nextgen:css/fontawesome.min.css']}" />
+    <link rel="stylesheet" href="#{resource['nextgen:css/solid.min.css']}" />
+    <link rel="stylesheet" href="#{resource['nextgen:css/style.css']}" />
+    <link rel="stylesheet" href="#{resource['nextgen:css/upload.css']}" />
+
+    <c:if test="#{not empty eclParamM.cssName}">
+        <link rel="stylesheet" href="/CSS/#{eclParamM.cssName}" />
+    </c:if>
+
+    <script type="text/javascript" src="#{resource['nextgen:js/jquery-3.7.1.min.js']}"></script>
+    <script type="text/javascript" src="#{resource['nextgen:js/popper.min.js']}"></script>
+    <script type="text/javascript" src="#{resource['nextgen:js/bootstrap.min.js']}"></script>
+    <script type="text/javascript" src="#{resource['nextgen:js/custom.js']}"></script>
+    <script type="text/javascript" src="#{resource['nextgen:js/websocket.js']}"></script>
+    <script type="text/javascript" src="#{resource['nextgen:js/resumable.js']}"></script>
+    <script type="text/javascript" src="#{resource['nextgen:js/upload.js']}"></script>
+    <script type="text/javascript" src="#{resource['nextgen:js/portal.js']}"></script>
+</h:head>
+
+<f:view>
+
+    <!-- Metadaten um den Mandant usw. zu setzen -->
+    <f:metadata>
+        <!-- Achtung - die folgende Reihenfolge ist zwingend, sonst funktioniert die
+                "Aktivierungsprozedur" bei Portalstart nicht richtig -->
+        <f:viewParam name="zeit" value="#{tSessionVerwaltung.zeit}" />
+        <f:viewParam name="hvjahr" value="#{tSessionVerwaltung.hvjahr}" />
+        <f:viewParam name="hvnummer" value="#{tSessionVerwaltung.hvnummer}" />
+        <f:viewParam name="datenbereich" value="#{tSessionVerwaltung.datenbereich}" />
+        <f:viewParam name="mandant" value="#{tSessionVerwaltung.mandant}" />
+        <f:viewParam name="sprache" value="#{tLanguage.sprache}" />
+        <f:viewParam name="test" value="#{tSessionVerwaltung.test}" />
+        <f:viewParam name="nummer" value="#{tLoginLogoutSession.loginKennung}" />
+        <f:viewParam name="p" value="#{tLoginLogoutSession.loginPasswort}" />
+        <f:viewParam name="la" value="#{tSessionVerwaltung.linkArt}" />
+        <f:viewParam name="bestaetigungscode" value="#{tSessionVerwaltung.bestaetigungsCode}" />
+    </f:metadata>
+
+    <h:body onunload="browserSchliessen();" class="mt-lg-5 pb-5">
+        <ui:include src="/WEB-INF/nextgen/modals/modal-loading-new.xhtml" />
+        <!-- === Benötigte Portalkonfigurationen === -->
+
+        <!-- Abfrage beim schliessen des Browsers (Wenn ja: Logout wird ausgeführt) -->
+        <p:remoteCommand name="browserSchliessen" id="browserSchliessen" action="#{tLoginLogout.doBrowserSchliessen}" />
+
+        <!-- Falls Javascript im Browser deaktiviert ist -->
+        <noscript>
+            <p>
+                In Ihrer Browser-Konfiguration ist JavaScript deaktiviert. In dieser
+                Konfiguration sind wesentliche Teile dieses Portals nicht
+                funktionsfähig.
+            </p>
+            <p>
+                Bitte aktivieren Sie JavaScript,
+                bevor Sie weiterarbeiten.
+            </p>
+        </noscript>
+
+        <!-- id=headerform zwingend erforderlich als Ajax-Renderpunkt -->
+        <h:form id="headerform">
+            <section id="header">
+                <div class="container-fluid">
+                    <div class="row d-lg-none">
+                        <div class="col-12 text-end d-lg-none pe-4">
+                            <h:panelGroup rendered="#{tRender.portalMehrsprachig()==true}">
+                                <i id="popover-lang-btn" data-bs-toggle="popover" data-bs-placement="bottom"
+                                    data-bs-content="" class="btn fa-solid fa-globe fs-1 mt-2"></i>
+                                <ui:include src="/WEB-INF/nextgen/popovers/popover-lang.xhtml" />
+                            </h:panelGroup>
+                            <h:commandLink id="buttonEinstellungenAngebotenOben" action="#{tAuswahl.doEinstellungen}"
+                                styleClass="btn btn-primary mt-2 py-2 fs-1" rendered="#{tSession.userEingeloggt > 0}">
+                                <f:ajax execute="@all" render="inhaltsform"
+                                    onevent="function(data) {nachAjaxButton(data, true, false, 'mainInhaltModal', null, true)}" />
+                                <i class="fa-solid fa-user"></i>
+                            </h:commandLink>
+                            <h:commandLink id="btnHeaderLogoutOben" action="#{tLoginLogout.doLogout}"
+                                onclick="setLogoutButtonClicked()" styleClass="btn btn-danger mt-2 ms-3 py-2 fs-1"
+                                rendered="#{tSeitensteuerungSession.logoutNormalAnzeigen}">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </h:commandLink>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-12 col-lg-8 text-center text-lg-start">
+                            <!-- Als value wird nur ein Dummy angegeben. Welches Logo tatsächlich angezeigt wird, wird in der Bean TImageServlet.java über Parameter gesteuert bzw. aus Datei ausgelesen -->
+                            <h:graphicImage value="/images/dummy.png" alt="Logo" width="#{eclParamM.logoBreite}" />
+                            <br class="d-lg-none" />
+                            <h1 class="h1 mx-lg-3 align-middle d-lg-none d-xxl-inline mt-4"></h1>
+                            <h1 class="h3 mx-lg-3 align-middle d-none d-lg-inline d-xl-none"></h1>
+                            <h1 class="h2 mx-lg-3 align-middle d-none d-xl-inline d-xxl-none"></h1>
+                        </div>
+                        <div class="col-4 text-end d-none d-lg-block">
+                            <h:panelGroup rendered="#{tRender.portalMehrsprachig()==true}">
+                                <i id="popover-lang-btn-01" data-bs-toggle="popover" data-bs-placement="bottom"
+                                    data-bs-content="" class="btn fa-solid fa-globe fs-3 mt-2"></i>
+                                <ui:include src="/WEB-INF/nextgen/popovers/popover-lang-01.xhtml" />
+                            </h:panelGroup>
+                            <h:commandLink id="buttonEinstellungenAngeboten" action="#{tAuswahl.doEinstellungen}"
+                                styleClass="btn btn-primary mt-2 py-2" rendered="#{tSession.viewnummer != 101 and 
+                                    tSession.viewnummer != 83 and 
+                                    tSession.viewnummer != 75 and 
+                                    tSession.viewnummer != 76 and 
+                                    tSession.viewnummer != 77 and 
+                                    tSession.viewnummer != 78}">
+                                <f:ajax execute="@all" render="inhaltsform"
+                                    onevent="function(data) {nachAjaxButton(data, true, false, 'mainInhaltModal', null, true)}" />
+                                <i class="fa-solid fa-user"></i>
+                            </h:commandLink>
+                            <h:commandLink id="btnHeaderLogout" action="#{tLoginLogout.doLogout}"
+                                onclick="setLogoutButtonClicked()" styleClass="btn btn-danger mt-2 ms-3 py-2"
+                                rendered="#{tSeitensteuerungSession.logoutNormalAnzeigen}">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </h:commandLink>
+                        </div>
+                    </div>
+                    <h:panelGroup rendered="#{tSession.viewnummer == 101 or 
+                        tSession.viewnummer == 83 or 
+                        tSession.viewnummer == 75 or 
+                        tSession.viewnummer == 76 or 
+                        tSession.viewnummer == 77 or 
+                        tSession.viewnummer == 78}">
+                        <div class="row">
+                            <div class="col-7 d-none d-lg-block">
+                            </div>
+                            <div class="col-12 col-lg-5 text-center">
+                                <p class="pt-3 px-3 px-lg-0">
+                                    <h:outputText value="#{eclPortalTexteM.holeText('3')}" escape="false" />
+                                </p>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{tSession.viewnummer != 101 and 
+                        tSession.viewnummer != 83 and 
+                        tSession.viewnummer != 75 and 
+                        tSession.viewnummer != 76 and 
+                        tSession.viewnummer != 77 and 
+                        tSession.viewnummer != 78}">
+                        <script>
+                            hideHeader();
+                        </script>
+                    </h:panelGroup>
+                </div>
+            </section>
+        </h:form>
+
+
+        <!-- id=streamform zwingend erforderlich als Ajax-Renderpunkt -->
+        <h:form id="streamform">
+            <ui:include src="/WEB-INF/nextgen/hStream.xhtml" />
+        </h:form>
+        <!-- id=konferenzform zwingend erforderlich als Ajax-Renderpunkt -->
+        <h:form id="konferenzform">
+            <ui:include src="/WEB-INF/nextgen/hKonferenz.xhtml" />
+        </h:form>
+        <!-- id=inhaltsform zwingend erforderlich als Ajax-Renderpunkt -->
+        <h:form id="inhaltsform">
+            <ui:include src="/WEB-INF/nextgen/hInhaltModals.xhtml" />
+        </h:form>
+        <f:subview id="idInfoModalResponse">
+            <ui:include src="/WEB-INF/nextgen/modals/modal-info-response.xhtml" />
+        </f:subview>
+        <!-- id=footerform zwingend erforderlich als Ajax-Renderpunkt -->
+        <h:form id="footerform">
+            <script>
+                setJahr();
+            </script>
+            <ui:include src="/WEB-INF/nextgen/hFooter.xhtml" />
+        </h:form>
+
+        <ui:include src="/WEB-INF/nextgen/modals/modal-info-response.xhtml" />
+
+        <!-- === CookieHint === -->
+        <h:panelGroup rendered="#{eclParamM.cookieHinweis==1}">
+            <f:subview id="idCookieHint">
+                <ui:include src="/WEB-INF/nextgen/idetail/idCookieHint.xhtml" />
+            </f:subview>
+        </h:panelGroup>
+    </h:body>
+</f:view>
+
+</html>

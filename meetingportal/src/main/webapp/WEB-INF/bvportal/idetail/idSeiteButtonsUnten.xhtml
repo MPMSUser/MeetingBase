@@ -1,0 +1,80 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:p="http://primefaces.org/ui"
+        lang="de">
+
+<head>
+    <title>Logout-Buttons</title>
+</head>
+
+<body>
+    <ui:composition>
+        <!-- Varianten siehe TSeitensteuerung.java -->
+        <section id="button-unten-bereich">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-1_3">
+                        <h:commandButton value="#{tSeitensteuerung.holeTextLinkerButton()}" id="buttonUntenLeft" action="#{tSeitensteuerung.doLinkerButton()}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.linkenButtonAnzeigen==true}">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </div>
+                    <div class="col-1_3">
+                        <h:panelGroup rendered="#{tRender.logoutObenOderUnten()==2 and tSeitensteuerungSession.logoutAnzeigen==true}">
+
+                            <!-- Button, wenn beim Logout Portal verlassen werden soll -->
+                            <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonUntenCenter1" action="#{tLoginLogout.doLogoutVerlassen()}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.logoutSeiteVerlassenAnzeigen}">
+                            </h:commandButton>
+
+                            <!-- Button, wenn beim Logout zur Login-Seite zurückgekehrt wird -->
+                            <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonUntenCenter2" action="#{tLoginLogout.doLogout}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.logoutNormalAnzeigen}">
+                            </h:commandButton>
+
+                            <!-- Button, wenn auf Login-Seite zur Aufrufseite angezeigt werden soll -->
+                            <h:commandButton value="#{eclPortalTexteM.holeText('859')}" id="buttonUntenCenter3" action="#{tLoginLogout.doBeenden()}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.endeButtonAnzeigen}">
+                            </h:commandButton>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{tRender.logoutObenOderUnten()==1 or tSeitensteuerungSession.logoutAnzeigen==false}">
+                        </h:panelGroup>
+                    </div>
+
+                    <div class="col-1_3">
+                        <h:panelGroup rendered="#{tSeitensteuerungSession.rechtenButtonAnzeigen==true}">
+                            <h:commandButton value="#{tSeitensteuerung.holeTextRechterButton()}" id="buttonUntenRight1" action="#{tSeitensteuerung.doRechterButton()}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.rechterButtonRenderKomplett==true}">
+                                <f:ajax execute="@all" render="headerform inhaltsform streamform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                            <h:commandButton value="#{tSeitensteuerung.holeTextRechterButton()}" id="buttonUntenRight2" action="#{tSeitensteuerung.doRechterButton()}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.rechterButtonRenderKomplett==false}">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                        </h:panelGroup>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ui:composition>
+</body>
+
+</html>

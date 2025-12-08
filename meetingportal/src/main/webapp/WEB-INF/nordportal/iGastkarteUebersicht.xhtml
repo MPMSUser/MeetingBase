@@ -1,0 +1,172 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+	xmlns:h="jakarta.faces.html" lang="de">
+
+
+	<f:subview id="iGastkarteUebersichtOben">
+		<ui:include src="idetail/idSeiteStart.xhtml" />
+	</f:subview>
+
+
+	<div class="container-80">
+
+		<!-- Starttext - weitere Gastkarten ausstellen möglich -->
+		<h:panelGroup
+			rendered="#{tGaesteSession.veraendernIstZulaessig==true and tGaesteSession.neuerGastZulaessig==true}">
+			<h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(2263)}">
+				<p>
+					<h:outputText value="#{eclPortalTexteM.holeIText(2263)}" escape="false" />
+
+				</p>
+			</h:panelGroup>
+		</h:panelGroup>
+		<!-- Starttext - grundsätzlich noch Veränderungen möglich, aber Limit erreicht -->
+		<h:panelGroup
+			rendered="#{tGaesteSession.veraendernIstZulaessig==true and tGaesteSession.neuerGastZulaessig==false}">
+			<h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(2264)}">
+				<p>
+					<h:outputText value="#{eclPortalTexteM.holeIText(2264)}" escape="false" />
+
+				</p>
+			</h:panelGroup>
+		</h:panelGroup>
+		<!-- Starttext - keine Veränderungen mehr möglich, nur noch Anzeige -->
+		<h:panelGroup rendered="#{tGaesteSession.veraendernIstZulaessig==false}">
+			<h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(2265)}">
+				<p>
+					<h:outputText value="#{eclPortalTexteM.holeIText(2265)}" escape="false" />
+
+				</p>
+			</h:panelGroup>
+		</h:panelGroup>
+
+
+
+		<h:panelGroup rendered="#{tGaesteSession.liefereAnzahlGaesteInsgesamt()>0}">
+			<ui:repeat value="#{tGaesteSession.gastkartenListe}" var="gast">
+				<div class="row">
+					<div class="col-6">
+						<p>
+							<h:outputText value="#{gast.zutrittsIdent}" escape="true" />
+							<br />
+							<h:outputText value="#{gast.name}" escape="true" />
+							<br />
+							<h:outputText value="#{gast.vorname}" escape="true" />
+							<br />
+							<h:outputText value="#{gast.ort}" escape="true" />
+							<br />
+							<h:outputText value="#{gast.mailAdresse}" escape="true" />
+							<br />
+						</p>
+					</div>
+					<div class="col-2">
+						<h:panelGroup rendered="#{gast.verwendung gt 0}" styleClass="btn-w-100">
+							<div>
+								<h:commandButton value="#{eclPortalTexteM.holeIText(2288)}"
+									action="#{tGaeste.doPDF(gast)}" onclick="this.form.target='_blank'"
+									styleClass="btn-typ-00">
+								</h:commandButton>
+							</div>
+							<h:panelGroup rendered="#{gast.liefereMailAdresseIstVorhanden()}">
+								<div>
+									<br />
+									<h:commandButton value="#{eclPortalTexteM.holeIText(2289)}"
+										action="#{tGaeste.doMail(gast)}" styleClass="btn-typ-00"
+										rendered="#{gast.liefereMailAdresseIstVorhanden()}">
+										<f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+									</h:commandButton>
+								</div>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{tGaesteSession.veraendernIstZulaessig}">
+								<div>
+									<br />
+									<h:commandButton value="#{eclPortalTexteM.holeIText(2290)}"
+										action="#{tGaeste.doStornieren(gast)}" styleClass="btn-typ-00"
+										rendered="#{tGaesteSession.veraendernIstZulaessig}">
+										<f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+									</h:commandButton>
+								</div>
+							</h:panelGroup>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{gast.verwendung lt 0}">
+							<h:outputText value="#{eclPortalTexteM.holeIText(2291)}" escape="true" />
+						</h:panelGroup>
+					</div>
+				</div>
+			</ui:repeat>
+		</h:panelGroup>
+
+
+
+
+
+
+		<div class="row">
+			<!-- 
+            <div class="col-3">
+                <h:outputLabel value="#{eclPortalTexteM.holeIText(2166)}" escape="false" />
+            </div>
+            <div class="col-5">
+                <h:inputText value="#{tZuordnungSession.kennung}" maxlength="20" size="20" />
+            </div>
+            <div class="col-3">
+                <h:outputLabel value="#{eclPortalTexteM.holeIText(2167)}" escape="false" />
+            </div>
+            <div class="col-5">
+                <h:inputSecret value="#{tZuordnungSession.passwort}" maxlength="200" size="30" autocomplete="off"
+                    styleClass="txtLogin" />
+            </div>
+            <div class="col-8">
+            </div>
+            
+            -->
+
+			<!-- Text und button - weitere Gastkarten ausstellen möglich -->
+			<h:panelGroup
+				rendered="#{tGaesteSession.veraendernIstZulaessig==true and tGaesteSession.neuerGastZulaessig==true}">
+				<div class="col-8 btn-w-100">
+					<h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2267')}">
+						<p>
+							<h:outputText value="#{eclPortalTexteM.holeText('2267')}" escape="false" />
+
+						</p>
+					</h:panelGroup>
+					<p>
+						<h:commandButton value="#{eclPortalTexteM.holeText('2268')}" id="buttonNeueGastkarte"
+							action="#{tGaeste.doNeueGastkarte()}" styleClass="btn-typ-00">
+							<f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+						</h:commandButton>
+					</p>
+				</div>
+			</h:panelGroup>
+
+
+
+			<!-- Endetext immer -->
+			<h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(2266)}">
+				<p>
+					<h:outputText value="#{eclPortalTexteM.holeIText(2266)}" escape="false" />
+
+				</p>
+			</h:panelGroup>
+		</div>
+	</div>
+	<f:subview id="iGastkarteUebersichtButtons">
+		<ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+	</f:subview>
+
+</ui:composition>

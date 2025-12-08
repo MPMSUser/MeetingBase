@@ -1,0 +1,650 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <f:subview id="iAuswahl1GeneralversammlungBriefwahlOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+
+
+    <!-- Generalversammlungsfunktionen noch nicht möglich -->
+    <h:panelGroup rendered="#{!tAuswahl1Session.generalversammlungBriefwahlMoeglich}">
+        <div class="container-80">
+            <div class="row">
+                <div class="col-8  btn-w-100">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1970')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1970')}" escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+    </h:panelGroup>
+
+    <!-- +++++++++++++++++++++ Generelversammlung generell möglich +++++++++++++++++++++++ -->
+    <h:panelGroup rendered="#{tAuswahl1Session.generalversammlungBriefwahlMoeglich}">
+        <div class="container-80">
+            <!-- kein eigener Bestand vorhanden -->
+            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.eigenerAREintragVorhanden==false}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1971')}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('1971')}" escape="false"></h:outputText>
+
+                    </p>
+                </h:panelGroup>
+            </h:panelGroup>
+
+
+
+            <!-- eigener Bestand vorhanden, d.h. Anmeldung und Vollmacht und Briefwahl möglich -->
+            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.eigenerAREintragVorhanden==true}">
+
+                <!-- +++++++++Briefwahl möglich +++++ -->
+                <h:panelGroup rendered="#{tSession.portalBriefwahlIstMoeglich==true}">
+
+                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereGattungMitglied()==2}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1104')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1104')}" escape="false" />
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereGattungMitglied()==3}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1105')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1105')}" escape="false" />
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+
+                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereGattungMitglied()==1}">
+
+
+                        <!-- Briefwahl bereits durch Bevollmächtigten erteilt -->
+                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereBriefwahlDurchAndereErteilt()==true}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1021')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1021')}" escape="false">
+                                    </h:outputText>
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <h:panelGroup
+                            rendered="#{eclBesitzGesamtAuswahl1M.liefereBriefwahlDurchAndereErteilt()==false}">
+                            <!-- Briefwahl noch nicht durch Bevollmächtigten erteilt -->
+
+                            <!-- Starttext -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('571')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('571')}" escape="false">
+                                    </h:outputText>
+
+                                </p>
+                            </h:panelGroup>
+                            <!-- Briefwahl noch nicht erteilt -->
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereBriefwahlNeuMoeglich()}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('572')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('572')}" escape="false">
+                                        </h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                                <!--Bttuon Briefwahl erteilen (Erstmalig) -->
+                                <p>
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('573')}"
+                                        action="#{tGeneralversammlung.doBriefwahlErteilen()}" styleClass="btn-typ-00"
+                                        id="i111btnbriefwahl1">
+                                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+
+                                </p>
+
+                            </h:panelGroup>
+                            <!-- Briefwahl bereits erteilt -->
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereBriefwahlNeuMoeglich()==false}">
+
+                                <!-- falls minderjähriger etc: Formulare anzeigen, falls noch keine Vollmacht eingegangen -->
+								<h:panelGroup
+									rendered="#{eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich==false and !eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragen}">
+									
+									<!-- Starttext -->
+									<h:panelGroup
+										rendered="#{eclPortalTexteM.pruefeTextVorhanden('1102')}">
+										<p>
+											<h:outputText value="#{eclPortalTexteM.holeText('1102')}"
+												escape="false">
+											</h:outputText>
+
+										</p>
+									</h:panelGroup>
+
+										<!-- Text, falls noch kein gesetzlicher Vertreter bekannt -->
+												<!-- Fall 1 - nichts (absolut nichts) elektronisch hochgeladen (also quasi wie bisher) -->
+												<h:panelGroup
+													rendered="#{eclBesitzGesamtAuswahl1M.ungepruefteGesetzlVertreterVorhanden==false and eclBesitzGesamtAuswahl1M.ungepruefteNachweiseVorhanden==false}">
+													<h:panelGroup
+														rendered="#{eclPortalTexteM.pruefeTextVorhanden('2374')}">
+														<p>
+															<h:outputText value="#{eclPortalTexteM.holeText('2374')}"
+																escape="false"></h:outputText>
+
+														</p>
+													</h:panelGroup>
+												</h:panelGroup>
+
+												<!-- Fall 2 - Gesetzl. hochgeladen, aber noch nicht geprüft -->
+												<h:panelGroup
+													rendered="#{eclBesitzGesamtAuswahl1M.ungepruefteGesetzlVertreterVorhanden==true}">
+													<h:panelGroup
+														rendered="#{eclPortalTexteM.pruefeTextVorhanden('2379')}">
+														<p>
+															<h:outputText value="#{eclPortalTexteM.holeText('2379')}"
+																escape="false"></h:outputText>
+
+														</p>
+													</h:panelGroup>
+												</h:panelGroup>
+
+												<!-- Fall 3 - weitere Sachen Digital übermittelt, aber noch nicht geprüft -->
+												<h:panelGroup
+													rendered="#{eclBesitzGesamtAuswahl1M.ungepruefteGesetzlVertreterVorhanden==false and
+														eclBesitzGesamtAuswahl1M.ungepruefteNachweiseVorhanden==true}">
+													<h:panelGroup
+														rendered="#{eclPortalTexteM.pruefeTextVorhanden('2380')}">
+														<p>
+															<h:outputText value="#{eclPortalTexteM.holeText('2380')}"
+																escape="false"></h:outputText>
+
+														</p>
+													</h:panelGroup>
+												</h:panelGroup>
+
+
+									<!-- gesetzlicher Vertreter ist einzugeben -->
+									<f:subview
+										id="iGvAuswahl1GeneralversammlungBriefwahlGesetzlicherVertreter">
+										<ui:include src="idetail/idVVGesetzlicherVertreter.xhtml" />
+									</f:subview>
+
+									<hr class="sperator-line" />
+
+									<!-- Hier Hochladebereich einfügen. -->
+
+									<!-- Filesize input -->
+									<div class="resumable-error error">#{eclPortalTexteM.getFehlertext('-100166')}</div>
+									<div class="resumable-drop">
+										Dateiauswahl per Drag &amp; Drop oder <a
+											class="resumable-browse"> <u>Datei auswählen</u>
+										</a>
+									</div>
+
+									<ul class="resumable-list">
+									</ul>
+
+									<script>
+										var fileTypesArray = ".pdf;.jpg;.jpeg;.tiff;.png;.tif".split(";");
+										fileSizeMax = 1024 * 1024 * 1024;
+										var fileAnzahlMax = 1;
+										var fehlerZuVieleDateien = "#{eclPortalTexteM.getFehlertext('-100165')}";
+										var fehlerDateiZuGross = "#{eclPortalTexteM.getFehlertext('-100159')}";
+										var fehlerFalscherDateityp = "#{eclPortalTexteM.getFehlertext('-100161')}";
+										mode = 1;
+										loadUpload(1);
+									</script>
+
+
+
+									<div style="display: none;">
+										<h:commandButton id="btnAbschickenUploadBriefwahl"
+											action="#{tGeneralversammlung.doAbschickenUploadBriefwahl()}"
+											styleClass="btn-typ-00" value="Upload">
+											<f:ajax execute=" @all " render="@form "
+												onevent="nachAjaxButtonCheckFileUpload" />
+										</h:commandButton>
+									</div>
+
+									<!-- hochgeladene Dokumente anzeigen -->
+
+									<!-- Hochgeladene Dateien anzeigen -->
+									<h:panelGroup
+										rendered="#{eclBesitzGesamtAuswahl1M.listeNachweiseIstLeer==false}">
+										<h:panelGroup
+											rendered="#{eclPortalTexteM.pruefeTextVorhanden('2344')}">
+											<p>
+												<h:outputText value="#{eclPortalTexteM.holeText('2344')}"
+													escape="false" />
+											</p>
+										</h:panelGroup>
+
+										<ui:repeat value="#{eclBesitzGesamtAuswahl1M.listeNachweise}"
+											var="nachweis" id="schleifeNachweiseBriefwahl">
+											<div class="row">
+												<div class="col-1">
+													<h:outputText value="#{nachweis.vertreterZusatz}" />
+												</div>
+											</div>
+										</ui:repeat>
+
+
+									</h:panelGroup>
+									<hr class="sperator-line" />
+									
+
+
+									<h:panelGroup
+										rendered="#{eclBesitzGesamtAuswahl1M.gruppenTextVollmachtsButtonAnzeigen}">
+										<!-- Button Formular Gesetzliche -->
+										<p>
+											<h:commandButton
+												value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVollmachtsButton)}"
+												action="#{tGeneralversammlung.doVollmachtsformularNrBriefwahl()}"
+												styleClass="btn-typ-00" onclick="this.form.target='_blank'">
+											</h:commandButton>
+										</p>
+									</h:panelGroup>
+
+									<!-- Button Formular Gesetzliche -->
+									<!-- 
+                                        <p>
+                                            <h:commandButton value="#{eclPortalTexteM.holeText('1007')}" action="#{tGeneralversammlung.doVollmachtGesetzlichformular()}" styleClass="btn-typ-00" onclick="this.form.target='_blank'">
+                                            </h:commandButton>
+
+                                        </p>
+                                        -->
+
+									<!-- Button Formular Elternvollmacht -->
+									<!-- 
+                                        <p>
+                                            <h:commandButton value="#{eclPortalTexteM.holeText('1094')}" action="#{tGeneralversammlung.doVollmachtElternformular()}" styleClass="btn-typ-00" onclick="this.form.target='_blank'">
+                                            </h:commandButton>
+
+                                        </p>
+                                        -->
+
+									<!-- Ende -->
+									<h:panelGroup
+										rendered="#{eclPortalTexteM.pruefeTextVorhanden('1103')}">
+										<p>
+											<h:outputText value="#{eclPortalTexteM.holeText('1103')}"
+												escape="false">
+											</h:outputText>
+
+										</p>
+									</h:panelGroup>
+
+								</h:panelGroup>
+
+								<!--Bttuon Briefwahl ändern -->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('575')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('575')}" escape="false">
+                                        </h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                                <p>
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('576')}"
+                                        action="#{tGeneralversammlung.doBriefwahlAendern()}" styleClass="btn-typ-00"
+                                        id="i111btnbriefwahl2">
+                                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+
+                                </p>
+                                <!--Button Briefwahl stornieren -->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('577')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('577')}" escape="false">
+                                        </h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                                <p>
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('578')}"
+                                        action="#{tGeneralversammlung.doBriefwahlStornieren()}" styleClass="btn-typ-00"
+                                        id="i111btnbriefwahl3">
+                                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                </p>
+
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!-- ++++Briefwahl nichtmöglich ++++ -->
+                <h:panelGroup rendered="#{tSession.portalBriefwahlIstMoeglich==false}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('710')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('710')}" escape="false"></h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+
+            </h:panelGroup>
+            <!-- Ende von Anmeldung möglich weil eigener Bestand -->
+
+
+
+            <!-- Gast, der aber keine Vollmachten mehr hat -->
+            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.erhalteneVollmachtenVorhanden==false and
+				(eclLoginDatenM.liefereKennungArt()==2)}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1101')}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('1101')}" escape="false"></h:outputText>
+
+                    </p>
+                </h:panelGroup>
+            </h:panelGroup>
+
+            <!-- fremder Bestand vorhanden, d.h. Anzeige und ggf. Briefwahl ermöglichen -->
+            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.erhalteneVollmachtenVorhanden==true}">
+                <section class="bereits-angemeldet-bereich">
+                    <!-- Starttext -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('997')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('997')}" escape="false"></h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+                    <!-- Text, wenn Briefwahl noch möglich (grundsätzlich) -->
+                    <h:panelGroup rendered="#{tSession.portalBriefwahlIstMoeglich==true}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('998')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('998')}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <!-- Liste der erhaltenen Vollmachten -->
+                    <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereVollmachtsListe()}" var="erhalteneVollmachten">
+                        <div class="row">
+                            <div class="col-3">
+                                <p>
+                                    <h:outputText
+                                        value="#{eclPortalTexteM.holeText('1001')}#{erhalteneVollmachten.aktionaersnummerFuerAnzeige}"
+                                        escape="false"></h:outputText>
+                                    <br />
+                                    <h:outputText value="#{erhalteneVollmachten.aktionaerTitelVornameName}"
+                                        escape="false"></h:outputText>
+                                    <br />
+                                    <h:outputText value="#{erhalteneVollmachten.aktionaerOrt}" escape="false">
+                                    </h:outputText>
+                                    <br />
+                                    <!-- normale Vollmacht -->
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1019')}" escape="false"
+                                        rendered="#{erhalteneVollmachten.vollmachtsart==0}"></h:outputText>
+                                    <br />
+                                    <!-- gesetzliche Vollmacht -->
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1020')}" escape="false"
+                                        rendered="#{erhalteneVollmachten.vollmachtsart==1}"></h:outputText>
+                                    <h:panelGroup
+                                        rendered="#{tRender.stimmenAnzeigen()  and (erhalteneVollmachten.gattung==1)}">
+                                        <br />
+                                        <h:outputText value="#{eclPortalTexteM.holeText('21')}" escape="false" />
+                                        <br />
+                                        <h:outputLabel value="#{erhalteneVollmachten.aktionaerStimmenDE}"
+                                            rendered="#{tLanguage.lang == 1}" />
+                                        <h:outputLabel value="#{erhalteneVollmachten.aktionaerStimmenEN}"
+                                            rendered="#{tLanguage.lang == 2}"></h:outputLabel>
+                                        <br />
+                                        <h:outputText value="#{eclPortalTexteM.holeText('22')}" escape="false">
+                                        </h:outputText>
+                                    </h:panelGroup>
+                                </p>
+                            </div>
+                            <div class="col-5">
+                                <!-- Briefwahl? -->
+                                <h:panelGroup rendered="#{tSession.portalBriefwahlIstMoeglich==true}">
+                                    <!-- Briefwahl durch andere erteilt -->
+                                    <h:panelGroup
+                                        rendered="#{erhalteneVollmachten.bereitsErteiltWeisungBriefwahlAllgemeinDurchAndere==true}">
+                                        <h:panelGroup
+                                            rendered="#{erhalteneVollmachten.bereitsErteiltBriefwahlDurchAktionär==true}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1022')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1022')}"
+                                                        escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+                                            <h:commandButton value="#{eclPortalTexteM.holeText('1095')}"
+                                                action="#{tGeneralversammlung.doBriefwahlStornierenMitgliedDurchBevollmaechtigter(erhalteneVollmachten)}"
+                                                styleClass="btn-typ-00">
+                                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                            </h:commandButton>
+                                        </h:panelGroup>
+                                        <h:panelGroup
+                                            rendered="#{erhalteneVollmachten.bereitsErteiltBriefwahlDurchVertreter==true}">
+                                            <h:panelGroup
+                                                rendered="#{erhalteneVollmachten.bereitsErteiltBriefwahlDurchVertreter==true}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1023')}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1023')}"
+                                                            escape="false"></h:outputText>
+
+                                                    </p>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <!-- Briefwahl durch eingeloggte Person erteilt -->
+                                    <h:panelGroup
+                                        rendered="#{erhalteneVollmachten.bereitsErteiltWeisungBriefwahlAllgemeinDurchAndere==false}">
+                                        <h:panelGroup rendered="#{erhalteneVollmachten.anzPersBriefwahl==0}">
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('1000')}"
+                                                    action="#{tGeneralversammlung.doBriefwahlBevollmaechtigter(erhalteneVollmachten)}"
+                                                    styleClass="btn-typ-00"
+                                                    rendered="#{erhalteneVollmachten.gattung==1}">
+                                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+                                                <h:panelGroup rendered="#{erhalteneVollmachten.gattung==2}">
+                                                    <h:panelGroup
+                                                        rendered="#{eclPortalTexteM.pruefeTextVorhanden('1104')}">
+                                                        <p>
+                                                            <h:outputText value="#{eclPortalTexteM.holeText('1104')}"
+                                                                escape="false" />
+
+                                                        </p>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
+                                                <h:panelGroup rendered="#{erhalteneVollmachten.gattung==3}">
+                                                    <h:panelGroup
+                                                        rendered="#{eclPortalTexteM.pruefeTextVorhanden('1105')}">
+                                                        <p>
+                                                            <h:outputText value="#{eclPortalTexteM.holeText('1105')}"
+                                                                escape="false" />
+
+                                                        </p>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
+                                            </p>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{erhalteneVollmachten.anzPersBriefwahl>0}">
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('1024')}"
+                                                    action="#{tGeneralversammlung.doBriefwahlAendernBevollmaechtigter(erhalteneVollmachten)}"
+                                                    styleClass="btn-typ-00">
+                                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+                                            </p>
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('1025')}"
+                                                    action="#{tGeneralversammlung.doBriefwahlStornierenBevollmaechtigter(erhalteneVollmachten)}"
+                                                    styleClass="btn-typ-00">
+                                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                    <!-- Endetext -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('999')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('999')}" escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+                </section>
+            </h:panelGroup>
+            <!-- Ende fremder Bestand -->
+
+            <!-- geerbte von gesetzlichen Vollmachten, d.h. Anzeige und ggf. Briefwahl ermöglichen -->
+            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vererbteVollmachtenVorhanden==true}">
+                <section class="bereits-angemeldet-bereich">
+                    <!-- Starttext -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1016')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1016')}" escape="false"></h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+                    <!-- Text, wenn Briefwahl noch möglich (grundsätzlich) -->
+                    <h:panelGroup rendered="#{tSession.portalBriefwahlIstMoeglich==true}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1017')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1017')}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <!-- Liste der erhaltenen Vollmachten -->
+                    <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereVererbteVollmachtsListe()}"
+                        var="erhalteneVollmachten">
+                        <div class="row">
+                            <div class="col-3">
+                                <p>
+                                    <h:outputText
+                                        value="#{eclPortalTexteM.holeText('1001')}#{erhalteneVollmachten.aktionaersnummerFuerAnzeige}"
+                                        escape="false"></h:outputText>
+                                    <br />
+                                    <h:outputText value="#{erhalteneVollmachten.aktionaerTitelVornameName}"
+                                        escape="false"></h:outputText>
+                                    <br />
+                                    <h:outputText value="#{erhalteneVollmachten.aktionaerOrt}" escape="false">
+                                    </h:outputText>
+
+                                </p>
+                            </div>
+                            <div class="col-5">
+                                <!-- Briefwahl? -->
+                                <h:panelGroup rendered="#{tSession.portalBriefwahlIstMoeglich==true}">
+                                    <!-- Briefwahl durch andere erteilt -->
+                                    <h:panelGroup
+                                        rendered="#{erhalteneVollmachten.bereitsErteiltWeisungBriefwahlAllgemeinDurchAndere==true}">
+                                        <h:panelGroup
+                                            rendered="#{erhalteneVollmachten.bereitsErteiltBriefwahlDurchAktionär==true}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1022')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1022')}"
+                                                        escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+                                            <h:commandButton value="#{eclPortalTexteM.holeText('1095')}"
+                                                action="#{tGeneralversammlung.doBriefwahlStornierenMitgliedDurchBevollmaechtigter(erhalteneVollmachten)}"
+                                                styleClass="btn-typ-00">
+                                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                            </h:commandButton>
+                                        </h:panelGroup>
+                                        <h:panelGroup
+                                            rendered="#{erhalteneVollmachten.bereitsErteiltBriefwahlDurchVertreter==true}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1023')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1023')}"
+                                                        escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <!-- Briefwahl durch eingeloggte Person erteilt -->
+                                    <h:panelGroup
+                                        rendered="#{erhalteneVollmachten.bereitsErteiltWeisungBriefwahlAllgemeinDurchAndere==false}">
+                                        <h:panelGroup rendered="#{erhalteneVollmachten.anzPersBriefwahl==0}">
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('1000')}"
+                                                    action="#{tGeneralversammlung.doBriefwahlGeerbter(erhalteneVollmachten)}"
+                                                    styleClass="btn-typ-00">
+                                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+                                            </p>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{erhalteneVollmachten.anzPersBriefwahl>0}">
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('1024')}"
+                                                    action="#{tGeneralversammlung.doBriefwahlAendernGeerbter(erhalteneVollmachten)}"
+                                                    styleClass="btn-typ-00">
+                                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('1025')}"
+                                                    action="#{tGeneralversammlung.doBriefwahlStornierenGeerbter(erhalteneVollmachten)}"
+                                                    styleClass="btn-typ-00">
+                                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                    <!-- Endetext -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1018')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1018')}" escape="false"></h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+                </section>
+            </h:panelGroup>
+            <!-- Ende geerbte von gesetzlichen Vollmachten -->
+
+
+            <!-- Endtext -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1972')}">
+                <p>
+                    <h:outputText value="#{eclPortalTexteM.holeText('1972')}" escape="false"></h:outputText>
+
+                </p>
+            </h:panelGroup>
+        </div>
+    </h:panelGroup>
+
+
+
+    <!-- Buttons -->
+    <f:subview id="iAuswahl1GeneralversammlungBriefwahlButtons">
+        <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+    </f:subview>
+
+</ui:composition>

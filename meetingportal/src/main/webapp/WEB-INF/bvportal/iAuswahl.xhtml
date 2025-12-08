@@ -1,0 +1,1203 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough" xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component"
+    xmlns:c="jakarta.tags.core" xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <ui:composition>
+
+        <f:subview id="iauswahlOben">
+            <ui:include src="idetail/idSeiteStart.xhtml" />
+        </f:subview>
+
+        <!-- +++++++++++++++++++++++++HV-Portal ist nicht in Betrieb+++++++++++++++++++++++++++++ -->
+        <section id="portal-nicht-im-bertrieb-bereich">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-8">
+                        <h:panelGroup rendered="#{tSession.hvPortalInBetrieb==false}">
+                            <h:panelGroup rendered="#{tSession.vorDerHVNachDerHV==0}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('478')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('478')}" escape="false">
+                                        </h:outputText>
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{tSession.vorDerHVNachDerHV==1}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('480')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('480')}" escape="false">
+                                        </h:outputText>
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{tSession.vorDerHVNachDerHV==2}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('481')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('481')}" escape="false">
+                                        </h:outputText>
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- +++++++++++++++++++++++++HV-Portal ist in Betrieb+++++++++++++++++++++++++++++ -->
+        <div class="container" id="portal-in-betrieb-bereich">
+            <h:panelGroup rendered="#{tSession.hvPortalInBetrieb==true}">
+                <div class="container-80">
+                    <div class="row">
+                        <div class="col-8">
+                            <!-- Statusangabe zur HV -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2129')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('2129')}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+
+                            <!-- +++++++++++++++++++Startbereich vor Bestandsübersicht++++++++++++++++++++++ -->
+                            <!-- Starttext 1 -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('911')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('911')}" escape="false">
+                                    </h:outputText>
+                                </p>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+
+                    <!-- Falls nicht-angemeldete Bestände vorhanden -->
+                    <h:panelGroup rendered="#{eclBesitzGesamtM.nichtAngemeldeteVorhanden}">
+                        <!-- Anmeldefrist noch aktiv - bitte anmelden -->
+                        <div class="row">
+                            <div class="col-8">
+                                <h:panelGroup rendered="#{tSession.portalErstanmeldungIstMoeglich==true}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('39')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('39')}" escape="false">
+                                            </h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <!-- Anmeldefrist nicht aktiv - Anmeldung nicht mehr möglich -->
+                                <h:panelGroup rendered="#{!tSession.portalErstanmeldungIstMoeglich}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('318')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('318')}" escape="false">
+                                            </h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                    <!-- Text, falls angemeldete vorhanden -->
+                    <h:panelGroup rendered="#{eclBesitzGesamtM.angemeldeteVorhanden==true}">
+                        <div class="row">
+                            <div class="col-8">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('476')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('476')}" escape="false">
+                                        </h:outputText>
+                                    </p>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+
+                    <!-- Starttext 2 -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('910')}">
+                        <div class="row">
+                            <div class="col-8">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('910')}" escape="false">
+                                    </h:outputText>
+                                </p>
+                            </div>
+                        </div>
+                    </h:panelGroup>
+                </div>
+                <!-- +++++++++++++++++++ Bestandsübersicht++++++++++++++++++++++ -->
+
+                <!-- ++++++++++++++Schleife für alle Kennungen usw. ++++++++++++-->
+                <section id="bestandsuebersicht-bereich">
+                    <ui:repeat value="#{eclBesitzGesamtM.besitzJeKennungListe}" style="background-color: cadetblue;" var="besitzJeKennung" id="schleifeBesitzJeKennung">
+                        <section>
+                            <div class="container-80">
+                                <!-- +++++++Kennung anzeigen, wenn mehrere Kennungen zugeordnet +++++-->
+                                <h:panelGroup rendered="#{eclBesitzGesamtM.weitereKennungen==true}">
+                                    <!-- die Kennung ist die eigene Kennung  -->
+                                    <h:panelGroup rendered="#{besitzJeKennung.besitzIstUrsprungVonKennung==true}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1241')}">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <h3>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1241')}" escape="false">
+                                                        </h:outputText>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                    <!-- die Kennung ist eine zugeordnete Kennung  -->
+                                    <h:panelGroup rendered="#{besitzJeKennung.besitzIstUrsprungVonKennung==false}">
+
+                                        <!-- Kennung "Aktienregistereintrag" anzeigen mit Text drum rum -->
+                                        <h:panelGroup rendered="#{besitzJeKennung.kennungsArt==1}">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <h3>
+                                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1230')}">
+                                                            <h:outputText value="#{eclPortalTexteM.holeText('1230')}" escape="false"></h:outputText>
+                                                        </h:panelGroup>
+                                                        <h:outputText value="#{besitzJeKennung.kennungFuerAnzeige}" escape="false">
+                                                        </h:outputText>
+                                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1231')}">
+                                                            <h:outputText value="#{eclPortalTexteM.holeText('1231')}" escape="false"></h:outputText>
+                                                        </h:panelGroup>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </h:panelGroup>
+
+                                        <!-- Kennung "Gast" anzeigen mit Text drum rum -->
+                                        <h:panelGroup rendered="#{besitzJeKennung.kennungsArt==2}">
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <h3>
+                                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1232')}">
+                                                            <h:outputText value="#{eclPortalTexteM.holeText('1232')}" escape="false"></h:outputText>
+                                                        </h:panelGroup>
+                                                        <h:outputText value="#{besitzJeKennung.kennungFuerAnzeige}" escape="false">
+                                                        </h:outputText>
+                                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1233')}">
+                                                            <h:outputText value="#{eclPortalTexteM.holeText('1233')}" escape="false"></h:outputText>
+                                                        </h:panelGroup>
+                                                    </h3>
+                                                </div>
+                                            </div>
+                                        </h:panelGroup>
+
+                                        <!-- Button zur Aufhebung der Zuordnung -->
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1234')}" action="#{tAuswahl.doWeitereWillenserklaerung(besitzJeKennung)}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </h:panelGroup>
+                                </h:panelGroup>
+
+
+                                <!-- Falls vorhanden: Eigene Aktienregistereinträge anzeigen -->
+                                <h:panelGroup rendered="#{besitzJeKennung.eigenerAREintragVorhanden==true}">
+
+                                    <ui:repeat value="#{besitzJeKennung.eigenerAREintragListe}" var="besitzAREintrag" style="background-color: chartreuse" id="schleifeBesitzJeKennungEigenerAREintrag">
+
+                                        <f:subview id="iEigenerAREintrag">
+                                            <ui:include src="idetail/idAuswahlAREintrag.xhtml" />
+                                        </f:subview>
+
+                                        <!-- Falls Gastkartenanforderung über Portal möglich -->
+                                        <!-- Falls  gastKartenGemeldetEigeneAktien>0, dann Gastkartenliste anzeigen -->
+                                        <!-- Falls gastKartenGemeldetEigeneAktien<zulaessigeMaxAnzahl, dann neu-Anforderung möglich -->
+
+                                    </ui:repeat>
+                                </h:panelGroup>
+
+                                <!-- Falls vorhanden: erhaltene Gastkarte anzeigen -->
+
+
+                                <!-- Falls vorhanden: erhaltene Vollmachten anzeigen -->
+                                <h:panelGroup rendered="#{besitzJeKennung.erhalteneVollmachtenVorhanden==true}">
+                                    <section class="bereits-angemeldet-bereich">
+                                        <!-- Starttext Vollmachten an Dritte vorhanden -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1441')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1441')}" escape="false">
+                                                </h:outputText>
+                                            </p>
+                                        </h:panelGroup>
+                                        <br />
+
+                                        <ui:repeat value="#{besitzJeKennung.zugeordneteMeldungenBevollmaechtigtListe}" var="meldung" id="schleifeZugeordneteMeldungenBevollmaechtigtListe">
+                                            <f:subview id="iVollmachtMELDintrag">
+                                                <ui:include src="idetail/idAuswahlMELDEintrag.xhtml" />
+                                            </f:subview>
+                                        </ui:repeat>
+                                    </section>
+
+                                </h:panelGroup>
+
+                                <!-- Falls vorhanden: Insti-Aktienregistereinträge anzeigen -->
+                                <h:panelGroup rendered="#{besitzJeKennung.instiAREintraegeVorhanden==true}">
+
+                                    <ui:repeat value="#{besitzJeKennung.instiAREintraegeListe}" var="besitzAREintrag" style="background-color: chartreuse" id="schleifeBesitzJeKennungInstiAREintrag">
+
+                                        <f:subview id="iInstiAREintrag">
+                                            <ui:include src="idetail/idAuswahlAREintrag.xhtml" />
+                                        </f:subview>
+                                    </ui:repeat>
+                                </h:panelGroup>
+
+                                <!-- Falls vorhanden: Insti-Anmeldungen anzeigen -->
+                                <h:panelGroup rendered="#{besitzJeKennung.instiMeldungenVorhanden==true}">
+                                    <ui:repeat value="#{besitzJeKennung.zugeordneteMeldungenInstiListe}" var="meldung" id="schleifeZugeordneteMeldungenInstiListe">
+                                        <f:subview id="iInstiMELDintrag">
+                                            <ui:include src="idetail/idAuswahlMELDEintrag.xhtml" />
+                                        </f:subview>
+                                    </ui:repeat>
+
+                                </h:panelGroup>
+                            </div>
+                        </section>
+                    </ui:repeat>
+                </section>
+                <!-- Hier die Funktionasufrufe rein, die nur bei HV-Portal im Betrieb möglich sind -->
+
+
+                <!--+++++++++++++++++++++++++ HV-Funktion wird angeboten (nur Text, quasi als Überschrift für Folge-Funktionen)+++++++++++++++++++++++++-->
+                <h:panelGroup rendered="#{tAuswahlSession.hvFunktionWirdAngeboten()}">
+                    <section id="hvfunktion-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1435')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1435')}" escape="false" />
+                                        </p>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+                <!--+++++++++++++++++++++++++ Online-Teilnahme angeboten +++++++++++++++++++++++++-->
+                <h:panelGroup rendered="#{tAuswahlSession.onlineteilnahmeAngeboten}">
+                    <section id="unterlagen-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+
+                                    <!-- Zugang ist möglich -->
+                                    <h:panelGroup rendered="#{eclBesitzGesamtM.kennungIstOnlinePraesent==false}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1053')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1053')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                        <!-- Button nur anbieten, wenn keine automatische Zuschaltung -->
+                                        <h:panelGroup rendered="#{eclParamM.liefereZuschaltungHVAutomatischNachLogin()==false}">
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('1063')}" id="buttonOnlineTeilnahmeAngeboten" action="#{tAuswahl.doTeilnahmeZugang()}" styleClass="btn-typ-00">
+                                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                    <!-- Abgang ist möglich -->
+                                    <h:panelGroup rendered="#{eclBesitzGesamtM.kennungIstOnlinePraesent==true}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2082')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('2082')}" escape="false" />
+                                            </p>
+                                        </h:panelGroup>
+                                        <!-- Button nur anbieten, wenn keine automatische Zuschaltung -->
+                                        <h:panelGroup rendered="#{eclParamM.liefereZuschaltungHVAutomatischNachLogin()==false}">
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('1088')}" action="#{tAuswahl.doTeilnahmeAbgang()}" styleClass="btn-typ-00">
+                                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+
+                <!--+++++++++++++++++++++++++ Streaming wird angeboten +++++++++++++++++++++++++-->
+                <h:panelGroup rendered="#{tAuswahlSession.streamAngeboten}">
+                    <section id="streaming-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('760')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('760')}" escape="false" />
+                                        </p>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{tAuswahlSession.streamAktiv}">
+                                        <!-- Streaming ist gerade aktiv -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('761')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('761')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('762')}" id="buttonStreamingAngeboten" action="#{tAuswahl.doStream}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </p>
+                                    <h:panelGroup rendered="#{tAuswahlSession.streamAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('763')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('763')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+                <!--+++++++++++++++++++++++++ Unterlagen wird angeboten +++++++++++++++++++++++++-->
+                <h:panelGroup rendered="#{tAuswahlSession.unterlagenAngeboten()}">
+                    <section id="unterlagen-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1203')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1203')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1204')}" id="buttonUnterlagenAngeboten" action="#{tAuswahl.doUnterlagen}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+
+                <!-- ++++++++++++++Botschaften (einreichen) ++++++++++++++++++-->
+                <!--Botschaften werden angeboten und sind berechtigt -->
+                <h:panelGroup rendered="#{tAuswahlSession.botschaftenEinreichenAngeboten}">
+                    <section id="botschaftenEinreichen-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1778')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1778')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- Botschaften ist gerade aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.botschaftenEinreichenAktiv}">
+                                        <!-- Text immer -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1779')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1779')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+
+                                        <!-- Text, wenn Berechtigung erst beantragt werden muß -->
+                                        <h:panelGroup rendered="#{tAuswahlSession.botschaftenEinreichenTatsaechlichBerechtigt==false}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1780')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1780')}" escape="false" />
+
+                                                </p>
+                                            </h:panelGroup>
+
+                                            <!-- Text, wenn Berechtigung zur Abgabe tatsächlich vorhanden -->
+                                            <h:panelGroup rendered="#{tAuswahlSession.botschaftenEinreichenTatsaechlichBerechtigt}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1781')}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1781')}" escape="false" />
+
+                                                    </p>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+
+                                    <!-- Botschaften ist gerade nicht aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.botschaftenEinreichenAktiv==false}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1782')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1782')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                    <!-- Button immer verfügbar, wenn Berechtigung zur Abgabe tatsächlich vorhanden -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.botschaftenEinreichenTatsaechlichBerechtigt}">
+                                        <p>
+                                            <h:commandButton value="#{eclPortalTexteM.holeText('1783')}" id="buttonBotschaftenAngeboten" action="#{tAuswahl.doBotschaftenEinreichen}" styleClass="btn-typ-00">
+                                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                            </h:commandButton>
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup rendered="#{tAuswahlSession.botschaftenEinreichenAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1784')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1784')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+
+                <!--+++++++++++++++++++++++++ Botschaften anzeigen wird angeboten +++++++++++++++++++++++++-->
+                <h:panelGroup rendered="#{tAuswahlSession.botschaftenAnzeigeAngeboten}">
+                    <section id="botschaftenAnzeige-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1785')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1785')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1786')}" id="buttonBotschaftenAnzeigenAngeboten" action="#{tAuswahl.doBotschaftenAnzeigen}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+
+
+                <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++Fragen ++++++++++++++++++++++++++++++++++++++++++++-->
+                <!-- Fragen sind angeboten und berechtigt -->
+                <h:panelGroup rendered="#{tAuswahlSession.fragenAngeboten}">
+                    <section id="fragen-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1760')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1760')}" escape="false" />
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- Einleitungstext - wenn Rückfragen nicht angeboten. UB verwenden, da unabhängig davon ob Rückfragen für diesen User zulässig oder nicht -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAngebotenUB==false}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('756')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('756')}" escape="false" />
+                                                <!-- ehemalige Text-Nr. -->
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                    <!-- Einleitungstext - wenn Rückfragen angeboten. UB verwenden, da unabhängig davon ob Rückfragen für diesen User zulässig oder nicht -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAngebotenUB}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1761')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1761')}" escape="false" />
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                    <!-- Fragenstellung ist gerade aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.fragenAktiv}">
+                                        <!-- Text immer -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1762')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1762')}" escape="false" />
+                                            </p>
+                                        </h:panelGroup>
+
+                                        <!-- Text wenn Rückfragen nicht angeboten. UB verwenden, da unabhängig davon ob Rückfragen für diesen User zulässig oder nicht  -->
+                                        <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAngebotenUB==false}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('757')}" escape="false" />
+                                                <!-- ehemalige Text-Nr. -->
+                                            </p>
+                                        </h:panelGroup>
+
+                                        <!-- Text wenn Rückfragen angeboten. UB verwenden, da unabhängig davon ob Rückfragen für diesen User zulässig oder nicht  -->
+                                        <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAngebotenUB}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1763')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1763')}" escape="false" />
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+
+
+                                    </h:panelGroup>
+
+                                    <!-- Fragenstellung ist gerade nicht aktiv -->
+                                    <h:panelGroup rendered="#{!tAuswahlSession.fragenAktiv}">
+                                        <!-- Text immer -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1764')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1764')}" escape="false" />
+                                            </p>
+                                        </h:panelGroup>
+
+                                        <!-- Text wenn Rückfragen nicht angeboten -->
+                                        <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAngebotenUB==false}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1196')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1196')}" escape="false" />
+                                                    <!-- ehemalige Text-Nr. -->
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+
+                                        <!-- Rückfragen werden angeboten -->
+                                        <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAngebotenUB}">
+                                            <!-- Text immer -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1765')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1765')}" escape="false" />
+                                                </p>
+                                            </h:panelGroup>
+                                            <!-- Teilnehmer kann Rückfragen stellen -->
+                                            <h:panelGroup rendered="#{tAuswahlSession.rueckfragenBerechtigt==true}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1766')}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1766')}" escape="false" />
+                                                    </p>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+
+                                            <!-- Teilnehmer kann keine Rückfragen stellen -->
+                                            <h:panelGroup rendered="#{tAuswahlSession.rueckfragenBerechtigt==false}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1767')}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1767')}" escape="false" />
+                                                    </p>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+
+
+                                    </h:panelGroup>
+                                    <!-- Button immer verfügbar - wegen Anzeige der gestellten Fragen -->
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('758')}" id="buttonFragenAngeboten" action="#{tAuswahl.doFragen}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                    </p>
+                                    <h:panelGroup rendered="#{tAuswahlSession.fragenAktiv}">
+                                        <!-- Fragenstellung ist gerade aktiv -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('759')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('759')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+
+
+
+
+                <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++Rückfragen ++++++++++++++++++++++++++++++++++++++++++++-->
+                <!-- Rückfragen Angeboten (unabhängig von Berechtigung), und der Benutzer ist grundsätzlich berechtigt, Rückfragen zu stellen
+                 wenn er vorher Fragen gestellt hat (also wenn die "potentielle MÖglichkeit" dazu besteht) -->
+                <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAngebotenUB and tAuswahlSession.rueckfragenBerechtigtWennGestellt}">
+                    <section id="rueckfragen-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Starttext immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1768')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1768')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+                                    <!-- Rückfragen nicht aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAktivUB==false}">
+                                        <!-- Starttext immer -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1769')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1769')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+
+                                        <!-- Fragen derzeit aktiv -->
+                                        <h:panelGroup rendered="#{tAuswahlSession.fragenAktivUB}">
+                                            <!-- noch keine Fragen gestellt -->
+                                            <h:panelGroup rendered="#{tAuswahlSession.rueckfragenBerechtigt==false}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1770')}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1770')}" escape="false" />
+                                                    </p>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <!-- bereits Fragen gestellt -->
+                                            <h:panelGroup rendered="#{tAuswahlSession.rueckfragenBerechtigt}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1771')}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1771')}" escape="false" />
+                                                    </p>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <!-- Fragen derzeit nicht aktiv -->
+                                        <h:panelGroup rendered="#{tAuswahlSession.fragenAktivUB==false}">
+                                            <!-- noch keine Fragen gestellt -->
+                                            <h:panelGroup rendered="#{tAuswahlSession.rueckfragenBerechtigt==false}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1772')}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1772')}" escape="false" />
+                                                    </p>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                            <!-- bereits Fragen gestellt -->
+                                            <h:panelGroup rendered="#{tAuswahlSession.rueckfragenBerechtigt}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1773')}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1773')}" escape="false" />
+                                                    </p>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                    <!-- Rückfragen aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAktivUB}">
+                                        <!-- noch keine Fragen gestellt -->
+                                        <h:panelGroup rendered="#{tAuswahlSession.rueckfragenBerechtigt==false}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1774')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1774')}" escape="false" />
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <!-- bereits Fragen gestellt -->
+                                        <h:panelGroup rendered="#{tAuswahlSession.rueckfragenBerechtigt}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1775')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1775')}" escape="false" />
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                    <!-- Button immer aktiv, wenn Fragen bereits gestellt und damit Rückfragen möglich (wegen Anzeige gestellter Rückfragen - analog zu Fragen*/-->
+                                    <h:panelGroup rendered="#{tAuswahlSession.rueckfragenBerechtigt}">
+                                        <p>
+                                            <h:commandButton value="#{eclPortalTexteM.holeText('1776')}" id="buttonRueckfragenAngeboten" action="#{tAuswahl.doRueckfragen}" styleClass="btn-typ-00">
+                                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                            </h:commandButton>
+                                        </p>
+                                        <h:panelGroup rendered="#{tAuswahlSession.rueckfragenAktivUB}">
+                                            <!-- Rückfragenstellung ist gerade aktiv -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1777')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1777')}" escape="false" />
+
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+                <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++Wortmeldungen ++++++++++++++++++++++++++++++++++++++++++++-->
+                <!-- Wortmeldungen sind angeboten und berechtigt -->
+                <h:panelGroup rendered="#{tAuswahlSession.wortmeldungenAngeboten}">
+                    <section id="wortmeldungen-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1126')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1126')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- Wortmeldungen ist gerade aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.wortmeldungenAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1127')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1127')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <!-- Button immer verfügbar - wegen Anzeige der gestellten Wortmeldungen und Rednerliste -->
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1128')}" id="buttonWortmeldungenAngeboten" action="#{tAuswahl.doWortmeldungen}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                    <h:panelGroup rendered="#{tAuswahlSession.wortmeldungenAktiv}">
+                                        <!-- Fragenstellung ist gerade aktiv -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1129')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1129')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+                <!-- ++++++++++++++Widersprueche ++++++++++++++++++-->
+                <!--Widersprueche werden angeboten und sind berechtigt -->
+                <h:panelGroup rendered="#{tAuswahlSession.widerspruecheAngeboten}">
+                    <section id="widersprueche-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('764')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('764')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- Widersprueche ist gerade aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.widerspruecheAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('765')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('765')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <!-- Button immer verfügbar - wegen Anzeige der gestellten Widersprüche -->
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('766')}" id="buttonWiderspruecheAngeboten" action="#{tAuswahl.doWidersprueche}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                    <h:panelGroup rendered="#{tAuswahlSession.widerspruecheAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('767')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('767')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+                <!-- ++++++++++++++Anträge ++++++++++++++++++-->
+                <!--Anträge werden angeboten und sind berechtigt -->
+                <h:panelGroup rendered="#{tAuswahlSession.antraegeAngeboten}">
+                    <section id="antraege-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1300')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1300')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- Anträge ist gerade aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.antraegeAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1301')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1301')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <!-- Button immer verfügbar - wegen Anzeige der gestellten Anträge -->
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1302')}" id="buttonAntraegeAngeboten" action="#{tAuswahl.doAntraege}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                    <h:panelGroup rendered="#{tAuswahlSession.antraegeAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1303')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1303')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+                <!-- ++++++++++++++Sonstige Mitteilungen ++++++++++++++++++-->
+                <!--SonstMitteilungen werden angeboten und sind berechtigt -->
+                <h:panelGroup rendered="#{tAuswahlSession.sonstigeMitteilungenAngeboten}">
+                    <section id="sonstmitteilungen-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1296')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1296')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- SonstMitteilungen ist gerade aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.sonstigeMitteilungenAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1297')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1297')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <!-- Button immer verfügbar - wegen Anzeige der gestellten SonstMitteilungen -->
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1298')}" id="buttonSonstigeMitteilungenAngeboten" action="#{tAuswahl.doSonstigeMitteilungen}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                    <h:panelGroup rendered="#{tAuswahlSession.sonstigeMitteilungenAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1299')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1299')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+
+                <!-- ++++++++++++++Teilnehmerverzeichnis ++++++++++++++++++-->
+                <!--Teilnehmerverzeichnis wird angeboten und sind berechtigt -->
+                <h:panelGroup rendered="#{tAuswahlSession.teilnehmerverzeichnisAngeboten}">
+                    <section id="teilnehmerverzeichnis-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('834')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('834')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- Teilnehmerverzeichnis ist gerade aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.teilnehmerverzeichnisAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('835')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('835')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <!-- Button immer verfügbar - wegen Anzeige Teilnehmerverzeichnis -->
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('836')}" id="buttonTeilnehmerverzeichnisAngeboten" action="#{tAuswahl.doTeilnehmerverz()}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('837')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('837')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+                <!-- ++++++++++++++Abstimmungsergebnisse ++++++++++++++++++-->
+                <!--Abstimmungsergebnisse wird angeboten und sind berechtigt -->
+                <h:panelGroup rendered="#{tAuswahlSession.abstimmungsergebnisseAngeboten}">
+                    <section id="abstimmungsergebnisse-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                    <!-- Einleitungstext - immer -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('838')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('838')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- Abstimmungsergebnisse ist gerade aktiv -->
+                                    <h:panelGroup rendered="#{tAuswahlSession.abstimmungsergebnisseAktiv}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('839')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('839')}" escape="false" />
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <!-- Button immer verfügbar - wegen Anzeige Abstimmungsergebnisse -->
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('840')}" id="buttonAbstimmungsergebnisseAngeboten" action="#{tAuswahl.doAbstimmungserg()}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('841')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('841')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </h:panelGroup>
+
+            </h:panelGroup>
+        </div>
+
+
+                          <!-- +++++++++++++++++++++++++++++++++++++++Stimmabgabe ++++++++++++++++++++++-->
+                    <section id="ku310abstimmung-wird-angeboten-bereich">
+                        <div class="container-80">
+                            <div class="row">
+                                <div class="col-8 btn-w-100">
+                                     <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1175')}" id="buttonku310Stimmabgabe" action="#{tStimmabgabeku310.doZurAbstimmung}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+	
+
+
+
+
+        <!-- +++++++++++++++++Hier die Funktionsaufrufe rein, die immer möglich sind, egal ob HV-Portal in Betrieb oder nicht+++++++ -->
+
+
+        <!-- Einstellungen -->
+        <section id="funktionsaufrufe-bereich">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-8 btn-w-100">
+                        <h:panelGroup rendered="#{tRender.auswahlEinstellungen()}">
+                            <p>
+                                <h:commandButton value="#{eclPortalTexteM.holeText('43')}" id="buttonEinstellungenAngeboten" action="#{tAuswahl.doEinstellungen}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                </h:commandButton>
+
+                            </p>
+                        </h:panelGroup>
+
+                        <!-- Überwachung -->
+                        <h:panelGroup rendered="#{tAuswahlSession.monitoringAngeboten}">
+                            <p>
+                                <h:commandButton value="Monitoring" action="#{tAuswahl.doMonitoring}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                        </h:panelGroup>
+
+
+
+
+
+                        <!-- Dokumentation Seitenaufbau-->
+
+                        <!-- Anmelden erforderlich und möglich: Text wird angezeigt, wenn nicht-angemeldete Bestände vorhanden sind und
+        wenn Anmeldephase noch läuft-->
+                        <!-- Anmelden wäre erforderlich, aber nicht mehr möglich: Textg wird angezeigt, wenn nicht-angemeldete Bestände vorhanden sind
+        und Anmeldephase bereits beendet ist -->
+
+
+
+                        <!-- Tabellenbereiche
+
+        Für alle zugeordnete Kennungen:
+            (Anzeigen nur wenn mehrere Kennungen; bei eigener Kennung "Auflösungs-Button" nicht anzeigen)
+            Text
+            Kennungsdaten, d.h. Kennung und Name/Vorname
+            Zuordnung auflösen (nicht bei eigener Kennung)
+
+            Für Aktienregistereinträge:
+                Aktionärsnummer, Aktionärsdaten, Stimmen
+
+                Aktionärsdaten:
+                    Wenn noch nicht angemeldet:
+                    > Text dass noch nicht angemeldet (ähnlich oben)
+                    > Buttons: Anmelden, EK-Buttons, Briefwahl, SRV,
+
+                    Wenn angemeldet: für alle Meldungen:
+                    > Wenn keine Briefwahl etc.: Hinweistext
+                    > Je nach Status: Stornieren / Ändern, oder neu Briefwahl EK etc.
+
+                Gastdaten:
+                    Anzeige aller Gastdaten, mit Storno-Button / Detailanzeige
+                    Wenn noch Ausstellung möglich: Button "neue Gastkarte"
+
+            Für Daten über Vollmacht erhalten
+                Aktionärsnummer, Aktionärsdaten, Stimmen
+                Detailanzeige der erteilten Willenserklärungen (Ticket, Briefwahl etc.) mit jeweils möglichen Buttons wie oben für Meldungen
+
+            Für Insti-Aktienregistereinträge:
+                Wie oben
+            FÜr Insti-Meldungen
+                Wie über Vollmacht erhalten
+        -->
+
+
+
+
+                        <!--  vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv -->
+
+                        <!-- ++++++++++++Text++++++++++++ -->
+
+                        <!-- ++++++++++Text vor Mehrfachbuttons++++++++ -->
+
+                        <!-- ++++++++++Mehrfachbuttons++++++++++++++ -->
+
+                        <!-- +++++++++++Text nach Mehrfachbuttons++++++++++ -->
+
+                        <!-- +++++++++++++Ende-Text++++++++++++++++++ -->
+
+
+                        <!-- ++++++++++++++++++++++++++++++weitere (Einzel)-Funktionen++++++++++++++++++++++++++++++++ -->
+                        <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+                        <!-- Online-Teilnahme -->
+                        <h:panelGroup rendered="#{tRender.auswahlTeilnahmeZugang()}">
+                            <p>
+                                <h:commandButton value="Zugang" action="#{tAuswahl.doTeilnahmeZugang}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="seite" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{tRender.auswahlTeilnahmeWeitereZugang()}">
+                            <p>
+                                <h:commandButton value="Zugang Weitere" action="#{tAuswahl.doTeilnahmeWeitereZugang}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="seite" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{tRender.auswahlTeilnahmeAbgang()}">
+                            <p>
+                                <h:commandButton value="Abgang" action="#{tAuswahl.doTeilnahmeAbgang}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="seite" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{tRender.auswahlStimmabgabe()}">
+                            <p>
+                                <h:commandButton value="Stimmabgabe" action="#{tAuswahl.doStimmabgabe}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="seite" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                        </h:panelGroup>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <f:subview id="iauswahlButtons">
+            <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+        </f:subview>
+
+    </ui:composition>
+</body>
+
+</html>

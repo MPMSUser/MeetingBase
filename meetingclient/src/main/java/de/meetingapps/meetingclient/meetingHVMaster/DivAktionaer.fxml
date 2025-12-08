@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="766.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="43.0" layoutY="31.0" text="Kartennummer" />
+      <TextField fx:id="tfStimmkartennummer" layoutX="181.0" layoutY="27.0" onKeyPressed="#onKeyAktionaersnummer" />
+      <Pane layoutX="14.0" layoutY="519.0" prefHeight="200.0" prefWidth="948.0">
+         <children>
+            <TextArea fx:id="tfFehlermeldung" editable="false" layoutX="14.0" layoutY="8.0" prefHeight="62.0" prefWidth="807.0" />
+         </children>
+      </Pane>
+      <Label layoutX="43.0" layoutY="63.0" text="Name, Vorname" />
+      <Label layoutX="43.0" layoutY="94.0" text="Ort" />
+      <Label layoutX="43.0" layoutY="125.0" text="Aktien" />
+      <TextField fx:id="tfNameVorname" editable="false" layoutX="181.0" layoutY="59.0" prefHeight="25.0" prefWidth="663.0" />
+      <TextField fx:id="tfOrt" editable="false" layoutX="181.0" layoutY="90.0" prefHeight="25.0" prefWidth="663.0" />
+      <TextField fx:id="tfAktien" editable="false" layoutX="181.0" layoutY="121.0" />
+      <Button fx:id="btnEinlesen" layoutX="368.0" layoutY="27.0" mnemonicParsing="false" onAction="#clickedEinlesen" text="Einlesen" />
+      <Label layoutX="40.0" layoutY="731.0" text="Zuletzt bearbeiteter Aktionär" />
+      <TextField fx:id="tfZuletztBearbeitet" editable="false" layoutX="205.0" layoutY="727.0" prefHeight="25.0" prefWidth="741.0" />
+      <Button fx:id="btnLabelDruck" layoutX="368.0" layoutY="494.0" mnemonicParsing="false" onAction="#clickedLabelDruck" text="Stimmblocklabel drucken" />
+      <Button fx:id="btnBeenden" layoutX="45.0" layoutY="494.0" mnemonicParsing="false" onAction="#clickedBeenden" text="Beenden" />
+      <Label layoutX="769.0" layoutY="308.0" prefHeight="62.0" prefWidth="176.0" text="Achtung: keine weitere Abfrage! Stornierung nur zulässig, wenn noch nicht in Sammelkarte!" wrapText="true" />
+      <ScrollPane layoutX="40.0" layoutY="268.0" prefHeight="200.0" prefWidth="687.0">
+         <content>
+            <GridPane fx:id="grdPnAnzeige" prefHeight="90.0" prefWidth="686.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Willenserkl.Id" />
+                  <Label text="Willenserklr.Art" GridPane.columnIndex="1" />
+                  <Label text="S-Nr" GridPane.columnIndex="2" />
+                  <Label text="E-Nr" GridPane.columnIndex="3" />
+                  <Label text="In Liste" GridPane.columnIndex="4" />
+               </children>
+            </GridPane>
+         </content>
+      </ScrollPane>
+      <Button fx:id="btnStornoAusfuehren" layoutX="769.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnStornoAusfuehren" text="Kompletten Storno ausführen" />
+      <Button fx:id="btnIdentsAktionaerZuGast" layoutX="769.0" layoutY="395.0" mnemonicParsing="false" onAction="#clickedIdentsAktionaerZuGast" text="Idents: Aktionär zu Gast" />
+      <Button fx:id="btnIdentsGastZuAktonaer" layoutX="769.0" layoutY="429.0" mnemonicParsing="false" onAction="#clickedIdentsGastZuAktonaer" text="Idents: Gast zu Aktionär" />
+      <RadioButton fx:id="rbStimmkartenNr" layoutX="469.0" layoutY="31.0" mnemonicParsing="false" text="StimmkartenNr">
+         <toggleGroup>
+            <ToggleGroup fx:id="tgKartenNr" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="rbEintrittskartenNr" layoutX="596.0" layoutY="31.0" mnemonicParsing="false" text="EintrittskartenNr" toggleGroup="$tgKartenNr" />
+      <Label layoutX="43.0" layoutY="156.0" text="Vertreter Name" />
+      <TextField fx:id="tfVertreterName" editable="false" layoutX="181.0" layoutY="152.0" prefHeight="25.0" prefWidth="569.0" />
+      <TextField fx:id="tfVertreterVorname" editable="false" layoutX="181.0" layoutY="186.0" prefHeight="25.0" prefWidth="569.0" />
+      <TextField fx:id="tfVertreterOrt" editable="false" layoutX="181.0" layoutY="219.0" prefHeight="25.0" prefWidth="569.0" />
+      <Label layoutX="43.0" layoutY="190.0" text="Vertreter Vorname" />
+      <Label layoutX="43.0" layoutY="223.0" text="Vertreter Ort" />
+      <Button fx:id="btnSpeichernVertreter" layoutX="773.0" layoutY="152.0" mnemonicParsing="false" onAction="#onBtnSpeichernVertreter" text="Änderungen Vertreter speichern" />
+      <Button fx:id="btnZugangsformularDruck" layoutX="529.0" layoutY="494.0" mnemonicParsing="false" onAction="#clickedZugangsformularDruck" text="Zugangsformular drucken" />
+   </children>
+</Pane>

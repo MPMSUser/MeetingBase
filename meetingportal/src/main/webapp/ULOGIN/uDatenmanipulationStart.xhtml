@@ -1,0 +1,1025 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+	xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+
+	<ui:define name="content">
+		<h:form enctype="multipart/form-data">
+
+			<!-- Titel -->
+			<ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+				<ui:param name="loginAnzeigen" value="1" />
+			</ui:include>
+
+			<!-- Überschrift und Fehlermeldung -->
+			<ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+				<ui:param name="ueberschrift" value="Datenmanipulation Auswahl Parameter" />
+				<ui:param name="zurueck" value="1" />
+			</ui:include>
+
+
+			<div class="divArbeitsbereich">
+				<table class="divArbeitsbereichUeberschrift">
+					<tr>
+						<td class="divArbeitsbereichUeberschriftText">
+							<h:outputLabel value="#{uDatenmanipulationSession.ueberschrift}" />
+						</td>
+						<td class="divArbeitsbereichUeberschriftButton">
+							<h:commandButton value="Start" styleClass="btnStandard"
+								action="#{uDatenmanipulation.doStart}"
+								rendered="#{eclParamM.liefereDatenbestandDatenmanipulationIstGesperrt()==false}"
+								onclick="this.form.target='_self'" />
+						</td>
+					</tr>
+				</table>
+				<p>
+					<h:outputLabel value="#{uDatenmanipulationSession.startText}" escape="false" />
+					<br /> <br />
+					<h:dataTable var="textzeile" value="#{uDatenmanipulationSession.startZeilen}">
+						<h:column>
+							<h:outputLabel value="#{textzeile}" />
+						</h:column>
+					</h:dataTable>
+					<br />
+				</p>
+
+				<h:panelGroup rendered="#{eclParamM.liefereDatenbestandDatenmanipulationIstGesperrt()==true}">
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+						<p:column>
+							Der Mandant ist wahrscheinlich produktiv geschaltet - die Funktionen zur Datenmanipulation
+							stehen deshalb nicht zur Verfügung. <br />
+							Zur Nutzung dieser Funktion ggf. den Parameter in den Basis-Parametern umstellen.<br />
+						</p:column>
+
+					</p:panelGrid>
+
+				</h:panelGroup>
+
+
+				<h:panelGroup rendered="#{eclParamM.liefereDatenbestandDatenmanipulationIstGesperrt()==false}">
+					<h:panelGroup rendered="#{eclParamM.liefereDatenbestandIstProduktiv()==true}">
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								<br />
+								Produktive Daten vorhanden - die Funktionen zur Datenmanipulation stehen jedoch zur
+								Verfügung. <br />
+								Achtung - möglicherweise Veränderung von Produktionsdaten!<br />
+								<br />
+							</p:column>
+
+						</p:panelGrid>
+
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==1}">
+
+						<!-- loeschenMeldebestandHV -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Es werden - mit Ausnahme einiger weniger Grund-Parameter - alle mandantenabhängigen
+								Tables geleert. <br />
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==2}">
+						<!-- loeschenMeldebestandHV -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Es werden gelöscht: <br />
+								<ul>
+									<li>Alle Daten von virtueller HV (Fragen, Wortmeldungen,
+										...)</li>
+									<li>Alle Präsenzbewegungen</li>
+									<li>Alle Stimmabgaben</li>
+									<li>Alle Willenserklärungen (Weisungen, Eintrittskarten,
+										Vollmachten...)</li>
+									<li>Alle Meldedaten (einschließlich Sammelkarten)</li>
+									<li>Alle Gastkarten</li>
+								</ul>
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==3}">
+						<!-- loeschenAbstimmungsagenda -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Es werden die Abstimmungspunkte und Abstimmungsvorgänge gelöscht. <br />
+								<br />
+								Achtung - vorher unbedingt sicherstellen, dass keine Weisungen und Abstimmungen mehr
+								vorhanden sind!<br />
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==4}">
+						<!-- loeschenAktienregister -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Es werden gelöscht: <br />
+								<ul>
+									<li>Alle Daten im Aktienregister</li>
+									<li>Alle LoginKennungen (und damit auch alle Zugangsdaten
+										für Gäste!)</li>
+									<li>Alle Insti-Bestands-Zuordnungen</li>
+								</ul>
+								<br />
+								Achtung - vorher unbedingt Löschen Meldebestand und HV-Daten durchführen, da sonst
+								möglicherweise inkonsistente Daten entstehen!<br />
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==5}">
+						<!-- loeschenAktienregister -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Für alle Kennungen zurücksetzen:
+							</p:column>
+							<p:column>
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Hinweis Aktionärsportal gelesen:"></h:outputLabel>
+							</p:column>
+							<p:column>
+								<h:selectBooleanCheckbox
+									value="#{uDatenmanipulationSession.ruecksetzenHinweisAktionaersPortal}" />
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Hinweis HV-Portal gelesen:"></h:outputLabel>
+							</p:column>
+							<p:column>
+								<h:selectBooleanCheckbox
+									value="#{uDatenmanipulationSession.ruecksetzenHinweisHVPortal}" />
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Hinweis Perm-Portal 1:"></h:outputLabel>
+							</p:column>
+							<p:column>
+								<h:selectBooleanCheckbox value="#{uDatenmanipulationSession.ruecksetzenPermPortal1}" />
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Hinweis Perm-Portal 2:"></h:outputLabel>
+							</p:column>
+							<p:column>
+								<h:selectBooleanCheckbox value="#{uDatenmanipulationSession.ruecksetzenPermPortal2}" />
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==6}">
+						<!-- loeschenAktienregister -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Für alle Aktionäre, die sich noch nicht für den elektronischen Einladungsversand
+								registriert haben, wird
+								- nach diesem Rücksetzen - erneut der Hinweis auf den elektronischen Einladungsversand
+								nach dem Login angeboten.
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==7}">
+						<!-- loeschenAktienregister -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Für alle Kennungen wird ein neues Initial-Passwort gesetzt und eine ggf. registrierte
+								E-Mail-Adresse gelöscht.
+							</p:column>
+							<p:column>
+							</p:column>
+
+							<p:column>
+								Passwort soll gesetzt werden auf:
+							</p:column>
+							<p:column>
+								<h:selectOneRadio value="#{uDatenmanipulationSession.initialPasswortArt}"
+									layout="pageDirection">
+									<f:selectItem itemLabel="PW" itemValue="1" />
+									<f:selectItem
+										itemLabel="#{uDatenmanipulationSession.initialPasswortStandard} #{uDatenmanipulationSession.initialPasswortStandardZusatztext}"
+										itemValue="2" />
+									<f:selectItem itemLabel="sonstiges Passwort" itemValue="3" />
+								</h:selectOneRadio>
+							</p:column>
+
+							<p:column>
+								sonstiges Passwort:
+							</p:column>
+							<p:column>
+								<h:inputText value="#{uDatenmanipulationSession.initialPasswortSonstiges}"
+									maxlength="20" size="20"></h:inputText>
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==8}">
+						<!-- loeschenAktienregister -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Für alle Kennungen, die bereits ein eigenes Passwort vergeben haben, wird zusätzlich ein
+								neues Initialpasswort vergeben.<br />
+								Das vergebene eigene Passwort bleibt gültig.<br />
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==9}">
+						<!-- Anmelden Ohne Eintrittskarte -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Alle Aktionäre, die noch nicht angemeldet sind, werden angemeldet - ohne weitere
+								Willenserklärung, d.h. insbesondere ohne Eintrittskartenausstellung.<br />
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==10}">
+						<!-- Anmeldung mit Eintrittskarte -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Alle Aktionäre, die noch nicht angemeldet sind, werden angemeldet - mit Ausstellung
+								einer Eintrittskarte.<br />
+							</p:column>
+						</p:panelGrid>
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								<h:outputLabel
+									value="Eintrittskarte identisch mit Aktionärsnummer vergeben (für Inhaberaktien):">
+								</h:outputLabel>
+							</p:column>
+							<p:column>
+								<h:selectBooleanCheckbox
+									value="#{uDatenmanipulationSession.eintrittskarteWieAktionaersnummer}" />
+							</p:column>
+
+							<p:column>
+								<h:outputLabel
+									value="Wenn EK identisch mit Aktionärsnummer vergeben wird: letzte Ziffer abschneiden:">
+								</h:outputLabel>
+							</p:column>
+							<p:column>
+								<h:selectBooleanCheckbox
+									value="#{uDatenmanipulationSession.eintrittskarteWieAktionaersnummerOhneLetzteZiffer}" />
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==12}">
+						<!-- loeschenAktienregister -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Alle Meldungen, die beim Abstimmungsvorgang eine Stimmabgabe durchgeführt haben, aber
+								nicht präsent sind, werden Präsent gesetzt.<br />
+							</p:column>
+							<p:column>
+							</p:column>
+
+							<p:column>
+								Nr. Abstimmungsvorgang:
+							</p:column>
+							<p:column>
+								<h:inputText value="#{uDatenmanipulationSession.ku217Abstimmvorgang}" maxlength="8"
+									size="8"></h:inputText>
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==13}">
+						<!-- Anlegen Testbestand -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+
+							<p:column>
+								Gewünschtes Initialpasswort:
+							</p:column>
+							<p:column>
+								<h:selectOneRadio value="#{uDatenmanipulationSession.initialPasswortArt}"
+									layout="pageDirection">
+									<f:selectItem itemLabel="PW" itemValue="1" />
+									<f:selectItem
+										itemLabel="#{uDatenmanipulationSession.initialPasswortStandard} #{uDatenmanipulationSession.initialPasswortStandardZusatztext}"
+										itemValue="2" />
+									<f:selectItem itemLabel="sonstiges Passwort" itemValue="3" />
+								</h:selectOneRadio>
+							</p:column>
+
+							<p:column>
+								sonstiges Passwort:
+							</p:column>
+							<p:column>
+								<h:inputText value="#{uDatenmanipulationSession.initialPasswortSonstiges}"
+									maxlength="20" size="20"></h:inputText>
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value=" "></h:outputLabel>
+							</p:column>
+							<p:column>
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Anzahl Aktionäre je Gattung:"></h:outputLabel>
+							</p:column>
+							<p:column>
+								<h:inputText value="#{uDatenmanipulationSession.anzahlAktionaereJeGattung}"
+									maxlength="8" size="8"></h:inputText>
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Gruppen verteilen):"></h:outputLabel>
+							</p:column>
+							<p:column>
+								<h:selectBooleanCheckbox value="#{uDatenmanipulationSession.gruppenVerteilen}" />
+							</p:column>
+
+							<p:column>
+								<h:outputLabel value="Ergänzung Aktienregister (Genossenschaften, Vereine) anlegen:">
+								</h:outputLabel>
+							</p:column>
+							<p:column>
+								<h:selectBooleanCheckbox value="#{uDatenmanipulationSession.ergaenzungAnlegen}" />
+							</p:column>
+
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==15}">
+						<!-- loeschenAktienregister -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Für alle Mandanten werden die gespeicherten Aktionärsdaten (Aktienregister, Meldungen,
+								HVDaten, ....) gelöscht.
+								<br />
+							</p:column>
+							<p:column>
+							</p:column>
+
+							<p:column>
+								Löschen bis Datum (Leer=alle)
+							</p:column>
+							<p:column>
+								<h:inputText value="#{uDatenmanipulationSession.loeschenBisDatum}" maxlength="10"
+									size="10"></h:inputText>
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==16}">
+						<!-- Demo-Aktionäre zurücksetzen -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								Die vordefinierten Demo-Aktionäre werden zurückgesetzt. Wird ein neues Passwort
+								eingegeben, dann wird dieses
+								zukünftig verwendet - ansonsten wird das bisher vorgespeicherte Passwort verwendet.
+								<br />
+							</p:column>
+							<p:column>
+							</p:column>
+
+							<p:column>
+								Neues Passwort (optional):
+							</p:column>
+							<p:column>
+								<h:inputText value="#{uDatenmanipulationSession.demoPasswort}" maxlength="20" size="20">
+								</h:inputText>
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+					<h:panelGroup rendered="#{uDatenmanipulationSession.nummer==17}">
+						<!-- Mandantennummer in Tables umschießen -->
+						<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+							style="width: 1180px">
+							<p:column>
+								In den Tables werden die Mandantennummer auf den aktuellen Mandanten umgestellt. Dient
+								dazu, um Tables, die unter einem
+								anderen Mandanten angelegt wurden, auf diesen Mandanten umzustellen.
+								<br />
+							</p:column>
+
+							<p:column>
+								<b>Achtung! Mit dieser Funktion werden die kompletten Datenbestände eines Mandanten mit
+									einem Knopfdruck komplett umgearbeitet.
+									Werden diese Funktionen versehentlich auf Produktionsdaten angewandt, können diese
+									dabei komplett zerstört werden!</b><br /><br />
+
+
+								<h2>Funktion zum Kopieren von Mandanten (bzw. Umbauen von Mandanten-Tables auf eine
+									andere Mandantennummer)</h2>
+								<ul>
+									<li>Schritt 1: (Soweit noch nicht erfolgt): Neuanlegen des Ziel-Mandanten,
+										Emittenten-Daten mit betterMeeting pflegen.</li>
+									<li>Schritt 2: Im Quell-Mandant Status auf "Komplett Teststatus" setzen.</li>
+									<li>Schritt 3: Schema des Quell-Mandanten aus dessen Datenbankschema mit MySQL
+										Workbench exportieren (Achtung: 'Include Create Schema' NICHT aktivieren!)</li>
+									<li>Schritt 3: Den in Schritt 3 erzeugten Export in Schema des Ziel-Mandanten mit
+										MySQL Workbench importieren (Achtung: Ziel Schema in 'Default Target Schema'
+										auswählen)</li>
+									<li>Schritt 4: Ggf. Formular-Designs des Mandanten kopieren (Dateiebene,
+										betterMeeting_Root\betterreports\MxxxJxxxxxx)</li>
+									<li>Schritt 5: Diese Funktion - Mandantennummer ändern - im Ziel-Mandant durchführen
+									</li>
+									<li>Hinweis: einige wenige (eher unbedeutende) Tables werden bei dieser Methode
+										nicht kopiert, z.B. Fehlertexte für Portal</li>
+								</ul>
+							</p:column>
+
+						</p:panelGrid>
+					</h:panelGroup>
+
+				</h:panelGroup>
+
+
+
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==101}">
+					<!-- weisungsSummenMitAuswahl -->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Auch 'verdeckte (z.B. Deutsche Bank)' ausgeben (vor HV nicht an Kunden weitergeben!)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox value="#{uReportsSession.geheimeWeisungenAusgeben}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Nur für diese SammelIdent drucken (leer=alle)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.druckNurSammelkartenIdent}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Nur für diese Gruppe drucken (leer=alle)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.druckNurGruppe}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==106}">
+					<!-- Meldeliste -->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Sortierung"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteSortierung}" layout="pageDirection">
+								<f:selectItem itemLabel="Sortiert nach meldeIdent" itemValue="1" />
+								<f:selectItem itemLabel="Sortiert nach Name" itemValue="2" />
+								<f:selectItem itemLabel="Sortiert nach Aktien absteigend" itemValue="3" />
+								<f:selectItem itemLabel="Sortiert nach Ek-Nr" itemValue="4" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Selektion 1"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteKlasse}" layout="pageDirection">
+								<f:selectItem itemLabel="Aktionäre" itemValue="1" />
+								<f:selectItem itemLabel="Gäste" itemValue="0" />
+							</h:selectOneRadio>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Selektion 2 (bei Aktionären)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteSelektion}" layout="pageDirection">
+								<f:selectItem itemLabel="nur Aktionärsmeldungen" itemValue="1" />
+								<f:selectItem itemLabel="nur Sammelkarten" itemValue="2" />
+								<f:selectItem itemLabel="alle" itemValue="3" />
+							</h:selectOneRadio>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==107}">
+					<!-- Negativliste (Präsenz) -->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Art"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.negativlisteArt}" layout="pageDirection">
+								<f:selectItem itemLabel="Alle noch nie präsenten" itemValue="1" />
+								<f:selectItem itemLabel="Alle derzeit nicht präsenten" itemValue="2" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Sortierung"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteSortierung}" layout="pageDirection">
+								<f:selectItem itemLabel="Sortiert nach meldeIdent" itemValue="1" />
+								<f:selectItem itemLabel="Sortiert nach Name" itemValue="2" />
+								<f:selectItem itemLabel="Sortiert nach Aktien absteigend" itemValue="3" />
+								<f:selectItem itemLabel="Sortiert nach Ek-Nr" itemValue="4" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Selektion 1"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteKlasse}" layout="pageDirection">
+								<f:selectItem itemLabel="Aktionäre" itemValue="1" />
+								<f:selectItem itemLabel="Gäste" itemValue="0" />
+							</h:selectOneRadio>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Selektion 2 (bei Aktionären)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.meldelisteSelektion}" layout="pageDirection">
+								<f:selectItem itemLabel="nur Aktionärsmeldungen" itemValue="1" />
+								<f:selectItem itemLabel="nur Sammelkarten" itemValue="2" />
+								<f:selectItem itemLabel="alle" itemValue="3" />
+							</h:selectOneRadio>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==108}">
+					<!-- Negativliste (Anmeldungen) mit Auswahl-->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Sortierung"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.negativlisteSortierung}" layout="pageDirection">
+								<f:selectItem itemLabel="Sortiert nach Aktionärsnummer" itemValue="1" />
+								<f:selectItem itemLabel="Sortiert nach Name" itemValue="2" />
+								<f:selectItem itemLabel="Sortiert nach Aktien absteigend" itemValue="3" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Ab Aktienzahl (leer=alle)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.negativlisteAktienzahl}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel
+								value="Die größten (0=alle; nur bei Sortierung nach Aktien absteigend zulässig))">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.negativlisteGroesste}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==111}">
+					<!-- Willenserklärungen (Alle, mit Auswahl)-->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Selektion"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.nurInternetWK}" layout="pageDirection">
+								<f:selectItem itemLabel="alle" itemValue="1" />
+								<f:selectItem itemLabel="ohne reine Interneterklärungen" itemValue="2" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Ab Datum (leer=alle, sonst: JJJJ.MM.TT HH:MM:SS bzw. Teile)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.druckenAb}" maxlength="20" size="20"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==112}">
+					<!-- Willenserklärungen (Alle, mit Auswahl)-->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Aktionärsnummer (Namensaktien) / Eintrittskartennummer (Inhaberaktien)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.aktionaersNummer}" maxlength="30" size="30">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==115 or
+                    uReportsSession.reportNummer==117 or uReportsSession.reportNummer==119}">
+					<!-- Sammelkarten (mit Auswahl) Reports-->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Auch 'verdeckte (z.B. Deutsche Bank)' ausgeben (vor HV nicht an Kunden weitergeben!)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox value="#{uReportsSession.geheimeWeisungenAusgeben}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Selektion: Druck nur für Sammelkartenident (leer=alle)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.selektionIdent}" maxlength="5" size="5"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Selektion: Druck nur für Gruppe (leer=alle)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.selektionGruppe}" maxlength="5" size="5">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==121
+                    or uReportsSession.reportNummer==123}">
+					<!-- Sammelkarten (mit Auswahl) Export-->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Auch 'verdeckte (z.B. Deutsche Bank)' ausgeben (vor HV nicht an Kunden weitergeben!)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox value="#{uReportsSession.geheimeWeisungenAusgeben}" />
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==124}">
+					<!-- Gästeliste -->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Listenart"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.gaestelisteArt}" layout="pageDirection">
+								<f:selectItem itemLabel="Übersicht" itemValue="1" />
+								<f:selectItem itemLabel="Präsenz" itemValue="2" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Zugangsdaten (Passwörter) (nur bei Übersicht)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectBooleanCheckbox value="#{uReportsSession.gaestelistePasswoerter}" />
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Sortierung"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.gaestelisteSortierung}" layout="pageDirection">
+								<f:selectItem itemLabel="Zutrittsnummer" itemValue="1" />
+								<f:selectItem itemLabel="Name" itemValue="2" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Selektierung (nur bei Präsenz)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:selectOneRadio value="#{uReportsSession.gaestelisteSelektion}" layout="pageDirection">
+								<f:selectItem itemLabel="Alle" itemValue="1" />
+								<f:selectItem itemLabel="Aktuell präsente" itemValue="2" />
+								<f:selectItem itemLabel="Alle jemals präsente" itemValue="3" />
+							</h:selectOneRadio>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==129}">
+					<!-- Kontrollliste Weisungen-->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Ab Datum (leer=alle, sonst: JJJJ.MM.TT HH:MM:SS, bzw. Teile)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.kontrollisteWeisungenDruckenAb}" maxlength="19"
+								size="19"></h:inputText>
+						</p:column>
+
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==130 or uReportsSession.reportNummer==131}">
+					<!-- Elektronischer Einladungsversand-->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel
+								value="Stichtag bis zu dem Registrierung erfolgt sein soll (TT.MM.JJJJ oder leer=alle)">
+							</h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.mailRegistrierungBis}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==132}">
+					<!-- Sonder-Report: Arbeitsplatzstatistik-->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Startzeit (JJJJ.MM.JJ HH:MM:SS)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.statistikStartZeit}" maxlength="20" size="20">
+							</h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Zeitslot Länge"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.statistikZeitSlotLaenge}" maxlength="20" size="20">
+							</h:inputText>
+						</p:column>
+
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==133}">
+					<!-- Sonder-Report: Eintrittskarten-Barcodes -->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Ab Nummer EK"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.vonNummerEK}" maxlength="20" size="22"></h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Bis Nummer EK"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.bisNummerEK}" maxlength="20" size="22"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Ab Nummer SK"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.vonNummerSK}" maxlength="20" size="22"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Eintrittskarten-Index für EK (leer=keiner)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.nebenNummerEK}" maxlength="2" size="4"></h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==134}">
+					<!-- Sonder-Report: Einladungs-Barcodes -->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Ab Nummer Aktionär"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.vonNummerAktionaer}" maxlength="20" size="22">
+							</h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Bis Nummer Aktionär"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.bisNummerAktionaer}" maxlength="20" size="22">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{uReportsSession.reportNummer==134}">
+					<!-- Sonder-Report: Einladungs-Barcodes -->
+					<p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2"
+						style="width: 1180px">
+
+						<p:column>
+							<h:outputLabel value="Ab Nummer Aktionär"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.vonNummerAktionaer}" maxlength="20" size="22">
+							</h:inputText>
+						</p:column>
+						<p:column>
+							<h:outputLabel value="Bis Nummer Aktionär"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.bisNummerAktionaer}" maxlength="20" size="22">
+							</h:inputText>
+						</p:column>
+
+						<p:column>
+							<h:outputLabel value="Formular-Variante (leer=Standard)"></h:outputLabel>
+						</p:column>
+						<p:column>
+							<h:inputText value="#{uReportsSession.reportVariante}" maxlength="10" size="10">
+							</h:inputText>
+						</p:column>
+
+					</p:panelGrid>
+				</h:panelGroup>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

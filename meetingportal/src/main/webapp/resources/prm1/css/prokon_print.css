@@ -1,0 +1,134 @@
+/**
+ *  Copyright 2025 Better Orange IR & HV AG
+ *
+ *  Licensed under the Meetingbase License (the "License");
+ *  Vou may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+body {
+    --col-violett: #c800a0;
+    --col-pink: #ff00b4;
+    --col-gelb: #ff961e;
+    --col-orange: #ff6400;
+    --col-gruen: #0ac789;
+    --col-schwarz: #000000;
+    --col-weiss: #ffffff;
+    --col-grau: #ededed;
+    --col-grau-dunkel: #848484;
+    --col-error: #fe2e2e;
+    --col-warning: #facc2e;
+    --col-success: #2efe2e;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background-color: var(--col-weiss);
+    color: var(--col-schwarz);
+}
+
+
+/* === GRID === */
+
+.row::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+[class*='col-'] {
+    float: left;
+    min-height: 1px;
+    padding: .2rem;
+}
+
+.col-1 {
+    width: 10%;
+}
+
+.col-4 {
+    width: 50%;
+    display: inline;
+    margin-bottom: .5rem;
+}
+
+.col-8 {
+    width: 100%;
+}
+
+
+/* === Elemente === */
+
+.daten-head {
+    font-weight: bold;
+    background-color: var(--col-grau);
+}
+
+.t-right {
+    text-align: right;
+}
+
+.print-none {
+    display: none;
+}
+
+
+/* === Umsaetze === */
+
+#btnDruckeUmsaetze0 {
+    visibility: hidden;
+}
+
+#btnDruckeUmsaetze1 {
+    display: block;
+    margin-top: 20;
+    float: left;
+}
+
+#umsaetzeMitgliedsdaten {
+    display: block;
+    padding-left: .2rem;
+    margin-bottom: 1rem;
+}
+
+#umsaetze-bereich {
+    margin-top: 1rem;
+}
+
+#umsaetze-bereich .col-1,
+#umsaetze-bereich .col-4 {
+    padding: .5rem;
+}
+
+.daten-inhalt:nth-of-type(odd) {
+    background-color: var(--col-grau);
+}
+
+#divUmsaetzeZeitraum {
+    display: none;
+}
+
+#divUmsaetzeZeitraum>.input-typ-01 {
+    width: 100px;
+}
+
+#umsatzAnzeige {
+    border: 1px solid var(--col-grau);
+}
+
+#umsaetzeMitgliedsdaten img {
+    width: 200px;
+    margin-bottom: 2rem;
+}
+
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+        -moz-print-color-adjust: exact;
+        -ms-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}

@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="700.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane style="-fx-border-color: black;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
+      <VBox spacing="15.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label text="ISIN">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="cbIsin" maxWidth="1.7976931348623157E308">
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
+               </children>
+            </VBox>
+            <Button fx:id="btnGeneralInformation" alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" text="General Information" textOverrun="CLIP">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMeeting" alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" text="Meeting">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnParticipation" alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" text="Participation">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnProxyChoice" alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" text="Proxy Choice">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnMeetingDetails" alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" text="Meeting Details">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnIssuer" alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" text="Issuer">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnIssuerAgent" alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" text="Issuer Agent">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnResolution" alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" text="Resolution">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnVote" alignment="TOP_LEFT" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" style="-fx-background-color: none;" text="Vote">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <ScrollPane fx:id="scrlPane" fitToWidth="true" focusTraversable="false" layoutX="320.0" layoutY="3.0" pannable="true" style="-fx-border-color: black; -fx-border-style: solid;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="160.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="5.0">
+         <content>
+            <GridPane fx:id="gridPane" hgap="10.0" vgap="5.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+              </columnConstraints>
+              <rowConstraints>
+        <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" valignment="TOP" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+               <children>
+                  <Label text="General Information">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <Label text="NotificationType" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="cbNtfctnTp" maxWidth="1.7976931348623157E308" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></ComboBox>
+                  <Button fx:id="btnNtfctnTp" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="EventCompletenessStatus" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="cbEvtCmpltnsSts" maxWidth="1.7976931348623157E308" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></ComboBox>
+                  <Button fx:id="btnEvtCmpltnsSts" focusTraversable="false" layoutX="313.0" layoutY="93.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="EventConfirmationStatus" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="cbEvtConfSts" maxWidth="1.7976931348623157E308" GridPane.rowIndex="6">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></ComboBox>
+                  <Button fx:id="btnEvtConfSts" focusTraversable="false" layoutX="313.0" layoutY="173.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <CheckBox fx:id="checkShrhldrRghtsDrctvInd" mnemonicParsing="false" text="ShareholderRightsDirectiveIndicator" GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></CheckBox>
+                  <Button fx:id="btnShrhldrRghtsDrctvInd" focusTraversable="false" layoutX="313.0" layoutY="253.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <CheckBox fx:id="checkConfOfHldgReqrd" mnemonicParsing="false" text="ConfirmationOfHoldingRequired (67c bei Inhaberaktien)" GridPane.rowIndex="8">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></CheckBox>
+                  <Button fx:id="btnConfOfHldgReqrd" focusTraversable="false" layoutX="313.0" layoutY="293.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <GridPane hgap="10.0" layoutX="15.0" layoutY="693.0" vgap="5.0" GridPane.rowIndex="9">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="PreviousNotificationIdentification" />
+                        <TextField fx:id="tfPrvsNtfctnId" disable="true" editable="false" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkRcnfrmInstrs" disable="true" mnemonicParsing="false" text="ReconfirmInstructions" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <Label text="Meeting" GridPane.rowIndex="10">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <Label alignment="BOTTOM_LEFT" text="MeetingIdentification" GridPane.rowIndex="11" />
+                  <TextField fx:id="tfMtgId" editable="false" promptText="Wird vom System vergeben" GridPane.rowIndex="12">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></TextField>
+                  <Label text="IssuerMeetingIdentification (Eindeutige Kennung)" GridPane.rowIndex="13">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin></Label>
+                  <TextField fx:id="tfIssrMtgId" GridPane.rowIndex="14">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></TextField>
+                  <Label text="Type" GridPane.rowIndex="15" />
+                  <ComboBox fx:id="cbTp" maxWidth="1.7976931348623157E308" GridPane.rowIndex="16">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></ComboBox>
+                  <Button fx:id="btnTp" focusTraversable="false" layoutX="860.0" layoutY="266.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="16" />
+                  <Label text="Einberufungsdatum" GridPane.rowIndex="17" />
+                  <DatePicker fx:id="dpAnncmntDt" maxWidth="1.7976931348623157E308" GridPane.rowIndex="18">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></DatePicker>
+                  <Button fx:id="btnAnncmntDt" focusTraversable="false" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                  <HBox alignment="CENTER_LEFT" spacing="15.0" GridPane.rowIndex="19">
+                     <children>
+                        <Label text="Participation">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <Button fx:id="btnAddParticipation" mnemonicParsing="false" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="boxParticipation" spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="20">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="25.0" />
+                     </GridPane.margin></VBox>
+                  <GridPane hgap="10.0" vgap="5.0" GridPane.rowIndex="21">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="ConfirmationMarketDeadline (Letzter Anmeldetag)" />
+                        <DatePicker fx:id="dpConfirmationMarketDeadline" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
+                        <Label text="Uhrzeit" GridPane.columnIndex="1" />
+                        <TextField fx:id="tfConfirmationMarketDeadlineTime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <Button fx:id="btnConfirmationMarketDeadline" focusTraversable="false" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="21" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></Button>
+                  <Label text="AdditionalDocumentationURLAddress" GridPane.rowIndex="22" />
+                  <TextField fx:id="tfAdditionalDocumentationURLAddress" GridPane.rowIndex="23">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></TextField>
+                  <Button fx:id="btnAdditionalDocumentationURLAddress" focusTraversable="false" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="23" />
+                  <HBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="911.0" spacing="15.0" GridPane.rowIndex="24">
+                     <children>
+                        <Label text="AdditionalProcedureDetails">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnAddAdditionalProcedureDetails" mnemonicParsing="false" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="boxAdditionalProcedureDetails" layoutX="25.0" layoutY="608.0" spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="25">
+                     <padding>
+                        <Insets right="25.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <Label text="Proxy Choice" GridPane.rowIndex="26">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <GridPane hgap="10.0" layoutX="15.0" layoutY="886.0" vgap="5.0" GridPane.rowIndex="27">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="MarketDeadline (Letzter Anmeldetag)" />
+                        <DatePicker fx:id="dpMarketDeadline" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
+                        <Label text="Uhrzeit" GridPane.columnIndex="1" />
+                        <TextField fx:id="tfMarketDeadlineTime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <Button fx:id="btnMarketDeadline" focusTraversable="false" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="27" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <HBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="730.0" spacing="15.0" GridPane.rowIndex="28">
+                     <children>
+                        <Label text="AuthorisedProxy">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <Button fx:id="btnAuthorisedProxy" mnemonicParsing="false" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="boxAuthorisedProxy" spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="29">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets right="25.0" />
+                     </padding>
+                  </VBox>
+                  <Label text="EntitlementFixingDate (Record Date / technical Record Date))" GridPane.rowIndex="30" />
+                  <DatePicker fx:id="dpEntitlementFixingDate" maxWidth="1.7976931348623157E308" GridPane.rowIndex="31">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </DatePicker>
+                  <Label text="Securities Blocking Period End Date" GridPane.rowIndex="32" />
+                  <ComboBox fx:id="cbSecuritiesBlockingPeriod" maxWidth="1.7976931348623157E308" GridPane.rowIndex="33">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Button fx:id="btnSecuritiesBlockingPeriod" focusTraversable="false" layoutX="860.0" layoutY="1313.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="33" />
+                  <GridPane hgap="10.0" layoutX="15.0" layoutY="824.0" vgap="5.0" GridPane.rowIndex="34">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="NEVER" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Registration Securities Market Deadline" />
+                        <TextField fx:id="tfRegnSctiesMktDdln" editable="false" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkRegnSctiesMktDdln" mnemonicParsing="false" text="Namensaktien" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></CheckBox>
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <Button fx:id="btnRegnSctiesMktDdln" focusTraversable="false" layoutX="860.0" layoutY="1015.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="34" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Label text="Meeting Details" GridPane.rowIndex="35">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <GridPane hgap="10.0" layoutX="15.0" layoutY="794.0" vgap="5.0" GridPane.rowIndex="36">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="HV Datum" />
+                        <DatePicker fx:id="dpMeetingDate" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
+                        <Label text="Uhrzeit" GridPane.columnIndex="1" />
+                        <TextField fx:id="tfMeetingTime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <Button fx:id="btnMeetingDate" focusTraversable="false" layoutX="860.0" layoutY="923.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="36" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Label text="DateStatus" GridPane.rowIndex="37" />
+                  <ComboBox fx:id="cbDateStatus" maxWidth="1.7976931348623157E308" GridPane.rowIndex="38">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></ComboBox>
+                  <Button fx:id="btnDateStatus" focusTraversable="false" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="38" />
+                  <Label text="Location" GridPane.rowIndex="39">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Label text="AddressType" GridPane.rowIndex="40" />
+                  <ComboBox fx:id="cbMeetingAddressType" maxWidth="1.7976931348623157E308" GridPane.rowIndex="41">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></ComboBox>
+                  <Button fx:id="btnMeetingAddressType" focusTraversable="false" layoutX="860.0" layoutY="1593.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="41" />
+                  <Label text="AddressLine" GridPane.rowIndex="42" />
+                  <TextField fx:id="tfAddressLine1" GridPane.rowIndex="43" />
+                  <Button fx:id="btnAddressLine1" focusTraversable="false" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="43" />
+                  <TextField fx:id="tfAddressLine2" GridPane.rowIndex="44" />
+                  <Button fx:id="btnAddressLine2" focusTraversable="false" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="44" />
+                  <TextField fx:id="tfAddressLine3" GridPane.rowIndex="45" />
+                  <Button fx:id="btnAddressLine3" focusTraversable="false" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="45" />
+                  <GridPane hgap="10.0" GridPane.rowIndex="46">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Street Name" />
+                        <TextField fx:id="tfMeetingStreet" GridPane.rowIndex="1" />
+                        <Label text="Building Number" GridPane.columnIndex="1" />
+                        <TextField fx:id="tfMeetingBuilding" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="46" GridPane.valignment="BOTTOM">
+                     <children>
+                        <Button fx:id="btnMeetingStreet" alignment="TOP_LEFT" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" />
+                        <Button fx:id="btnMeetingBuilding" alignment="TOP_LEFT" focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="11.0" />
+                     </GridPane.margin>
+                  </HBox>
+                  <GridPane hgap="10.0" layoutX="15.0" layoutY="1890.0" GridPane.rowIndex="47">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Post Code" />
+                        <TextField fx:id="tfMeetingPost" GridPane.rowIndex="1" />
+                        <Label text="Town" GridPane.columnIndex="1" />
+                        <TextField fx:id="tfMeetingTown" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="47">
+                     <children>
+                        <Button fx:id="btnMeetingPost" focusTraversable="false" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" />
+                        <Button fx:id="btnMeetingTown" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="11.0" />
+                     </GridPane.margin>
+                  </HBox>
+                  <Label text="Country" GridPane.rowIndex="48" />
+                  <TextField fx:id="tfMeetingCountry" GridPane.rowIndex="49">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></TextField>
+                  <Button fx:id="btnMeetingCountry" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="49" />
+                  <Label text="Issuer" GridPane.rowIndex="50">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <Label text="Name" GridPane.rowIndex="51" />
+                  <TextField fx:id="tfIssuerName" GridPane.rowIndex="52">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></TextField>
+                  <Button fx:id="btnIssuerName" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="52" />
+                  <Label layoutX="15.0" layoutY="1617.0" text="Address Type" GridPane.rowIndex="53" />
+                  <ComboBox fx:id="cbIssuerAddressType" layoutX="15.0" layoutY="1653.0" maxWidth="1.7976931348623157E308" GridPane.rowIndex="54">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></ComboBox>
+                  <Button fx:id="btnIssuerAddressType" focusTraversable="false" layoutX="860.0" layoutY="1717.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="54" />
+                  <GridPane hgap="10.0" layoutX="15.0" layoutY="1890.0" GridPane.rowIndex="55">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Street Name" />
+                        <TextField fx:id="tfIssuerStreet" GridPane.rowIndex="1" />
+                        <Label text="Building Number" GridPane.columnIndex="1" />
+                        <TextField fx:id="tfIssuerBuilding" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="55">
+                     <children>
+                        <Button fx:id="btnIssuerStreet" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" />
+                        <Button fx:id="btnIssuerBuilding" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="11.0" />
+                     </GridPane.margin>
+                  </HBox>
+                  <GridPane hgap="10.0" layoutX="15.0" layoutY="1970.0" GridPane.rowIndex="56">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="Post Code" />
+                        <TextField fx:id="tfIssuerPost" GridPane.rowIndex="1" />
+                        <Label text="Town" GridPane.columnIndex="1" />
+                        <TextField fx:id="tfIssuerTown" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <HBox alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="56">
+                     <children>
+                        <Button fx:id="btnIssuerPost" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" />
+                        <Button fx:id="btnIssuerTown" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="11.0" />
+                     </GridPane.margin>
+                  </HBox>
+                  <Label layoutX="15.0" layoutY="2017.0" text="Country" GridPane.rowIndex="57" />
+                  <TextField fx:id="tfIssuerCountry" layoutX="15.0" layoutY="2053.0" GridPane.rowIndex="58">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></TextField>
+                  <Button fx:id="btnIssuerCountry" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="58" />
+                  <Label layoutX="15.0" layoutY="2097.0" text="Issuer Agent" GridPane.rowIndex="59">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <Label layoutX="15.0" layoutY="2137.0" text="Name" GridPane.rowIndex="60" />
+                  <TextField fx:id="tfIssuerAgentName" layoutX="15.0" layoutY="2173.0" GridPane.rowIndex="61">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></TextField>
+                  <Button fx:id="btnIssuerAgentName" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="61" />
+                  <Label text="Role" GridPane.rowIndex="62" />
+                  <ComboBox fx:id="cbIssuerAgentRole" maxWidth="1.7976931348623157E308" GridPane.rowIndex="63">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </ComboBox>
+                  <Button fx:id="btnIssuerAgentRole" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="63" />
+                  <Label text="Security" GridPane.rowIndex="64">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <Label text="ISIN" GridPane.rowIndex="65" />
+                  <TextField fx:id="tfIsin" GridPane.rowIndex="66">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></TextField>
+                  <HBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="730.0" spacing="15.0" GridPane.rowIndex="67">
+                     <children>
+                        <Label text="Resolution">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font></Label>
+                        <Button fx:id="btnEditResolution" mnemonicParsing="false" />
+                     </children>
+                  </HBox>
+                  <VBox fx:id="boxResolution" spacing="5.0" GridPane.columnSpan="2" GridPane.rowIndex="68">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="25.0" />
+                     </GridPane.margin>
+                  </VBox>
+                  <Label text="Vote" GridPane.rowIndex="69">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <CheckBox fx:id="checkPartialVoteAllowed" mnemonicParsing="false" text="PartialVoteAllowed" GridPane.rowIndex="70">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></CheckBox>
+                  <Button fx:id="btnPartialVoteAllowed" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="70" />
+                  <CheckBox fx:id="checkSplitVoteAllowed" mnemonicParsing="false" text="SplitVoteAllowed" GridPane.rowIndex="71">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></CheckBox>
+                  <Button fx:id="btnSplitVoteAllowed" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="71" />
+                  <GridPane hgap="10.0" layoutX="15.0" layoutY="623.0" vgap="5.0" GridPane.rowIndex="72">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Label text="VoteMarketDeadline (Laut PSG: Letzter Anmeldetag)" />
+                        <DatePicker fx:id="dpVoteMarketDeadline" maxWidth="1.7976931348623157E308" GridPane.rowIndex="1" />
+                        <Label text="Uhrzeit" GridPane.columnIndex="1" />
+                        <TextField fx:id="tfVoteMarketDeadlineTime" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </GridPane>
+                  <Button fx:id="btnVoteMarketDeadline" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="72" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets bottom="11.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Label text="VoteThroughNetwork - VoteChannel" GridPane.rowIndex="73" />
+                  <ComboBox fx:id="cbVoteChannel" maxWidth="1.7976931348623157E308" GridPane.rowIndex="74">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin></ComboBox>
+                  <Button fx:id="btnVoteChannel" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="74" />
+                  <CheckBox fx:id="checkBeneficialOwnerDisclosure" layoutX="15.0" layoutY="3257.0" mnemonicParsing="false" text="BeneficialOwnerDisclosure (Bei Namensaktien und 67c - anhaken)" GridPane.rowIndex="75" />
+                  <Button fx:id="btnBeneficialOwnerDisclosure" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="75" />
+                  <Label text="Additional Information" GridPane.rowIndex="76">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="Disclaimer - EN" GridPane.rowIndex="77" />
+                  <TextArea fx:id="taDisclaimer" prefHeight="50.0" GridPane.rowIndex="78">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </TextArea>
+                  <Button fx:id="btnDisclaimer" focusTraversable="false" layoutX="860.0" layoutY="2766.0" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="78" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets bottom="10.0" />
+                     </GridPane.margin>
+                  </Button>
+                  <Button fx:id="btnEntitlementFixingDate" focusTraversable="false" mnemonicParsing="false" prefWidth="25.0" style="-fx-background-color: none;" GridPane.columnIndex="1" GridPane.rowIndex="31" />
+               </children>
+            </GridPane>
+         </content></ScrollPane>
+      <VBox spacing="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Label fx:id="lblSentTime" alignment="CENTER" focusTraversable="false" maxWidth="1.7976931348623157E308" prefHeight="65.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnChange" disable="true" focusTraversable="false" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Ändern" />
+            <ScrollPane fitToWidth="true" focusTraversable="false" prefHeight="200.0" prefWidth="125.0">
+              <content>
+                  <VBox fx:id="boxHistory" spacing="10.0">
+                     <opaqueInsets>
+                        <Insets top="5.0" />
+                     </opaqueInsets>
+                  </VBox>
+              </content>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </ScrollPane>
+            <Button fx:id="btnResponse" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onResponse" text="ProxyLieferant01 Antwort" />
+         </children>
+      </VBox>
+      <VBox spacing="15.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <children>
+            <Button fx:id="btnCreateFile" focusTraversable="false" mnemonicParsing="false" onAction="#onCreateFile" prefHeight="45.0" prefWidth="125.0" text="Datei erstellen">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnParameter" focusTraversable="false" mnemonicParsing="false" onAction="#onParameter" prefHeight="45.0" prefWidth="125.0" text="Parameter laden" />
+            <Button fx:id="btnSave" focusTraversable="false" mnemonicParsing="false" onAction="#onSave" prefHeight="45.0" prefWidth="125.0" text="Speichern" />
+            <Button fx:id="btnSend" focusTraversable="false" mnemonicParsing="false" onAction="#onSend" prefHeight="45.0" prefWidth="125.0" text="Senden" />
+         </children>
+      </VBox>
+      <Button fx:id="btnClose" focusTraversable="false" mnemonicParsing="false" text="Beenden" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+   </children>
+</AnchorPane>

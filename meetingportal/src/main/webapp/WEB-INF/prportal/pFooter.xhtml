@@ -1,0 +1,102 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+    <footer id="footer-bereich">
+        <div class="container-full">
+            <div class="row">
+                <div class="col-1_3">
+                    <!-- Nutzungshinweise / Datenschutzhinweise zusammen -->
+                    <h:panelGroup rendered="#{!eclParamM.separateDatenschutzhinweise}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1754')}">
+                            <p>
+                                <h:outputLabel value="#{eclPortalTexteM.holeText('1754')}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!--Nutzungshinweise und Datenschutzhinweise getrennt -->
+                    <h:panelGroup rendered="#{eclParamM.separateDatenschutzhinweise}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('729')}">
+                            <p>
+                                <h:outputLabel value="#{eclPortalTexteM.holeText('729')}" escape="false">
+                                </h:outputLabel>
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{eclParamM.separateDatenschutzhinweise}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('730')}">
+                            <p>
+                                <h:outputLabel value=" #{eclPortalTexteM.holeText('730')}" escape="false">
+                                </h:outputLabel>
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </div>
+
+                <div class="col-1_3">
+                    <!-- Hilfe/Kontakt -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1755')}">
+                        <p>
+                            <h:outputLabel value=" #{eclPortalTexteM.holeText('1755')}" escape="false" />
+                        </p>
+                    </h:panelGroup>
+                </div>
+
+                <div class="col-1_3">
+                    <!-- Impressum -->
+                    <h:panelGroup rendered="#{eclParamM.impressum}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1756')}">
+                            <p>
+                                <h:outputLabel value=" #{eclPortalTexteM.holeText('1756')}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </div>
+            </div>
+
+            <div class="row">
+                <h:panelGroup rendered="#{tSession.testModus=='1' or tSession.testModus=='2'}">
+                    <div class="col-2">
+                        <h:commandButton value="----Texte Refresh----" action="#{tAllgemein.doRefreshTexte()}"
+                            styleClass="btn-typ-test">
+                            <f:ajax execute="@all" render="headerform inhaltsform footerform streamform"
+                                onevent="nach_test_btn" />
+                        </h:commandButton>
+                    </div>
+                    <div class="col-2">
+                        <h:commandButton value="----Nummern ein----" action="#{tAllgemein.doNummernEin()}"
+                            styleClass="btn-typ-test">
+                            <f:ajax execute="@all" render="headerform inhaltsform footerform streamform"
+                                onevent="nach_test_btn" />
+                        </h:commandButton>
+                    </div>
+                    <div class="col-2">
+                        <h:commandButton value="----Nummern aus----" action="#{tAllgemein.doNummernAus()}"
+                            styleClass="btn-typ-test">
+                            <f:ajax execute="@all" render="headerform inhaltsform footerform streamform"
+                                onevent="nach_test_btn" />
+                        </h:commandButton>
+                    </div>
+                    <div class="col-2"></div>
+                </h:panelGroup>
+            </div>
+        </div>
+    </footer>
+
+</ui:composition>

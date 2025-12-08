@@ -1,0 +1,334 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="#{uGastkarteSession.ueberschrift}" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <div class="divArbeitsbereich">
+
+                <h:panelGroup rendered="#{uGastkarteSession.ausstellungsart=='1'}">
+                    <p>
+                        <h:outputText
+                            value="Die unten aufgeführte Gastkarte wurde gespeichert und soeben per Email versandt.">
+                        </h:outputText>
+                    </p>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{uGastkarteSession.ausstellungsart=='2'}">
+                    <p>
+                        <h:outputText
+                            value="Die unten aufgeführte Gastkarte wurde gespeichert. Bitte drucken Sie die Karte über den Button Drucken aus.">
+                        </h:outputText>
+                        <br />
+                        <h:panelGroup rendered="#{uGastkarteSession.hinweisPapierformat!=''}">
+                            <p>
+                                <h:outputText value="Legen Sie hierzu das Formular "></h:outputText>
+                                <b>
+                                    <h:outputLabel value="#{uGastkarteSession.hinweisPapierformat}" />
+                                </b>
+                                <h:outputText value=" in den Drucker ein."></h:outputText>
+                            </p>
+                            <br />
+                        </h:panelGroup>
+                        <br />
+                        <h:commandButton value="Drucken" styleClass="btnNeutral" action="#{uGastkarte.doDrucken()}"
+                            onclick="this.form.target='_blank'" />
+
+                    </p>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{uGastkarteSession.ausstellungsart=='3'}">
+                    <p>
+                        <h:outputText
+                            value="Die unten aufgeführte Gastkarte wurde gespeichert und wird zentral mit dem nächsten Drucklauf gedruckt.">
+                        </h:outputText>
+                    </p>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{uGastkarteSession.manuellerMailversand and !uGastkarteSession.aenderung}">
+                    <h:outputText value="Sie können manuell eine Bestätigungsmail verschicken:"></h:outputText>
+                    <h:outputText value="#{uGastkarteSession.mailtext}" escape="false"></h:outputText>
+
+                </h:panelGroup>
+
+                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px">
+                    <p:column>
+                        <h:outputLabel value="Gastkarten-Nr"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{eclGastM.nummer}"></h:outputLabel>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldAnredeVerwenden>0}">
+                        <h:outputLabel value="Anrede"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldAnredeVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.anredeText}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldTitelVerwenden>0}">
+                        <h:outputLabel value="Titel"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldTitelVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.titel}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldAdelstitelVerwenden>0}">
+                        <h:outputLabel value="Adelstitel"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldAdelstitelVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.adelstitel}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldNameVerwenden>0}">
+                        <h:outputLabel value="Name"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldNameVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.name}" />
+                    </p:column>
+
+
+                    <p:column rendered="#{uGastkarteSession.feldVornameVerwenden>0}">
+                        <h:outputLabel value="Vorname"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldVornameVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.vorname}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldZuHaendenVerwenden>0}">
+                        <h:outputLabel value="#{uGastkarteSession.feldZuHaendenBezeichnung}"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldZuHaendenVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.zuHdCo}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldZusatz1Verwenden>0}">
+                        <h:outputLabel value="#{uGastkarteSession.feldZusatz1Bezeichnung}"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldZusatz1Verwenden>0}">
+                        <h:outputLabel value="#{eclGastM.zusatz1}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldZusatz2Verwenden>0}">
+                        <h:outputLabel value="#{uGastkarteSession.feldZusatz2Bezeichnung}"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldZusatz2Verwenden>0}">
+                        <h:outputLabel value="#{eclGastM.zusatz2}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldStrasseVerwenden>0}">
+                        <h:outputLabel value="Straße"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldStrasseVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.strasse}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldLandVerwenden>0}">
+                        <h:outputLabel value="Land"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldLandVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.land}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldPLZVerwenden>0}">
+                        <h:outputLabel value="Postleitzahl"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldPLZVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.plz}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldOrtVerwenden>0}">
+                        <h:outputLabel value="Ort"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldOrtVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.ort}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldMailadresseVerwenden>0}">
+                        <h:outputLabel value="Mailadresse"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldMailadresseVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.mailadresse}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldKommunikationsspracheVerwenden>0}">
+                        <!-- <h:outputLabel value="Kommunikationssprache"></h:outputLabel> -->
+                        <h:outputLabel value="Insti-Ident"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldKommunikationsspracheVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.kommunikationssprache}" />
+                        <!-- <h:outputLabel value="#{eclGastM.kommunikationsspracheText}" /> -->
+                    </p:column>
+
+
+                    <p:column rendered="#{uGastkarteSession.feldGruppeVerwenden>0}">
+                        <h:outputLabel value="Gruppe"></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldGruppeVerwenden>0}">
+                        <h:outputLabel value="#{eclGastM.gruppeText}" />
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:outputLabel value=""></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldAusstellungsgrundVerwenden>0}">
+                        <h:dataTable value="#{eclGastM.ausstellungsgrundListe}" var="ausstellungsgrund"
+                            columnClasses="tblKennzeichenC00,tblKennzeichenC01,tblKennzeichenC02" rowClasses="leftText"
+                            styleClass="tblKennzeichen">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Kürzel" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{ausstellungsgrund.ausstellungsGrundKuerzel}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Beschreibung" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{ausstellungsgrund.beschreibung}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Kommentar" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{ausstellungsgrund.kommentar}" />
+                            </h:column>
+
+                        </h:dataTable>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:outputLabel value=""></h:outputLabel>
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.feldVipVerwenden>0}">
+                        <h:dataTable value="#{eclGastM.vipKZListe}" var="vipKZ"
+                            columnClasses="tblKennzeichenC00, tblKennzeichenC01, tblKennzeichenC02"
+                            rowClasses="leftText" styleClass="tblKennzeichen">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Kürzel" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{vipKZ.vipKZKuerzel}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Beschreibung" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{vipKZ.beschreibung}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Kommentar" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{vipKZ.parameter}" />
+                            </h:column>
+
+                        </h:dataTable>
+                    </p:column>
+
+                    <p:column rendered="#{uGastkarteSession.gruppenausstellung}">
+                        <h:outputLabel value="zugeordnete Gastkarten" />
+                    </p:column>
+                    <p:column rendered="#{uGastkarteSession.gruppenausstellung}">
+                        <h:dataTable value="#{eclGastM.meldungenMeldungenListe}" var="meldungenMeldungen"
+                            rendered="#{uGastkarteSession.gruppenausstellung}"
+                            columnClasses="tblPersonC00, tblPersonC01, tblPersonC02, tblPersonC03, tblPersonC04"
+                            rowClasses="leftText" styleClass="tblPerson">
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Gastkarten-Nr" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{meldungenMeldungen.zutrittsIdent}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="von MeldungsIdent" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{meldungenMeldungen.vonMeldungsIdent}" />
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Name" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{meldungenMeldungen.name}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Vorname" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{meldungenMeldungen.vorname}" />
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Ort" style="float: left" />
+                                </f:facet>
+                                <h:outputText value="#{meldungenMeldungen.ort}" />
+                            </h:column>
+
+                        </h:dataTable>
+                    </p:column>
+                </p:panelGrid>
+
+            </div>
+
+            <table class="divButtons">
+                <tr>
+                    <td class="divButtonsLeft"></td>
+                    <td class="divButtonsCenter"></td>
+                    <td class="divButtonsRight">
+                        <h:commandButton value="Nächste Gastkarte" styleClass="btnStandard"
+                            action="#{uGastkarte.doNaechsteGastkarte()}" rendered="#{!uGastkarteSession.aenderung}" />
+                    </td>
+
+                </tr>
+            </table>
+            <h:panelGroup rendered="#{uMenueSession.menueServicelinetools()}">
+                <table class="divButtons">
+                    <tr>
+                        <td class="divButtonsLeft"></td>
+                        <td class="divButtonsCenter"></td>
+                        <td class="divButtonsRight">
+                            <h:commandButton value="Zum Service-Line-Tool" styleClass="btnStandard"
+                                action="#{uGastkarte.doZumServiceLineToolQuittung()}" />
+                        </td>
+                    </tr>
+                </table>
+            </h:panelGroup>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

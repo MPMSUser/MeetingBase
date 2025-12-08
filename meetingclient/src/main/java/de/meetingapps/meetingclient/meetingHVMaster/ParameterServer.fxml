@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btnSpeichern" layoutX="14.0" layoutY="762.0" mnemonicParsing="false" onAction="#clickedSpeichern" text="Speichern / Beenden">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnAbbrechen" layoutX="563.0" layoutY="761.0" mnemonicParsing="false" onAction="#clickedAbbrechen" text="Abbrechen" />
+      <Label fx:id="lblFehlermeldung" layoutX="14.0" layoutY="732.0" prefHeight="17.0" prefWidth="927.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="38.0" layoutY="14.0" prefHeight="32.0" prefWidth="943.0" text="Die folgenden Parameter gelten für den Server insgesamt - sie gelten damit für alle auf dem Server gespeicherten Emittenten!" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+	<TabPane layoutX="9.0" layoutY="46.0" prefHeight="666.0" prefWidth="1182.0" tabClosingPolicy="UNAVAILABLE">
+		<tabs>
+			<Tab text="Server">
+				<content>
+					<Pane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1100.0">
+						<children>
+						      <Label layoutX="38.0" layoutY="50.0" text="Server-Bezeichnung">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfServerBezeichnung" layoutX="217.0" layoutY="46.0" prefHeight="25.0" prefWidth="301.0" />
+      <Label layoutX="37.0" layoutY="345.0" prefHeight="45.0" prefWidth="173.0" text="Login auf Web-Seiten ohne Kennung/Passwort möglich" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="565.0" layoutY="350.0" prefHeight="45.0" prefWidth="515.0" text="Darf ausschließlich auf Servern zugelassen werden, die NICHT von außen erreichbar sind!" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <CheckBox fx:id="cbLocalInternPasswort" layoutX="217.0" layoutY="359.0" mnemonicParsing="false" />
+      <Label layoutX="38.0" layoutY="81.0" text="Server-Art">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfServerArt" layoutX="217.0" layoutY="77.0" prefHeight="25.0" prefWidth="105.0" />
+      <Label layoutX="567.0" layoutY="81.0" prefHeight="17.0" prefWidth="536.0" text="Serverart: 1=Produktionsserver (ExternerHoster), 2=Einrichtungsserver, 3=HV-Server, 4=Einzel-Rechner" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="37.0" layoutY="376.0" prefHeight="45.0" prefWidth="173.0" text="Passwort-Aging ein" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="565.0" layoutY="380.0" prefHeight="45.0" prefWidth="504.0" text="Auf HV-Server ausschalten. Auf allen anderen Servern mit Produktionsdatein einschalten" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbPasswortAging" layoutX="217.0" layoutY="390.0" mnemonicParsing="false" />
+      <Label layoutX="37.0" layoutY="435.0" prefHeight="45.0" prefWidth="173.0" text="Alle Portale gesperrt" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbLoginGesperrt" layoutX="217.0" layoutY="449.0" mnemonicParsing="false" />
+      <Label layoutX="38.0" layoutY="112.0" text="Datenbank-Nummer">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfDbServerIdent" layoutX="217.0" layoutY="107.0" prefHeight="25.0" prefWidth="105.0" />
+      <Label layoutX="567.0" layoutY="98.0" prefHeight="32.0" prefWidth="344.0" text="Eindeutige Nummer über alle Datenbanken hinweg" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="38.0" layoutY="470.0" prefHeight="32.0" prefWidth="173.0" text="Text Gesperrt Deutsch" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfLoginGesperrtTextDeutsch" layoutX="217.0" layoutY="473.0" prefHeight="25.0" prefWidth="828.0" />
+      <Label layoutX="37.0" layoutY="500.0" prefHeight="32.0" prefWidth="173.0" text="Text gesperrt Englisch" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfLoginGesperrtTextEnglisch" layoutX="218.0" layoutY="503.0" prefHeight="25.0" prefWidth="828.0" />
+      <Label layoutX="37.0" layoutY="407.0" prefHeight="45.0" prefWidth="173.0" text="Login bei BetterMeeting ohne Passwort möglich" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+	<CheckBox fx:id="cbLocalInternPasswortMeeting" layoutX="217.0" layoutY="421.0" mnemonicParsing="false" />
+
+	<Label layoutX="37.0" layoutY="535.0" prefHeight="32.0" prefWidth="173.0" text="Web-Sockets Local Host" wrapText="true">
+		<font>
+			<Font name="Arial" size="12.0" />
+		</font>
+	</Label>
+      
+      <TextField fx:id="tfWebSocketsLocalHost" layoutX="218.0" layoutY="538.0" prefHeight="25.0" prefWidth="592.0" />
+      <Label layoutX="36.0" layoutY="310.0" prefHeight="45.0" prefWidth="173.0" text="Konfiguration auf diesem Server möglich:" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbStandardPortaltextePflegbar" layoutX="217.0" layoutY="324.0" mnemonicParsing="false" />
+      <Label layoutX="245.0" layoutY="320.0" prefHeight="25.0" prefWidth="173.0" text="Standardportaltexte" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbNummernformenPflegbar" layoutX="399.0" layoutY="324.0" mnemonicParsing="false" />
+      <Label layoutX="427.0" layoutY="320.0" prefHeight="25.0" prefWidth="173.0" text="Nummernformen" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbInstisPflegbar" layoutX="560.0" layoutY="324.0" mnemonicParsing="false" />
+      <Label layoutX="588.0" layoutY="320.0" prefHeight="25.0" prefWidth="173.0" text="Institutionelle" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+                        <Label layoutX="37.0" layoutY="567.0" prefHeight="32.0" prefWidth="173.0" text="Präfix reports-Verzeichnisse" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfPraefixPfadVerzeichnisse" layoutX="218.0" layoutY="570.0" prefHeight="25.0" prefWidth="592.0" />
+                        <Label layoutX="38.0" layoutY="599.0" prefHeight="32.0" prefWidth="173.0" text="*Timeout Sperrlogik (ms)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfTimeoutSperrlogik" layoutX="219.0" layoutY="602.0" prefHeight="25.0" prefWidth="592.0" />
+                        <Label layoutX="38.0" layoutY="162.0" text="Initialpasswort für Testdaten">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfPortalInitialPasswortTestBestand" layoutX="217.0" layoutY="157.0" prefHeight="25.0" prefWidth="352.0" />
+						</children>
+					</Pane>	
+				</content>
+			</Tab>
+	<Tab text="URL">
+		<content>
+			<Pane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1100.0">
+			<children>
+      <Label layoutX="38.0" layoutY="141.0" text="Präfix Portal Seiten">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfLocalPraefixLink" layoutX="217.0" layoutY="137.0" prefHeight="25.0" prefWidth="301.0" />
+      <Label layoutX="566.0" layoutY="141.0" text="Dieses Präfix ist der Beginn des Links des Portalaufrufs (d.h. vor /meetingport)">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="566.0" layoutY="155.0" text="Lokaler Server: http://127.0.0.1:8080">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="566.0" layoutY="170.0" text="Test-Server (von extern): http://testportal.better-orange.de">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="565.0" layoutY="185.0" text="Produktions-Server: https://www.portal.better-orange.de">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+               <Label layoutX="38.0" layoutY="203.0" text="Alternatives Präfix Portal Seiten">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfLocalPraefixLinkAlternativ" layoutX="217.0" layoutY="199.0" prefHeight="25.0" prefWidth="301.0" />
+      <Label layoutX="566.0" layoutY="203.0" text="Alternatives Präfix des Links des Portalaufrufs (d.h. vor /betterport), z.B. für Testserver von intern">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="566.0" layoutY="218.0" text="Test-Server (von intern): http://testportal">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="38.0" layoutY="228.0" prefHeight="45.0" prefWidth="173.0" text="Präfix Portal Seiten für &quot;Subdomain-Variante" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfSubdomainPraefixLink" layoutX="217.0" layoutY="238.0" prefHeight="25.0" prefWidth="301.0" />
+      <Label layoutX="566.0" layoutY="232.0" prefHeight="45.0" prefWidth="435.0" text="Für Verwendung von Subdomain-Aufrufen - Teil vor dem Mandanten-Kürzel. Für Produktionsserver https://" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="37.0" layoutY="265.0" prefHeight="45.0" prefWidth="173.0" text="Suffix Portal Seiten für &quot;Subdomain-Variante" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfSubdomainSuffixLink" layoutX="216.0" layoutY="275.0" prefHeight="25.0" prefWidth="301.0" />
+      <Label layoutX="565.0" layoutY="269.0" prefHeight="45.0" prefWidth="435.0" text="Für Verwendung von Subdomain-Aufrufen - Teil nach dem Mandanten-Kürzel. Für Produktionsserver .aktionaersservice.de" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+                        <Label layoutX="38.0" layoutY="310.0" prefHeight="45.0" prefWidth="173.0" text="Kurz-Url: Lang-Url-Komponente ersetzen" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="36.0" layoutY="355.0" prefHeight="45.0" prefWidth="173.0" text="Kurz-Url: Lang-Url-Komponente ersetzen durch" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfDomainLinkErsetzen" layoutX="216.0" layoutY="320.0" prefHeight="25.0" prefWidth="301.0" />
+                        <TextField fx:id="tfDomainLinkErsetzenDurch" layoutX="216.0" layoutY="365.0" prefHeight="25.0" prefWidth="301.0" />
+                        <Label layoutX="565.0" layoutY="310.0" prefHeight="45.0" prefWidth="435.0" text="z.B. portal02" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="565.0" layoutY="355.0" prefHeight="45.0" prefWidth="435.0" text="z.B. BO02" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+         
+			</children>
+			</Pane>
+		</content>
+	</Tab>
+	<Tab text="Verbund-Server">
+		<content>
+			<Pane minHeight="0.0" minWidth="0.0" prefHeight="700.0" prefWidth="1100.0">
+			<children>
+				<Label layoutX="37.0" layoutY="22.0" prefHeight="32.0" prefWidth="173.0" text="Verbund-Server 1" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+
+				<TextField fx:id="tfVerbundServerAdresse1" layoutX="218.0" layoutY="25.0" prefHeight="25.0" prefWidth="592.0" />
+				<Label layoutX="37.0" layoutY="52.0" prefHeight="32.0" prefWidth="173.0" text="Verbund-Server 2" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+				<TextField fx:id="tfVerbundServerAdresse2" layoutX="218.0" layoutY="55.0" prefHeight="25.0" prefWidth="592.0" />
+				<Label layoutX="38.0" layoutY="82.0" prefHeight="32.0" prefWidth="173.0" text="Verbund-Server 3" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+				<TextField fx:id="tfVerbundServerAdresse3" layoutX="219.0" layoutY="85.0" prefHeight="25.0" prefWidth="592.0" />
+				<Label layoutX="37.0" layoutY="116.0" prefHeight="32.0" prefWidth="173.0" text="Verbund-Server 4" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+				<TextField fx:id="tfVerbundServerAdresse4" layoutX="218.0" layoutY="119.0" prefHeight="25.0" prefWidth="592.0" />
+				<Label layoutX="38.0" layoutY="150.0" prefHeight="32.0" prefWidth="173.0" text="Verbund-Server 5" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+				<TextField fx:id="tfVerbundServerAdresse5" layoutX="219.0" layoutY="153.0" prefHeight="25.0" prefWidth="592.0" />
+				<Label layoutX="853.0" layoutY="26.0" prefHeight="23.0" prefWidth="65.0" text="Aktiv" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+				<CheckBox fx:id="cbVerbundServerAktiv1" layoutX="934.0" layoutY="30.0" mnemonicParsing="false" />
+				<Label layoutX="853.0" layoutY="56.0" prefHeight="23.0" prefWidth="65.0" text="Aktiv" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+				<CheckBox fx:id="cbVerbundServerAktiv2" layoutX="934.0" layoutY="60.0" mnemonicParsing="false" />
+				<Label layoutX="853.0" layoutY="86.0" prefHeight="23.0" prefWidth="65.0" text="Aktiv" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+				<CheckBox fx:id="cbVerbundServerAktiv3" layoutX="934.0" layoutY="91.0" mnemonicParsing="false" />
+				<Label layoutX="853.0" layoutY="120.0" prefHeight="23.0" prefWidth="65.0" text="Aktiv" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+				<CheckBox fx:id="cbVerbundServerAktiv4" layoutX="934.0" layoutY="124.0" mnemonicParsing="false" />
+				<Label layoutX="853.0" layoutY="152.0" prefHeight="23.0" prefWidth="65.0" text="Aktiv" wrapText="true">
+					<font>
+						<Font name="Arial" size="12.0" />
+					</font>
+				</Label>
+				<CheckBox fx:id="cbVerbundServerAktiv5" layoutX="934.0" layoutY="159.0" mnemonicParsing="false" />
+			</children>
+			</Pane>
+		</content>
+	</Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>

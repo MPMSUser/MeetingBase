@@ -1,0 +1,108 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+    <f:subview id="iUnterlagenOben">
+        <ui:include src="idetail/idSeiteStartModals.xhtml" />
+    </f:subview>
+
+    <div class="modal-body">
+        <div class="container-fluid">
+            <h:panelGroup rendered="#{tUnterlagenSession.ansehenAktiv}">
+                <!-- Unterlagen anzeigen -->
+                <!-- Starttext -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(tUnterlagenSession.starttextAktiv)}"
+                    styleClass="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeIText(tUnterlagenSession.starttextAktiv)}"
+                                escape="false" />
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+                <!-- Text, wenn Unterlagenliste leert -->
+                <h:panelGroup rendered="#{tUnterlagenSession.liefereListeIstLeer()==true}">
+                    <h:panelGroup
+                        rendered="#{eclPortalTexteM.pruefeITextVorhanden(tUnterlagenSession.textWennAktivAberListeLeer)}"
+                        styleClass="row mt-2">
+                        <div class="col">
+                            <p>
+                                <h:outputText
+                                    value="#{eclPortalTexteM.holeIText(tUnterlagenSession.textWennAktivAberListeLeer)}"
+                                    escape="false" />
+
+                            </p>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tUnterlagenSession.liefereListeIstLeer()==false}">
+                    <f:subview id="iUnterlagen">
+                        <!-- Unterlagenliste -->
+                        <ui:repeat value="#{tUnterlagenSession.unterlagenListe}" var="unterlage">
+                            <ui:include src="idetail/idUnterlageAnzeigen.xhtml" />
+                        </ui:repeat>
+                    </f:subview>
+                </h:panelGroup>
+
+                <!-- Endetexttext -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(tUnterlagenSession.endetextAktiv)}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeIText(tUnterlagenSession.endetextAktiv)}"
+                            escape="false" />
+
+                    </p>
+                </h:panelGroup>
+
+
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tUnterlagenSession.ansehenAktiv==false}">
+                <!-- nicht aktiv -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(tUnterlagenSession.textInaktiv)}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeIText(tUnterlagenSession.textInaktiv)}"
+                            escape="false" />
+
+                    </p>
+                </h:panelGroup>
+            </h:panelGroup>
+
+
+            <!-- Endetext immer -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(tUnterlagenSession.endetextImmer)}">
+                <p>
+                    <h:outputText value="#{eclPortalTexteM.holeIText(tUnterlagenSession.endetextImmer)}"
+                        escape="false" />
+
+                </p>
+            </h:panelGroup>
+        </div>
+    </div>
+
+    <f:subview id="iUnterlagenButtons">
+        <ui:include src="idetail/idSeiteButtonsUntenModals.xhtml ">
+            <ui:param name="modalShowBtnRight" value="false" />
+            <ui:param name="modalStaticBtnRight" value="false" />
+            <ui:param name="modalShowBtnLeft" value="false" />
+            <ui:param name="modalStaticBtnLeft" value="false" />
+        </ui:include>
+    </f:subview>
+
+
+</ui:composition>

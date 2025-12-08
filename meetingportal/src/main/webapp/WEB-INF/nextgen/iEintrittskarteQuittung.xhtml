@@ -1,0 +1,186 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+
+    <f:subview id="iEintrittskarteQuittungOben">
+        <ui:include src="idetail/idSeiteStartModals.xhtml" />
+    </f:subview>
+
+    <div class="modal-body">
+        <div class="container-fluid">
+
+            <f:subview id="iEintrittskarteQuittungBestaende">
+                <ui:include src="idetail/idDurchfuehrenFuerBestand.xhtml" />
+            </f:subview>
+
+            <!-- Vollmacht an Dritte -->
+            <h:panelGroup rendered="#{tSeitensteuerungSession.ekvVollmachtEingeben}">
+
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvVollmachtStarttextAnzeigen}" styleClass="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{tSeitensteuerung.holeTextEkvTextVollmachtStarttext()}"
+                                escape="false"></h:outputText>
+                        </p>
+                    </div>
+                </h:panelGroup>
+                <div class="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputLabel
+                                value="#{tWillenserklaerungSession.vollmachtName} #{tWillenserklaerungSession.vollmachtVorname}">
+                            </h:outputLabel><br />
+                            <h:outputLabel value="#{tWillenserklaerungSession.vollmachtOrt}"></h:outputLabel>
+                        </p>
+                    </div>
+                </div>
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvVollmachtEndetextAnzeigen}" styleClass="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{tSeitensteuerung.holeTextEkvTextVollmachtEndetext()}" escape="false">
+                            </h:outputText>
+
+                        </p>
+                    </div>
+                </h:panelGroup>
+            </h:panelGroup>
+
+
+
+            <!--  Text je Funktion -->
+            <h:panelGroup rendered="#{tSeitensteuerungSession.ekvArtStarttextAnzeigen}" styleClass="row mt-2">
+                <div class="col">
+                    <p>
+                        <h:outputText value="#{tSeitensteuerung.holeTextEkvTextArtStarttext()}" escape="false">
+                        </h:outputText>
+                    </p>
+                </div>
+            </h:panelGroup>
+
+
+            <h:panelGroup rendered="#{tSeitensteuerungSession.ekvQuittungVersandartAnzeigen}" styleClass="row mt-2">
+                <div class="col">
+                    <p>
+                        <h:outputText value="#{tSeitensteuerung.holeTextEkvTextQuittungVersandart()}" escape="false">
+                        </h:outputText>
+                    </p>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tSeitensteuerungSession.ekvVersandadresseAnzeigen}" styleClass="row mt-2">
+                <div class="col">
+                    <p>
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse1}">
+                        </h:outputLabel><br />
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse2}">
+                        </h:outputLabel><br />
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse3}">
+                        </h:outputLabel><br />
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse4}">
+                        </h:outputLabel><br />
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse5}">
+                        </h:outputLabel>
+                    </p>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tSeitensteuerungSession.ekvEKDruck1ButtonAnzeigen}">
+                <div class="row mt-4">
+                    <div class="col">
+                        <h:commandLink action="#{tEintrittskarteQuittungUDetail.doQuittungDruckeEintrittskarte()}"
+                            target="_blank" styleClass="btn btn-outline-primary">
+                            <i class="fa-solid fa-print me-2"></i> #{eclPortalTexteM.holeText('377')}
+                        </h:commandLink>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tSeitensteuerungSession.ekvEKDruck2ButtonAnzeigen}">
+                <div class="row mt-4">
+                    <div class="col">
+                        <h:commandLink action="#{tEintrittskarteQuittungUDetail.doQuittungDruckeEintrittskarte()}"
+                            target="_blank" styleClass="btn btn-outline-primary">
+                            <i class="fa-solid fa-print me-2"></i> #{eclPortalTexteM.holeText('383')}
+                        </h:commandLink>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <h:commandLink action="#{tEintrittskarteQuittungUDetail.doQuittungDruckeEintrittskarte2()}"
+                            target="_blank" styleClass="btn btn-outline-primary">
+                            <i class="fa-solid fa-print me-2"></i> #{eclPortalTexteM.holeText('384')}
+                        </h:commandLink>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tSeitensteuerungSession.ekvEKMail1ButtonAnzeigen}">
+                <div class="row mt-4">
+                    <div class="col">
+                        <h:commandButton value="#{eclPortalTexteM.holeText('379')}" action="#{tEintrittskarteQuittungUDetail.doQuittungMailEintrittskarte()}"
+                        onclick="this.form.target='_self'" styleClass="btn btn-outline-primary">
+                        <f:ajax execute="@all" render="inhaltsform" onevent="function(data) {nachAjaxButton(data, 'true', 'false', 'mainInhaltModal', null, 'true')}" />
+                        </h:commandButton>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{tSeitensteuerungSession.ekvEKMail2ButtonAnzeigen}">
+                <div class="row mt-4">
+                    <div class="col">
+                        <h:commandButton value="#{eclPortalTexteM.holeText('386')}" action="#{tEintrittskarteQuittungUDetail.doQuittungMailEintrittskarte()}"
+                        onclick="this.form.target='_self'" styleClass="btn btn-outline-primary">
+                        <f:ajax execute="@all" render="inhaltsform" onevent="function(data) {nachAjaxButton(data, 'true', 'false', 'mainInhaltModal', null, 'true')}" />
+                        </h:commandButton>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <h:commandButton value="#{eclPortalTexteM.holeText('386')}" action="#{tEintrittskarteQuittungUDetail.doQuittungMailEintrittskarte2()}"
+                        onclick="this.form.target='_self'" styleClass="btn btn-outline-primary">
+                        <f:ajax execute="@all" render="inhaltsform" onevent="function(data) {nachAjaxButton(data, 'true', 'false', 'mainInhaltModal', null, 'true')}" />
+                        </h:commandButton>
+                    </div>
+                </div>
+            </h:panelGroup>
+            <div class="row mt-4">
+                <div class="col">
+                    <p>
+                        <h:panelGroup rendered="#{aDlgVariablen.eintrittskarteVersandart=='1'}">
+                        </h:panelGroup><br />
+                        <h:panelGroup rendered="#{aDlgVariablen.eintrittskarteVersandart=='2'}">
+                        </h:panelGroup><br />
+                        <h:panelGroup rendered="#{aDlgVariablen.eintrittskarteVersandart=='3'}">
+                        </h:panelGroup><br />
+                        <h:panelGroup rendered="#{aDlgVariablen.eintrittskarteVersandart=='4'}">
+                        </h:panelGroup>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <f:subview id="iNurEintrittskarteQuittungButtons">
+        <ui:include src="idetail/idSeiteButtonsUntenModals.xhtml">
+            <ui:param name="modalShowBtnRight" value="false" />
+            <ui:param name="modalStaticBtnRight" value="false" />
+            <ui:param name="modalShowBtnLeft" value="false" />
+            <ui:param name="modalStaticBtnLeft" value="false" />
+        </ui:include>
+    </f:subview>
+
+</ui:composition>

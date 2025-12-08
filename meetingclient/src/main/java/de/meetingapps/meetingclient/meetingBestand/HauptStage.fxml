@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+		<MenuBar layoutY="2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<menus>
+				<Menu mnemonicParsing="false" text="Datei">
+					<items>
+                  <MenuItem fx:id="mnEmittentenUebersicht" mnemonicParsing="false" onAction="#gewEmittentenUebersicht" text="Emittenten Übersicht" />
+                  <MenuItem fx:id="mnModulauswahl" mnemonicParsing="false" onAction="#gewModulauswahl" text="Modulauswahl" />
+						<MenuItem fx:id="mnMandantWechseln" mnemonicParsing="false" onAction="#gewMandantWechseln" text="Mandant Wechseln" />
+						<MenuItem fx:id="mnBeenden" mnemonicParsing="false" onAction="#gewBeenden" text="Beenden" visible="false" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Datenbasis">
+					<items>
+                  <MenuItem fx:id="mnAktienregister" mnemonicParsing="false" onAction="#gewAktienregister" text="Bestand" />
+						<MenuItem fx:id="mnInstiPflege" mnemonicParsing="false" onAction="#gewInstiPflege" text="Pflege Institutionelle" />
+						<MenuItem fx:id="mnSammelkarten" mnemonicParsing="false" onAction="#gewSammelkarten" text="Sammelkarten" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Willenserklärungen erfassen">
+					<items>
+						<MenuItem fx:id="mnEinzelfall" mnemonicParsing="false" onAction="#gewEinzelfall" text="Einzelfall" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<Menu mnemonicParsing="false" text="Manuelle Stapelerfassung - Anmeldung">
+							<items>
+                                 <MenuItem fx:id="mnAnmeldung" mnemonicParsing="false" onAction="#gewAnmeldungen" text="nur Anmelden" />
+								<Menu mnemonicParsing="false" text="Eintrittskarten">
+ 									<items>
+										<MenuItem fx:id="mn1EintrittskarteSelbst" mnemonicParsing="false" onAction="#gew1EintrittskarteSelbst" text="1 Eintrittskarte selbst" />
+										<MenuItem fx:id="mn1EintrittskarteVertreter" mnemonicParsing="false" onAction="#gew1EintrittskarteVertreter" text="1 Eintrittskarte mit Vollmacht" />
+										<MenuItem fx:id="mn2EintrittskarteSelbst" mnemonicParsing="false" onAction="#gew2EintrittskarteSelbst" text="2 Eintrittskarten Selbst" />
+										<MenuItem fx:id="mn2EintrittskarteSelbstOderVertreter" mnemonicParsing="false" onAction="#gew2EintrittskarteSelbstOderVertreter" text="2 Eintrittskarten Selbst oder Vollmacht" />
+									</items>
+								</Menu>
+								<MenuItem fx:id="mnSRV" mnemonicParsing="false" onAction="#gewSRV" text="Vollmacht/Weisung SRV" />
+								<MenuItem fx:id="mnBriefwahl" mnemonicParsing="false" onAction="#gewBriefwahl" text="Briefwahl" />
+								<MenuItem fx:id="mnKIAV" mnemonicParsing="false" onAction="#gewKIAV" text="Vollmacht KI/AV" />
+								<MenuItem fx:id="mnDauervollmacht" mnemonicParsing="false" onAction="#gewDauervollmacht" text="Dauervollmacht" />
+								<MenuItem fx:id="mnOrga" mnemonicParsing="false" onAction="#gewOrga" text="Organisatorisch in Sammelkarte" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Manuelle Stapelerfassung - Weisungseintrittskarte">
+							<items>
+								<MenuItem fx:id="mnWekSRV" mnemonicParsing="false" onAction="#gewWekSRV" text="Stimmrechtsvertreter" />
+								<MenuItem fx:id="mnWekBriefwahl" mnemonicParsing="false" onAction="#gewWekBriefwahl" text="Briefwahl" />
+							</items>
+						</Menu>
+						<SeparatorMenuItem mnemonicParsing="false" />
+                  		<MenuItem fx:id="mnSammelkarteZuordnen" mnemonicParsing="false" onAction="#gewSammelkarteZuordnen" text="Bestände Sammelkarte zuordnen" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem fx:id="mnStapelverarbeitung" mnemonicParsing="false" onAction="#gewStapelverarbeitung" text="Stapelverarbeitung" />
+						<MenuItem fx:id="mnInstiProv" mnemonicParsing="false" onAction="#gewInstiProv" text="Institutionelle Anleger (Prov)" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Verarbeiten">
+					<items>
+						<MenuItem fx:id="mnVersandadressePruefen" mnemonicParsing="false" onAction="#gewVersandadressePruefen" text="Versandadressen prüfen" />
+						<MenuItem fx:id="mnEintrittskkartenDrucken" mnemonicParsing="false" onAction="#gewEintrittskartenDrucken" text="Eintrittskarten drucken" />
+                        <MenuItem fx:id="mnStimmkartenDrucken" mnemonicParsing="false" onAction="#gewStimmkartenDrucken" text="Stimmkarten Drucken" />
+						<MenuItem fx:id="mnPersonenprognose" mnemonicParsing="false" onAction="#gewPersonenprognose" text="Personenprognose" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+						<MenuItem fx:id="mnQSKontrollisteWeisungen" mnemonicParsing="false" onAction="#gewQSKontrollisteWeisungen" text="QS Kontrolliste Weisungen" />
+						<MenuItem fx:id="mnQSWeisungenBildschirm" mnemonicParsing="false" onAction="#gewQSWeisungenBildschirm" text="QS Weisungen Bildschirm" />
+						<SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="mnSperreNullBestand" mnemonicParsing="false" onAction="#gewSperreNullBestand" text="Sperre 0-Bestände" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+						<Menu mnemonicParsing="false" text="Passwort-Anforderungen">
+							<items>
+								<MenuItem fx:id="mnPasswortPruefen" mnemonicParsing="false" onAction="#gewPasswortPruefen" text="Prüfen" />
+								<MenuItem fx:id="mnPasswortDrucken" mnemonicParsing="false" onAction="#gewPasswortDrucken" text="Drucken" />
+							</items>
+						</Menu>
+						<SeparatorMenuItem mnemonicParsing="false" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Testen">
+					<items>
+						<MenuItem fx:id="mnMassentest" mnemonicParsing="false" onAction="#gewMassentest" text="Massentest" />
+					</items>
+				</Menu>
+				<Menu mnemonicParsing="false" text="Verwaltung">
+					<items>
+						<MenuItem fx:id="mnPasswortAendern" mnemonicParsing="false" onAction="#gewPasswortAendern" text="Passwort Ändern" />
+						<MenuItem mnemonicParsing="false" text="About" />
+					</items>
+				</Menu>
+                <Menu mnemonicParsing="false" text="InhaberImport">
+              <items>
+                <MenuItem fx:id="mnInhaberImportImport" mnemonicParsing="false" onAction="#gewInhaberImportImport" text="Import" />
+                  <MenuItem fx:id="mnInhaberImportExport" disable="true" mnemonicParsing="false" onAction="#gewInhaberImportExport" text="Export" visible="false" />
+                  <MenuItem fx:id="mnInhaberImportProtokoll" mnemonicParsing="false" onAction="#gewInhaberImportProtokoll" text="Protokoll" />
+                  <MenuItem fx:id="mnAnforderungsstelle" mnemonicParsing="false" onAction="#gewAnforderungsstelle" text="Anforderungsstellen" visible="false" />
+                  <MenuItem fx:id="mnImportProfil" mnemonicParsing="false" onAction="#gewImportProfil" text="Import Profile" />
+                  <MenuItem fx:id="mnEintrittskartenDefinition" mnemonicParsing="false" onAction="#gewEintrittskartenDefinition" text="Eintrittskartendefinition" visible="false" />
+              </items>
+            </Menu>
+			</menus>
+		</MenuBar>
+		<Label fx:id="lblUser" layoutX="21.0" layoutY="44.0" prefHeight="65.0" prefWidth="825.0" wrapText="true" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="50.0" />
+      <Label layoutX="25.0" layoutY="150.0" text="Consultant:" AnchorPane.leftAnchor="35.0" />
+      <Label fx:id="lblConsultant" alignment="TOP_LEFT" layoutX="123.0" layoutY="150.0" prefHeight="88.0" prefWidth="708.0" />
+      <Label fx:id="lblDatenStatus" layoutX="25.0" layoutY="320.0" prefHeight="141.0" prefWidth="1010.0" textFill="#fc002e" wrapText="true" AnchorPane.leftAnchor="35.0">
+         <font>
+            <Font size="64.0" />
+         </font></Label>
+		<Label fx:id="lblServer" layoutX="178.0" layoutY="264.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="35.0">
+			<font>
+				<Font size="96.0" />
+			</font>
+		</Label>
+      <Label fx:id="lblImport" layoutX="1045.0" layoutY="567.0" AnchorPane.bottomAnchor="55.0" AnchorPane.rightAnchor="15.0" />
+        <GridPane fx:id="hauptAnsicht" hgap="25.0" style="-fx-background-color: e8e8e8; -fx-border-color: black; -fx-background-radius: 5; -fx-border-radius: 5;" vgap="25.0" visible="false" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="50.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints prefHeight="115.0" vgrow="SOMETIMES" />
+          <RowConstraints prefHeight="115.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+               </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </GridPane>
+      <CheckBox fx:id="cbAnsicht" focusTraversable="false" layoutX="1016.0" layoutY="577.0" mnemonicParsing="false" onAction="#onCbAnsicht" prefHeight="25.0" text="Hauptansicht" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </CheckBox>
+	</children>
+</AnchorPane>

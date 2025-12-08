@@ -1,0 +1,746 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+        <f:subview id="iAuswahl1GeneralversammlungOben">
+            <ui:include src="idetail/idSeiteStart.xhtml" />
+        </f:subview>
+
+
+
+        <!-- Generalversammlungsfunktionen noch nicht möglich -->
+        <h:panelGroup rendered="#{!tAuswahl1Session.generalversammlungMoeglich}">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-8  btn-w-100">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('674')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('674')}" escape="false"></h:outputText>
+                            </p>
+                        </h:panelGroup>
+                    </div>
+                </div>
+            </div>
+        </h:panelGroup>
+
+        <!-- +++++++++++++++++++++ Generelversammlung generell möglich +++++++++++++++++++++++ -->
+        <h:panelGroup rendered="#{tAuswahl1Session.generalversammlungMoeglich}">
+            <div class="container-80">
+                <!-- kein eigener Bestand vorhanden -->
+                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.eigenerAREintragVorhanden==false}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('962')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('962')}" escape="false"></h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+
+
+                <!-- eigener Bestand vorhanden, d.h. Anmeldung und Vollmacht und Briefwahl möglich -->
+                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.eigenerAREintragVorhanden==true}">
+                    <!-- +++++++++++++++An-/Abmeldung ++++++++++++++++++++-->
+                    <!-- Starttext -->
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('699')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('699')}" escape="false"></h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+
+                    <!-- ++++++++Anmelden/Abmelden (und ggf. Vollmacht) ist möglich -->
+                    <h:panelGroup rendered="#{tSession.portalErstanmeldungIstMoeglich==true}">
+                        <!-- Anmeldung ist für diesen Aktionär möglich -->
+                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anmeldungMoeglich}">
+                            <!-- noch nicht an - oder abgemeldet -->
+                            <h:panelGroup rendered="#{!eclBesitzGesamtAuswahl1M.anOderAbgemeldet}">
+                                <!-- Start -->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('702')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('702')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                                <!-- Button an oder abmelden -->
+                                <p>
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('708')}" action="#{tGeneralversammlung.doAnAbmelden()}" styleClass="btn-typ-00">
+                                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+
+                                </p>
+                                <!-- Ende -->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('703')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('703')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+
+
+                            <!-- bereits an oder abgemeldet -->
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anOderAbgemeldet}">
+                                <!-- Start -->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('704')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('704')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+
+                                <!-- Angemeldet - egal wie -->
+                                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.angemeldet}">
+
+                                    <!-- Starttext ist angemeldet -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('706')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('706')}" escape="false"></h:outputText>
+
+                                        </p>
+                                    </h:panelGroup>
+
+
+                                    <!-- Ausdruck von Zutrittsdokument ermöglichen -->
+                                    <h:panelGroup rendered="#{tRender.freiwilligeAnmeldungEKDruckMoeglich() and eclBesitzGesamtAuswahl1M.ekDruckWirdAngezeigt}">
+                                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereNurEinButton()}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1731')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1731')}" escape="false"></h:outputText>
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereNurEinButton()==false}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2046')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('2046')}" escape="false"></h:outputText>
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereVollmachtNormal()}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2049')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('2049')}" escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+                                        <p>
+                                            <h:commandButton value="#{eclPortalTexteM.holeText('1732')}" action="#{tGeneralversammlung.doEKAnzeigen()}" onclick="this.form.target='_blank'" styleClass="btn-typ-00" />
+                                        </p>
+                                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereZweitePersonAngemeldet()}">
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('2047')}" action="#{tGeneralversammlung.doEK2Anzeigen()}" onclick="this.form.target='_blank'" styleClass="btn-typ-00" />
+                                            </p>
+                                        </h:panelGroup>
+                                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereMitgliedAlsGastAngemeldet()}">
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('2048')}" action="#{tGeneralversammlung.doEK3Anzeigen()}" onclick="this.form.target='_blank'" styleClass="btn-typ-00" />
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+<!-- bei ku178 713 hier wieder raus -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('713')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('713')}" escape="false"></h:outputText>
+
+                                            </p>
+                                        </h:panelGroup>
+
+                                    <!-- Angemeldet mit einer Person (mit oder ohne gesetzliche Erforderniss) -->
+                                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anmeldung=='1' or eclBesitzGesamtAuswahl1M.anmeldung=='5'}">
+                                    <!-- bei ku178 713 wieder rein -->
+                                        <!-- falls keine gesetzliche Vertretungs-Erfordernis erforderlich - Text Sie wurden freigeschaltet -->
+                                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich==true}">
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1100')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1100')}" escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+                                        </h:panelGroup>
+
+                                        <!-- Button an oder abmelden darf hier unabhgängig von
+                                    gesetzlicher Vollmacht, da Umshift auf Dritten immer möglich sein muß
+                                    und Stornierung der gesetzlichen Vollmacht nicht möglich ist-->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2054')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('2054')}" escape="false"></h:outputText>
+                                            </p>
+                                        </h:panelGroup>
+                                        <p>
+                                            <!--  war früher mal auch Text 708 -->
+                                            <h:commandButton value="#{eclPortalTexteM.holeText('2053')}" action="#{tGeneralversammlung.doAnAbmelden()}" styleClass="btn-typ-00">
+                                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                            </h:commandButton>
+
+                                        </p>
+
+                                        <!-- Falls gesetzliche Vollmacht erforderlich -->
+                                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.selbstAnmeldungOhneGesetzlichenVertreterMoeglich==false}">
+                                            <!-- Starttext -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1005')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1005')}" escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+
+                                            <!-- keine gesetzliche Vollmacht hinterlegt -->
+                                            <h:panelGroup rendered="#{!eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragen}">
+                                                <!-- Starttext -->
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1006')}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1006')}" escape="false"></h:outputText>
+
+                                                    </p>
+                                                </h:panelGroup>
+
+                                                <!-- Gruppen-spezifischer Text  gruppenTextVorVollmachtsformular -->
+                                                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vollmachtsFormularGesetzlichZulaessig}">
+                                                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.gruppenTextVorVollmachtsformular!=0}">
+                                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(eclBesitzGesamtAuswahl1M.gruppenTextVorVollmachtsformular)}">
+                                                            <p>
+                                                                <h:outputText value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVorVollmachtsformular)}" escape="false"></h:outputText>
+                                                            </p>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
+
+                                                    <!-- Button Formular Gesetzliche -->
+                                                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.gruppenTextVollmachtsButtonAnzeigen}">
+                                                        <p>
+                                                            <h:commandButton value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVollmachtsButton)}" action="#{tGeneralversammlung.doVollmachtsformularNr()}"
+                                                                styleClass="btn-typ-00" onclick="this.form.target='_blank'">
+                                                            </h:commandButton>
+
+                                                        </p>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
+
+                                                <!-- Button Formular Elternvollmacht -->
+                                                <!--
+                                                <p>
+                                                    <h:commandButton value="#{eclPortalTexteM.holeText('1094')}" action="#{tGeneralversammlung.doVollmachtElternformular()}" styleClass="btn-typ-00" onclick="this.form.target='_blank'">
+                                                    </h:commandButton>
+                                                </p>
+                                                -->
+
+                                                <!-- Ende -->
+                                                <!-- früher: 1008 -->
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(eclBesitzGesamtAuswahl1M.gruppenTextGesetzlVollmachtFehlt)}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextGesetzlVollmachtFehlt)}" escape="false"></h:outputText>
+
+                                                    </p>
+                                                </h:panelGroup>
+
+                                            </h:panelGroup>
+
+                                        </h:panelGroup>
+
+                                    </h:panelGroup>
+
+
+                                    <!-- Angemeldet mit zwei Personen -->
+                                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anmeldung=='3'}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('714')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('714')}" escape="false"></h:outputText>
+
+                                            </p>
+                                        </h:panelGroup>
+                                        <!-- Button immer möglich -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2054')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('2054')}" escape="false"></h:outputText>
+                                            </p>
+                                        </h:panelGroup>
+                                        <p>
+                                            <!-- war früher TextNr 708 -->
+                                            <h:commandButton value="#{eclPortalTexteM.holeText('2053')}" action="#{tGeneralversammlung.doAnAbmelden()}" styleClass="btn-typ-00">
+                                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                            </h:commandButton>
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- Angemeldet mit Bevollmächtigtem -->
+                                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anmeldung=='4'}">
+                                        <!-- Starttext -->
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('966')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('966')}" escape="false"></h:outputText>
+
+                                            </p>
+                                        </h:panelGroup>
+
+                                        <!-- keine geltende Vollmacht eingetragen -->
+                                        <h:panelGroup rendered="#{!eclBesitzGesamtAuswahl1M.vollmachtAnDritteEingetragen}">
+                                            <!-- Starttext -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('963')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('963')}" escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+
+                                            <!-- Button an oder abmelden -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2054')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('2054')}" escape="false"></h:outputText>
+                                                </p>
+                                            </h:panelGroup>
+                                            <p>
+                                                <!-- war früher TextNr 708 -->
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('2053')}" action="#{tGeneralversammlung.doAnAbmelden()}" styleClass="btn-typ-00">
+                                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+
+                                            </p>
+
+                                            <!-- Zwischentext -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1004')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('1004')}" escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+
+                                            <!-- Gruppen-spezifischer Text  gruppenTextAnmeldungMitVertreter -->
+                                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.gruppenTextAnmeldungMitVertreter!=0}">
+                                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(eclBesitzGesamtAuswahl1M.gruppenTextAnmeldungMitVertreter)}">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextAnmeldungMitVertreter)}" escape="false"></h:outputText>
+
+                                                    </p>
+                                                </h:panelGroup>
+                                            </h:panelGroup>
+
+
+                                            <!-- Button Vollmachtsformular an Dritte -->
+                                            <p>
+                                                <h:commandButton value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextVollmachtsFormularFuerVertreterButton)}" action="#{tGeneralversammlung.doVollmachtsformular()}"
+                                                    styleClass="btn-typ-00" onclick="this.form.target='_blank'">
+                                                </h:commandButton>
+
+                                            </p>
+
+                                            <!-- Ende -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('965')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('965')}" escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+
+                                        </h:panelGroup>
+
+                                        <!-- nicht für ku178 ! -->
+                                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vollmachtAnDritteEingetragen}">
+                                            <!-- Starttext -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('963')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('963')}" escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+
+                                            <!-- Button an oder abmelden -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2054')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('2054')}" escape="false"></h:outputText>
+                                                </p>
+                                            </h:panelGroup>
+                                            <p>
+                                                <!-- war früher TextNr 708 -->
+                                                <h:commandButton value="#{eclPortalTexteM.holeText('2053')}" action="#{tGeneralversammlung.doAnAbmelden()}" styleClass="btn-typ-00">
+                                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                                </h:commandButton>
+
+                                            </p>
+
+                                            <!-- Ende -->
+                                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('965')}">
+                                                <p>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText('965')}" escape="false"></h:outputText>
+
+                                                </p>
+                                            </h:panelGroup>
+
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+
+                                </h:panelGroup>
+                                <!-- Ende Angemeldet -->
+
+                                <!-- ist abgemeldet -->
+                                <h:panelGroup rendered="#{!eclBesitzGesamtAuswahl1M.angemeldet}">
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('707')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('707')}" escape="false"></h:outputText>
+
+                                        </p>
+                                    </h:panelGroup>
+                                    <!-- Gruppen-spezifischer Text  gruppenTextAbmeldungBestaetigung -->
+                                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.gruppenTextAbmeldungBestaetigung!=0}">
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(eclBesitzGesamtAuswahl1M.gruppenTextAbmeldungBestaetigung)}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeIText(eclBesitzGesamtAuswahl1M.gruppenTextAbmeldungBestaetigung)}" escape="false"></h:outputText>
+
+                                            </p>
+                                        </h:panelGroup>
+                                    </h:panelGroup>
+                                    <!-- Button an oder abmelden -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2054')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('2054')}" escape="false"></h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                    <p>
+                                        <!-- war früher TextNr 708 -->
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('2053')}" action="#{tGeneralversammlung.doAnAbmelden()}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                </h:panelGroup>
+
+                                <!-- Allgemeiner Text Ende An oder Abgemeldet-->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('705')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('705')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+
+                            </h:panelGroup>
+
+                            <!-- Hier eingegangene Vollmachten anzeigen - unabhängig vom Vollmachtsstatus -->
+                            <!-- nur ku178
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereVollmachtenAberNichtAngemeldet()==true}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1092')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1092')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            -->
+
+                            <!-- bereits gesetzliche Vollmacht hinterlegt -->
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragen}">
+                                <!-- Start -->
+                                <!--
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1009')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1009')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                                -->
+                                <!-- Vollmachtsdaten -->
+                                <!--
+                                <section class="weisung-liste-willenserklaerungen-bereich">
+                                    <div class="container-80">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <p>
+                                                    <h:outputText value="#{eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragenEcl.liefereNameKomplett()}" escape="false"></h:outputText>
+                                                    <br/>
+                                                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragenEcl.bevollmaechtigterStrasse!=''}">
+                                                        <h:outputText value="#{eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragenEcl.bevollmaechtigterStrasse}" escape="false"></h:outputText>
+                                                        <br/>
+                                                    </h:panelGroup>
+                                                    <h:outputText value="#{eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragenEcl.liefereOrtKomplett()}" escape="false"></h:outputText>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                -->
+
+
+                                <!-- ggf. mit der gesetzlichen Vollmacht weitergegebene Vollmachten anzeigen -->
+                                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragen
+                                            and (eclBesitzGesamtAuswahl1M.liefereListeAllerMitGesetzlichenVollmachtenVorhanden()==true)}">
+                                    <section class="bereits-angemeldet-bereich">
+
+                                        <!-- Start -->
+                                        <!--
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1013')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1013')}" escape="false"></h:outputText>
+
+                                            </p>
+                                        </h:panelGroup>
+                                        -->
+                                        <!-- Liste der mit der gesetzlichen Vollmacht mitgegebenen Vollmachten -->
+                                        <!--
+                                        <ui:repeat value="#{eclBesitzGesamtAuswahl1M.listeAllerMitGesetzlichenVollmachten}" var="vorlaeufigeVollmachtFuerAnzeige">
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <p>
+                                                        <h:outputText value="#{eclPortalTexteM.holeText('1014')}" escape="false"></h:outputText>
+                                                        <br/>
+                                                        <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.aktionaerNummerFuerAnzeige}" escape="false"></h:outputText>
+                                                        <br/>
+                                                        <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.liefereAktionaerNameKomplett()}" escape="false"></h:outputText>
+                                                        <br/>
+                                                        <h:panelGroup rendered="#{vorlaeufigeVollmachtFuerAnzeige.aktionaerStrasse!=''}">
+                                                            <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.aktionaerStrasse}" escape="false"></h:outputText>
+                                                            <br/>
+                                                        </h:panelGroup>
+                                                        <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.liefereAktionaerOrtKomplett()}" escape="false"></h:outputText>
+                                                    </p>
+                                                </div>
+                                                <div class="col-5">
+                                                    Storno?
+                                                    <h:outputText value="#{eclPortalTexteM.holeText(vorlaeufigeVollmachtFuerAnzeige.liefereStorniertText())}" escape="false"></h:outputText>
+                                                    <br/>
+                                                    <h:outputText value="#{eclPortalTexteM.holeText(vorlaeufigeVollmachtFuerAnzeige.lieferePruefstatusText())}" escape="false"></h:outputText>
+                                                    <br/>
+                                                    <h:panelGroup rendered="#{vorlaeufigeVollmachtFuerAnzeige.abgelehntWeil!=0}">
+                                                        <h:outputText value="#{eclPortalTexteM.holeText(vorlaeufigeVollmachtFuerAnzeige.liefereAbgelehntWeilText())}" escape="false"></h:outputText>
+                                                        <br/>
+                                                        <h:panelGroup rendered="#{vorlaeufigeVollmachtFuerAnzeige.abgelehntWeil==8}">
+                                                            <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.abgelehntWeilText}" escape="false"></h:outputText>
+                                                            <br/>
+                                                        </h:panelGroup>
+                                                    </h:panelGroup>
+                                                </div>
+                                            </div>
+                                        </ui:repeat>
+                                        -->
+                                        <!-- Ende -->
+                                        <!--
+                                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1015')}">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1015')}" escape="false"></h:outputText>
+
+                                            </p>
+                                        </h:panelGroup>
+                                        -->
+                                    </section>
+                                </h:panelGroup>
+
+                                <!-- Ende -->
+                                <!--
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1010')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1010')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                                -->
+                            </h:panelGroup>
+
+                            <!-- restliche gesetzliche Vollmachten anzeigen -->
+                            <!--
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereListeAllerGesetzlichenVollmachtenVorhanden()}">
+                                <section class="bereits-angemeldet-bereich">
+                                    Start
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1011')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1011')}" escape="false"></h:outputText>
+
+                                        </p>
+                                    </h:panelGroup>
+                                    Liste der sonstigen Vollmachten
+                                    <ui:repeat value="#{eclBesitzGesamtAuswahl1M.listeAllerGesetzlichenVollmachten}" var="vorlaeufigeVollmachtFuerAnzeige">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <p>
+                                                    <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.liefereNameKomplett()}" escape="false"></h:outputText>
+                                                    <br/>
+                                                    <h:panelGroup rendered="#{vorlaeufigeVollmachtFuerAnzeige.bevollmaechtigterStrasse!=''}">
+                                                        <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.bevollmaechtigterStrasse}" escape="false"></h:outputText>
+                                                        <br/>
+                                                    </h:panelGroup>
+                                                    <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.liefereOrtKomplett()}" escape="false"></h:outputText>
+                                                </p>
+                                            </div>
+                                            <div class="col-5">
+                                                Storno?
+                                                <h:outputText value="#{eclPortalTexteM.holeText(vorlaeufigeVollmachtFuerAnzeige.liefereStorniertText())}" escape="false"></h:outputText>
+                                                <br/>
+                                                <h:outputText value="#{eclPortalTexteM.holeText(vorlaeufigeVollmachtFuerAnzeige.lieferePruefstatusText())}" escape="false"></h:outputText>
+                                                <br/>
+                                                <h:panelGroup rendered="#{vorlaeufigeVollmachtFuerAnzeige.abgelehntWeil!=0}">
+                                                    <h:outputText value="#{eclPortalTexteM.holeText(vorlaeufigeVollmachtFuerAnzeige.liefereAbgelehntWeilText())}" escape="false"></h:outputText>
+                                                    <br/>
+                                                    <h:panelGroup rendered="#{vorlaeufigeVollmachtFuerAnzeige.abgelehntWeil==8}">
+                                                        <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.abgelehntWeilText}" escape="false"></h:outputText>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                    Ende
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1012')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1012')}" escape="false"></h:outputText>
+
+                                        </p>
+                                    </h:panelGroup>
+                                </section>
+                            </h:panelGroup>
+                            -->
+
+                            <!-- geltende Vollmacht an Dritte eingetragen -->
+                            <!--
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vollmachtAnDritteEingetragen}">
+                                Start
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('981')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('981')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                                Vollmachtsdaten
+                                <section class="weisung-liste-willenserklaerungen-bereich">
+                                    <div class="container-80">
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <p>
+                                                    <h:outputText value="#{eclBesitzGesamtAuswahl1M.vollmachtAnDritteEingetragenEcl.liefereNameKomplett()}" escape="false"></h:outputText>
+                                                    <br/>
+                                                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vollmachtAnDritteEingetragenEcl.bevollmaechtigterStrasse!=''}">
+                                                        <h:outputText value="#{eclBesitzGesamtAuswahl1M.vollmachtAnDritteEingetragenEcl.bevollmaechtigterStrasse}" escape="false"></h:outputText>
+                                                        <br/>
+                                                    </h:panelGroup>
+                                                    <h:outputText value="#{eclBesitzGesamtAuswahl1M.vollmachtAnDritteEingetragenEcl.liefereOrtKomplett()}" escape="false"></h:outputText>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+
+                                 Zwischentext
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('982')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('982')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                                Stornieren
+                                <p>
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('983')}" action="#{tGeneralversammlung.doVollmachtStornieren()}" styleClass="btn-typ-00">
+                                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+
+                                </p>
+                                Ende
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('984')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('984')}" escape="false"></h:outputText>
+
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            -->
+
+                            <!-- Alle restlichen evtl. vorliegenden Vollmachten anzeigen -->
+                            <!--
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereListeAllerVollmachtenVorhanden()}">
+                                <section class="bereits-angemeldet-bereich">
+                                    Start
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('985')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('985')}" escape="false"></h:outputText>
+
+                                        </p>
+                                    </h:panelGroup>
+                                    <ui:repeat value="#{eclBesitzGesamtAuswahl1M.listeAllerVollmachten}" var="vorlaeufigeVollmachtFuerAnzeige">
+                                        <div class="row">
+                                            <div class="col-3">
+                                                <p>
+                                                    <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.liefereNameKomplett()}" escape="false"></h:outputText>
+                                                    <br/>
+                                                    <h:panelGroup rendered="#{vorlaeufigeVollmachtFuerAnzeige.bevollmaechtigterStrasse!=''}">
+                                                        <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.bevollmaechtigterStrasse}" escape="false"></h:outputText>
+                                                        <br/>
+                                                    </h:panelGroup>
+                                                    <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.liefereOrtKomplett()}" escape="false"></h:outputText>
+
+                                                </p>
+                                            </div>
+                                            <div class="col-5">
+                                                Storno?
+                                                <h:outputText value="#{eclPortalTexteM.holeText(vorlaeufigeVollmachtFuerAnzeige.liefereStorniertText())}" escape="false"></h:outputText>
+                                                <br/>
+                                                <h:outputText value="#{eclPortalTexteM.holeText(vorlaeufigeVollmachtFuerAnzeige.lieferePruefstatusText())}" escape="false"></h:outputText>
+                                                <br/>
+                                                <h:panelGroup rendered="#{vorlaeufigeVollmachtFuerAnzeige.abgelehntWeil!=0}">
+                                                    <h:outputText value="#{eclPortalTexteM.holeText(vorlaeufigeVollmachtFuerAnzeige.liefereAbgelehntWeilText())}" escape="false"></h:outputText>
+                                                    <br/>
+                                                    <h:panelGroup rendered="#{vorlaeufigeVollmachtFuerAnzeige.abgelehntWeil==8}">
+                                                        <h:outputText value="#{vorlaeufigeVollmachtFuerAnzeige.abgelehntWeilText}" escape="false"></h:outputText>
+
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+                                    Ende
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('986')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('986')}" escape="false"></h:outputText>
+
+                                        </p>
+                                    </h:panelGroup>
+                                </section>
+                            </h:panelGroup>
+                            -->
+
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- +++++Anmelden/Abmelden ist nicht möglich++++ -->
+                    <h:panelGroup rendered="#{tSession.portalErstanmeldungIstMoeglich==false}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('701')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('701')}" escape="false"></h:outputText>
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                </h:panelGroup>
+                <!-- Ende von Anmeldung möglich weil eigener Bestand -->
+
+
+
+                <!-- Endtext -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('700')}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('700')}" escape="false"></h:outputText>
+
+                    </p>
+                </h:panelGroup>
+            </div>
+        </h:panelGroup>
+
+
+
+        <!-- Buttons -->
+        <f:subview id="iAuswahl1GeneralversammlungButtons">
+            <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+        </f:subview>
+
+    </ui:composition>

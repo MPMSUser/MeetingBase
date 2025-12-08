@@ -1,0 +1,239 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+    <f:subview id="iEinstellungenBestaetigungOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+
+    <div class="container-80">
+        <div class="row">
+            <div class="col-8">
+                <!--  E-Mail-Versand neu registriert -->
+                <!-- DDDDD202402 Anfang, Textalternativen -->
+                <h:panelGroup rendered="#{tEinstellungenSession.quittungEMailVersandNeuRegistriert}">
+                    <h:panelGroup rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==1}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('620')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('620')}" escape="false" />
+
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==2}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2183')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('2183')}" escape="false" />
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <!-- DDDDD202402 Ende, Textalternativen -->
+
+                <!-- DDDDD202402 Anfang, Bereich komplett neu -->
+                <!--  Willenserklärungsbestätigungen per E-Mail neu registriert -->
+                <h:panelGroup
+                    rendered="#{tEinstellungenSession.quittungEMailBestaetigungBeiAllenWillenserklaerungenNeuRegistriert}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2188')}" styleClass="row">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('2188')}" escape="false" />
+
+                            </p>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <!--  Willenserklärungsbestätigungen per E-Mail De- registriert -->
+                <h:panelGroup
+                    rendered="#{tEinstellungenSession.quittungEMailBestaetigungBeiAllenWillenserklaerungenDeRegistriert}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2189')}" styleClass="row">
+                        <div class="col">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('2189')}" escape="false" />
+
+                            </p>
+                        </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <!-- DDDDD202402 Ende, Textalternativen -->
+
+                <!--  E-Mail-Adresse noch nicht bestätigt, und E-Mail-Versand aktiviert -->
+                <h:panelGroup rendered="#{tEinstellungenSession.quittungEmailNochNichtBestaetigt}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('631')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('631')}" escape="false" />
+
+                        </p>
+
+                        <h:panelGroup
+                            rendered="#{eclParamM.linkEmailEnthaeltLinkOderCode==2 and (!tEinstellungenSession.quittungNeueEmailAdresseEingetragen)}">
+
+                            <div class="row">
+                                <div class="col-2">
+                                    <p>
+                                        <h:outputLabel value="#{eclPortalTexteM.holeText('1527')}" />
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p>
+                                        <h:inputText value="#{tEinstellungenSession.eMailBestaetigungsCodeBestaetigung}"
+                                            maxlength="80" size="40" autocomplete="off"></h:inputText>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1529')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1529')}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+
+                        </h:panelGroup>
+
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!--  E-Mail-Versand De- registriert -->
+                <!-- DDDDD202402 Anfang, Textalternativen -->
+                <h:panelGroup rendered="#{tEinstellungenSession.quittungEMailVersandDeRegistriert}">
+                    <h:panelGroup rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==1}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('621')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('621')}" escape="false" />
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{eclParamM.liefereEmailVersandRegistrierungOderWiderspruch()==2}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('2184')}" styleClass="row">
+                            <div class="col">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('2184')}" escape="false" />
+                                </p>
+                            </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <!-- DDDDD202402 Ende, Textalternativen -->
+
+                <!--  E-Mail-Adresse neu oder geändert -->
+                <h:panelGroup rendered="#{tEinstellungenSession.quittungNeueEmailAdresseEingetragen}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('622')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('622')}" escape="false" />
+                            <h:outputText value="#{tEinstellungenSession.quittungNeueEmailAdresse}" />
+                            <h:outputText value="#{eclPortalTexteM.holeText('623')}" escape="false" />
+
+                        </p>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{eclParamM.linkEmailEnthaeltLinkOderCode==2}">
+
+                        <div class="row">
+                            <div class="col-2">
+                                <p>
+                                    <h:outputLabel value="#{eclPortalTexteM.holeText('1527')}" />
+                                </p>
+                            </div>
+                            <div class="col-6">
+                                <p>
+                                    <h:inputText value="#{tEinstellungenSession.eMailBestaetigungsCodeBestaetigung}"
+                                        maxlength="80" size="40" autocomplete="off"></h:inputText>
+                                </p>
+                            </div>
+                        </div>
+
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1529')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1529')}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+
+                    </h:panelGroup>
+
+
+                </h:panelGroup>
+
+                <!--  E-Mail-Adresse gelöscht -->
+                <h:panelGroup rendered="#{tEinstellungenSession.quittungNeueEmailAdresseAusgetragen}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('624')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('624')}" escape="false" />
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!-- E-Mail Adresse wurde bestätigt -->
+                <h:panelGroup rendered="#{tEinstellungenSession.quittungEmailWurdeBestaetigt}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1528')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1528')}" escape="false" />
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!--  Dauerhaftes Passwort aktiviert -->
+                <h:panelGroup rendered="#{tEinstellungenSession.quittungDauerhaftesPasswortAktiviert}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('625')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('625')}" escape="false" />
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!--  Dauerhaftes Passwort Deaktiviert -->
+                <h:panelGroup rendered="#{tEinstellungenSession.quittungDauerhaftesPasswortDeAktiviert}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('626')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('626')}" escape="false" />
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!--  Dauerhaftes Passwort Geändert -->
+                <h:panelGroup rendered="#{tEinstellungenSession.quittungDauerhaftesPasswortGeaendert}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('627')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('627')}" escape="false" />
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!-- Endetext -->
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('629')}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('629')}" escape="false" />
+                    </p>
+                </h:panelGroup>
+            </div>
+        </div>
+    </div>
+
+    <f:subview id="iEinstellungenBestaetigungButtons">
+        <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+    </f:subview>
+</ui:composition>

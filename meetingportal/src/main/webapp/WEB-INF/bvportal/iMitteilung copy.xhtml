@@ -1,0 +1,505 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:p="http://primefaces.org/ui"
+        lang="de">
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <ui:composition>
+
+        <f:subview id="iMitteilungOben">
+            <ui:include src="idetail/idSeiteStart.xhtml" />
+        </f:subview>
+
+        <div class="container-80">
+            <div class="row">
+                <div class="col-8">
+                    <!-- ++++++++++++++++++++++Mitteilung eingeben+++++++++++++++++++++++ -->
+                    <!-- Starttext (Mitteilungstellung ist gerade aktiv) -->
+                    <h:panelGroup rendered="#{tMitteilungSession.funktionIstAktiv}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrStarttextAktiv)}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrStarttextAktiv)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Starttext (Mitteilungstellung ist gerade inaktiv) -->
+                    <h:panelGroup rendered="#{!tMitteilungSession.funktionIstAktiv}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrStarttextInaktiv)}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrStarttextInaktiv)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+
+                    <!-- Mitteilung ist gerade aktiv -->
+                    <h:panelGroup rendered="#{tMitteilungSession.funktionIstAktiv}">
+
+                        <!-- ausgangsView -->
+                        <h:panelGroup rendered="#{tMitteilungSession.anzuzeigenderBereich==1}">
+
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrAusgangsViewStarttext)}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrAusgangsViewStarttext)}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+                            <p>
+                                <h:commandButton value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrAusgangsViewButtonStart)}" action="#{tMitteilung.doMitteilungStart()}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrAusgangsViewEndetext)}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrAusgangsViewEndetext)}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+
+                        <!-- personBestaetigen -->
+                        <h:panelGroup rendered="#{tMitteilungSession.anzuzeigenderBereich==3}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrPersonBestaetigenStarttext)}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrPersonBestaetigenStarttext)}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+                            <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrPersonBestaetigenTextVorName)}#{eclLoginDatenM.titelVornameName}#{eclPortalTexteM.holeText(tMitteilungSession.textNrPersonBestaetigenTextNachName)}" escape="false" />
+                            <p>
+                                <h:commandButton value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrPersonBestaetigenJaButton)}" action="#{tMitteilung.doPersonBestaetigenJa()}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                                <h:commandButton value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrPersonBestaetigenNeinButton)}" action="#{tMitteilung.doPersonBestaetigenNein()}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                        </h:panelGroup>
+
+                        <!-- mitteilungEingeben -->
+                        <h:panelGroup rendered="#{tMitteilungSession.anzuzeigenderBereich==4}">
+
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrMitteilungStarttext)}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungStarttext)}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+
+                            <!-- Fragensteller -->
+                            <h:panelGroup rendered="#{tMitteilungSession.nameAbfragen>0}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrMitteilungNameAbfragen)}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungNameAbfragen)}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+                                <p>
+                                    <h:inputText value="#{tMitteilungSession.nameEingabe}" maxlength="100" size="80" />
+                                </p>
+                            </h:panelGroup>
+
+                            <!-- Kontaktdaten -->
+                            <h:panelGroup rendered="#{tMitteilungSession.kontaktdatenAbfragen>0}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrMitteilungKontaktAbfragen)}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungKontaktAbfragen)}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+                                <p>
+                                    <h:inputText value="#{tMitteilungSession.kontaktdatenEingabe}" maxlength="100" size="80" />
+                                </p>
+                            </h:panelGroup>
+
+                            <!-- Bestätigungshinweis gelesen -->
+                            <h:panelGroup rendered="#{tMitteilungSession.hinweisGelesen>0}">
+                                <h:panelGrid columns="2">
+                                    <h:selectBooleanCheckbox id="id7" value="#{tMitteilungSession.hinweisBestaetigt}">
+                                    </h:selectBooleanCheckbox>
+                                    <h:outputLabel value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungHinweisGelesen)}" escape="false"></h:outputLabel>
+                                </h:panelGrid>
+
+                            </h:panelGroup>
+
+                            <!-- zu TOP-Auswahl -->
+                            <h:panelGroup rendered="#{tMitteilungSession.topListeAnbieten>0}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrVorTOPAuswahl)}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrVorTOPAuswahl)}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+
+                                <ui:repeat value="#{eclAbstimmungenListeM.abstimmungenListeM}" var="abstimmung" id="schleifeMitteilung">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="col-1">
+                                                <h:panelGroup rendered="#{abstimmung.nummerUnterdruecken==false}">
+                                                    <h:outputText value="#{abstimmung.nummer}" rendered="#{tLanguage.lang ==1}" />
+                                                    <h:outputText value="#{abstimmung.nummerEN}" rendered="#{tLanguage.lang ==2}" />
+                                                </h:panelGroup>
+                                                <span></span>
+                                                <h:outputText value="#{abstimmung.nummerindex}" rendered="#{tLanguage.lang == 1}" />
+                                                <h:outputText value="#{abstimmung.nummerindexEN}" rendered="#{tLanguage.lang == 2}" />
+                                            </div>
+                                            <div class="col-2">
+                                                <h:outputText value="#{abstimmung.anzeigeBezeichnungLang}" rendered="#{tLanguage.lang == 1}" escape="false" />
+                                                <h:outputText value="#{abstimmung.anzeigeBezeichnungLangEN}" rendered="#{tLanguage.lang == 2}" escape="false" />
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="abstimmungs-btn-jne">
+                                                <h:selectBooleanCheckbox id="id7" value="#{abstimmung.markiert}" rendered="#{!abstimmung.ueberschrift}">
+                                                </h:selectBooleanCheckbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+
+                                <ui:repeat value="#{eclAbstimmungenListeM.gegenantraegeListeM}" var="abstimmung" id="schleifeMitteilungGegen">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <div class="col-1">
+                                                <h:panelGroup rendered="#{abstimmung.nummerUnterdruecken==false}">
+                                                    <h:outputText value="#{abstimmung.nummer}" rendered="#{tLanguage.lang ==1}" />
+                                                    <h:outputText value="#{abstimmung.nummerEN}" rendered="#{tLanguage.lang ==2}" />
+                                                </h:panelGroup>
+                                                <span></span>
+                                                <h:outputText value="#{abstimmung.nummerindex}" rendered="#{tLanguage.lang == 1}" />
+                                                <h:outputText value="#{abstimmung.nummerindexEN}" rendered="#{tLanguage.lang == 2}" />
+                                            </div>
+                                            <div class="col-2">
+                                                <h:outputText value="#{abstimmung.anzeigeBezeichnungLang}" rendered="#{tLanguage.lang == 1}" escape="false" />
+                                                <h:outputText value="#{abstimmung.anzeigeBezeichnungLangEN}" rendered="#{tLanguage.lang == 2}" escape="false" />
+                                            </div>
+                                        </div>
+                                        <div class="col-3">
+                                            <div class="abstimmungs-btn-jne">
+                                                <h:selectBooleanCheckbox id="id7" value="#{abstimmung.markiert}" rendered="#{!abstimmung.ueberschrift}">
+                                                </h:selectBooleanCheckbox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrNachTOPAuswahl)}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrNachTOPAuswahl)}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+
+                            </h:panelGroup>
+
+                            <!-- Kurztext -->
+                            <h:panelGroup rendered="#{tMitteilungSession.kurztextAbfragen>0}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrMitteilungVorKurzText)}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungVorKurzText)}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+                                <p>
+                                    <h:inputText value="#{tMitteilungSession.kurzTextEingabe}" maxlength="100" size="80" />
+                                </p>
+                            </h:panelGroup>
+
+                            <!-- Langtext -->
+                            <h:panelGroup rendered="#{tMitteilungSession.langtextAbfragen>0}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrMitteilungVorLangText)}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungVorLangText)}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+                                <p>
+                                    <h:inputTextarea value="#{tMitteilungSession.langTextEingabe}" counter="display" rows="5" cols="70" pt:maxlength="#{tMitteilungSession.laenge}" onkeyup="setVerbleibendeZeichen(event);">
+                                    </h:inputTextarea>
+                                    <br /> <span id="span-verbleibende-Zeichen">0</span> /
+                                    <h:outputText value="#{tMitteilungSession.laenge}" escape="false" />
+                                </p>
+                                <!--
+                <p:inputTextarea value="#{tMitteilungSession.langTextEingabe}"
+                    counter="display" rows="5" cols="70"
+                    maxlength="#{tMitteilungSession.laenge}"
+                    counterTemplate="#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungLangTextVorZaehler)}{0}#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungLangTextNachZaehler)}">
+                </p:inputTextarea>
+                    <br />
+                    <p>
+                        <h:outputText id="display" />
+                    </p>
+                -->
+                            </h:panelGroup>
+
+                            <!-- Datei (Text oder Video) hochladen -->
+                            <h:panelGroup rendered="#{tMitteilungSession.dateiHochladenMoeglich}">
+                                <!-- Einleitungstext für Hochladen -->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrStarttextHochladenBereich)}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrStarttextHochladenBereich)}" escape="false" />
+                                    </p>
+                                </h:panelGroup>
+
+                                <div id="fileUploadVorAuswahl">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrNochKeineDateiAusgewaehltHochladenBereich)}" escape="false" />
+                                    </p>
+                                </div>
+                                <p>
+                                    <h:outputLabel id="lblUploadFile" for="uploadFile" value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrButtonDateiAuswaehlenHochladenBereich)}" styleClass="btn-typ-00 upload" />
+                                    <h:inputFile id="uploadFile" value="#{tMitteilungSession.uploadFile}" styleClass="upload" onchange="setFileUpload(this, '#{tMitteilungSession.erlaubteUploadFormateVideoJS}', '#{tMitteilungSession.erlaubteUploadFormateTextJS}', '#{tMitteilungSession.videoLaenge}', '#{tMitteilungSession.textLaenge}')">
+
+                                    </h:inputFile>
+                                </p>
+                                <div id="fileUploadNachAuswahl">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrVorDateiNameHochladenBereich)}" escape="false" />
+                                        <label id="lblUploadFileName" styleClass="m-left"></label>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrNachDateiNameHochladenBereich)}" escape="false" />
+                                    </p>
+                                </div>
+                                <!--
+                                    <p>
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('1919')}" action="#{tMitteilung.doFileUpload()}" styleClass="btn-typ-00">
+                                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+                                </p>
+                                -->
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrEndetextHochladenBereich)}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrEndetextHochladenBereich)}" escape="false" />
+                                    </p>
+
+                                </h:panelGroup>
+
+
+                                <!-- Was halt sonst noch so gebraucht wird ??????????????????????????????????????????????????????????????????????? -->
+                            </h:panelGroup>
+
+                            <!-- Button abschicken -->
+                            <p>
+                                <h:commandButton value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungButtonAbschicken)}" action="#{tMitteilung.doMitteilungAbschicken()}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                </h:commandButton>
+                            </p>
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrMitteilungEndetext)}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrMitteilungEndetext)}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+
+
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- mitteilungNichtMoeglichDaPersonNichtBestaetigt -->
+                    <h:panelGroup rendered="#{tMitteilungSession.anzuzeigenderBereich==5}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrPersonNichtBestaetigt)}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrPersonNichtBestaetigt)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+
+                    <!-- keineWeiterenMitteilungenMoeglich -->
+                    <h:panelGroup rendered="#{tMitteilungSession.anzuzeigenderBereich==6}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrKeineWeiterenMitteilungen)}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrKeineWeiterenMitteilungen)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- personenArtNichtZulaessig -->
+                    <h:panelGroup rendered="#{tMitteilungSession.anzuzeigenderBereich==7}">
+                        <h:panelGroup rendered="#{tMitteilungSession.juristischePersonNichtZulaessig}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrJuristischePersonNichtZulaessig)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{tMitteilungSession.personengemeinschaftNichtZulaessig}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrPersonengemeinschaftNichtZulaessig)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Endetext (immer) -->
+                    <h:panelGroup rendered="#{tMitteilungSession.funktionIstAktiv}">
+                        <!-- Fragenstellung ist gerade aktiv -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrEndetextAktiv)}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrEndetextAktiv)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+
+                </div>
+            </div>
+        </div>
+
+        <!--<f:subview id="iFragenButtons">
+            <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+        </f:subview>-->
+
+        <section id="button-unten-bereich">
+            <div class="container-80">
+                <div class="row">
+                    <div class="col-1_3">
+                        <h:commandButton value="#{tSeitensteuerung.holeTextLinkerButton()}" id="buttonUntenLeft" action="#{tSeitensteuerung.doLinkerButton()}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.linkenButtonAnzeigen==true}">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButtonResetFileUpload" />
+                        </h:commandButton>
+                    </div>
+                    <div class="col-1_3">
+                        <h:panelGroup rendered="#{tRender.logoutObenOderUnten()==2 and tSeitensteuerungSession.logoutAnzeigen==true}">
+
+                            <!-- Button, wenn beim Logout Portal verlassen werden soll -->
+                            <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonUntenCenter1" action="#{tLoginLogout.doLogoutVerlassen()}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.logoutSeiteVerlassenAnzeigen}">
+                                <f:ajax onevent="nachAjaxButtonResetFileUpload" />
+                            </h:commandButton>
+
+                            <!-- Button, wenn beim Logout zur Login-Seite zurückgekehrt wird -->
+                            <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonUntenCenter2" action="#{tLoginLogout.doLogout}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.logoutNormalAnzeigen}">
+                                <f:ajax onevent="nachAjaxButtonResetFileUpload" />
+                            </h:commandButton>
+
+                            <!-- Button, wenn auf Login-Seite zur Aufrufseite angezeigt werden soll -->
+                            <h:commandButton value="#{eclPortalTexteM.holeText('859')}" id="buttonUntenCenter3" action="#{tLoginLogout.doBeenden()}" styleClass="btn-typ-01" rendered="#{tSeitensteuerungSession.endeButtonAnzeigen}">
+                                <f:ajax onevent="nachAjaxButtonResetFileUpload" />
+                            </h:commandButton>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{tRender.logoutObenOderUnten()==1 or tSeitensteuerungSession.logoutAnzeigen==false}">
+                        </h:panelGroup>
+                    </div>
+
+                    <div class="col-1_3">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="container-80">
+            <div class="row">
+                <div class="col-8">
+
+                    <!--+++++++++++++++++++++ Rednerliste anzeigen+++++++++++++++++++++++++ -->
+                    <h:panelGroup rendered="#{tMitteilungSession.anzuzeigenderBereich==1 and tMitteilungSession.listeAnzeigen>0}">
+                        <!-- Starttext -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrListeStarttext)}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrListeStarttext)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrListeButtonAktualisieren)}" action="#{tMitteilung.doAktualisierenRednerListe}" styleClass="btn-typ-00">
+                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                        </p>
+
+
+                        <h:dataTable value="#{tMitteilungSession.rednerListe}" var="redner" styleClass="dataTableRueck" cellspacing="0" rowClasses="dataTableRueckOddRow,dataTableRueckEvenRow">
+                            <h:column>
+                                <h:outputText value="#{redner.nameVornameOrt}" escape="false" />
+                            </h:column>
+                        </h:dataTable>
+
+                        <!-- EndText -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrListeEndetext)}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrListeEndetext)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+
+                    <!--+++++++++++++++++++++ gestellte Mitteilungen anzeigen+++++++++++++++++++++++++ -->
+                    <h:panelGroup rendered="#{tMitteilungSession.anzuzeigenderBereich==1 and tMitteilungSession.anzahlMitteilungenGestellt>0}">
+                        <!-- Starttext -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrListeMitteilungenStarttext)}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrListeMitteilungenStarttext)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+
+                        <section id="gestellte-mitteilungen-bereich">
+                            <ui:repeat value="#{tMitteilungSession.mitteilungenGestelltListe}" var="mitteilung">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p>
+                                            <h:panelGroup rendered="#{mitteilung.nameVornameOrt!=''}">
+                                                <h:outputText value="#{mitteilung.nameVornameOrt}" escape="true" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{mitteilung.kontaktDaten!=''}">
+                                                <h:outputText value="#{mitteilung.kontaktDaten}" escape="true" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{mitteilung.zuTOPListe!=''}">
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1889')}" escape="false" />
+                                                <h:outputText value="#{mitteilung.zuTOPListe}" escape="true" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{mitteilung.mitteilungKurztext!=''}">
+                                                <h:outputText value="#{mitteilung.mitteilungKurztext}" escape="true" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{mitteilung.mitteilungLangtext!=''}">
+                                                <h:outputText value="#{mitteilung.mitteilungLangtext}" escape="true" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:panelGroup rendered="#{mitteilung.dateiname!=''}">
+                                                <h:outputText value="#{mitteilung.dateiname}" escape="true" />
+                                                <br />
+                                            </h:panelGroup>
+                                            <h:outputText value="#{eclPortalTexteM.holeText(mitteilung.liefereStatusText())}" escape="false" rendered="#{tMitteilungSession.listeAnzeigen>0}" />
+                                        </p>
+                                    </div>
+                                    <div class="col-2">
+                                        <h:commandButton value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrListeMitteilungenButtonZurueckziehen)}" action="#{tMitteilung.doZurueckziehenMitteilung(mitteilung)}" class="btn-typ-00" rendered="#{mitteilung.zurueckziehenMoeglich() and tMitteilungSession.funktionIstAktiv and tMitteilungSession.zurueckziehenMoeglich==1}">
+                                            <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText(mitteilung.liefereStatusText())}" escape="false" />
+                                        </p>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </section>
+                        <!-- EndText -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden(tMitteilungSession.textNrListeMitteilungenEndetext)}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText(tMitteilungSession.textNrListeMitteilungenEndetext)}" escape="false" />
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+
+    <f:subview id="iTeilnehmerverzOben">
+        <ui:include src="idetail/idSeiteStartModals.xhtml" />
+    </f:subview>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <!-- ++++++++++++++++++++++Teilnehmerverzeichnis+++++++++++++++++++++++ -->
+            <!-- Teilnehmerverzeichnis ist aktiv -->
+            <h:panelGroup rendered="#{tAuswahlSession.teilnehmerverzeichnisAktiv}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('844')}" styleClass="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('844')}" escape="false" />
+
+                        </p>
+                    </div>
+                </h:panelGroup>
+                <div class="row mt-2">
+                    <div class="col">
+                        <ui:repeat value="#{tTeilnehmerverzSession.absTeilButtonList}" var="absTeil">
+                            <h:commandButton
+                            value="#{eclPortalTexteM.holeText(absTeil.buttontext1Vorne)}#{absTeil.buttontext1Ziffer}#{eclPortalTexteM.holeText(absTeil.buttontext1Hinten)}"
+                            action="#{tTeilnehmerverz.doAnzeige(absTeil)}" onclick="this.form.target='_blank'"
+                            styleClass="btn btn-outline-primary w-100 mb-2" />
+                            <h:commandButton
+                                    value="#{eclPortalTexteM.holeText(absTeil.buttontext2Vorne)}#{absTeil.buttontext2Ziffer}#{eclPortalTexteM.holeText(absTeil.buttontext2Hinten)}"
+                                    action="#{tTeilnehmerverz.doAnzeigeZusammen(absTeil)}"
+                                    styleClass="btn btn-outline-primary w-100 mb-5" onclick="this.form.target='_blank'"
+                                    rendered="#{eclParamM.teilnehmerverzZusammenstellung==1}" />
+                        </ui:repeat>
+                    </div>
+                </div>
+            </h:panelGroup>
+
+
+            <!-- Teilnehmerverzeichnis ist nicht aktiv -->
+            <h:panelGroup rendered="#{!tAuswahlSession.teilnehmerverzeichnisAktiv}">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('845')}" styleClass="row mt-2">
+                    <div class="col">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('845')}" escape="false" />
+
+                        </p>
+                    </div>
+                </h:panelGroup>
+
+            </h:panelGroup>
+
+
+
+            <!-- Endetext (immer) -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('846')}" styleClass="row mt-2">
+                <div class="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('846')}" escape="false" />
+
+                    </p>
+                </div>
+            </h:panelGroup>
+
+        </div>
+    </div>
+    <f:subview id="iTeilnehmerverzDetailButtons">
+        <ui:include src="idetail/idSeiteButtonsUntenModals.xhtml ">
+            <ui:param name="modalShowBtnRight" value="true" />
+            <ui:param name="modalStaticBtnRight" value="true" />
+            <ui:param name="modalShowBtnLeft" value="false" />
+            <ui:param name="modalStaticBtnLeft" value="false" />
+        </ui:include>
+    </f:subview>
+
+
+</ui:composition>

@@ -1,0 +1,332 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:p="http://primefaces.org/ui"
+        lang="de">
+
+<head>
+<title></title>
+</head>
+<body>
+    <ui:composition>
+
+        <f:subview id="iFragenOben">
+            <ui:include src="idetail/idSeiteStart.xhtml" />
+        </f:subview>
+
+
+        <!-- ++++++++++++++++++++++Fragen eingeben+++++++++++++++++++++++ -->
+        <!-- Starttext (Fragenstellung ist gerade aktiv) -->
+        <h:panelGroup rendered="#{tAuswahlSession.fragenAktiv}">
+            <h:panelGroup
+                rendered="#{eclPortalTexteM.pruefeTextVorhanden('769')}">
+                <p class="pText">
+                    <h:outputText value="#{eclPortalTexteM.holeText('769')}"
+                        escape="false" />
+                    <br /> <br />
+                </p>
+            </h:panelGroup>
+        </h:panelGroup>
+
+        <!-- Starttext (Fragenstellung ist gerade inaktiv) -->
+        <h:panelGroup rendered="#{!tAuswahlSession.fragenAktiv}">
+            <h:panelGroup
+                rendered="#{eclPortalTexteM.pruefeTextVorhanden('770')}">
+                <p class="pText">
+                    <h:outputText value="#{eclPortalTexteM.holeText('770')}"
+                        escape="false" />
+                    <br /> <br />
+                </p>
+            </h:panelGroup>
+        </h:panelGroup>
+
+
+        <!-- Fragenstellung ist gerade aktiv -->
+        <h:panelGroup rendered="#{tAuswahlSession.fragenAktiv}">
+
+            <!-- Fragen-Stellen-Start-Bereich -->
+            <h:panelGroup rendered="#{tFragenSession.anzuzeigenderBereich==1}">
+
+                <h:panelGroup
+                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('771')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('771')}"
+                            escape="false" />
+                        <br /> <br />
+                    </p>
+                </h:panelGroup>
+                <p class="pText pMenu">
+                    <h:commandButton value="#{eclPortalTexteM.holeText('772')}"
+                        action="#{tFragen.doFrageStart}" styleClass="btnFunktionAuswahl">
+                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                    </h:commandButton>
+                    <br /> <br />
+                </p>
+                <h:panelGroup
+                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('773')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('773')}"
+                            escape="false" />
+                        <br /> <br />
+                    </p>
+                </h:panelGroup>
+            </h:panelGroup>
+
+                <!-- Person-Abfragen-Bereich -->
+            <h:panelGroup
+                rendered="#{tFragenSession.anzuzeigenderBereich==2}">
+                <h:panelGroup
+                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('774')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('774')}"
+                            escape="false" />
+                        <br /> <br />
+                    </p>
+                </h:panelGroup>
+
+                <ui:include src="iDetail/idPersonAuswaehlen.xhtml">
+                </ui:include>
+
+                <br />
+                <br />
+                <p class="pText pMenu">
+                    <h:commandButton value="#{eclPortalTexteM.holeText('775')}"
+                        action="#{tFragen.doPersonAuswaehlen}"
+                        styleClass="btnFunktionAuswahl">
+                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    <br /> <br />
+                </p>
+                <h:panelGroup
+                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('776')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('776')}"
+                            escape="false" />
+                        <br /> <br />
+                    </p>
+                </h:panelGroup>
+
+            </h:panelGroup>
+
+            <!-- Person-Bestätigen-Bereich -->
+            <h:panelGroup
+                rendered="#{tFragenSession.anzuzeigenderBereich==3}">
+                <h:panelGroup
+                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('777')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('777')}"
+                            escape="false" />
+                        <br /> <br />
+                    </p>
+                </h:panelGroup>
+                <p class="pText pMenu">
+                    <h:commandButton
+                        value="#{eclPortalTexteM.holeText('778')}#{tFragenSession.aktuellerFragensteller}#{eclPortalTexteM.holeText('779')}"
+                        action="#{tFragen.doPersonBestaetigen}"
+                        styleClass="btnFunktionAuswahl">
+                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    <br /> <br />
+                </p>
+            </h:panelGroup>
+
+            <!-- Frage eingeben - Bereich -->
+            <h:panelGroup
+                rendered="#{tFragenSession.anzuzeigenderBereich==4}">
+
+                <h:panelGroup
+                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('780')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('780')}"
+                            escape="false" />
+                        <br /> <br />
+                    </p>
+                </h:panelGroup>
+
+                <!-- Fragensteller -->
+                <h:panelGroup rendered="#{eclParamM.fragenstellerAbfragen==1}">
+                    <p class="pText">
+                        <h:outputText
+                            value="#{eclPortalTexteM.holeText('781')}#{tFragenSession.aktuellerFragensteller}#{eclPortalTexteM.holeText('782')}"
+                            escape="false" />
+                        <br /> <br />
+                    </p>
+                </h:panelGroup>
+                <!-- Frage zu TOP -->
+                <h:panelGroup
+                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('783')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('783')}"
+                            escape="false" />
+                    </p>
+                </h:panelGroup>
+                <h:inputText value="#{tFragenSession.frageZuTop}"
+                    maxLength="100" size="80" />
+                <br />
+                <br />
+                <!-- Fragetext -->
+                <h:panelGroup
+                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('784')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('784')}"
+                            escape="false" />
+                    </p>
+                </h:panelGroup>
+                <h:inputTextarea value="#{tFragenSession.frageText}"
+                    counter="display" rows="5" cols="70"
+                    pt:maxlength="#{tFragenSession.maxZeichen}">
+                </h:inputTextarea>
+                <!--
+                <p:inputTextarea value="#{tFragenSession.frageText}"
+                    counter="display" rows="5" cols="70"
+                    maxlength="#{tFragenSession.maxZeichen}"
+                    counterTemplate="#{eclPortalTexteM.holeText('793')}{0}#{eclPortalTexteM.holeText('785')}">
+                </p:inputTextarea>
+                -->
+                <br />
+                <p class="pText">
+                    <h:outputText id="display" />
+                </p>
+                <p class="pText pMenu">
+                    <br />
+                    <h:commandButton value="#{eclPortalTexteM.holeText('786')}"
+                        action="#{tFragen.doFrageAbschicken}"
+                        styleClass="btnFunktionAuswahl">
+                        <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    <br /> <br />
+                </p>
+                <h:panelGroup
+                    rendered="#{eclPortalTexteM.pruefeTextVorhanden('787')}">
+                    <p class="pText">
+                        <h:outputText value="#{eclPortalTexteM.holeText('787')}"
+                            escape="false" />
+                        <br /> <br />
+                    </p>
+                </h:panelGroup>
+
+
+            </h:panelGroup>
+        </h:panelGroup>
+
+            <!-- SonstigePerson unzulässig - Bereich -->
+        <h:panelGroup
+            rendered="#{tFragenSession.anzuzeigenderBereich==5}">
+            <h:panelGroup
+                rendered="#{eclPortalTexteM.pruefeTextVorhanden('788')}">
+                <p class="pText">
+                    <h:outputText value="#{eclPortalTexteM.holeText('788')}"
+                        escape="false" />
+                    <br /> <br />
+                </p>
+            </h:panelGroup>
+        </h:panelGroup>
+
+            <!-- keine weiteren Fragen zulässig -->
+        <h:panelGroup
+            rendered="#{tFragenSession.anzuzeigenderBereich==6}">
+            <h:panelGroup
+                rendered="#{eclPortalTexteM.pruefeTextVorhanden('789')}">
+                <p class="pText">
+                    <h:outputText value="#{eclPortalTexteM.holeText('789')}"
+                        escape="false" />
+                    <br /> <br />
+                </p>
+            </h:panelGroup>
+        </h:panelGroup>
+
+
+        <!-- Endetext (immer) -->
+        <h:panelGroup rendered="#{tAuswahlSession.fragenAktiv}">
+            <!-- Fragenstellung ist gerade aktiv -->
+            <h:panelGroup
+                rendered="#{eclPortalTexteM.pruefeTextVorhanden('790')}">
+                <p class="pText">
+                    <h:outputText value="#{eclPortalTexteM.holeText('790')}"
+                        escape="false" />
+                    <br /> <br />
+                </p>
+            </h:panelGroup>
+        </h:panelGroup>
+
+
+        <f:subview id="iFragenButtons">
+            <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+        </f:subview>
+
+        <!--+++++++++++++++++++++ gestellte Fragen anzeigen+++++++++++++++++++++++++ -->
+        <!-- Starttext -->
+        <h:panelGroup
+            rendered="#{tFragenSession.anzuzeigenderBereich==1 and tFragenSession.anzahlFragenGestellt>0}">
+            <br />
+            <br />
+            <br />
+            <br />
+            <h:panelGroup
+                rendered="#{eclPortalTexteM.pruefeTextVorhanden('791')}">
+                <p class="pText">
+                    <h:outputText value="#{eclPortalTexteM.holeText('791')}"
+                        escape="false" />
+                </p>
+                <br />
+                <br />
+            </h:panelGroup>
+
+            <h:dataTable value="#{tFragenSession.fragenGestelltListe}"
+                var="frage" styleClass="dataTableRueck" cellspacing="0"
+                rowClasses="dataTableRueckOddRow,dataTableRueckEvenRow">
+                <h:column>
+                    <h:outputText value="#{frage.zuTop}" escape="false" />
+                    <br />
+                    <br />
+                    <h:outputText value="#{frage.fragentext}" escape="false" />
+                    <br />
+                    <br />
+                </h:column>
+            </h:dataTable>
+
+
+            <!-- EndText -->
+            <h:panelGroup
+                rendered="#{eclPortalTexteM.pruefeTextVorhanden('792')}">
+                <p class="pText">
+                    <h:outputText value="#{eclPortalTexteM.holeText('792')}"
+                        escape="false" />
+                </p>
+                <br />
+                <br />
+
+            </h:panelGroup>
+        </h:panelGroup>
+
+
+
+        <br />
+        <br />
+
+    </ui:composition>
+</body>
+</html>

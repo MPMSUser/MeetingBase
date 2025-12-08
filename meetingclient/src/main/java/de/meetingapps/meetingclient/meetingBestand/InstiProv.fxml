@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+            <Label layoutX="28.0" layoutY="152.0" text="Erklärung Datum" />
+            <TextField fx:id="tfErklaerungDatum" layoutX="118.0" layoutY="146.0" prefHeight="25.0" prefWidth="103.0" />
+            <Label layoutX="225.0" layoutY="149.0" text="Erklärung Zeit" />
+            <TextField fx:id="tfErklaerungZeit" layoutX="302.0" layoutY="145.0" prefHeight="25.0" prefWidth="103.0" />
+            <Label layoutX="468.0" layoutY="148.0" text="Eingangsweg" />
+            <ComboBox fx:id="cbEingangsWeg" layoutX="557.0" layoutY="145.0" prefHeight="25.0" prefWidth="290.0" />
+      <Label layoutX="28.0" layoutY="46.0" text="Zu importierende Datei" />
+      <TextField fx:id="tfImportDatei" layoutX="205.0" layoutY="42.0" prefHeight="25.0" prefWidth="605.0" />
+      <Label layoutX="28.0" layoutY="82.0" text="MeldeIdent Sammelkarte" />
+      <CheckBox fx:id="cbFixAnmelden" layoutX="28.0" layoutY="111.0" mnemonicParsing="false" text="Fix-Anmelden" />
+      <CheckBox fx:id="cbVorrangigFremdebesitz" layoutX="250.0" layoutY="111.0" mnemonicParsing="false" text="Vorrangig Fremdbesitz" />
+      <TextField fx:id="tfMeldeIdentSammelkarte" layoutX="205.0" layoutY="78.0" />
+      <Button fx:id="btnImportieren" layoutX="28.0" layoutY="202.0" mnemonicParsing="false" onAction="#onBtnImportieren" prefHeight="25.0" prefWidth="828.0" text="Importieren" />
+      <Label layoutX="28.0" layoutY="298.0" text="Verarbeitungslauf-Nummer" />
+      <TextField fx:id="tfVerarbeitungslauf" layoutX="205.0" layoutY="294.0" />
+      <Button fx:id="btnTesten" layoutX="28.0" layoutY="347.0" mnemonicParsing="false" onAction="#onBtnTesten" prefHeight="25.0" prefWidth="382.0" text="Testen" />
+      <Button fx:id="btnVerarbeiten" layoutX="503.0" layoutY="347.0" mnemonicParsing="false" onAction="#onBtnVerarbeiten" prefHeight="25.0" prefWidth="358.0" text="Verarbeiten" />
+      <Button fx:id="btnVerarbeitenNurWeisung" layoutX="503.0" layoutY="387.0" mnemonicParsing="false" onAction="#onBtnVerarbeitenNurWeisung" prefHeight="25.0" prefWidth="358.0" text="Verarbeiten nur Weisung" />
+</children>
+</Pane>

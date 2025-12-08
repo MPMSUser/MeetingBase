@@ -1,0 +1,253 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+	<!-- gesetzlicher Vertreter ist einzugeben -->
+	<h:panelGroup
+		rendered="#{eclBesitzGesamtAuswahl1M.liefereGesetzlichenVertreterEingeben()==true}">
+
+		<hr class="sperator-line" />
+		<h:panelGroup
+			rendered="#{eclBesitzGesamtAuswahl1M.eingabeMaskeGesetzVertreterAnzeigen==true}">
+			<h:panelGroup
+				rendered="#{eclBesitzGesamtAuswahl1M.liefereBevollmaechtigterEingeben()==false}">
+				<!-- Text, wenn nur gesetzlicher Vertreter -->
+				<h:panelGroup
+					rendered="#{eclPortalTexteM.pruefeTextVorhanden('2333')}">
+					<p>
+						<h:outputText value="#{eclPortalTexteM.holeText('2333')}"
+							escape="false" />
+					</p>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup
+				rendered="#{eclBesitzGesamtAuswahl1M.liefereBevollmaechtigterEingeben()==true}">
+				<!-- Text, wenn gesetzlicher Vertreter und Bevollmächtigter-->
+				<h:panelGroup
+					rendered="#{eclPortalTexteM.pruefeTextVorhanden('2351')}">
+					<p>
+						<h:outputText value="#{eclPortalTexteM.holeText('2351')}"
+							escape="false" />
+					</p>
+				</h:panelGroup>
+			</h:panelGroup>
+
+
+
+
+			<section id="gvGesetzl-bereich">
+				<div class="row">
+					<div class="col-4">
+						<div class="row">
+							<div class="col-3">
+								<h:outputLabel value="#{eclPortalTexteM.holeText('2346')}"
+									escape="false" />
+							</div>
+							<div class="col-5">
+								<h:inputText id="GVVollmachtGesetzTitel"
+									value="#{eclBesitzGesamtAuswahl1M.titelGesetzVertreter1}"
+									maxlength="30" size="30" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<h:outputLabel value="#{eclPortalTexteM.holeText('2334')}"
+									escape="false" />
+							</div>
+							<div class="col-5">
+								<h:inputText id="GVVollmachtGesetzName"
+									value="#{eclBesitzGesamtAuswahl1M.nameGesetzVertreter1}"
+									maxlength="80" size="50" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<h:outputLabel value="#{eclPortalTexteM.holeText('2335')}"
+									escape="false" />
+							</div>
+							<div class="col-5">
+								<h:inputText id="GVVollmachtGesetzVorname"
+									value="#{eclBesitzGesamtAuswahl1M.vornameGesetzVertreter1}"
+									maxlength="80" size="50" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<h:outputLabel value="#{eclPortalTexteM.holeText('2347')}"
+									escape="false" />
+							</div>
+							<div class="col-5">
+								<h:inputText id="GVVollmachtGesetzZusatz"
+									value="#{eclBesitzGesamtAuswahl1M.zusatzGesetzVertreter1}"
+									maxlength="80" size="50" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<h:outputLabel value="#{eclPortalTexteM.holeText('2348')}"
+									escape="false" />
+							</div>
+							<div class="col-5">
+								<h:inputText id="GVVollmachtGesetzStrasse"
+									value="#{eclBesitzGesamtAuswahl1M.strasseGesetzVertreter1}"
+									maxlength="80" size="50" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<h:outputLabel value="#{eclPortalTexteM.holeText('2349')}"
+									escape="false" />
+							</div>
+							<div class="col-5">
+								<h:inputText id="GVVollmachtGesetzPLZ"
+									value="#{eclBesitzGesamtAuswahl1M.plzGesetzVertreter1}"
+									maxlength="20" size="20" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<h:outputLabel value="#{eclPortalTexteM.holeText('2336')}"
+									escape="false" />
+							</div>
+							<div class="col-5">
+								<h:inputText id="GVVollmachtGesetzOrt"
+									value="#{eclBesitzGesamtAuswahl1M.ortGesetzVertreter1}"
+									maxlength="80" size="50" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-3">
+								<h:outputLabel value="#{eclPortalTexteM.holeText('2350')}"
+									escape="false" />
+							</div>
+							<div class="col-5">
+								<h:inputText id="GVVollmachtGesetzMail"
+									value="#{eclBesitzGesamtAuswahl1M.mailGesetzVertreter1}"
+									maxlength="100" size="50" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<section id="button-gesetzlVertreter-erteilen-bereich">
+				<div class="container-80">
+					<div class="row">
+						<div class="col-1_3"></div>
+						<div class="col-1_3"></div>
+						<div class="col-1_3">
+							<h:commandButton value="#{eclPortalTexteM.holeText('2357')}"
+								id="buttonGVAnAbmeldenGesetzlSpeichern"
+								action="#{tGeneralversammlung.doGesetzlicherVertreterSpeichern()}"
+								styleClass="btn-typ-01">
+								<f:ajax execute="@all"
+									render="headerform inhaltsform streamform"
+									onevent="nachAjaxButton" />
+							</h:commandButton>
+						</div>
+					</div>
+				</div>
+			</section>
+		</h:panelGroup>
+		<h:panelGroup
+			rendered="#{eclBesitzGesamtAuswahl1M.liefereListeGesetzlVertreterAnzeigen()==true}">
+			<h:panelGroup
+				rendered="#{eclPortalTexteM.pruefeTextVorhanden('2361')}">
+				<p>
+					<h:outputText value="#{eclPortalTexteM.holeText('2361')}"
+						escape="false" />
+				</p>
+			</h:panelGroup>
+			<ui:repeat value="#{eclBesitzGesamtAuswahl1M.listeGesetzlVertreter}"
+				var="gesetzlVertreter" id="schleifeGesetzlVertreter">
+				<div class="row">
+					<div class="col-1">
+						<h:outputText
+							value="#{gesetzlVertreter.vertreterVorname} #{gesetzlVertreter.vertreterName}" />
+						<br />
+						<h:outputText value="#{gesetzlVertreter.vertreterOrt}" />
+					</div>
+
+					<div class="col-1">
+						<h:panelGroup rendered="#{gesetzlVertreter.wurdeStorniert==1}">
+							<h:outputText value="#{eclPortalTexteM.holeText('2371')}"
+								escape="false" />
+						</h:panelGroup>
+						<h:panelGroup rendered="#{gesetzlVertreter.wurdeStorniert!=1}">
+							<h:commandButton value="#{eclPortalTexteM.holeText('2358')}"
+								id="buttonGVAnAbmeldenGesetzlLoeschen"
+								action="#{tGeneralversammlung.doGesetzlicherVertreterLoeschen(gesetzlVertreter)}"
+								styleClass="btn-typ-01">
+								<f:ajax execute="@all"
+									render="headerform inhaltsform streamform"
+									onevent="nachAjaxButton" />
+							</h:commandButton>
+						</h:panelGroup>
+
+					</div>
+				</div>
+			</ui:repeat>
+
+		</h:panelGroup>
+		<h:panelGroup
+			rendered="#{eclBesitzGesamtAuswahl1M.eingabeStornoGesetzVertreterAnzeigen==true}">
+			<!-- löschen gesetzlichen Vertreter durchführen -->
+			<h:panelGroup
+				rendered="#{eclPortalTexteM.pruefeTextVorhanden('2365')}">
+				<p>
+					<h:outputText value="#{eclPortalTexteM.holeText('2365')}"
+						escape="false" />
+				</p>
+			</h:panelGroup>
+			<h:outputText
+				value="#{eclBesitzGesamtAuswahl1M.stornoGesetzVertreter.vertreterVorname} #{eclBesitzGesamtAuswahl1M.stornoGesetzVertreter.vertreterName}" />
+			<br />
+			<h:outputText
+				value="#{eclBesitzGesamtAuswahl1M.stornoGesetzVertreter.vertreterOrt}" />
+			<br />
+			<div class="container-80">
+				<div class="row">
+					<div class="col-1_3">
+						<h:commandButton value="#{eclPortalTexteM.holeText('2369')}"
+							id="buttonGVAnAbmeldenGesetzlLoeschenAbbruch"
+							action="#{tGeneralversammlung.doGesetzlicherVertreterLoeschenAbbruch()}"
+							styleClass="btn-typ-01">
+							<f:ajax execute="@all" render="headerform inhaltsform streamform"
+								onevent="nachAjaxButton" />
+						</h:commandButton>
+					</div>
+					<div class="col-1_3"></div>
+					<div class="col-1_3">
+						<h:commandButton value="#{eclPortalTexteM.holeText('2366')}"
+							id="buttonGVAnAbmeldenGesetzlLoeschenAusfuehren"
+							action="#{tGeneralversammlung.doGesetzlicherVertreterLoeschenAusfuehren()}"
+							styleClass="btn-typ-01">
+							<f:ajax execute="@all" render="headerform inhaltsform streamform"
+								onevent="nachAjaxButton" />
+						</h:commandButton>
+					</div>
+				</div>
+			</div>
+
+		</h:panelGroup>
+	</h:panelGroup>
+
+
+
+
+</ui:composition>

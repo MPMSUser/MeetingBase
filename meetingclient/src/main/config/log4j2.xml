@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="info">
+                <appenders>
+                               <Console name="Console">
+                                               <PatternLayout pattern="%d{dd.MM.yyyy HH:mm:ss:SSS} %-5p  %c: %m%n" />
+                                               <ThresholdFilter level="DEBUG" onMatch="ACCEPT"
+                                                               onMismatch="DENY" />
+                               </Console>
+                               <RandomAccessFile name="BOlogger" fileName="logs/bologs.txt"
+                                               append="false" immediateFlush="false">
+                                               <PatternLayout alwaysWriteExceptions="false"
+                                                               pattern="%d{dd.MM.yyyy HH:mm:ss:SS} %-5p %c: %m%ex{short}%n" />
+                                               <ThresholdFilter level="DEBUG" onMatch="ACCEPT"
+                                                               onMismatch="DENY" />
+                               </RandomAccessFile>
+                </appenders>
+                <loggers>
+                               <root level="TRACE" includeLocation="false">
+                                               <AppenderRef ref="Console" />
+                                               <AppenderRef ref="BOlogger" />
+                               </root>
+                               
+                </loggers>
+</configuration>

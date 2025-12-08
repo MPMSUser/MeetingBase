@@ -1,0 +1,657 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <f:subview id="iAuswahl1TeilnahmeOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <div class="container-80">
+        <div class="row">
+            <div class="col-8 btn-w-100">
+
+                <!--  Seite noch nicht möglich - nur Announce-Text anzeigen -->
+                <h:panelGroup rendered="#{!tAuswahl1Session.generalversammlungTeilnahmeMoeglich}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1048')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1048')}" escape="false" />
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+                <!--  Seite möglich  -->
+                <h:panelGroup rendered="#{tAuswahl1Session.generalversammlungTeilnahmeMoeglich}">
+
+                    <!-- Kein Bestand zur OT -->
+                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.bestandFuerOTVorhanden==false}">
+
+                        <!-- Kein Bestand zum Vertreten - normales Mitglied -->
+                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.keinBestandFuerOTNormalesMitglied}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1049')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1049')}" escape="false" />
+
+                                </p>
+                                <!-- Button - zur Anmeldung -->
+                                <p>
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('1507')}"
+                                        action="#{tAuswahl1.doAnmeldenAusGVTeilnahme()}" styleClass="btn-typ-00"
+                                        id="iAuswahl1TeilnahmeZurAnmeldung">
+                                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <!-- Kein Bestand zum Vertreten - gesetzlich zu vertretendes Mitglied -->
+                        <h:panelGroup
+                            rendered="#{eclBesitzGesamtAuswahl1M.keinBestandFuerOTGesetzlichZuVertretendesMitglied}">
+                            <h:panelGroup
+                                rendered="#{eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragen==false and eclBesitzGesamtAuswahl1M.vollmachtAnDritteEingetragen==false}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1050')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1050')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vollmachtGesetzlichEingetragen==true}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1089')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1089')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.vollmachtAnDritteEingetragen==true}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1090')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1090')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <!-- Kein Bestand zum Vertreten - sonstige Person -->
+                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.keinBestandFuerOTSonstigePerson}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1051')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1051')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Bestand zum Vertreten -->
+                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.bestandFuerOTVorhanden==true}">
+                        <!-- Start-Text Online-Teilnahme noch gesperrt -->
+                        <h:panelGroup rendered="#{tAuswahlSession.onlineteilnahmeAktivUB==false}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1052')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1052')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <!-- Start-Text Online-Teilnahme möglich -->
+                        <h:panelGroup rendered="#{tAuswahlSession.onlineteilnahmeAktivUB==true}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1053')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1053')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+
+                        <h:panelGroup
+                            rendered="#{eclBesitzGesamtAuswahl1M.keinEigenerBestandFuerOTNormalesMitglied==true}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1099')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1099')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <!-- Hinweis: aufgrund Stornierungserfordernis der Vollmacht vor eigener Anmeldung können keine
+				zugeordneten Bestände da sein, die nicht Vertreten werden können weil sie bereits OT sind  -->
+
+                        <!-- Übersicht Bestände, die noch per OT vertreten werden können -->
+                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anzNichtPraesenteVorhanden>0}">
+                            <!-- Starttext (nur wenn OT gerade möglich) -->
+                            <h:panelGroup rendered="#{tAuswahlSession.onlineteilnahmeAktivUB==true}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1054')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1054')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                            <!-- Wenn vorhanden: eigene Bestände anzeigen -->
+                            <h:panelGroup
+                                rendered="#{eclBesitzGesamtAuswahl1M.eigenerBestandOTVertretbar and (eclBesitzGesamtAuswahl1M.liefereEigeneNichtPraesentVorhanden()==true)}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1060')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1060')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                                <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereEigeneNichtPraesent()}"
+                                    var="mitglied">
+                                    <ui:include src="idetail/idTabelleninhaltOnlineteilnahme.xhtml" />
+                                </ui:repeat>
+                            </h:panelGroup>
+
+                            <!-- Wenn vorhanden: bevollmächtige Bestände anzeigen -->
+                            <h:panelGroup
+                                rendered="#{eclBesitzGesamtAuswahl1M.liefereVertreteneNichtPraesentVorhanden()==true}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1061')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1061')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                                <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereVertreteneNichtPraesent()}"
+                                    var="mitglied">
+                                    <ui:include src="idetail/idTabelleninhaltOnlineteilnahme.xhtml" />
+                                </ui:repeat>
+                            </h:panelGroup>
+
+                            <!-- Wenn vorhanden: geerbte Bestände anzeigen -->
+                            <h:panelGroup
+                                rendered="#{eclBesitzGesamtAuswahl1M.liefereGeerbteNichtPraesentVorhanden()==true}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1062')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1062')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                                <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereGeerbteNichtPraesent()}"
+                                    var="mitglied">
+                                    <ui:include src="idetail/idTabelleninhaltOnlineteilnahme.xhtml" />
+                                </ui:repeat>
+                            </h:panelGroup>
+
+                            <!-- Bestände -->
+                            <!-- Zugangsbutton, wenn OT möglich, und noch nicht als Gast präsent -->
+                            <h:panelGroup
+                                rendered="#{tAuswahlSession.onlineteilnahmeAngebotenUB==true and (eclBesitzGesamtAuswahl1M.liefereAbgangAlsGastZulaessig()==false)}">
+
+                                <!-- separate Nutzungsbedingungen für Online-Teilnahme anzeigen -->
+                                <h:panelGroup rendered="#{eclParamM.onlineTeilnahmeSeparateNutzungsbedingungen}">
+
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1192')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1192')}" escape="false" />
+                                        </p>
+
+
+                                    </h:panelGroup>
+
+                                    <h:panelGrid columns="2">
+                                        <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.nutzungsbedingungenAkzeptiert -->
+                                        <h:selectBooleanCheckbox
+                                            value="#{tPraesenzZugangAbgangSession.nutzungsbedingungenAkzeptiert}">
+                                        </h:selectBooleanCheckbox>
+                                        <h:outputLabel value="#{eclPortalTexteM.holeText('1193')}" escape="false">
+                                        </h:outputLabel>
+
+                                        <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.personBestaetigt -->
+                                        <h:selectBooleanCheckbox
+                                            value="#{tPraesenzZugangAbgangSession.personBestaetigt}">
+                                        </h:selectBooleanCheckbox>
+                                        <h:outputLabel
+                                            value="#{eclPortalTexteM.holeText('1207')}#{eclLoginDatenM.titelVornameName}#{eclPortalTexteM.holeText('1208')}"
+                                            escape="false"></h:outputLabel>
+
+                                    </h:panelGrid>
+
+                                </h:panelGroup>
+
+
+                                <!-- Zugangsbuttons alld und mit Auswahlmöglichkeit -->
+                                <h:panelGroup
+                                    rendered="#{eclBesitzGesamtAuswahl1M.anzNichtPraesenteVorhanden>1 and eclBesitzGesamtAuswahl1M.gastPraesent==false}">
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1063')}"
+                                            action="#{tAuswahl1Teilnahme.doZugangAlle()}" styleClass="btn-typ-00"
+                                            id="i112zugang1">
+                                            <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1064')}"
+                                            action="#{tAuswahl1Teilnahme.doZugangAusgewaehlte()}"
+                                            styleClass="btn-typ-00" id="i112zugang2">
+                                            <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                </h:panelGroup>
+                                <!-- Zugangsbutton - nur Alle -->
+                                <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anzNichtPraesenteVorhanden==1}">
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1065')}"
+                                            action="#{tAuswahl1Teilnahme.doZugangAlle()}" styleClass="btn-typ-00"
+                                            id="i112zugang3">
+                                            <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+                        <!-- Übersicht Bestände, die gerade per OT vertreten werden -->
+                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anzPraesenteVorhanden>0}">
+                            <!-- Starttext -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1055')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1055')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+
+                            <!-- Wenn vorhanden: eigene Bestände anzeigen -->
+                            <h:panelGroup
+                                rendered="#{eclBesitzGesamtAuswahl1M.eigenerBestandOTVertretbar and (eclBesitzGesamtAuswahl1M.liefereEigenePraesentVorhanden()==true)}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1083')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1083')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                                <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereEigenePraesent()}" var="mitglied">
+                                    <ui:include src="idetail/idTabelleninhaltOnlineteilnahmePraesente.xhtml" />
+                                </ui:repeat>
+                            </h:panelGroup>
+
+                            <!-- Wenn vorhanden: bevollmächtige Bestände anzeigen -->
+                            <h:panelGroup
+                                rendered="#{eclBesitzGesamtAuswahl1M.liefereVertretenePraesentVorhanden()==true}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1084')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1084')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                                <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereVertretenePraesent()}"
+                                    var="mitglied">
+                                    <ui:include src="idetail/idTabelleninhaltOnlineteilnahmePraesente.xhtml" />
+                                </ui:repeat>
+                            </h:panelGroup>
+
+                            <!-- Wenn vorhanden: geerbte Bestände anzeigen -->
+                            <h:panelGroup
+                                rendered="#{eclBesitzGesamtAuswahl1M.liefereGeerbtePraesentVorhanden()==true}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1085')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1085')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                                <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereGeerbtePraesent()}" var="mitglied">
+                                    <ui:include src="idetail/idTabelleninhaltOnlineteilnahmePraesente.xhtml" />
+                                </ui:repeat>
+                            </h:panelGroup>
+
+                            <!-- Bestände -->
+                            <!-- Abgangsbuttons - nur alle-->
+                            <h:panelGroup rendered="#{tAuswahlSession.onlineteilnahmeAktivUB==true}">
+                                <p>
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('1088')}"
+                                        action="#{tAuswahl1Teilnahme.doAbgangAlle()}" styleClass="btn-typ-00">
+                                        <f:ajax execute="@all" render="@form streamform" onevent="nachAjaxButton" />
+                                    </h:commandButton>
+
+                                </p>
+                            </h:panelGroup>
+
+                        </h:panelGroup>
+
+                    </h:panelGroup>
+
+
+
+                    <!-- *********************************************Div. Buttons für laufende OT anzeigen **********************-->
+
+                    <!--+++++++++++++++++++++Gast-Zu/Abgänge++++++++++++++++++++++++++++++++-->
+                    <h:panelGroup rendered="#{eclParamM.onlineTeilnahmeGastInSeparatemMenue==false}">
+                        <!-- Gast ist noch nicht präsent, und Aktionär ist auch noch nicht präsent
+			(zweiter Teil eigentlich hier unnötig abzufragen, aber wg. Kompatibilität zu normalem Menü drin) -->
+                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereZugangAlsGastZulaessig()==true}">
+
+                            <!-- Gastzugang nicht möglich, da Aktionärszugang möglich und Parameter so gestellt, dass dann kein Gastzugang möglich -->
+                            <h:panelGroup
+                                rendered="#{eclBesitzGesamtAuswahl1M.liefereZugangNurAlsAktionaerMoeglich()==true}">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1198')}">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1198')}" escape="false" />
+
+                                    </p>
+                                </h:panelGroup>
+                            </h:panelGroup>
+
+                            <!-- Gastzugang ist möglich -->
+                            <h:panelGroup
+                                rendered="#{eclBesitzGesamtAuswahl1M.liefereZugangNurAlsAktionaerMoeglich()==false and eclParamM.aktionaerAlsGastAuchOhneBriefwahl==true}">
+
+                                <!-- Zugangsbutton ermöglichen, wenn Online-Teilnahme aktiv -->
+                                <h:panelGroup rendered="#{tAuswahlSession.onlineteilnahmeAngebotenUB==true}">
+
+                                    <!-- Starttext -->
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1199')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1199')}" escape="false" />
+
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- Zugangsbutton Gast -->
+                                    <p>
+                                        <h:commandButton value="#{eclPortalTexteM.holeText('1200')}"
+                                            action="#{tPraesenzZugangAbgang.doZugangGast()}" styleClass="btn-typ-00">
+                                            <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                        </h:commandButton>
+
+                                    </p>
+
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+
+
+                        <!-- Gast ist bereits präsent -->
+                        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereAbgangAlsGastZulaessig()==true}">
+                            <!-- Starttext -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1201')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1201')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+
+                            <!-- Abgangs-Button -->
+                            <p>
+                                <h:commandButton value="#{eclPortalTexteM.holeText('1202')}"
+                                    action="#{tPraesenzZugangAbgang.doAbgangGast()}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="@form streamform" onevent="nachAjaxButton" />
+                                </h:commandButton>
+
+                            </p>
+
+                        </h:panelGroup>
+
+                    </h:panelGroup>
+
+
+                    <!-- +++++++++++++++++++++++++++++++++++++++Stream +++++++++++++++++++++++++++++++++++++ -->
+                    <!-- Stream wird angeboten und berechtigt -->
+                    <h:panelGroup rendered="#{tAuswahlSession.streamAngeboten}">
+                        <!-- Einleitungstext - immer -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('760')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('760')}" escape="false" />
+
+                            </p>
+                        </h:panelGroup>
+
+                        <!-- Streaming ist gerade aktiv -->
+                        <h:panelGroup rendered="#{tAuswahlSession.streamAktiv}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('761')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('761')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                            <p>
+                                <h:commandButton value="#{eclPortalTexteM.holeText('762')}"
+                                    action="#{tAuswahl1Teilnahme.doStream}" styleClass="btn-typ-00">
+                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                </h:commandButton>
+
+                            </p>
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('763')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('763')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Unterlagen -->
+                    <!--+++++++++++++++++++++++++ Unterlagen wird angeboten +++++++++++++++++++++++++-->
+                    <h:panelGroup rendered="#{tAuswahlSession.unterlagenAngeboten()}">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1203')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1203')}" escape="false" />
+
+                            </p>
+                        </h:panelGroup>
+
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText('1204')}"
+                                action="#{tAuswahl1Teilnahme.doUnterlagen}" styleClass="btn-typ-00">
+                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+
+                    </h:panelGroup>
+
+                    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++Fragen ++++++++++++++++++++++++++++++++++++++++++++-->
+                    <!-- Fragen sind angeboten und berechtigt -->
+                    <h:panelGroup rendered="#{tAuswahlSession.fragenAngeboten}">
+                        <!-- Einleitungstext - immer -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('756')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('756')}" escape="false" />
+
+                            </p>
+                        </h:panelGroup>
+
+                        <!-- Fragenstellung ist gerade aktiv -->
+                        <h:panelGroup rendered="#{tAuswahlSession.fragenAktiv}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('757')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('757')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <!-- Fragenstellung ist gerade nicht aktiv -->
+                        <h:panelGroup rendered="#{!tAuswahlSession.fragenAktiv}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1196')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1196')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <!-- Button immer verfügbar - wegen Anzeige der gestellten Fragen -->
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText('758')}"
+                                action="#{tAuswahl1Teilnahme.doFragen}" styleClass="btn-typ-00">
+                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{tAuswahlSession.fragenAktiv}">
+                            <!-- Fragenstellung ist gerade aktiv -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('759')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('759')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+
+
+                    <!-- +++++++++++++++++++++++++++++++++++++++++++++++++++Wortmeldungen ++++++++++++++++++++++++++++++++++++++++++++-->
+                    <!-- Wortmeldungen sind angeboten und berechtigt -->
+                    <h:panelGroup rendered="#{tAuswahlSession.wortmeldungenAngeboten}">
+                        <!-- Einleitungstext - immer -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1126')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1126')}" escape="false" />
+
+                            </p>
+                        </h:panelGroup>
+
+                        <!-- Wortmeldungen ist gerade aktiv -->
+                        <h:panelGroup rendered="#{tAuswahlSession.wortmeldungenAktiv}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1127')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1127')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <!-- Button immer verfügbar - wegen Anzeige der gestellten Wortmeldungen und Rednerliste -->
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText('1128')}"
+                                action="#{tAuswahl1Teilnahme.doWortmeldungen}" styleClass="btn-typ-00">
+                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{tAuswahlSession.wortmeldungenAktiv}">
+                            <!-- Fragenstellung ist gerade aktiv -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1129')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1129')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- ++++++++++++++Widersprueche ++++++++++++++++++-->
+                    <!--Widersprueche werden angeboten und sind berechtigt -->
+                    <h:panelGroup rendered="#{tAuswahlSession.widerspruecheAngeboten}">
+                        <!-- Einleitungstext - immer -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('764')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('764')}" escape="false" />
+
+                            </p>
+                        </h:panelGroup>
+
+                        <!-- Widersprueche ist gerade aktiv -->
+                        <h:panelGroup rendered="#{tAuswahlSession.widerspruecheAktiv}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('765')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('765')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <!-- Button immer verfügbar - wegen Anzeige der gestellten Widersprüche -->
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText('766')}"
+                                action="#{tAuswahl1Teilnahme.doWidersprueche}" styleClass="btn-typ-00">
+                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{tAuswahlSession.widerspruecheAktiv}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('767')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('767')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- ++++++++++++++Teilnehmerverzeichnis ++++++++++++++++++-->
+                    <!--Teilnehmerverzeichnis wird angeboten und sind berechtigt -->
+                    <h:panelGroup rendered="#{tAuswahlSession.teilnehmerverzeichnisAngeboten}">
+                        <!-- Einleitungstext - immer -->
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('834')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('834')}" escape="false" />
+
+                            </p>
+                        </h:panelGroup>
+
+                        <!-- Teilnehmerverzeichnis ist gerade aktiv -->
+                        <h:panelGroup rendered="#{tAuswahlSession.teilnehmerverzeichnisAktiv}">
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('835')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('835')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <!-- Button immer verfügbar - wegen Anzeige Teilnehmerverzeichnis -->
+                        <p>
+                            <h:commandButton value="#{eclPortalTexteM.holeText('836')}"
+                                action="#{tAuswahl1Teilnahme.doTeilnehmerverz}" styleClass="btn-typ-00">
+                                <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                            </h:commandButton>
+
+                        </p>
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('837')}">
+                            <p>
+                                <h:outputText value="#{eclPortalTexteM.holeText('837')}" escape="false" />
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- +++++++++++++++++++++++++++++++++++++++Stimmabgabe ++++++++++++++++++++++-->
+                    <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.anzPraesenteVorhanden>0}">
+                        <h:panelGroup rendered="#{tAuswahlSession.onlineteilnahmeAktivUB==true}">
+                            <!-- Einleitungstext - immer -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1174')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1174')}" escape="false" />
+
+                                </p>
+                            </h:panelGroup>
+                            <p>
+                                <h:commandButton value="#{eclPortalTexteM.holeText('1175')}"
+                                    action="#{tAuswahl1Teilnahme.doStimmabgabe()}" styleClass="btn-typ-00"
+                                    id="i112stimmabgabe">
+                                    <f:ajax execute="@all" render="@form" onevent="nachAjaxButton" />
+                                </h:commandButton>
+
+                            </p>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </div>
+        </div>
+    </div>
+
+    <f:subview id="iAuswahl1TeilnahmeButtons">
+        <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+    </f:subview>
+
+</ui:composition>

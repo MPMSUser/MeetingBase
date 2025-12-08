@@ -1,0 +1,480 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:c="jakarta.tags.core" xmlns:fn="jakarta.tags.functions"
+    xmlns:p="http://primefaces.org/ui" lang="de">
+
+<f:view>
+    <!-- Hinweis zu den Abweichungen in den xhtmls:
+    iPasswortVergessen: Auswahl per Email / per Post rausgenommen, da im BetterSmartportal per Post nicht zulässig -->
+    <h:head>
+        <title>Internetservice zur Versammlung</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+        <meta name="msapplication-TileColor" content="#{eclParamM.kachelFarbe}" />
+        <meta name="theme-color" content="#{eclParamM.themeFarbe}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="#{resource['std:icons/favicon-32x32.png']}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="#{resource['std:icons/favicon-16x16.png']}" />
+
+        <style>
+            body {
+                /* Schriftgröße */
+                --siz-font: #{eclParamM.schriftgroesseGlobal}px;
+                /* Logo Mindesbreite */
+                --wid-logo-min: #{eclParamM.logoMindestbreite}px;
+                /* Farbe Header */
+                --col-header: #{eclParamM.farbeHeader};
+                /* Button Typ 00:hover Effekt */
+                --col-back-Btn00: #{eclParamM.farbeHintergrundBtn00};
+                --col-font-Btn00: #{eclParamM.farbeSchriftBtn00};
+                --col-border-Btn00: #{eclParamM.farbeRahmenBtn00};
+                --wid-border-Btn00: #{eclParamM.breiteRahmenBtn00}px;
+                --rad-border-Btn00: #{eclParamM.radiusRahmenBtn00}px;
+                --sty-border-Btn00: #{eclParamM.stilRahmenBtn00};
+                --col-back-Btn00-hover: #{eclParamM.farbeHintergrundBtn00Hover};
+                --col-font-Btn00-hover: #{eclParamM.farbeSchriftBtn00Hover};
+                --col-border-Btn00-hover: #{eclParamM.farbeRahmenBtn00Hover};
+                --wid-border-Btn00-hover: #{eclParamM.breiteRahmenBtn00Hover}px;
+                --rad-border-Btn00-hover: #{eclParamM.radiusRahmenBtn00Hover}px;
+                --sty-border-Btn00-hover: #{eclParamM.stilRahmenBtn00Hover};
+                /* Link Schriftfarbe */
+                --col-link-font-color: #{eclParamM.farbeLink};
+                /* Link Schriftfarbe wenn hover */
+                --col-link-font-color-hover: #{eclParamM.farbeLinkHover};
+                /* Listenfarbe für ungerade (odd) Reihe*/
+                --col-02: #{eclParamM.farbeListeUngerade};
+                /* Listenfarbe für gerade (even) Reihe */
+                --col-03: #{eclParamM.farbeListeGerade};
+                /* Hintergrundfarbe der gesamten Seite */
+                --col-site-background: #{eclParamM.farbeHintergrund};
+                /* Textfarbe für gesamte Seite */
+                --col-font-color: #{eclParamM.farbeText};
+                /* Hintergrundfarbe für die Überschrift */
+                --col-font-headline-background: #{eclParamM.farbeUeberschriftHintergrund};
+                /* Schriftfarbe für die Überschrift */
+                --col-font-headline: #{eclParamM.farbeUeberschrift};
+                /*  Hintergrund CookieHint */
+                --col-cookiehint-background: #{eclParamM.farbeCookieHintHintergrund};
+                /* Schriftfarbe für CookieHint */
+                --col-cookiehint-font: #{eclParamM.farbeCookieHintSchrift};
+                /* Hintergrund für CookieHint Button */
+                --col-cookiehint-btn: #{eclParamM.farbeCookieHintButton};
+                /* Schriftfarbe für CookieHint Button */
+                --col-cookiehint-btn-font: #{eclParamM.farbeCookieHintButtonSchrift};
+                /* Farbe für Focus */
+                --col-focus: #{eclParamM.farbeFocus};
+                /* Farben für Stati */
+                --col-error: #{eclParamM.farbeError};
+                --col-error-font: #{eclParamM.farbeErrorSchrift};
+                --col-warning: #{eclParamM.farbeWarning};
+                --col-warning-font: #{eclParamM.farbeWarningSchrift};
+                --col-success: #{eclParamM.farbeSuccess};
+                --col-success-font: #{eclParamM.farbeSuccessSchrift};
+                /* Eingabefelder */
+                --col-border-input: #{eclParamM.farbeRahmenEingabefelder};
+                --wid-border-input: #{eclParamM.breiteRahmenEingabefelder}px;
+                --rad-border-input: #{eclParamM.radiusRahmenEingabefelder}px;
+                --sty-border-input: #{eclParamM.stilRahmenEingabefelder};
+                /* Farbe für Logout Button */
+                --col-back-logoutBtn: #{eclParamM.farbeHintergrundLogoutBtn};
+                --col-font-logoutBtn: #{eclParamM.farbeSchriftLogoutBtn};
+                --col-border-logoutBtn: #{eclParamM.farbeRahmenLogoutBtn};
+                --wid-border-logoutBtn: #{eclParamM.breiteRahmenLogoutBtn}px;
+                --rad-border-logoutBtn: #{eclParamM.radiusRahmenLogoutBtn}px;
+                --sty-border-logoutBtn: #{eclParamM.stilRahmenLogoutBtn};
+                --col-back-logoutBtn-hover: #{eclParamM.farbeHintergrundLogoutBtnHover};
+                --col-font-logoutBtn-hover: #{eclParamM.farbeSchriftLogoutBtnHover};
+                --col-border-logoutBtn-hover: #{eclParamM.farbeRahmenLogoutBtnHover};
+                --wid-border-logoutBtn-hover: #{eclParamM.breiteRahmenLogoutBtnHover}px;
+                --rad-border-logoutBtn-hover: #{eclParamM.radiusRahmenLogoutBtnHover}px;
+                --sty-border-logoutBtn-hover: #{eclParamM.stilRahmenLogoutBtnHover};
+                /* Farbe für Login Button */
+                --col-back-loginBtn: #{eclParamM.farbeHintergrundLoginBtn};
+                --col-font-loginBtn: #{eclParamM.farbeSchriftLoginBtn};
+                --col-border-loginBtn: #{eclParamM.farbeRahmenLoginBtn};
+                --wid-border-loginBtn: #{eclParamM.breiteRahmenLoginBtn}px;
+                --rad-border-loginBtn: #{eclParamM.radiusRahmenLoginBtn}px;
+                --sty-border-loginBtn: #{eclParamM.stilRahmenLoginBtn};
+                --col-back-loginBtn-hover: #{eclParamM.farbeHintergrundLoginBtnHover};
+                --col-font-loginBtn-hover: #{eclParamM.farbeSchriftLoginBtnHover};
+                --col-border-loginBtn-hover: #{eclParamM.farbeRahmenLoginBtnHover};
+                --wid-border-loginBtn-hover: #{eclParamM.breiteRahmenLoginBtnHover}px;
+                --rad-border-loginBtn-hover: #{eclParamM.radiusRahmenLoginBtnHover}px;
+                --sty-border-loginBtn-hover: #{eclParamM.stilRahmenLoginBtnHover};
+                /* Farben für den Login Bereich */
+                /* Rahmen */
+                --col-border-login: #{eclParamM.farbeRahmenLoginBereich};
+                --wid-border-login: #{eclParamM.breiteRahmenLoginBereich}px;
+                --rad-border-login: #{eclParamM.radiusRahmenLoginBereich}px;
+                --sty-border-login: #{eclParamM.stilRahmenLoginBereich};
+                /* Hintergrund */
+                --col-back-login: #{eclParamM.farbeHintergrundLoginBereich};
+                /* Links */
+                --col-link-login: #{eclParamM.farbeLinkLoginBereich};
+                --col-link-login-hover: #{eclParamM.farbeLinkHoverLoginBereich};
+                /* Eingabefelder Login */
+                --col-border-input-login: #{eclParamM.farbeRahmenEingabefelderLoginBereich};
+                --wid-border-input-login: #{eclParamM.breiteRahmenEingabefelderLoginBereich}px;
+                --rad-border-input-login: #{eclParamM.radiusRahmenEingabefelderLoginBereich}px;
+                --sty-border-input-login: #{eclParamM.stilRahmenEingabefelderLoginBereich};
+                /* Bestandsbereich Hintergrund für Reihen */
+                --col-bestand-odd-row: #{eclParamM.farbeBestandsbereichUngeradeReihe};
+                --col-bestand-even-row: #{eclParamM.farbeBestandsbereichGeradeReihe};
+                /* Untere Linie im Bestandsbereich */
+                --col-border-bestand-bottom: #{eclParamM.farbeLineUntenBestandsbereich};
+                --wid-border-bestand-bottom: #{eclParamM.breiteLineUntenBestandsbereich}px;
+                --sty-border-bestand-bottom: #{eclParamM.stilLineUntenBestandsbereich};
+                /* Rahmen für Anmeldeübersicht-Bereich */
+                --col-border-anmeldeuebersicht: #{eclParamM.farbeRahmenAnmeldeuebersicht};
+                --wid-border-anmeldeuebersicht: #{eclParamM.breiteRahmenAnmeldeuebersicht}px;
+                --rad-border-anmeldeuebersicht: #{eclParamM.radiusRahmenAnmeldeuebersicht}px;
+                --sty-border-anmeldeuebersicht: #{eclParamM.stilRahmenAnmeldeuebersicht};
+                /* Trennlinie Anmledeübersicht-Bereich */
+                --col-border-anmeldeuebersicht-trennung: #{eclParamM.farbeTrennlinieAnmeldeuebersicht};
+                --wid-border-anmeldeuebersicht-trennung: #{eclParamM.breiteTrennlinieAnmeldeuebersicht}px;
+                --sty-border-anmeldeuebersicht-trennung: #{eclParamM.stilTrennlinieAnmeldeuebersicht};
+                /* Farben und Rahmen für erteilte Willenserklärungen (idDurchführenFuerBestand) */
+                --col-border-willenerklaerung: #{eclParamM.farbeRahmenErteilteWillenserklärungen};
+                --wid-border-willenerklaerung: #{eclParamM.breiteRahmenErteilteWillenserklärungen}px;
+                --rad-border-willenerklaerung: #{eclParamM.radiusRahmenErteilteWillenserklärungen}px;
+                --sty-border-willenerklaerung: #{eclParamM.stilRahmenErteilteWillenserklärungen};
+                --col-back-willenerklaerung: #{eclParamM.farbeHintergrundErteilteWillenserklärungen};
+                --col-font-willenerklaerung: #{eclParamM.farbeSchriftErteilteWillenserklärungen};
+                /* Farben für Abstimmungstable */
+                /* Rahmen um Tabelle */
+                --col-border-abstimmungstable: #{eclParamM.farbeRahmenAbstimmungstabelle};
+                --wid-border-abstimmungstable: #{eclParamM.breiteRahmenAbstimmungstabelle}px;
+                --rad-border-abstimmungstable: #{eclParamM.radiusRahmenAbstimmungstabelle}px;
+                --sty-border-abstimmungstable: #{eclParamM.stilRahmenAbstimmungstabelle};
+                /* ungerade Reihe */
+                --col-back-abstimmungstable-odd: #{eclParamM.farbeHintergrundAbstimmungstabelleUngeradeReihen};
+                --col-font-abstimmungstable-odd: #{eclParamM.farbeSchriftAbstimmungstabelleUngeradeReihen};
+                /* gerade Reihe */
+                --col-back-abstimmungstable-even: #{eclParamM.farbeHintergrundAbstimmungstabelleGeradeReihen};
+                --col-font-abstimmungstable-even: #{eclParamM.farbeSchriftAbstimmungstabelleGeradeReihen};
+                /* Farben für Weisungsbuttons */
+                --col-back-weisungBtn-ja: #{eclParamM.farbeHintergrundWeisungJa};
+                --col-font-weisungBtn-ja: #{eclParamM.farbeSchriftWeisungJa};
+                --col-border-weisungBtn-ja: #{eclParamM.farbeRahmenWeisungJa};
+                --col-back-weisungBtn-ja-checked: #{eclParamM.farbeHintergrundWeisungJaChecked};
+                --col-font-weisungBtn-ja-checked: #{eclParamM.farbeSchriftWeisungJaChecked};
+                --col-border-weisungBtn-ja-checked: #{eclParamM.farbeRahmenWeisungJaChecked};
+                --col-back-weisungBtn-nein: #{eclParamM.farbeHintergrundWeisungNein};
+                --col-font-weisungBtn-nein: #{eclParamM.farbeSchriftWeisungNein};
+                --col-border-weisungBtn-nein: #{eclParamM.farbeRahmenWeisungNein};
+                --col-back-weisungBtn-nein-checked: #{eclParamM.farbeHintergrundWeisungNeinChecked};
+                --col-font-weisungBtn-nein-checked: #{eclParamM.farbeSchriftWeisungNeinChecked};
+                --col-border-weisungBtn-nein-checked: #{eclParamM.farbeRahmenWeisungNeinChecked};
+                --col-back-weisungBtn-enthaltung: #{eclParamM.farbeHintergrundWeisungEnthaltung};
+                --col-font-weisungBtn-enthaltung: #{eclParamM.farbeSchriftWeisungEnthaltung};
+                --col-border-weisungBtn-enthaltung: #{eclParamM.farbeRahmenWeisungEnthaltung};
+                --col-back-weisungBtn-enthaltung-checked: #{eclParamM.farbeHintergrundWeisungEnthaltungChecked};
+                --col-font-weisungBtn-enthaltung-checked: #{eclParamM.farbeSchriftWeisungEnthaltungChecked};
+                --col-border-weisungBtn-enthaltung-checked: #{eclParamM.farbeRahmenWeisungEnthaltungChecked};
+                /* === Footer === */
+                --col-back-footer-top: #{eclParamM.farbeHintergrundFooterTop};
+                --col-font-footer-top: #{eclParamM.farbeSchriftFooterTop};
+                --col-link-footer-top: #{eclParamM.farbeLinkFooterTop};
+                --col-link-footer-top-hover: #{eclParamM.farbeLinkFooterTopHover};
+                --col-back-footer-bottom: #{eclParamM.farbeHintergrundFooterBottom};
+                --col-font-footer-bottom: #{eclParamM.farbeSchriftFooterBottom};
+                --col-link-footer-bottom: #{eclParamM.farbeLinkFooterBottom};
+                --col-link-footer-bottom-hover: #{eclParamM.farbeLinkFooterBottomHover};
+                /* === Modal === */
+                --col-back-modal: #{eclParamM.farbeHintergrundModal};
+                --col-font-modal: #{eclParamM.farbeSchriftModal};
+                --col-back-modal-header: #{eclParamM.farbeHintergrundModalHeader};
+                --col-font-modal-header: #{eclParamM.farbeSchriftModalHeader};
+                --col-border-modal-body: #{eclParamM.farbeTrennlinieModal};
+                /* === Butons unten === */
+                --col-back-untenBtn: #{eclParamM.farbeHintergrundUntenButtons};
+                --col-font-untenBtn: #{eclParamM.farbeSchriftUntenButtons};
+                --col-border-untenBtn: #{eclParamM.farbeRahmenUntenButtons};
+                --wid-border-untenBtn: #{eclParamM.breiteRahmenUntenButtons}px;
+                --rad-border-untenBtn: #{eclParamM.radiusRahmenUntenButtons}px;
+                --sty-border-untenBtn: #{eclParamM.stilRahmenUntenButtons};
+                --col-back-untenBtn-hover: #{eclParamM.farbeHintergrundUntenButtonsHover};
+                --col-font-untenBtn-hover: #{eclParamM.farbeSchriftUntenButtonsHover};
+                --col-border-untenBtn-hover: #{eclParamM.farbeRahmenUntenButtonsHover};
+                --wid-border-untenBtn-hover: #{eclParamM.breiteRahmenUntenButtonsHover}px;
+                --rad-border-untenBtn-hover: #{eclParamM.radiusRahmenUntenButtonsHover}px;
+                --sty-border-untenBtn-hover: #{eclParamM.stilRahmenUntenButtonsHover};
+            }
+        </style>
+
+        <h:outputStylesheet library="std" name="css/beorKonfFix.css?v=1.6.0" />
+        <h:outputStylesheet library="font-awesome" name="css/fa-small.min.css?v=1.6.0" />
+        <c:if test="#{not empty eclParamM.cssName}">
+            <link rel="stylesheet" href="/CSS/#{eclParamM.cssName}" />
+        </c:if>
+
+    </h:head>
+
+
+    <h:body onunload="browserSchliessen();">
+        <p:remoteCommand name="browserSchliessen" id="browserSchliessen" action="#{tLoginLogout.doBrowserSchliessen}" />
+        <div id="wrapper">
+            <div id="inhalt">
+                <f:metadata>
+                    <!-- Achtung - die folgende Reihenfolge ist zwingend, sonst funktioniert die
+                    "Aktivierungsprozedur" bei Portalstart nicht richtig -->
+                    <f:viewParam name="zeit" value="#{tSessionVerwaltung.zeit}" />
+                    <f:viewParam name="hvjahr" value="#{tSessionVerwaltung.hvjahr}" />
+                    <f:viewParam name="hvnummer" value="#{tSessionVerwaltung.hvnummer}" />
+                    <f:viewParam name="datenbereich" value="#{tSessionVerwaltung.datenbereich}" />
+                    <f:viewParam name="mandant" value="#{tSessionVerwaltung.mandant}" />
+                    <f:viewParam name="sprache" value="#{tLanguage.sprache}" />
+                    <f:viewParam name="test" value="#{tSessionVerwaltung.test}" />
+                    <f:viewParam name="nummer" value="#{tLoginLogoutSession.loginKennung}" />
+                    <f:viewParam name="p" value="#{tLoginLogoutSession.loginPasswort}" />
+                    <f:viewParam name="la" value="#{tSessionVerwaltung.linkArt}" />
+                    <f:viewParam name="bestaetigungscode" value="#{tSessionVerwaltung.bestaetigungsCode}" />
+                    <f:viewParam name="per" value="#{tSessionVerwaltung.permanentPortal}" />
+                </f:metadata>
+
+                <h:outputScript library="std" name="js/custom.js?v=1.6.0" />
+                <h:outputScript library="std" name="js/jquery.min.js?v=1.6.0" />
+                <h:outputScript library="std" name="js/resumable.js?v=1.6.0" />
+                <h:outputScript library="pr01" name="js/upload.js?v=1.6.1" />
+                <h:outputScript library="std" name="js/websocket.js?v=1.6.0" />
+
+                <noscript>
+                    <section id="no-script-bereich">
+                        <div class="container-full">
+                            <div class="row">
+                                <div class="col-8">
+                                    <p>
+                                        In Ihrer Browser-Konfiguration ist JavaScript deaktiviert. In dieser
+                                        Konfiguration sind wesentliche Teile dieses Portals nicht
+                                        funktionsfähig.
+                                    </p>
+                                    <p>
+                                        Bitte aktivieren Sie JavaScript,
+                                        bevor Sie weiterarbeiten.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </noscript>
+
+                <!-- id=headerform zwingend erforderlich als Ajax-Renderpunkt -->
+                <h:form id="headerform">
+                    <div id="sub-header-bereich" class="container-full">
+                        <div class="row">
+                            <div class="col-1_3">
+                                <h:graphicImage library="pr01" name="images/header/header_pr01_01_large.webp" />
+                            </div>
+                            <div class="col-1_3">
+                                <h:graphicImage library="pr01" name="images/header/header_pr01_02_large.webp" />
+                                <h:panelGroup rendered="#{tRender.portalMehrsprachig()==true}">
+
+                                    <p>
+                                        <!-- Anzeige Sprachumschaltung über Texte -->
+                                        <h:panelGroup rendered="#{eclParamM.artSprachumschaltung==1}">
+                                            <h:commandLink action="#{tLanguage.setEN}"
+                                                rendered="#{tLanguage.lang == 1}">
+                                                <h:outputLabel value="#{eclPortalTexteM.holeText('19')}" escape="false">
+                                                </h:outputLabel>
+                                                <f:ajax execute="@all" render="headerform inhaltsform footerform"
+                                                    onevent="nach_sprach_link" />
+                                            </h:commandLink>
+                                            <h:commandLink action="#{tLanguage.setDE}"
+                                                rendered="#{tLanguage.lang == 2}">
+                                                <h:outputLabel value="#{eclPortalTexteM.holeText('18')}" escape="false">
+                                                </h:outputLabel>
+                                                <f:ajax execute="@all" render="headerform inhaltsform footerform"
+                                                    onevent="nach_sprach_link" />
+                                            </h:commandLink>
+                                            <!-- falls englischer Text: Zusatztext "nur Übersetzung, nicht rechtsbinden" anzeigen -->
+                                            <h:outputText value="#{eclPortalTexteM.holeText('20')}" escape="false"
+                                                rendered="#{tLanguage.lang == 2}"></h:outputText>
+                                        </h:panelGroup>
+
+                                        <!-- Anzeige Sprachumschaltung über Flaggen -->
+                                        <h:panelGroup rendered="#{eclParamM.artSprachumschaltung==2}">
+                                            <h:commandLink action="#{tLanguage.setDE}"
+                                                rendered="#{tLanguage.lang == 1}">
+                                                <h:graphicImage library="std" name="images/links/linkde.png"
+                                                    width="60" />
+                                                <f:ajax execute="@all" render="headerform inhaltsform footerform"
+                                                    onevent="nach_sprach_link" />
+                                            </h:commandLink>
+                                            <h:commandLink action="#{tLanguage.setEN}" rendered="#{tLanguage.lang == 1}"
+                                                style="margin-left: 5px">
+                                                <h:graphicImage library="std" name="images/links/linken.png"
+                                                    width="50" />
+                                                <f:ajax execute="@all" render="headerform inhaltsform footerform"
+                                                    onevent="nach_sprach_link" />
+                                            </h:commandLink>
+                                            <h:commandLink action="#{tLanguage.setDE}"
+                                                rendered="#{tLanguage.lang == 2}">
+                                                <h:graphicImage library="std" name="images/links/linkde.png"
+                                                    width="50" />
+                                                <f:ajax execute="@all" render="headerform inhaltsform footerform"
+                                                    onevent="nach_sprach_link" />
+                                            </h:commandLink>
+                                            <h:commandLink action="#{tLanguage.setEN}" rendered="#{tLanguage.lang == 2}"
+                                                style="margin-left: 5px">
+                                                <h:graphicImage library="std" name="images/links/linken.png"
+                                                    width="60" />
+                                                <f:ajax execute="@all" render="headerform inhaltsform footerform"
+                                                    onevent="nach_sprach_link" />
+                                            </h:commandLink>
+                                            <!-- falls englischer Text: Zusatztext "nur Übersetzung, nicht rechtsbinden" anzeigen -->
+                                            <h:outputText value="#{eclPortalTexteM.holeText('20')}" escape="false"
+                                                rendered="#{tLanguage.lang == 2}"></h:outputText>
+                                        </h:panelGroup>
+                                    </p>
+
+                                </h:panelGroup>
+                            </div>
+                            <div class="col-1_3">
+                                <!--<div class="faqCircle">
+                                    <i class="fas fa-question-circle"></i>
+                                    <div class="faqShow">
+                                        Test test test
+                                    </div>
+                                </div>-->
+                                <h:panelGroup
+                                    rendered="#{tRender.logoutObenOderUnten()==1 and tSeitensteuerungSession.logoutAnzeigen==true}">
+
+                                    <!-- Button, wenn beim Logout Portal verlassen werden soll -->
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonOben1"
+                                        action="#{tLoginLogout.doLogoutVerlassen()}" styleClass="btn-typ-logout"
+                                        rendered="#{tSeitensteuerungSession.logoutSeiteVerlassenAnzeigen}">
+                                    </h:commandButton>
+
+                                    <!-- Button, wenn beim Logout zur Login-Seite zurückgekehrt wird -->
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('35')}" id="buttonOben2"
+                                        action="#{tLoginLogout.doLogout}" onclick="setLogoutButtonClicked()"
+                                        styleClass="btn-typ-logout"
+                                        rendered="#{tSeitensteuerungSession.logoutNormalAnzeigen}">
+                                    </h:commandButton>
+
+                                    <!-- Button, wenn auf Login-Seite zur Aufrufseite angezeigt werden soll -->
+                                    <h:commandButton value="#{eclPortalTexteM.holeText('859')}" id="buttonOben3"
+                                        action="#{tLoginLogout.doBeenden()}" styleClass="btn-typ-logout"
+                                        rendered="#{tSeitensteuerungSession.endeButtonAnzeigen}">
+                                    </h:commandButton>
+
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                        <!-- Aktionärsdaten werden nur angezeigt, wenn Login erfolgreich ist -->
+                        <div class="row">
+                            <div class="col-1_3"></div>
+                            <div class="col-1_3"></div>
+                            <div class="col-1_3">
+                                <h:panelGroup rendered="#{tRender.headerAktionaersdaten()}">
+                                    <!-- Kennung -->
+                                    <!-- Je nach Kennungsart Aktionär oder andere Kennung Text anzeigen:
+                            "Aktienregister" bei KennungArt=1
+                            "Kennung" bei KennungArt=2 -->
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('957')}" escape="false"
+                                            rendered="#{eclLoginDatenM.liefereKennungArt()==2}" />
+                                        <h:outputText value="#{eclPortalTexteM.holeText('956')}" escape="false"
+                                            rendered="#{eclLoginDatenM.liefereKennungArt()==1}" />
+                                        <h:outputText value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />
+                                    </p>
+                                    <!-- Daten der eingeloggten Person anzeigen -->
+                                    <!--<h:dataTable value="#{eclLoginDatenM.adresszeilen}" var="zeile" style="margin: auto;">
+                                <h:column>
+                                    <h:outputLabel value="#{zeile}"></h:outputLabel>
+                                </h:column>
+                            </h:dataTable>-->
+                                    <p>
+                                        <h:outputText value="#{eclLoginDatenM.titelVornameName}" /><br />
+                                        <h:outputText value="#{eclLoginDatenM.ort}" />
+                                    </p>
+                                    <!-- Nur wenn Testmodus, dann z.B. Gruppe anzeigen -->
+                                    <h:panelGroup rendered="#{tSession.testModus=='1' || tSession.testModus=='2'}">
+                                        <p>
+                                            <h:outputText value="#{eclLoginDatenM.testanzeige}" />
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <!-- je nach Parametereinstellung: Stimmenzahl anzeigen -->
+                                    <h:panelGroup rendered="#{tRender.headerStimmenAnzeigen()}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('21')}" escape="false" />
+                                            <h:outputLabel value="#{eclLoginDatenM.stimmenDE}"
+                                                rendered="#{tLanguage.lang == 1}" />
+                                            <h:outputLabel value="#{eclLoginDatenM.stimmenEN}"
+                                                rendered="#{tLanguage.lang == 2}">
+                                            </h:outputLabel>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('22')}" escape="false">
+                                            </h:outputText>
+                                        </p>
+                                    </h:panelGroup>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-div"></div>
+                </h:form>
+
+                <!-- id=inhaltsform zwingend erforderlich als Ajax-Renderpunkt -->
+                <h:form id="inhaltsform">
+                
+                
+                    
+					
+                    <ui:include src="/WEB-INF/prbsportal/hInhalt.xhtml" />
+                </h:form>
+
+                <!-- id=streamform zwingend erforderlich als Ajax-Renderpunkt -->
+                <h:form id="streamform">
+                    <div class="divInhalt" id="stream">
+                        <ui:include src="/WEB-INF/prbsportal/hStream.xhtml" />
+                    </div>
+                </h:form>
+
+                <!-- === Info-Modal === -->
+                <f:subview id="idInfoModal">
+                    <ui:include src="/WEB-INF/prbsportal/idetail/idInfoModal.xhtml" />
+                </f:subview>
+
+                <!-- === Loading-Modal === -->
+                <f:subview id="idLoadingModal">
+                    <ui:include src="/WEB-INF/prbsportal/idetail/idLoadingModal.xhtml" />
+                </f:subview>
+            </div>
+            <!-- id=footerform zwingend erforderlich als Ajax-Renderpunkt -->
+            <h:form id="footerform">
+                <ui:include src="/WEB-INF/prbsportal/hFooter.xhtml" />
+            </h:form>
+
+            <!-- === CookieHint === -->
+            <h:panelGroup rendered="#{eclParamM.cookieHinweis==1}">
+                <f:subview id="idCookieHint">
+                    <ui:include src="/WEB-INF/prbsportal/idetail/idCookieHint.xhtml" />
+                </f:subview>
+            </h:panelGroup>
+
+        </div>
+        <script>
+            setStickyFooter();
+            setJahr();
+            window.addEventListener('resize', setStickyFooter);
+        </script>
+    </h:body>
+</f:view>
+
+</html>

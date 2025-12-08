@@ -1,0 +1,82 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+    <f:subview id="iZuordnungEinrichtenQuittungStart">
+        <ui:include src="idetail/idSeiteStartModals.xhtml" />
+    </f:subview>
+
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row mt-2">
+                <div class="col-6">
+                    <p>
+                        <h:outputLabel value="#{eclPortalTexteM.holeIText(2172)}" escape="false"></h:outputLabel>
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        <h:outputLabel value="#{tZuordnungSession.kennung}" />
+                    </p>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <p>
+                        <h:outputLabel value="#{eclPortalTexteM.holeIText(2173)}" escape="false">
+                        </h:outputLabel>
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        <h:outputLabel value="#{tZuordnungSession.name}" />
+                    </p>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <p>
+                        <h:outputLabel value="#{eclPortalTexteM.holeIText(2174)}" escape="false"></h:outputLabel>
+                    </p>
+                </div>
+                <div class="col-6">
+                    <p>
+                        <h:outputLabel value="#{tZuordnungSession.ort}" />
+                    </p>
+                </div>
+            </div>
+
+            <!-- Endetext immer -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeITextVorhanden(2171)}" styleClass="row mt-2">
+                <div class="col">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeIText(2171)}" escape="false" />
+
+                    </p>
+                </div>
+            </h:panelGroup>
+        </div>
+    </div>
+
+    <f:subview id="iZuordnungEinrichtenQuittungButtons">
+        <ui:include src="idetail/idSeiteButtonsUntenModals.xhtml">
+            <ui:param name="modalShowBtnRight" value="false" />
+            <ui:param name="modalStaticBtnRight" value="false" />
+            <ui:param name="modalShowBtnLeft" value="false" />
+            <ui:param name="modalStaticBtnLeft" value="false" />
+        </ui:include>
+    </f:subview>
+</ui:composition>

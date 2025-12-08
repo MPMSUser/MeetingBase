@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" prefHeight="700.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TabPane fx:id="tabPane" prefHeight="30.0" tabClosingPolicy="UNAVAILABLE" tabMinWidth="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <tabs>
+                <Tab id="1" text="Import" />
+                <Tab id="2" fx:id="overviewTab" text="Übersicht" />
+            </tabs>
+        </TabPane>
+              <TextField fx:id="tfFile" editable="false" maxHeight="25.0" onKeyPressed="#onEnter" promptText="Datei..." AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="285.0" AnchorPane.topAnchor="45.0" />
+              <ComboBox fx:id="cbProfile" maxHeight="25.0" maxWidth="205.0" prefHeight="25.0" prefWidth="205.0" visible="false" AnchorPane.rightAnchor="285.0" AnchorPane.topAnchor="45.0" />
+              <Button fx:id="btnClearFile" maxHeight="25.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="45.0" />
+              <Button fx:id="btnFile" alignment="CENTER" contentDisplay="CENTER" maxHeight="25.0" mnemonicParsing="false" onAction="#chooseFile" prefHeight="25.0" prefWidth="50.0" textAlignment="CENTER" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="45.0" />
+              <Button fx:id="btnRead" disable="true" maxHeight="25.0" mnemonicParsing="false" onAction="#onRead" prefHeight="25.0" prefWidth="135.0" text="Einlesen" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="45.0" />
+        <TableView fx:id="tableView" layoutX="15.0" layoutY="126.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="85.0">
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+        </TableView>
+        <Button fx:id="btnTableColumns" layoutX="484.0" layoutY="710.0" mnemonicParsing="false" prefWidth="100.0" text="Anpasssen" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="130.0" />
+      <Button fx:id="btnClose" cancelButton="true" layoutX="27.0" layoutY="725.0" mnemonicParsing="false" onAction="#onClose" prefWidth="100.0" text="Beenden" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" />
+      <Label fx:id="lblCode" alignment="CENTER" contentDisplay="CENTER" layoutX="474.0" layoutY="729.0" prefHeight="25.0" textAlignment="CENTER" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="345.0" AnchorPane.rightAnchor="240.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Button fx:id="btnCopy" layoutX="805.0" layoutY="665.0" mnemonicParsing="false" onAction="#onCopy" prefHeight="25.0" prefWidth="30.0" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="210.0" />
+      <Button fx:id="btnCopyDetailed" layoutX="835.0" layoutY="675.0" mnemonicParsing="false" onAction="#onCopyDetailed" prefHeight="25.0" prefWidth="30.0" visible="false" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="165.0" />
+      <Button fx:id="btnImport" disable="true" maxHeight="25.0" mnemonicParsing="false" onAction="#onImport" prefHeight="25.0" prefWidth="135.0" text="Importieren" underline="true" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btnCreate" layoutX="200.0" layoutY="665.0" mnemonicParsing="false" onAction="#onCreate" prefWidth="100.0" text="Anlegen" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="245.0" />
+    </children>
+</AnchorPane>

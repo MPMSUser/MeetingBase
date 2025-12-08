@@ -1,0 +1,76 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+	xmlns:f="jakarta.faces.core" 
+    lang="de">
+	<!-- Schleife für Quittungen -->
+	<!-- Schleife für alle Quittungen -->
+	<ui:repeat value="#{eclVeranstaltungenM.veranstaltungenQuittungListe}" var="quittung">
+		<tr>
+			<td>
+				<h:panelGroup rendered="#{eclVeranstaltungenM.zeigeInterneInfo}">
+					<h:outputLabel
+						value="##################################### Quittung Id #{quittung.identQuittungElement} ##########################" />
+					<br />
+					<br />
+				</h:panelGroup>
+				<br />
+
+				<!-- Element anzeigen -->
+				<h:panelGroup rendered="#{quittung.quittungTyp==1}">
+					<!-- Überschrift -->
+					<h1>
+						<h:outputLabel value="#{quittung.quittungstext}" escape="false" />
+					</h1>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{quittung.quittungTyp==2}">
+					<!-- Text -->
+					<h:outputLabel value="#{quittung.quittungstext}" escape="false" />
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{quittung.quittungTyp==3}">
+					<!-- Eingabefeld -->
+					<h:panelGroup rendered="#{quittung.quittungstext!=''}">
+						<h:outputLabel value="#{quittung.quittungstext}" escape="false" />
+					</h:panelGroup>
+					<h:outputLabel value="#{quittung.eingabeWert}" escape="false"></h:outputLabel>
+					<h:panelGroup rendered="#{quittung.quittungstextNachWert!=''}">
+						<h:outputLabel value="#{quittung.quittungstextNachWert}" escape="false" />
+					</h:panelGroup>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{quittung.quittungTyp==9}">
+					<!-- Druckbutton -->
+					<p>
+						<h:panelGroup rendered="#{quittung.quittungstext!=''}">
+							<h:outputLabel value="#{quittung.quittungstext}" escape="false" />
+						</h:panelGroup>
+						<h:commandButton value="#{quittung.buttonBezeichnungKomplett}"
+							action="#{tGeneralversammlung.doGastkarteVeranstaltungAnzeigen(quittung)}"
+							onclick="this.form.target='_blank'" styleClass="btn-typ-00" />
+						<h:panelGroup rendered="#{quittung.quittungstextNachWert!=''}">
+							<h:outputLabel value="#{quittung.quittungstextNachWert}" escape="false" />
+						</h:panelGroup>
+					</p>
+				</h:panelGroup>
+
+
+			</td>
+		</tr>
+	</ui:repeat>
+
+</ui:composition>

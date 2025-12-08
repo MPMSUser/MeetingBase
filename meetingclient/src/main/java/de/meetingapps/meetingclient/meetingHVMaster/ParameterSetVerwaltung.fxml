@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="312.0" layoutX="16.0" layoutY="24.0" stroke="BLACK" strokeType="INSIDE" width="1566.0" />
+      <ComboBox fx:id="cbSet" layoutX="142.0" layoutY="42.0" prefHeight="25.0" prefWidth="1409.0" />
+      <Label layoutX="34.0" layoutY="46.0" text="Parameter-Set" />
+      <Label layoutX="34.0" layoutY="90.0" text="Beschreibung" />
+      <TextArea fx:id="tfBeschreibung" layoutX="142.0" layoutY="90.0" prefHeight="107.0" prefWidth="1409.0" />
+      <Label fx:id="lblAngelegtVon" layoutX="34.0" layoutY="247.0" prefHeight="17.0" prefWidth="164.0" text="Angelegt von Kennung" />
+      <TextField fx:id="tfAngelegtVon" layoutX="246.0" layoutY="243.0" prefHeight="25.0" prefWidth="236.0" />
+      <Label fx:id="lblAngelegtAm" layoutX="548.0" layoutY="247.0" prefHeight="17.0" prefWidth="56.0" text="am" />
+      <TextField fx:id="tfAngelegtAm" layoutX="611.0" layoutY="243.0" prefHeight="25.0" prefWidth="236.0" />
+      <Label fx:id="lblGeaendertVon" layoutX="34.0" layoutY="289.0" prefHeight="17.0" prefWidth="164.0" text="Zuletzt geändert von Kennung" />
+      <TextField fx:id="tfGeaendertVon" layoutX="246.0" layoutY="285.0" prefHeight="25.0" prefWidth="236.0" />
+      <Label fx:id="lblGeaendertAm" layoutX="548.0" layoutY="289.0" prefHeight="17.0" prefWidth="56.0" text="am" />
+      <TextField fx:id="tfGeaendertAm" layoutX="611.0" layoutY="285.0" prefHeight="25.0" prefWidth="236.0" />
+      <Button fx:id="btnSpeichern" layoutX="16.0" layoutY="576.0" mnemonicParsing="false" onAction="#onBtnSpeichern" prefHeight="25.0" prefWidth="256.0" text="Speichern" />
+      <Button fx:id="btnAbbrechen" layoutX="378.0" layoutY="576.0" mnemonicParsing="false" onAction="#onBtnAbbrechen" prefHeight="25.0" prefWidth="256.0" text="Abbrechen" />
+      <Rectangle fx:id="rectEmittent" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="214.0" layoutX="17.0" layoutY="345.0" stroke="BLACK" strokeType="INSIDE" width="1566.0" />
+      <ComboBox fx:id="cbEmittent" layoutX="142.0" layoutY="370.0" prefHeight="25.0" prefWidth="1409.0" />
+      <Label fx:id="lblEmittent" layoutX="34.0" layoutY="374.0" text="Emittent" />
+      <Label fx:id="lblBezeichnungEmittent" layoutX="34.0" layoutY="416.0" text="Bezeichnung" />
+      <Label fx:id="lblJahrEmittent" layoutX="34.0" layoutY="445.0" text="Jahr" />
+      <Label fx:id="lblHVNummerEmittent" layoutX="34.0" layoutY="478.0" text="Lfd HV-Nummer" />
+      <TextField fx:id="tfBezeichnungEmittent" layoutX="142.0" layoutY="412.0" prefHeight="25.0" prefWidth="1004.0" />
+      <TextField fx:id="tfJahrEmittent" layoutX="142.0" layoutY="442.0" prefHeight="25.0" prefWidth="149.0" />
+      <TextField fx:id="tfHVNummerEmittent" layoutX="142.0" layoutY="474.0" prefHeight="25.0" prefWidth="149.0" />
+      <Label fx:id="lblDatenbereichEmittent" layoutX="34.0" layoutY="511.0" text="Datenbereich" />
+      <TextField fx:id="tfDatenbereichEmittent" layoutX="142.0" layoutY="507.0" prefHeight="25.0" prefWidth="149.0" />
+   </children>
+</Pane>

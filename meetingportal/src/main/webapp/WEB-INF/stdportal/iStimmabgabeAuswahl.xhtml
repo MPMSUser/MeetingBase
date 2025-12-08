@@ -1,0 +1,73 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:f="jakarta.faces.core"
+    xmlns:h="jakarta.faces.html" lang="de">
+
+
+    <f:subview id="iStimmabgabeAuswahlOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <div class="container-80">
+        <!-- Übersicht Bestände, die gerade per OT vertreten werden -->
+
+        <!-- Wenn vorhanden: eigene Bestände anzeigen -->
+        <h:panelGroup
+            rendered="#{eclBesitzGesamtAuswahl1M.eigenerBestandOTVertretbar and (eclBesitzGesamtAuswahl1M.liefereEigenePraesentVorhanden()==true)}">
+            <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereEigenePraesent()}" var="mitglied">
+                <ui:include src="idetail/idTabelleninhaltAbstimmungsauswahl.xhtml" />
+            </ui:repeat>
+        </h:panelGroup>
+
+        <!-- Wenn vorhanden: bevollmächtige Bestände anzeigen -->
+        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereVertretenePraesentVorhanden()==true}">
+            <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereVertretenePraesent()}" var="mitglied">
+                <ui:include src="idetail/idTabelleninhaltAbstimmungsauswahl.xhtml" />
+            </ui:repeat>
+        </h:panelGroup>
+
+        <!-- Wenn vorhanden: geerbte Bestände anzeigen -->
+        <h:panelGroup rendered="#{eclBesitzGesamtAuswahl1M.liefereGeerbtePraesentVorhanden()==true}">
+            <ui:repeat value="#{eclBesitzGesamtAuswahl1M.liefereGeerbtePraesent()}" var="mitglied">
+                <ui:include src="idetail/idTabelleninhaltAbstimmungsauswahl.xhtml" />
+            </ui:repeat>
+        </h:panelGroup>
+
+        <!-- Stimmabgabebuttons -->
+
+        <h:panelGroup rendered="#{tAuswahlSession.onlineteilnahmeAktivUB==true}">
+            <!-- Stimmabgabebuttons alle und mit Auswahlmöglichkeit -->
+            <p class="btn-w-100">
+                <h:commandButton value="#{eclPortalTexteM.holeText('1178')}"
+                    action="#{tStimmabgabe.doStimmabgabeAlle()}" styleClass="btn-typ-00">
+                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                </h:commandButton>
+            </p>
+            <p class="btn-w-100">
+                <h:commandButton value="#{eclPortalTexteM.holeText('1179')}"
+                    action="#{tStimmabgabe.doStimmabgabeAusgewaehlte()}" styleClass="btn-typ-00">
+                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                </h:commandButton>
+            </p>
+        </h:panelGroup>
+
+    </div>
+
+    <f:subview id="iStimmabgabeAuswahlButtons">
+        <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+    </f:subview>
+
+</ui:composition>

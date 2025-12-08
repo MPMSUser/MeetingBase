@@ -1,0 +1,157 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite" xmlns:my="jakarta.faces.component" xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+
+    <f:subview id="iEintrittskarteQuittungOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <f:subview id="iEintrittskarteQuittungBestaende">
+        <ui:include src="idetail/idDurchfuehrenFuerBestand.xhtml" />
+    </f:subview>
+
+    <div class="container-80">
+        <div class="row">
+            <div class="col-8">
+                <!-- Vollmacht an Dritte -->
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvVollmachtEingeben}">
+
+                    <h:panelGroup rendered="#{tSeitensteuerungSession.ekvVollmachtStarttextAnzeigen}">
+                        <p>
+                            <h:outputText value="#{tSeitensteuerung.holeTextEkvTextVollmachtStarttext()}"
+                                escape="false"></h:outputText>
+                        </p>
+                    </h:panelGroup>
+                    <p>
+                        <h:outputLabel
+                            value="#{tWillenserklaerungSession.vollmachtName} #{tWillenserklaerungSession.vollmachtVorname}">
+                        </h:outputLabel><br />
+                        <h:outputLabel value="#{tWillenserklaerungSession.vollmachtOrt}"></h:outputLabel>
+                    </p>
+                    <h:panelGroup rendered="#{tSeitensteuerungSession.ekvVollmachtEndetextAnzeigen}">
+                        <p>
+                            <h:outputText value="#{tSeitensteuerung.holeTextEkvTextVollmachtEndetext()}" escape="false">
+                            </h:outputText>
+
+                        </p>
+                    </h:panelGroup>
+                </h:panelGroup>
+
+
+
+                <!--  Text je Funktion -->
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvArtStarttextAnzeigen}">
+                    <p>
+                        <h:outputText value="#{tSeitensteuerung.holeTextEkvTextArtStarttext()}" escape="false">
+                        </h:outputText>
+                    </p>
+                </h:panelGroup>
+
+
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvQuittungVersandartAnzeigen}">
+                    <p>
+                        <h:outputText value="#{tSeitensteuerung.holeTextEkvTextQuittungVersandart()}" escape="false">
+                        </h:outputText>
+                    </p>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvVersandadresseAnzeigen}">
+                    <p>
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse1}">
+                        </h:outputLabel><br />
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse2}">
+                        </h:outputLabel><br />
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse3}">
+                        </h:outputLabel><br />
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse4}">
+                        </h:outputLabel><br />
+                        <h:outputLabel value="#{tWillenserklaerungSession.eintrittskarteAbweichendeAdresse5}">
+                        </h:outputLabel>
+                    </p>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvEKDruck1ButtonAnzeigen}">
+                    <p>
+                        <h:commandButton value="#{eclPortalTexteM.holeText('377')}"
+                            action="#{tEintrittskarteQuittungUDetail.doQuittungDruckeEintrittskarte()}"
+                            onclick="this.form.target='_blank'" styleClass="btn-typ-00" />
+                    </p>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvEKDruck2ButtonAnzeigen}">
+                    <p>
+                        <h:commandButton value="#{eclPortalTexteM.holeText('383')}"
+                            action="#{tEintrittskarteQuittungUDetail.doQuittungDruckeEintrittskarte()}"
+                            onclick="this.form.target='_blank'" styleClass="btn-typ-00" />
+                    </p>
+                    <p>
+                        <h:commandButton value="#{eclPortalTexteM.holeText('384')}"
+                            action="#{tEintrittskarteQuittungUDetail.doQuittungDruckeEintrittskarte2()}"
+                            onclick="this.form.target='_blank'" styleClass="btn-typ-00" />
+                    </p>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvEKMail1ButtonAnzeigen}">
+                    <p>
+                        <h:commandButton value=" #{eclPortalTexteM.holeText('379')}"
+                            action="#{tEintrittskarteQuittungUDetail.doQuittungMailEintrittskarte()}"
+                            onclick="this.form.target='_self'" styleClass="btn-typ-00">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </p>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{tSeitensteuerungSession.ekvEKMail2ButtonAnzeigen}">
+                    <p>
+                        <h:commandButton value=" #{eclPortalTexteM.holeText('386')}"
+                            action="#{tEintrittskarteQuittungUDetail.doQuittungMailEintrittskarte()}"
+                            onclick="this.form.target='_self'" styleClass="btn-typ-00">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </p>
+                    <p>
+                        <h:commandButton value=" #{eclPortalTexteM.holeText('387')}"
+                            action="#{tEintrittskarteQuittungUDetail.doQuittungMailEintrittskarte2()}"
+                            onclick="this.form.target='_self'" styleClass="btn-typ-00">
+                            <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                        </h:commandButton>
+                    </p>
+                </h:panelGroup>
+
+
+                <p>
+                    <h:panelGroup rendered="#{aDlgVariablen.eintrittskarteVersandart=='1'}">
+                    </h:panelGroup><br />
+                    <h:panelGroup rendered="#{aDlgVariablen.eintrittskarteVersandart=='2'}">
+                    </h:panelGroup><br />
+                    <h:panelGroup rendered="#{aDlgVariablen.eintrittskarteVersandart=='3'}">
+                    </h:panelGroup><br />
+                    <h:panelGroup rendered="#{aDlgVariablen.eintrittskarteVersandart=='4'}">
+                    </h:panelGroup>
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <f:subview id="iNurEintrittskarteQuittungButtons">
+        <ui:include src="idetail/idSeiteButtonsUnten.xhtml" />
+    </f:subview>
+
+</ui:composition>

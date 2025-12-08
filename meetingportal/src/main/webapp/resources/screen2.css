@@ -1,0 +1,171 @@
+/**
+ *  Copyright 2025 Better Orange IR & HV AG
+ *
+ *  Licensed under the Meetingbase License (the "License");
+ *  Vou may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+	width: 1150px;
+	height: 1150px;
+	margin: 0 auto;
+}
+
+#container {
+	width: 1150px;
+	height: 100%;
+}
+
+#header {
+	margin: auto;
+	margin-top: 20px;
+	width: 800px;
+	height: auto;
+	text-align: left;
+}
+
+#content {
+	width: 1000px;
+	margin: auto;
+	text-align: center;
+}
+
+#footer {
+	height: 5%;
+}
+
+.divFooter {
+	float: left;
+	width: 600px;
+}
+
+#divFooterRight {
+	text-align: right;
+}
+
+.btnAnmelden {
+	width: 100%;
+}
+
+.divButtons {
+	float: left;
+	width: 400px;
+}
+
+#divButtonsCenter {
+	text-align: center;
+}
+
+#divButtonsRight {
+	text-align: right;
+}
+
+.btnCommand {
+	width: 100px;
+}
+
+.btnKiAv {
+	
+}
+
+#btnKiAv00 {
+	width: 100px;
+}
+
+#btnKiAv01 {
+	width: 200px;
+}
+
+#btnKiAv02 {
+	width: 250px;
+}
+
+h1 {
+	font-size: 50px;
+}
+
+.btnScan {
+	width: 300px;
+	height: 100px;
+	background: #336799;
+	color: #fff;
+	border: none;
+	font-size: 35px;
+}
+
+.btnStandart {
+	width: 200px;
+	height: 80px;
+	border: none;
+	font-size: 25px;
+	
+}
+
+.div00 {
+	text-align: center;
+	width: 1000px;
+}
+
+.input {
+	font-size: 40px;
+	width: 400px;
+	height: auto;
+}
+.btnVoteJ{
+	height: 80px;
+	width: 100px;
+	border: none;
+	font-size: 25px;
+}
+.btnVoteN{
+	height: 80px;
+	width: 150px;
+	border: none;
+	font-size: 25px;
+}
+.btnVoteE{
+	height: 80px;
+	width: 200px;
+	border: none;
+	font-size: 25px;
+}
+.tableAbstimmung{
+	margin: auto;
+}
+.tableAbstimmung th{
+	font-size: 35px;
+}
+.grid{
+	margin: auto;
+	font-size: 20px;
+}
+.divButtons{
+	width: 1000px;
+}
+.divButtonsRight{
+	width: 333px;
+	float: left;
+	height: 100px;
+	text-align: right;
+}
+.divButtonsLeft{
+	width: 333px;
+	float: left;
+	height: 100px;
+	text-align: left;
+}
+.divButtonsCenter{
+	width: 333px;
+	float: left;
+	height: 100px;
+	text-align: center;
+}

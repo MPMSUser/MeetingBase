@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="45.0" layoutX="20.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="1400.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+      <Label layoutX="32.0" layoutY="29.0" text="Kennung HV-Spezifisch">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbKennungHVSpezifisch" layoutX="182.0" layoutY="28.0" mnemonicParsing="false" onAction="#onCbKennungHVSpezifisch" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="360.0" layoutX="20.0" layoutY="65.0" stroke="BLACK" strokeType="INSIDE" width="1400.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Label layoutX="28.0" layoutY="78.0" text="Kennung">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfKennung" layoutX="178.0" layoutY="73.0" onKeyPressed="#onKeyPressedKennung" prefHeight="25.0" prefWidth="445.0" />
+      <Button fx:id="btnBearbeiten" layoutX="645.0" layoutY="74.0" mnemonicParsing="false" onAction="#clickedBearbeiten" text="Bearbeiten">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnNeueKennungAnlegen" layoutX="734.0" layoutY="74.0" mnemonicParsing="false" onAction="#clickedNeueKennungAnlegen" text="Neue Kennung anlegen">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSuchen" layoutX="1019.0" layoutY="74.0" mnemonicParsing="false" onAction="#clickedSuchen" text="Suchen">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="28.0" layoutY="111.0" text="Name, Vorname">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfName" layoutX="178.0" layoutY="107.0" prefHeight="25.0" prefWidth="930.0" />
+      <Label layoutX="28.0" layoutY="142.0" text="Mail-Adresse">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfMailAdresse" layoutX="178.0" layoutY="138.0" prefHeight="25.0" prefWidth="930.0" />
+      <Label layoutX="29.0" layoutY="324.0" text="Kennung durch Software gesperrt">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbKennungDurchSoftwareGesperrt" layoutX="221.0" layoutY="323.0" mnemonicParsing="false" />
+      <Label layoutX="29.0" layoutY="348.0" text="Kennung manuell gesperrt">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbKennungManuellGesperrt" layoutX="221.0" layoutY="347.0" mnemonicParsing="false" />
+      <Label layoutX="297.0" layoutY="324.0" text="Trivial-Passwort zulässig">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbTrivialPasswortZulaessig" layoutX="489.0" layoutY="323.0" mnemonicParsing="false" />
+      <Label layoutX="297.0" layoutY="348.0" text="Ist eine Gruppenkennung (für HV)">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbIstGruppenKennungHV" layoutX="489.0" layoutY="347.0" mnemonicParsing="false" />
+      <Label layoutX="533.0" layoutY="348.0" text="Sollen nur auf HV-Server aktiv sein!">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="28.0" layoutY="384.0" text="Neues Passwort">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfNeuesPasswort" layoutX="178.0" layoutY="380.0" prefHeight="25.0" prefWidth="352.0" />
+      <TabPane layoutX="21.0" layoutY="434.0" prefHeight="306.0" prefWidth="1398.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Einzelberechtigungen">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fx:id="scrpnBerechtigungen" prefHeight="282.0" prefWidth="1398.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Profile">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ScrollPane fx:id="scrpnProfile" prefHeight="282.0" prefWidth="1398.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <Button fx:id="btnSpeichern" layoutX="26.0" layoutY="903.0" mnemonicParsing="false" onAction="#clickedSpeichern" text="Speichern" AnchorPane.bottomAnchor="15.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnAbbrechen" layoutX="123.0" layoutY="903.0" mnemonicParsing="false" onAction="#clickedAbbrechen" text="Abbrechen" AnchorPane.bottomAnchor="15.0">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="404.0" layoutY="29.0" text="Kennung ist Institutionellen-Kennung">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbKennungInstitutionelle" layoutX="626.0" layoutY="28.0" mnemonicParsing="false" onAction="#onCbKennungInstitutionelle" />
+      <Label fx:id="lblGehoertZuInsti" layoutX="28.0" layoutY="193.0" text="Zu Institutionellem">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbGehoertZuInsti" layoutX="178.0" layoutY="188.0" prefHeight="25.0" prefWidth="930.0" />
+      <CheckBox fx:id="cbBOMitarbeiter" layoutX="296.0" layoutY="237.0" mnemonicParsing="false" />
+      <Label fx:id="lblBOMitarbeiter" layoutX="32.0" layoutY="237.0" text="BO-Mitarbeiter, über Mail erreichbar" />
+      <RadioButton fx:id="cbUndefiniert" layoutX="33.0" layoutY="268.0" mnemonicParsing="false" text="Undefiniert">
+         <toggleGroup>
+            <ToggleGroup fx:id="tgGehoertZu" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="cbEmittent" layoutX="164.0" layoutY="268.0" mnemonicParsing="false" text="Kennung gehört Emittent" toggleGroup="$tgGehoertZu" />
+      <RadioButton fx:id="cbDritter" layoutX="361.0" layoutY="268.0" mnemonicParsing="false" text="Kennung gehört Drittem" toggleGroup="$tgGehoertZu" />
+      <Label fx:id="lblAufDreiServern" layoutX="774.0" layoutY="30.0" text="Kennuung auf P01/P02/P03 bearbeiten">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbAufDreiServern" layoutX="1003.0" layoutY="29.0" mnemonicParsing="false" onAction="#onCbKennungInstitutionelle" />
+   </children>
+</AnchorPane>

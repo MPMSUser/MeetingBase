@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="1494.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tbStandard" text="Standard">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnFertigStandard" layoutX="21.0" layoutY="640.0" mnemonicParsing="false" onAction="#onBtnFertigStandard" prefHeight="57.0" prefWidth="169.0" text="Fertig" />
+                        <Pane layoutX="21.0" layoutY="415.0" prefHeight="200.0" prefWidth="1453.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e8e8e8" height="200.0" stroke="BLACK" strokeType="INSIDE" width="1454.0" />
+  
+                              <Button fx:id="btnButton1" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBtnButton1" prefHeight="78.0" prefWidth="276.0" text="Button1">
+                                 <tooltip>
+                                    <Tooltip fx:id="ttButton1" text="Button1" />
+                                 </tooltip></Button>
+                              <Button fx:id="btnButton2" layoutX="299.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBtnButton2" prefHeight="78.0" prefWidth="276.0" text="Button2">
+                                 <tooltip>
+                                    <Tooltip fx:id="ttButton2" text="Button2" />
+                                 </tooltip></Button>
+                              <Button fx:id="btnButton3" layoutX="584.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBtnButton3" prefHeight="78.0" prefWidth="276.0" text="Button3">
+                                 <tooltip>
+                                    <Tooltip fx:id="ttButton3" text="Button3" />
+                                 </tooltip></Button>
+                              <Button fx:id="btnButton4" layoutX="869.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBtnButton4" prefHeight="78.0" prefWidth="276.0" text="Button4">
+                                <tooltip>
+                                    <Tooltip fx:id="ttButton4" text="Button4" />
+                                 </tooltip></Button>
+                               <Button fx:id="btnButton5" layoutX="1154.0" layoutY="14.0" mnemonicParsing="false" onAction="#onBtnButton5" prefHeight="78.0" prefWidth="276.0" text="Button5">
+                                <tooltip>
+                                    <Tooltip fx:id="ttButton5" text="Button5" />
+                                 </tooltip></Button>
+                               
+                              <Button fx:id="btnButton6" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" onAction="#onBtnButton5" prefHeight="78.0" prefWidth="276.0" text="Button6">
+                                <tooltip>
+                                    <Tooltip fx:id="ttButton6" text="Button6" />
+                                 </tooltip></Button>
+                               <Button fx:id="btnButton7" layoutX="299.0" layoutY="100.0" mnemonicParsing="false" onAction="#onBtnButton6" prefHeight="78.0" prefWidth="276.0" text="Button7">
+                                <tooltip>
+                                    <Tooltip fx:id="ttButton7" text="Button7" />
+                                 </tooltip></Button>
+                               <Button fx:id="btnButton8" layoutX="584.0" layoutY="100.0" mnemonicParsing="false" onAction="#onBtnButton7" prefHeight="78.0" prefWidth="276.0" text="Button8">
+                                <tooltip>
+                                    <Tooltip fx:id="ttButton8" text="Button8" />
+                                 </tooltip></Button>
+                               <Button fx:id="btnButton9" layoutX="869.0" layoutY="100.0" mnemonicParsing="false" onAction="#onBtnButton8" prefHeight="78.0" prefWidth="276.0" text="Button9">
+                                <tooltip>
+                                    <Tooltip fx:id="ttButton9" text="Button9" />
+                                 </tooltip></Button>
+                               <Button fx:id="btnButton10" layoutX="1154.0" layoutY="100.0" mnemonicParsing="false" onAction="#onBtnButton10" prefHeight="78.0" prefWidth="276.0" text="Button10">
+                                <tooltip>
+                                    <Tooltip fx:id="ttButton10" text="Button10" />
+                                 </tooltip></Button>
+                            </children>
+                        </Pane>
+                        <ScrollPane fx:id="scpnStandard" layoutX="21.0" layoutY="14.0" prefHeight="196.0" prefWidth="1453.0" />
+                        <TabPane fx:id="tpVerarbeitung" layoutX="21.0" layoutY="210.0" prefHeight="200.0" prefWidth="1454.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab fx:id="tbAuswahl" text="Auswahl">
+                              <content>
+                                <AnchorPane fx:id="tbnAusfuehren" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="1453.0" />
+                                          <HBox prefHeight="172.0" prefWidth="1451.0">
+                                             <children>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Button fx:id="btnAuswahlWeiter" layoutX="4.0" layoutY="55.0" mnemonicParsing="false" onAction="#onBtnAuswahlWeiter" prefHeight="44.0" prefWidth="192.0" text="Weiter" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <ScrollPane prefHeight="200.0" prefWidth="900.0">
+                                                         <content>
+                                                            <VBox prefHeight="377.0" prefWidth="900.0">
+                                                               <children>
+                                                                  <RadioButton fx:id="rbAuswahl1" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" selected="true" text="sadnoijafd ouwahd oiuwa hdiuwahdwa hdpwa hdpu wadpiuwapiud hpiuwadpiuwa piud wapiuhd hwapi" wrapText="true">
+                                                                     <toggleGroup>
+                                                                        <ToggleGroup fx:id="tgAuswahl" />
+                                                                     </toggleGroup></RadioButton>
+                                                                  <RadioButton fx:id="rbAuswahl2" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" text="sef fijafiüo aiüf oiüa foiüa fjü ajfwajfdüjwa dj waoiüd joiüd wadwa ecwa edcd aew" toggleGroup="$tgAuswahl" wrapText="true" />
+                                                                  <RadioButton fx:id="rbAuswahl3" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" text="daw dawdiewadpiu wadh wahdp wad wadpiuwadc wad waed" toggleGroup="$tgAuswahl" wrapText="true" />
+                                                                  <RadioButton fx:id="rbAuswahl4" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" text="daw dawdiewadpiu wadh wahdp wad wadpiuwadc wad waed" toggleGroup="$tgAuswahl" wrapText="true" />
+                                                                  <RadioButton fx:id="rbAuswahl5" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" text="daw dawdiewadpiu wadh wahdp wad wadpiuwadc wad waed" toggleGroup="$tgAuswahl" wrapText="true" />
+                                                                  <RadioButton fx:id="rbAuswahl6" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" text="daw dawdiewadpiu wadh wahdp wad wadpiuwadc wad waed" toggleGroup="$tgAuswahl" wrapText="true" />
+                                                                  <RadioButton fx:id="rbAuswahl7" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" text="daw dawdiewadpiu wadh wahdp wad wadpiuwadc wad waed" toggleGroup="$tgAuswahl" wrapText="true" />
+                                                                  <RadioButton fx:id="rbAuswahl8" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" text="daw dawdiewadpiu wadh wahdp wad wadpiuwadc wad waed" toggleGroup="$tgAuswahl" wrapText="true" />
+                                                                  <RadioButton fx:id="rbAuswahl9" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" text="daw dawdiewadpiu wadh wahdp wad wadpiuwadc wad waed" toggleGroup="$tgAuswahl" wrapText="true" />
+                                                                  <RadioButton fx:id="rbAuswahl10" mnemonicParsing="false" onAction="#onRbAuswahlAction" prefHeight="52.0" prefWidth="749.0" text="daw dawdiewadpiu wadh wahdp wad wadpiuwadc wad waed" toggleGroup="$tgAuswahl" wrapText="true" />
+                                                              </children>
+                                                            </VBox>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label fx:id="lblAuswahlText" layoutX="9.0" prefHeight="173.0" prefWidth="334.0" text="Label" wrapText="true" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </HBox>
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab fx:id="tbGastkarte" text="Gastkarte">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="200.0" stroke="BLACK" strokeType="INSIDE" width="1453.0" />
+                                          <Button fx:id="btnGastkarteAusstellen" layoutX="14.0" layoutY="113.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="192.0" text="Ersatz-Gastkarte ausstellen" />
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+          <Tab fx:id="tbDetail" text="Detail">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btnFertigDetail" layoutX="22.0" layoutY="643.0" mnemonicParsing="false" onAction="#onBtnFertigDetail" prefHeight="57.0" prefWidth="169.0" text="Fertig" />
+                        <ScrollPane fx:id="scpnDetail" layoutX="21.0" layoutY="14.0" prefHeight="618.0" prefWidth="1453.0" />
+                     </children></Pane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>

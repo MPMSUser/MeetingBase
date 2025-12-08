@@ -1,0 +1,231 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <f:subview id="pBestandHistorieOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <!-- Inhaltsbereich -->
+    <section id="inhalts-bereich">
+        <div class="col-4">
+            <!-- Überschrift */ -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1564')}">
+                <p>
+                <h2>
+                    <!--<h:outputLabel value="#{eclPortalTexteM.holeIText(1564)}" escape="false"></h:outputLabel>-->
+                    <h:outputLabel value="Meine Umsätze" escape="false"></h:outputLabel>
+                </h2>
+                </p>
+            </h:panelGroup>
+
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1564')}">
+                <p>
+                    <!--<h:outputLabel value="#{eclPortalTexteM.holeIText(1564)}" escape="false"></h:outputLabel>-->
+                    Einblick in Ihre Mitgliederbewegungen.<br /> Wählen Sie zur Ansicht einen Zeitraum aus.
+                </p>
+            </h:panelGroup>
+
+            <div class="row mt-2">
+                <div class="umsatzzeitraum-wahl-btn col-2">
+                    <h:selectOneRadio id="auswahlUmsatzzeitraum" value="#{pBestandhistorieSession.umsatzzeitraum}"
+                        layout="pageDirection">
+                        <f:selectItem itemLabel="Zeitraum" itemValue="3" />
+                        <f:selectItem itemLabel="Aktuelles Jahr" itemValue="2" />
+                        <f:selectItem itemLabel="Alle Umsätze" itemValue="1" />
+                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButtonUmsaetze"
+                            listener="#{pBestandhistorie.doLadeUmsaetze()}" />
+                    </h:selectOneRadio>
+                </div>
+                <div class="col-6" id="divUmsaetzeZeitraum">
+                    <h:outputText value="von" escape="false" />
+                    <h:inputText value="#{pBestandhistorieSession.datumVon}" styleClass="ml-1 input-typ-01 t-right" />
+                    <h:outputText value="bis" escape="false" styleClass="ml-2" />
+                    <h:inputText value="#{pBestandhistorieSession.datumBis}" styleClass="ml-1 input-typ-01 t-right" />
+                    <h:commandButton value="&#xf021;" id="buttonUmsaetzeAktualisieren"
+                        action="#{pBestandhistorie.doLadeUmsaetze()}" styleClass="btn-typ-01 ml-2 fa fa-refresh">
+                        <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                    </h:commandButton>
+                </div>
+                <div class="col-8" id="divUmsaetzeZeitraumMobil">
+                    <div class="row">
+                        <div class="col-8">
+                            <h:outputText value="von" escape="false" />
+                            <h:inputText value="#{pBestandhistorieSession.datumVonMobil}"
+                                styleClass="ml-1 input-typ-01 t-right" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <h:outputText value="bis" escape="false" />
+                            <h:inputText value="#{pBestandhistorieSession.datumBisMobil}"
+                                styleClass="ml-1_3 input-typ-01 t-right" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <h:commandButton value="&#xf021;" action="#{pBestandhistorie.doLadeUmsaetzeMobil()}"
+                                styleClass="btn-typ-01 fa fa-refresh">
+                                <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                            </h:commandButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <section class="row" id="umsaetze-bereich">
+                <div id="umsaetze-druckbereich">
+                    <div class="col-8">
+                        <script>
+                            showHideDivUmsaetzeZeitraum();
+                        </script>
+                        <div class="row" id="umsaetzeMitgliedsdaten">
+                            <div class="col-4">
+                                <h:graphicImage library="prm1" name="images/logo.webp" />
+                            </div>
+                            <div class="col-4">
+                                <b>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('957')}" escape="false"
+                                        rendered="#{eclLoginDatenM.liefereKennungArt()==2}" />
+                                    <h:outputText value="#{eclPortalTexteM.holeText('956')}" escape="false"
+                                        rendered="#{eclLoginDatenM.liefereKennungArt()==1}" />
+                                </b>
+                                <h:outputText value="#{eclLoginDatenM.anmeldeKennungFuerAnzeige}" />
+                                <br /> <b>Name:</b>
+                                <h:outputText value=" #{eclLoginDatenM.titelVornameName}" />
+                                <br /> <b>Mitglied seit:</b>
+                                <h:outputLabel value=" #{pBestandhistorieSession.aktionaerSeit}" />
+                            </div>
+                            <div class="col-4">
+                                <b>Geschäftsanteile:</b>
+                                <h:outputText value=" #{pBestandSession.geschaeftsanteileDE}" />
+                                <br /> <b>Geschäftsguthaben (nominal):</b>
+                                <h:outputText value=" #{pBestandSession.geschaeftsguthabenNominalDE}" />
+                                <br /> <b>Geschäftsguthaben (aktuell):</b>
+                                <h:outputText value=" #{pBestandSession.geschaeftsguthabenAktuellDE}" />
+                                <h:panelGroup rendered="#{pBestandSession.auffuellBetragDE ne '0,00'}">
+                                    <br />
+                                    <b>möglicher Auffüllbetrag:</b>
+                                    <h:outputText value=" #{pBestandSession.auffuellBetragDE}" />
+                                </h:panelGroup>
+                            </div>
+                            <div class="col-4">
+                                <b>Stand:</b>
+                                <h:outputText value=" #{pBestandSession.standDatum}" />
+                            </div>
+                            <div class="col-4">
+                                <b>Umsätze:</b>
+                                <h:outputText value=" #{pBestandhistorieSession.umsatzzeitraumText}" />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8 print-none">
+                                <b>
+                                    <h:outputLabel value="Mitglied seit:" escape="false">
+                                    </h:outputLabel>
+                                </b>
+                                <h:outputLabel value=" #{pBestandhistorieSession.aktionaerSeit}" />
+                            </div>
+                        </div>
+                        <div id="umsatzAnzeige">
+                            <div class="row daten-head">
+                                <div class="col-1">Datum der Wirksamkeit</div>
+                                <div class="col-1">Datum der Buchung</div>
+                                <div class="col-4">Buchungstext</div>
+                                <div class="col-1 t-right">Anteile</div>
+                                <div class="col-1 t-right">
+                                    Betrag<br /> in Euro
+                                </div>
+                            </div>
+                            <ui:repeat value="#{pBestandhistorieSession.bestandshistorie}" var="bestandhistorieeintrag"
+                                rendered="#{pBestandhistorieSession.umsaetzeVorhanden()}">
+                                <div class="row daten-inhalt">
+                                    <div class="col-1">
+                                        <h:outputLabel value="#{bestandhistorieeintrag.datum_der_wirksamkeit}" />
+                                    </div>
+                                    <div class="col-1">
+                                        <h:outputLabel value="#{bestandhistorieeintrag.datum_der_buchung}" />
+                                    </div>
+                                    <div class="col-4">
+                                        <h:outputLabel value="#{bestandhistorieeintrag.buchungstextBereinigt}" />
+                                    </div>
+                                    <div class="col-1 t-right">
+                                        <h:outputLabel value="#{bestandhistorieeintrag.anteile}" />
+                                    </div>
+                                    <div class="col-1 t-right">
+                                        <h:outputLabel value="#{bestandhistorieeintrag.betrag}" />
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                            <h:panelGroup rendered="#{not pBestandhistorieSession.umsaetzeVorhanden()}">
+                                <div class="row daten-inhalt">
+                                    <p class="t-center">Keine Umsätze vorhanden.</p>
+                                </div>
+                            </h:panelGroup>
+                            <input id="btnDruckeUmsaetze1" value="Drucken" type="reset" class="btn-typ-01 mt-2 fl-right"
+                                onclick="window.print();" />
+                        </div>
+                    </div>
+                </div>
+                <div id="umsatzAnzeigeMobil">
+                    <ui:repeat value="#{pBestandhistorieSession.bestandshistorie}" var="bestandhistorieeintrag"
+                        rendered="#{pBestandhistorieSession.umsaetzeVorhanden()}">
+                        <div class="row mt-2">
+                            <div class="col-8 t-center">
+                                <div class="col-8 t-bold">Datum der Wirksamkeit</div>
+                                <div class="col-8">
+                                    <h:outputLabel value="#{bestandhistorieeintrag.datum_der_wirksamkeit}" />
+                                </div>
+                                <div class="col-8 t-bold">Datum der Buchung</div>
+                                <div class="col-8">
+                                    <h:outputLabel value="#{bestandhistorieeintrag.datum_der_buchung}" />
+                                </div>
+                                <div class="col-8 t-bold">Buchungstext</div>
+                                <div class="col-8">
+                                    <h:outputLabel value="#{bestandhistorieeintrag.buchungstextBereinigt}" />
+                                </div>
+                                <div class="col-8 t-bold">Anteile</div>
+                                <div class="col-8">
+                                    <h:outputLabel value="#{bestandhistorieeintrag.anteile}" />
+                                </div>
+                                <div class="col-8 t-bold">
+                                    Betrag<br /> in Euro
+                                </div>
+                                <div class="col-8">
+                                    <h:outputLabel value="#{bestandhistorieeintrag.betrag}" />
+                                </div>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                    <h:panelGroup rendered="#{not pBestandhistorieSession.umsaetzeVorhanden()}">
+                        <div class="row daten-inhalt">
+                            <p class="t-center">Keine Umsätze vorhanden.</p>
+                        </div>
+                    </h:panelGroup>
+                    <input id="btnDruckeUmsaetze1" value="Drucken" type="reset" class="btn-typ-01 mt-2 fl-right"
+                        onclick="window.print();" />
+                </div>
+                <input id="btnDruckeUmsaetze0" value="Drucken" type="reset" class="btn-typ-01 mt-2 fl-right"
+                    onclick="druckeUmsaetze();" />
+
+            </section>
+        </div>
+    </section>
+</ui:composition>

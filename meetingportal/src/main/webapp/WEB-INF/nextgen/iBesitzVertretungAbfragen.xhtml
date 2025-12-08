@@ -1,0 +1,118 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" lang="de">
+
+
+    <f:subview id="iBesitzVertretungAbfragenOben">
+        <ui:include src="idetail/idSeiteStartModals.xhtml" />
+    </f:subview>
+
+
+
+    <!-- Verarbeitung -->
+    <div class="modal-body">
+        <div class="container-fluid">
+
+            <ui:repeat value="#{eclBesitzGesamtM.meldungenBereitsErteiltWeisungAllgemeinDurchAndereListe}"
+                var="meldung">
+                <div class="row">
+                    <div class="col">
+                        <h:selectBooleanCheckbox value="#{meldung.ausgewaehlt}" styleClass="form-check-input">
+                        </h:selectBooleanCheckbox>
+                        <h:outputLabel value="#{eclPortalTexteM.holeText('1450')}" escape="false" for="id3"
+                            styleClass="form-check-label"></h:outputLabel>
+                    </div>
+                    <div class="col">
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1442')}">
+                            <h:outputText value="#{eclPortalTexteM.holeText('1442')}" escape="false" />
+                        </h:panelGroup>
+                        <h:outputText value="#{meldung.aktionaersnummerFuerAnzeige}" escape="false" />
+                        <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1443')}">
+                            <br />
+                            <h:outputText value="#{eclPortalTexteM.holeText('1443')}" escape="false" />
+                        </h:panelGroup>
+                        <br />
+                        <h:outputText value="#{meldung.aktionaerTitelVornameName}" escape="false" />
+                        <br />
+                        <h:outputText value="#{meldung.aktionaerOrt}" escape="false" />
+                        <br />
+                        <h:panelGroup rendered="#{tRender.stimmenAnzeigen()==true}">
+                            <!-- alter Text: 1444, und zwar ohne : -->
+                            <h:panelGroup
+                                rendered="#{eclPortalTexteM.pruefeITextVorhanden(meldung.liefereTextNrGattung())}">
+                                <h:outputText value="#{eclPortalTexteM.holeIText(meldung.liefereTextNrGattung())}"
+                                    escape="false" />
+                            </h:panelGroup>
+                            <h:outputText value="#{meldung.aktionaerStimmenDE}" rendered="#{tLanguage.lang == 1}" />
+                            <h:outputText value="#{meldung.aktionaerStimmenEN}" rendered="#{tLanguage.lang == 2}" />
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1445')}">
+                                <h:outputText value="#{eclPortalTexteM.holeText('1445')}" escape="false" />
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </div>
+                    <div class="col">
+                        <h:panelGroup rendered="#{meldung.anzAlleSRV>0}">
+                            <h:outputText value="#{eclPortalTexteM.holeText('1451')}" escape="false" />
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{meldung.anzAlleBriefwahl>0}">
+                            <h:outputText value="#{eclPortalTexteM.holeText('1452')}" escape="false" />
+                        </h:panelGroup>
+                    </div>
+                </div>
+            </ui:repeat>
+        </div>
+        <!-- Endetext -->
+        <div class="row mt-5">
+            <div class="col">
+                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1453')}">
+                    <p>
+                        <h:outputText value="#{eclPortalTexteM.holeText('1453')}" escape="false"></h:outputText>
+                    </p>
+                </h:panelGroup>
+
+                <!-- Buttons -->
+                <p>
+                    <h:commandButton value="#{eclPortalTexteM.holeText('1454')}"
+                        action="#{tBesitzVertretungAbfragen.doWiderrufenUndUebernehmen()}" styleClass="btn btn-primary">
+                        <f:ajax execute="@all" render="inhaltsform"
+                            onevent="function(data) {nachAjaxButton(data, '#{modalShowBtnRight}', true, 'mainInhaltModal', 'mainInhaltModal', '#{modalStaticBtnRight}')}" />
+                    </h:commandButton>
+                </p>
+
+                <p>
+                    <h:commandButton value="#{eclPortalTexteM.holeText('1455')}"
+                        action="#{tBesitzVertretungAbfragen.doWeiterOhneUebernehmen()}" styleClass="btn btn-primary">
+                        <f:ajax execute="@all" render="inhaltsform"
+                            onevent="function(data) {nachAjaxButton(data, '#{modalShowBtnRight}', true, 'mainInhaltModal', 'mainInhaltModal', '#{modalStaticBtnRight}')}" />
+                    </h:commandButton>
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+
+    <f:subview id="iBesitzVertretungAbfragenButtons">
+        <ui:include src="idetail/idSeiteButtonsUntenModals.xhtml">
+            <ui:param name="modalShowBtnRight" value="true" />
+            <ui:param name="modalStaticBtnRight" value="true" />
+            <ui:param name="modalShowBtnLeft" value="false" />
+            <ui:param name="modalStaticBtnLeft" value="false" />
+        </ui:include>
+    </f:subview>
+
+</ui:composition>

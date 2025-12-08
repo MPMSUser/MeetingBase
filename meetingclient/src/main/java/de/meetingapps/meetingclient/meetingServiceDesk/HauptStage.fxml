@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="116.0" layoutX="10.0" layoutY="520.0" stroke="BLACK" strokeType="INSIDE" width="1082.0" />
+      <Button fx:id="btnSuchenTeilnehmer" layoutX="22.0" layoutY="553.0" mnemonicParsing="false" onAction="#onBtnSuchenTeilnehmer" prefHeight="75.0" prefWidth="263.0" text="Suchen Teilnehmer" />
+      <Button fx:id="btnNeutraleDokumente" layoutX="814.0" layoutY="553.0" mnemonicParsing="false" onAction="#onBtnNeutraleDokumente" prefHeight="75.0" prefWidth="263.0" text="Neutrale Dokumente" />
+      <Button fx:id="btnNeueGastkarte" layoutX="424.0" layoutY="553.0" mnemonicParsing="false" onAction="#onBtnNeueGastkarte" prefHeight="75.0" prefWidth="263.0" text="Neue Gastkarte" />
+      <Label layoutX="22.0" layoutY="528.0" text="Weitere Bearbeitungsmöglichkeiten" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="503.0" layoutX="9.0" layoutY="8.0" stroke="BLACK" strokeType="INSIDE" width="1082.0" />
+      <Label layoutX="22.0" layoutY="14.0" text="Standardabläufe" />
+      <TabPane fx:id="tpAblauf" layoutX="22.0" layoutY="43.0" prefHeight="458.0" prefWidth="1060.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tPersonenart" text="Ermittlung Personenart">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <RadioButton fx:id="rbAktionaer" layoutX="14.0" layoutY="22.0" mnemonicParsing="false" text="(Aktionär) Sind Sie ein Aktionär?">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tgPersonenart" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbVertreter" layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="(Vertreter) Sind Sie ein Vertreter?" toggleGroup="$tgPersonenart">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbGastkarteVergessen" layoutX="530.0" layoutY="12.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="505.0" text="(Gastkarte vergessen) Sind Sie ein angemeldeter Gast und haben Ihre Gastkarte nicht dabei?" toggleGroup="$tgPersonenart" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbBegleitperson" layoutX="530.0" layoutY="83.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="487.0" text="(Gastkarte für Begleitperson) Sind Sie eine Begleitperson und benötigen Sie eine Gastkarte?" toggleGroup="$tgPersonenart" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbGastkarte" layoutX="530.0" layoutY="152.0" mnemonicParsing="false" text="(Sonstige/Dritte) Benötigen Sie eine Gastkarte?" toggleGroup="$tgPersonenart">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
+                        <RadioButton fx:id="rbUnbekannt" layoutX="530.0" layoutY="201.0" mnemonicParsing="false" text="(Unbekannt) &quot;Wollen Sie da rein?&quot;" toggleGroup="$tgPersonenart">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </RadioButton>
+                          <Button fx:id="btnWeiter" layoutX="14.0" layoutY="347.0" mnemonicParsing="false" onAction="#onBtnWeiter" prefHeight="57.0" prefWidth="207.0" text="Weiter">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnDirektSuche" layoutX="277.0" layoutY="347.0" mnemonicParsing="false" onAction="#onBtnDirektSuche" prefHeight="57.0" prefWidth="207.0" text="Direkt zur Suche">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                         <Button fx:id="btnDirektGastkarte" layoutX="526.0" layoutY="347.0" mnemonicParsing="false" onAction="#onBtnDirektGastkarte" prefHeight="57.0" prefWidth="207.0" text="Direkt zur Ausstellung Gastkarte" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Label layoutX="14.0" layoutY="254.0" text="Achtung:" />
+                        <Label layoutX="14.0" layoutY="264.0" prefHeight="61.0" prefWidth="1024.0" text="Auskünfte über einen Aktionär oder dessen Bevollmächtigte dürfen nur an den Aktionär selbst oder an Personen gegeben werden, die eine gültige Vollmacht haben (also diese entweder vorlegen, oder diese bereits im System hinterlegt ist)" wrapText="true" />
+                      </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tIdAktionaer" text="Identifikation Aktionär">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Vorzulegen ist:" />
+                        <Label layoutX="40.0" layoutY="42.0" text="eines der folgenden Dokumente:" />
+                        <Label fx:id="lblIdAktionaerEK" layoutX="73.0" layoutY="72.0" text="Eintrittskarte" />
+                        <Label fx:id="lblIdAktionaerSK" layoutX="73.0" layoutY="99.0" text="Stimmkarte" />
+                        <Label fx:id="lblIdAktionaerEinladung" layoutX="73.0" layoutY="127.0" text="Persönlich adressiertes Einladungsschreiben zur Hauptversammlung" />
+                        <Label layoutX="40.0" layoutY="220.0" text="oder ein Lichtbildausweis" />
+ 
+                        <Button fx:id="btnWeiterIdAktionaer" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#onBtnWeiterIdAktionaer" prefHeight="57.0" prefWidth="207.0" text="Weiter">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnZurueckIdAktionaer" layoutX="825.0" layoutY="358.0" mnemonicParsing="false" onAction="#onBtnZurueckIdAktionaer" prefHeight="57.0" prefWidth="207.0" text="Zurück">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                      </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tIdVertreter" text="Identifikation Vertreter">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Vorzulegen ist:" />
+                        <Label layoutX="40.0" layoutY="42.0" text="eines der folgenden Dokumente:" />
+                        <Label fx:id="lblIdVertreterEK" layoutX="73.0" layoutY="72.0" text="Eintrittskarte" />
+                        <Label fx:id="lblIdVertreterSK" layoutX="73.0" layoutY="99.0" text="Stimmkarte" />
+                        <Label fx:id="lblIdVertreterEinladung" layoutX="73.0" layoutY="127.0" text="Persönlich adressiertes Einladungsschreiben zur Hauptversammlung" />
+                        <Label fx:id="lblIdVertreterVollmacht" layoutX="73.0" layoutY="155.0" text="Vollmacht" />
+                        <Label layoutX="40.0" layoutY="220.0" text="oder ein Lichtbildausweis" />
+ 
+                        <Button fx:id="btnWeiterIdVertreter" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#onBtnWeiterIdVertreter" prefHeight="57.0" prefWidth="207.0" text="Weiter">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnZurueckIdVertreter" layoutX="825.0" layoutY="358.0" mnemonicParsing="false" onAction="#onBtnZurueckIdVertreter" prefHeight="57.0" prefWidth="207.0" text="Zurück">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                      </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tIdGast" text="Identifikation Gast">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Vorzulegen ist:" />
+                        <Label layoutX="40.0" layoutY="42.0" text="eines der folgenden Dokumente:" />
+                        <Label fx:id="lblIdGastGastkarte" layoutX="73.0" layoutY="72.0" text="Gastkarte" />
+                        <Label layoutX="40.0" layoutY="220.0" text="oder ein Lichtbildausweis" />
+ 
+                        <Button fx:id="btnWeiterIdGast" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#onBtnWeiterIdGast" prefHeight="57.0" prefWidth="207.0" text="Weiter">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnZurueckIdGast" layoutX="825.0" layoutY="358.0" mnemonicParsing="false" onAction="#onBtnZurueckIdGast" prefHeight="57.0" prefWidth="207.0" text="Zurück">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                      </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tIdUnbekannt" text="Identifikation unbekannte Personenart">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Vorzulegen ist:" />
+                        <Label layoutX="40.0" layoutY="42.0" text="eines der folgenden Dokumente:" />
+                        <Label fx:id="lblIdUnbekanntEK" layoutX="73.0" layoutY="72.0" text="Eintrittskarte" />
+                        <Label fx:id="lblIdUnbekanntSK" layoutX="73.0" layoutY="99.0" text="Stimmkarte" />
+                        <Label fx:id="lblIdUnbekanntEinladung" layoutX="73.0" layoutY="127.0" text="Persönlich adressiertes Einladungsschreiben zur Hauptversammlung" />
+                        <Label fx:id="lblIdUnbekanntVollmacht" layoutX="73.0" layoutY="155.0" text="Vollmacht" />
+                        <Label fx:id="lblIdUnbekanntGastkarte" layoutX="73.0" layoutY="179.0" text="Gastkarte" />
+                        <Label layoutX="40.0" layoutY="220.0" text="oder ein Lichtbildausweis" />
+ 
+                        <Button fx:id="btnWeiterIdUnbekannt" layoutX="14.0" layoutY="358.0" mnemonicParsing="false" onAction="#onBtnWeiterIdUnbekannt" prefHeight="57.0" prefWidth="207.0" text="Weiter">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btnZurueckIdUnbekannt" layoutX="825.0" layoutY="358.0" mnemonicParsing="false" onAction="#onBtnZurueckIdUnbekannt" prefHeight="57.0" prefWidth="207.0" text="Zurück">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                      </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

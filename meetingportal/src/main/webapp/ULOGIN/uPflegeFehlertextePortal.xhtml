@@ -1,0 +1,133 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    xmlns:p="http://primefaces.org/ui" lang="de" template="/WEB-INF/uTemplate.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+
+            <!-- Titel -->
+            <ui:include src="/WEB-INF/ULOGIN/#{uSession.aktuellesTemplate}">
+                <ui:param name="loginAnzeigen" value="1" />
+            </ui:include>
+
+
+            <!-- Überschrift und Fehlermeldung -->
+            <ui:include src="/WEB-INF/ULOGIN/uIncUeberschriftMitMandant.xhtml">
+                <ui:param name="ueberschrift" value="#{uPflegeFehlertextePortalSession.ueberschrift}" />
+                <ui:param name="zurueck" value="1" />
+            </ui:include>
+
+            <div class="divArbeitsbereich">
+
+                <p:panelGrid columnClasses="panel25FirstColumn, panel25SecondColumn" columns="2" style="width: 1180px">
+
+                    <p:column>
+                        <h:outputLabel value="Basis-Set"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegeFehlertextePortalSession.basisSet}" maxlength="5" size="5"
+                            rendered="#{uPflegeFehlertextePortalSession.modus==0}"></h:inputText>
+                        <h:outputLabel value="#{uPflegeFehlertextePortalSession.basisSet}"
+                            rendered="#{uPflegeFehlertextePortalSession.modus!=0}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Fehler-Nr"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <table class="tableSendenZwei">
+                            <tr>
+                                <td>
+                                    <h:inputText value="#{uPflegeFehlertextePortalSession.ident}" maxlength="6" size="6"
+                                        rendered="#{uPflegeFehlertextePortalSession.modus==0}"></h:inputText>
+                                    <h:outputLabel value="#{uPflegeFehlertextePortalSession.ident}"
+                                        rendered="#{uPflegeFehlertextePortalSession.modus!=0}" />
+                                </td>
+                                <td class="tableRechts">
+                                    <h:commandButton value="Weiter" action="#{uPflegeFehlertextePortal.doWeiter()}"
+                                        rendered="#{uPflegeNachrichtBasisTextSession.modus==0}"
+                                        styleClass="btnNeutral" />
+                                </td>
+                            </tr>
+                        </table>
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Kürzel"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegeFehlertextePortalSession.kuerzel}" maxlength="70" size="70"
+                            rendered="#{!uPflegeFehlertextePortalSession.mandantenSpezifisch}"></h:inputText>
+                        <h:outputLabel value="#{uPflegeFehlertextePortalSession.kuerzel}"
+                            rendered="#{uPflegeFehlertextePortalSession.mandantenSpezifisch}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Fehlertext Deutsch"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegeFehlertextePortalSession.fehlermeldungDE}" maxlength="400"
+                            size="120" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Fehlertext Englisch"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:inputText value="#{uPflegeFehlertextePortalSession.fehlermeldungEN}" maxlength="400"
+                            size="120" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Fehlertext Standard DE"
+                            rendered="#{uPflegeFehlertextePortalSession.mandantenSpezifisch}"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegeFehlertextePortalSession.fehlermeldungStandardDE}" />
+                    </p:column>
+
+                    <p:column>
+                        <h:outputLabel value="Fehlertext Standard EN"
+                            rendered="#{uPflegeFehlertextePortalSession.mandantenSpezifisch}"></h:outputLabel>
+                    </p:column>
+                    <p:column>
+                        <h:outputLabel value="#{uPflegeFehlertextePortalSession.fehlermeldungStandardEN}" />
+                    </p:column>
+
+                </p:panelGrid>
+                <br /> <br />
+            </div>
+
+
+            <table class="divButtons">
+                <tr>
+                    <td class="divButtonsLeft">
+                        <h:commandButton value="Abbrechen" styleClass="btnStandard"
+                            action="#{uPflegeFehlertextePortal.doAbbrechen()}" />
+                    </td>
+                    <td class="divButtonsCenter"></td>
+                    <td class="divButtonsRight">
+                        <h:commandButton value="Speichern" styleClass="btnStandard"
+                            action="#{uPflegeFehlertextePortal.doSpeichern()}" />
+                    </td>
+
+                </tr>
+            </table>
+
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,1364 @@
+/**
+ *  Copyright 2025 Better Orange IR & HV AG
+ *
+ *  Licensed under the Meetingbase License (the "License");
+ *  Vou may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+<<<<<<< HEAD
+#header {
+    margin-top: 20px;
+    width: 1200px;
+    margin-bottom: 20px;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.ui-menu .ui-menuitem-link {
+    min-width: 150px;
+}
+
+.ui-menuitem-text {
+    width: auto;
+}
+
+.ui-menu .ui-menuitem-link .ui-menuitem-icon,
+.ui-menu .ui-submenu-icon {
+    display: inline-block;
+    float: left;
+    width: 25px;
+}
+
+
+/*TOP-Bereich für Logo und Programm-Titel*/
+
+.titel {
+    font-size: 30px;
+    font-weight: bold;
+    vertical-align: text-top;
+    text-align: right;
+}
+
+
+/*Überschrift / Mandant*/
+
+.divUeberschrift {
+    width: 1200px;
+}
+
+.divUeberschriftText {
+    font-size: 20px;
+    font-weight: bold;
+    width: 650px;
+    text-align: left;
+}
+
+.divUeberschriftMandant {
+    width: 320px;
+    text-align: left;
+}
+
+.divUeberschriftZurueck {
+    text-align: right;
+}
+
+
+/*Fehlermeldung*/
+
+.divFehlermeldung {
+    width: 1200px;
+    font-weight: bold;
+    color: red;
+}
+
+
+/*Arbeitsbereich*/
+
+.divArbeitsbereich {
+    width: 1200;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: #F5F5F5;
+    margin-bottom: 15px;
+}
+
+.divArbeitsbereichUeberschrift {
+    width: 1180px;
+}
+
+.divArbeitsbereichUeberschriftText {
+    font-size: 18px;
+    font-weight: bold;
+    width: 900px;
+    text-align: left;
+}
+
+.divArbeitsbereichUeberschriftButton {
+    text-align: right;
+}
+
+
+/*Table in Arbeitsbereich*/
+
+
+/*Arbeitsbereich*/
+
+.tableArbeitsbereich {
+    width: 1180px;
+    border: 1px;
+    border-style: solid;
+    vertical-align: top;
+}
+
+
+/*Mail senden - Table in zweiter Spalte*/
+
+.tableSendenZwei {
+    width: 800px;
+}
+
+
+/*Buttons*/
+
+.divButtons {
+    width: 1200px;
+}
+
+.divButtonsArbeitsbereich {
+    width: 1180px;
+}
+
+.divButtonsLeft {
+    text-align: left;
+    width: 393px;
+}
+
+.divButtonsCenter {
+    text-align: center;
+    width: 394px;
+}
+
+.divButtonsRight {
+    text-align: right;
+    width: 393px;
+}
+
+.btnStandard {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 1px solid Black;
+    white-space: normal;
+    font-size: 14px;
+    font-weight: normal;
+    width: 200px;
+    text-align: center !important;
+}
+
+.btnBreit {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 1px solid Black;
+    white-space: normal;
+    font-size: 14px;
+    font-weight: normal;
+    width: 1100px;
+    text-align: left !important;
+}
+
+.btnKlein {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid Black;
+    white-space: normal;
+    font-size: 12px;
+    font-weight: normal;
+    width: 100px;
+    text-align: center !important;
+}
+
+.btnNeutral {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid Black;
+    white-space: normal;
+    font-size: 12px !important;
+    font-weight: normal;
+    text-align: center !important;
+}
+
+.btnStandard:hover {
+    border: 1px solid Grey;
+}
+
+.btnBreit:hover {
+    border: 1px solid Grey;
+}
+
+
+/*Für Listen*/
+
+.colStandard {
+    font-size: 12px;
+}
+
+
+/*Für Tabellen*/
+
+.tableRechts {
+    text-align: right;
+}
+
+
+/*h:datatable borderless*/
+
+.borderless {
+    border: 0px !important;
+    border-style: none !important;
+    border-color: white;
+}
+
+
+/*Panel-Grid für E-Mail senden*/
+
+.sendenFirstColumn {
+    width: 590px;
+    border: 1px;
+    border-style: solid;
+    vertical-align: top;
+}
+
+.sendenSecondColumn {
+    width: 590px;
+    border: 1px;
+    border-style: solid;
+    vertical-align: top;
+}
+
+
+/*Panel-Grid für Eingabe 25%/75%*/
+
+.panel25FirstColumn {
+    width: 25% !important;
+}
+
+.panel25SecondColumn {
+    width: 75% !important;
+}
+
+
+/*Menue - irgendwie nicht funktionierend ...*/
+
+.divMenue {
+    font-size: 14px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 200px;
+    white-space: nowrap;
+}
+
+
+/* unsortiert*/
+
+body {
+    font-family: sans-serif;
+    width: 1200px;
+    margin: auto;
+    font-size: 15px;
+}
+
+span {
+    width: 50px;
+}
+
+#container {
+    width: 1200px;
+}
+
+#footer {
+    width: 1200px;
+}
+
+.divFooter {
+    width: 600px;
+    float: left;
+}
+
+.linkFooter {
+    color: #000;
+    text-decoration: underline;
+}
+
+#divFooterRight {
+    text-align: right;
+}
+
+#logo {
+    width: 300px;
+}
+
+#divLogin {
+    width: 400px;
+    margin: auto;
+    text-align: center;
+    border: 1px solid #336799;
+    border-radius: 10px;
+}
+
+#tblLogin {
+    width: 380px;
+    margin: auto;
+}
+
+#tblLogin td {
+    width: 190px;
+}
+
+.leftText {
+    text-align: left;
+}
+
+.rightText {
+    text-align: right;
+}
+
+.fehlermeldungen {
+    color: red;
+}
+
+.commandLink {
+    font-size: 20px;
+    text-decoration: underline;
+    font-family: sans-serif;
+    color: #000;
+}
+
+.divMenu {
+    padding-left: 10px;
+    width: 1200px;
+    border: 1px solid #336799;
+    border-radius: 10px;
+}
+
+.divMenuUnder {
+    float: left;
+}
+
+.divMenuUnderLeft {
+    width: 400px;
+}
+
+.divMenuUnderRight {
+    width: 800px;
+}
+
+.tblKennzeichen {
+    width: 880px;
+}
+
+.tblKennzeichenC00 {
+    width: 20%;
+}
+
+.tblKennzeichenC01 {
+    width: 40%;
+}
+
+.tblKennzeichenC02 {
+    width: 40%;
+}
+
+.tblPerson {
+    width: 880px;
+}
+
+.tblPersonC00 {
+    width: 170px;
+}
+
+.tblPersonC01 {
+    width: 170px;
+}
+
+.tblPersonC02 {
+    width: 170px;
+}
+
+.tblPersonC03 {
+    width: 170px;
+}
+
+.tblPersonC04 {
+    width: 170px;
+}
+
+.tblPerson2 {
+    width: 800px;
+}
+
+.tblPerson2C00 {
+    width: 200px;
+}
+
+.tblPerson2C01 {
+    width: 200px;
+}
+
+.tblPerson2C02 {
+    width: 200px;
+}
+
+.tblPerson2C03 {
+    width: 200px;
+}
+
+.tbl3Spalten {
+    width: 880px;
+}
+
+.tbl3SpaltenC00 {
+    width: 300px;
+}
+
+.tbl3SpaltenC01 {
+    width: 300px;
+}
+
+.tbl3SpaltenC02 {
+    width: 280px;
+}
+
+
+/* === stream-show-bereich === */
+
+#stream-show-bereich iframe {
+    width: 100%;
+    min-height: 900px;
+    border: none;
+}
+
+@media(max-width: 1600px) {
+    #stream-show-bereich iframe {
+        min-height: 800px;
+    }
+}
+
+@media(max-width: 1366px) {
+    #stream-show-bereich iframe {
+        min-height: 700px;
+    }
+}
+
+@media(max-width: 1200px) {
+    #stream-show-bereich iframe {
+        min-height: 600px;
+    }
+}
+
+@media(max-width: 1024px) {
+    #stream-show-bereich iframe {
+        min-height: 500px;
+    }
+}
+
+@media(max-width: 768px) {
+    #stream-show-bereich iframe {
+        min-height: 400px;
+    }
+}
+
+@media(max-width: 576px) {
+    #stream-show-bereich iframe {
+        min-height: 300px;
+    }
+}
+
+@media(max-width: 480px) {
+    #stream-show-bereich iframe {
+        min-height: 250px;
+    }
+}
+
+@media(max-width: 360px) {
+    #stream-show-bereich iframe {
+        min-height: 200px;
+    }
+}
+
+
+/* === Titel === */
+
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.fs-1-5 {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+
+
+/* === Start Modal ===*/
+
+.modal {
+    position: fixed;
+    z-index: 30;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.6);
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+.modal-content {
+    position: fixed;
+    top: 80px;
+    background-color: #ffffff;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    -webkit-animation-name: slideInModal;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideInModal;
+    animation-duration: 0.4s;
+    font-family: "Condensed", sans-serif;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--col-light-grey);
+    overflow: auto;
+    max-height: 80%;
+}
+
+.modal-content-static {
+    position: fixed;
+    top: 80px;
+    background-color: #ffffff;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-family: "Condensed", sans-serif;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--col-light-grey);
+    overflow: auto;
+    max-height: 80%;
+}
+
+.close i {
+    color: #ffffff;
+    float: right;
+    font-weight: bold;
+    margin-right: 1rem;
+    margin-top: .5rem;
+}
+
+.close01 i {
+    color: #585858;
+    float: right;
+    font-weight: bold;
+    margin-right: 1rem;
+    margin-top: .5rem;
+}
+
+.close i:hover,
+.close i:focus {
+    color: #585858;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.modal-body {
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.modal-body>header>i {
+    font-size: 2rem;
+}
+
+.modal-body>div {
+    border-bottom: 2px solid var(--col-grey);
+}
+
+.modal-body>.btn-typ-0 {
+    margin-top: 1rem;
+}
+
+.modal-body>.btn-typ-0:hover {
+    border: none;
+}
+
+@-webkit-keyframes slideInModal {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 80px;
+        opacity: 1
+    }
+}
+
+@keyframes slideInModal {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 80px;
+        opacity: 1
+    }
+}
+
+@media(max-width: 1024px) {
+    .modal-content {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+@media(max-width: 800px) {
+    .modal-content {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        max-height: 85%;
+    }
+}
+
+@media(max-width: 450px) {
+    .modal-content {
+        width: 95%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+    }
+}
+
+
+/* === Ende Modal === */
+
+.ui-panelgrid {
+    width: 100%;
+}
+
+.ui-panelgrid-cell  {
+    border: 1px solid #F5F5F5 !important;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+=======
+#header {
+    margin-top: 20px;
+    width: 1200px;
+    margin-bottom: 20px;
+}
+
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.ui-menu .ui-menuitem-link {
+    min-width: 150px;
+}
+
+.ui-menuitem-text {
+    width: auto;
+}
+
+.ui-menu .ui-menuitem-link .ui-menuitem-icon,
+.ui-menu .ui-submenu-icon {
+    display: inline-block;
+    float: left;
+    width: 25px;
+}
+
+
+/*TOP-Bereich für Logo und Programm-Titel*/
+
+.titel {
+    font-size: 30px;
+    font-weight: bold;
+    vertical-align: text-top;
+    text-align: right;
+}
+
+
+/*Überschrift / Mandant*/
+
+.divUeberschrift {
+    width: 1200px;
+}
+
+.divUeberschriftText {
+    font-size: 20px;
+    font-weight: bold;
+    width: 650px;
+    text-align: left;
+}
+
+.divUeberschriftMandant {
+    width: 320px;
+    text-align: left;
+}
+
+.divUeberschriftZurueck {
+    text-align: right;
+}
+
+
+/*Fehlermeldung*/
+
+.divFehlermeldung {
+    width: 1200px;
+    font-weight: bold;
+    color: red;
+}
+
+
+/*Arbeitsbereich*/
+
+.divArbeitsbereich {
+    width: 1200;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: #F5F5F5;
+    margin-bottom: 15px;
+}
+
+.divArbeitsbereichUeberschrift {
+    width: 1180px;
+}
+
+.divArbeitsbereichUeberschriftText {
+    font-size: 18px;
+    font-weight: bold;
+    width: 900px;
+    text-align: left;
+}
+
+.divArbeitsbereichUeberschriftButton {
+    text-align: right;
+}
+
+
+/*Table in Arbeitsbereich*/
+
+
+/*Arbeitsbereich*/
+
+.tableArbeitsbereich {
+    width: 1180px;
+    border: 1px;
+    border-style: solid;
+    vertical-align: top;
+}
+
+
+/*Mail senden - Table in zweiter Spalte*/
+
+.tableSendenZwei {
+    width: 800px;
+}
+
+
+/*Buttons*/
+
+.divButtons {
+    width: 1200px;
+}
+
+.divButtonsArbeitsbereich {
+    width: 1180px;
+}
+
+.divButtonsLeft {
+    text-align: left;
+    width: 393px;
+}
+
+.divButtonsCenter {
+    text-align: center;
+    width: 394px;
+}
+
+.divButtonsRight {
+    text-align: right;
+    width: 393px;
+}
+
+.btnStandard {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 1px solid Black;
+    white-space: normal;
+    font-size: 14px;
+    font-weight: normal;
+    width: 200px;
+    text-align: center !important;
+}
+
+.btnBreit {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
+    border: 1px solid Black;
+    white-space: normal;
+    font-size: 14px;
+    font-weight: normal;
+    width: 1100px;
+    text-align: left !important;
+}
+
+.btnKlein {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid Black;
+    white-space: normal;
+    font-size: 12px;
+    font-weight: normal;
+    width: 100px;
+    text-align: center !important;
+}
+
+.btnNeutral {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 5px;
+    border: 1px solid Black;
+    white-space: normal;
+    font-size: 12px !important;
+    font-weight: normal;
+    text-align: center !important;
+}
+
+.btnStandard:hover {
+    border: 1px solid Grey;
+}
+
+.btnBreit:hover {
+    border: 1px solid Grey;
+}
+
+
+/*Für Listen*/
+
+.colStandard {
+    font-size: 12px;
+}
+
+
+/*Für Tabellen*/
+
+.tableRechts {
+    text-align: right;
+}
+
+
+/*h:datatable borderless*/
+
+.borderless {
+    border: 0px !important;
+    border-style: none !important;
+    border-color: white;
+}
+
+
+/*Panel-Grid für E-Mail senden*/
+
+.sendenFirstColumn {
+    width: 590px;
+    border: 1px;
+    border-style: solid;
+    vertical-align: top;
+}
+
+.sendenSecondColumn {
+    width: 590px;
+    border: 1px;
+    border-style: solid;
+    vertical-align: top;
+}
+
+
+/*Panel-Grid für Eingabe 25%/75%*/
+
+.panel25FirstColumn {
+    width: 25% !important;
+}
+
+.panel25SecondColumn {
+    width: 75% !important;
+}
+
+
+/*Menue - irgendwie nicht funktionierend ...*/
+
+.divMenue {
+    font-size: 14px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 200px;
+    white-space: nowrap;
+}
+
+
+/* unsortiert*/
+
+body {
+    font-family: sans-serif;
+    width: 1200px;
+    margin: auto;
+    font-size: 15px;
+}
+
+span {
+    width: 50px;
+}
+
+#container {
+    width: 1200px;
+}
+
+#footer {
+    width: 1200px;
+}
+
+.divFooter {
+    width: 600px;
+    float: left;
+}
+
+.linkFooter {
+    color: #000;
+    text-decoration: underline;
+}
+
+#divFooterRight {
+    text-align: right;
+}
+
+#logo {
+    width: 300px;
+}
+
+#divLogin {
+    width: 400px;
+    margin: auto;
+    text-align: center;
+    border: 1px solid #336799;
+    border-radius: 10px;
+}
+
+#tblLogin {
+    width: 380px;
+    margin: auto;
+}
+
+#tblLogin td {
+    width: 190px;
+}
+
+.leftText {
+    text-align: left;
+}
+
+.rightText {
+    text-align: right;
+}
+
+.fehlermeldungen {
+    color: red;
+}
+
+.commandLink {
+    font-size: 20px;
+    text-decoration: underline;
+    font-family: sans-serif;
+    color: #000;
+}
+
+.divMenu {
+    padding-left: 10px;
+    width: 1200px;
+    border: 1px solid #336799;
+    border-radius: 10px;
+}
+
+.divMenuUnder {
+    float: left;
+}
+
+.divMenuUnderLeft {
+    width: 400px;
+}
+
+.divMenuUnderRight {
+    width: 800px;
+}
+
+.tblKennzeichen {
+    width: 880px;
+}
+
+.tblKennzeichenC00 {
+    width: 20%;
+}
+
+.tblKennzeichenC01 {
+    width: 40%;
+}
+
+.tblKennzeichenC02 {
+    width: 40%;
+}
+
+.tblPerson {
+    width: 880px;
+}
+
+.tblPersonC00 {
+    width: 170px;
+}
+
+.tblPersonC01 {
+    width: 170px;
+}
+
+.tblPersonC02 {
+    width: 170px;
+}
+
+.tblPersonC03 {
+    width: 170px;
+}
+
+.tblPersonC04 {
+    width: 170px;
+}
+
+.tblPerson2 {
+    width: 800px;
+}
+
+.tblPerson2C00 {
+    width: 200px;
+}
+
+.tblPerson2C01 {
+    width: 200px;
+}
+
+.tblPerson2C02 {
+    width: 200px;
+}
+
+.tblPerson2C03 {
+    width: 200px;
+}
+
+.tbl3Spalten {
+    width: 880px;
+}
+
+.tbl3SpaltenC00 {
+    width: 300px;
+}
+
+.tbl3SpaltenC01 {
+    width: 300px;
+}
+
+.tbl3SpaltenC02 {
+    width: 280px;
+}
+
+
+/* === stream-show-bereich === */
+
+#stream-show-bereich iframe {
+    width: 100%;
+    min-height: 900px;
+    border: none;
+}
+
+@media(max-width: 1600px) {
+    #stream-show-bereich iframe {
+        min-height: 800px;
+    }
+}
+
+@media(max-width: 1366px) {
+    #stream-show-bereich iframe {
+        min-height: 700px;
+    }
+}
+
+@media(max-width: 1200px) {
+    #stream-show-bereich iframe {
+        min-height: 600px;
+    }
+}
+
+@media(max-width: 1024px) {
+    #stream-show-bereich iframe {
+        min-height: 500px;
+    }
+}
+
+@media(max-width: 768px) {
+    #stream-show-bereich iframe {
+        min-height: 400px;
+    }
+}
+
+@media(max-width: 576px) {
+    #stream-show-bereich iframe {
+        min-height: 300px;
+    }
+}
+
+@media(max-width: 480px) {
+    #stream-show-bereich iframe {
+        min-height: 250px;
+    }
+}
+
+@media(max-width: 360px) {
+    #stream-show-bereich iframe {
+        min-height: 200px;
+    }
+}
+
+
+/* === Titel === */
+
+.d-none {
+    display: none;
+}
+
+.d-block {
+    display: block;
+}
+
+.fs-1-5 {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+}
+
+
+/* === Start Modal ===*/
+
+.modal {
+    position: fixed;
+    z-index: 30;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.6);
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+.modal-content {
+    position: fixed;
+    top: 80px;
+    background-color: #ffffff;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    -webkit-animation-name: slideInModal;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideInModal;
+    animation-duration: 0.4s;
+    font-family: "Condensed", sans-serif;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--col-light-grey);
+    overflow: auto;
+    max-height: 80%;
+}
+
+.modal-content-static {
+    position: fixed;
+    top: 80px;
+    background-color: #ffffff;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-family: "Condensed", sans-serif;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid var(--col-light-grey);
+    overflow: auto;
+    max-height: 80%;
+}
+
+.close i {
+    color: #ffffff;
+    float: right;
+    font-weight: bold;
+    margin-right: 1rem;
+    margin-top: .5rem;
+}
+
+.close01 i {
+    color: #585858;
+    float: right;
+    font-weight: bold;
+    margin-right: 1rem;
+    margin-top: .5rem;
+}
+
+.close i:hover,
+.close i:focus {
+    color: #585858;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.modal-body {
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.modal-body>header>i {
+    font-size: 2rem;
+}
+
+.modal-body>div {
+    border-bottom: 2px solid var(--col-grey);
+}
+
+.modal-body>.btn-typ-0 {
+    margin-top: 1rem;
+}
+
+.modal-body>.btn-typ-0:hover {
+    border: none;
+}
+
+@-webkit-keyframes slideInModal {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 80px;
+        opacity: 1
+    }
+}
+
+@keyframes slideInModal {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 80px;
+        opacity: 1
+    }
+}
+
+@media(max-width: 1024px) {
+    .modal-content {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
+@media(max-width: 800px) {
+    .modal-content {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        max-height: 85%;
+    }
+}
+
+@media(max-width: 450px) {
+    .modal-content {
+        width: 95%;
+        margin-left: 2.5%;
+        margin-right: 2.5%;
+    }
+}
+
+
+/* === Ende Modal === */
+
+.ui-panelgrid {
+    width: 100%;
+}
+
+.ui-panelgrid-cell  {
+    border: 1px solid #F5F5F5 !important;
+    border-spacing: 0px;
+    border-collapse: collapse;
+}
+>>>>>>> refs/remotes/origin/f20240226PortalAllgemein

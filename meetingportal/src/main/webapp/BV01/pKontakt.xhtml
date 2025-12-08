@@ -1,0 +1,99 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<!DOCTYPE html>
+<html	xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:faces="jakarta.faces"
+        xmlns:ui="jakarta.faces.facelets"
+        xmlns:f="jakarta.faces.core"
+        xmlns:h="jakarta.faces.html"
+        xmlns:pt="jakarta.faces.passthrough"
+        xmlns:cc="jakarta.faces.composite"
+        xmlns:my="jakarta.faces.component"
+        xmlns:c="jakarta.tags.core"
+        xmlns:fn="jakarta.tags.functions"
+        xmlns:p="http://primefaces.org/ui"
+        lang="de">
+
+<f:view>
+
+    <h:body>
+        <ui:composition template="templates/pTemplate.xhtml">
+            <ui:define name="content">
+
+
+                <div class="container-full">
+                    <div class="row">
+                        <div class="col-8">
+                            <h:panelGroup rendered="#{tSession.testModus=='2'}">
+                                <p>
+                                    <h:outputText value="Language= #{tLanguage.lang}" />
+                                    <br/>
+                                    <h:outputLabel value="seitenname= pNutzungshinweise" />
+                                    <br/>
+                                    <h:outputLabel value="App-Titel= #{eclPortalTexteM.holeText('299')}" />
+                                </p>
+                            </h:panelGroup>
+                        </div>
+                    </div>
+                </div>
+
+                <section id="idSeiteStart-bereich">
+                    <div class="container-full">
+                        <div class="row">
+                            <div class="col-8">
+                                <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('15')}">
+                                    <h2>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('15')}" escape="false"></h:outputText>
+                                    </h2>
+                                </h:panelGroup>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="kontakt-bereich">
+                    <div class="container-80">
+                        <div class="row">
+                            <div class="col-8">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('16')}" escape="false"></h:outputText>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="button-unten-bereich">
+                    <div class="container-80">
+                        <div class="row">
+                            <div class="col-1_3">
+                                <h:commandButton value="#{eclPortalTexteM.holeText('858')}" onclick="window.close();" styleClass="btn-typ-00"></h:commandButton>
+                            </div>
+                            <div class="col-1_3">
+                            </div>
+                            <div class="col-1_3">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+
+</f:view>
+
+</html>

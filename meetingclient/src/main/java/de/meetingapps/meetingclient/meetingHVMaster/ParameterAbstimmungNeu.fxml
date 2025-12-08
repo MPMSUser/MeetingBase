@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1545.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="294.0" layoutX="830.0" layoutY="410.0" stroke="BLACK" strokeType="INSIDE" width="700.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="287.0" layoutX="13.0" layoutY="329.0" stroke="BLACK" strokeType="INSIDE" width="810.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="308.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="1515.0" />
+      <Button fx:id="btnNeu" layoutX="16.0" layoutY="864.0" mnemonicParsing="false" onAction="#clickedNeu" prefHeight="25.0" prefWidth="180.0" text="Neu anlegen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnAbbrechen" layoutX="198.0" layoutY="864.0" mnemonicParsing="false" onAction="#clickedAbbrechen" prefHeight="25.0" prefWidth="180.0" text="Abbrechen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="220.0" />
+      <Label layoutX="32.0" layoutY="53.0" text="Intern (ohne . etc.!):" />
+      <Label fx:id="lblExtern" layoutX="32.0" layoutY="84.0" text="Listen (Portal, Tablet, ...):" />
+      <Label layoutX="32.0" layoutY="118.0" text="Formulare:" />
+      <Label layoutX="214.0" layoutY="53.0" text="TOP" />
+      <TextField fx:id="tfTOPInternDE" layoutX="258.0" layoutY="49.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label layoutX="367.0" layoutY="53.0" text="Index" />
+      <TextField fx:id="tfIndexInternDE" layoutX="409.0" layoutY="49.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label fx:id="lblEnglisch" layoutX="879.0" layoutY="22.0" text="Englisch:" />
+      <Label fx:id="lblTOPExternDE" layoutX="214.0" layoutY="84.0" text="TOP" />
+      <TextField fx:id="tfTOPExtenDE" layoutX="258.0" layoutY="80.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label fx:id="lblIndexExternDE" layoutX="367.0" layoutY="84.0" text="Index" />
+      <TextField fx:id="tfIndexExternDE" layoutX="409.0" layoutY="80.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label layoutX="213.0" layoutY="22.0" text="Deutsch:" />
+      <Label fx:id="lblTOPExternEN" layoutX="880.0" layoutY="84.0" text="TOP" />
+      <TextField fx:id="tfTOPExternEN" layoutX="924.0" layoutY="80.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label fx:id="lblIndexExternEN" layoutX="1033.0" layoutY="84.0" text="Index" />
+      <TextField fx:id="tfIndexExternEN" layoutX="1075.0" layoutY="80.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label fx:id="lblTOPFormulareDE" layoutX="214.0" layoutY="118.0" text="TOP" />
+      <TextField fx:id="tfTOPFormulareDE" layoutX="258.0" layoutY="114.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label fx:id="lblIndexFormulareDE" layoutX="367.0" layoutY="118.0" text="Index" />
+      <TextField fx:id="tfIndexFormulareDE" layoutX="409.0" layoutY="114.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label layoutX="32.0" layoutY="157.0" text="Kurzbezeichnung:" />
+      <TextField fx:id="tfKurzbezeichnungDE" layoutX="213.0" layoutY="153.0" prefWidth="600.0" />
+      <TextField fx:id="tfKurzbezeichnungEN" layoutX="880.0" layoutY="153.0" prefWidth="600.0" />
+      <Label layoutX="32.0" layoutY="193.0" text="Langtext:" />
+      <TextArea fx:id="tfLangtextDE" layoutX="213.0" layoutY="185.0" prefHeight="90.0" prefWidth="600.0" />
+      <TextArea fx:id="tfLangtextEN" layoutX="879.0" layoutY="185.0" prefHeight="90.0" prefWidth="600.0" />
+      <CheckBox fx:id="cbAlsUeberschrift" layoutX="32.0" layoutY="342.0" mnemonicParsing="false" onAction="#onCbAlsUeberschrift" text="Nur als Überschrift verwenden" />
+      <Label layoutX="32.0" layoutY="403.0" text="Stimmberechtigte Gattungen:" />
+      <CheckBox fx:id="cbGattung1" layoutX="283.0" layoutY="403.0" mnemonicParsing="false" text="1" />
+      <CheckBox fx:id="cbGattung2" layoutX="348.0" layoutY="403.0" mnemonicParsing="false" text="2" />
+      <CheckBox fx:id="cbGattung3" layoutX="406.0" layoutY="403.0" mnemonicParsing="false" text="3" />
+      <CheckBox fx:id="cbGattung4" layoutX="470.0" layoutY="403.0" mnemonicParsing="false" text="4" />
+      <Label fx:id="lblStimmenAuswerten" layoutX="32.0" layoutY="370.0" text="Stimmen auswerten: (A=Additionsverfahren)" />
+      <ComboBox fx:id="cbStimmenAuswerten" layoutX="348.0" layoutY="366.0" prefHeight="25.0" prefWidth="94.0" />
+      <CheckBox fx:id="cbAktivAbstimmungWeisung" layoutX="20.0" layoutY="717.0" mnemonicParsing="false" text="Für Abstimmung und Weisungserfassung in Bestandspflege aktivieren" textFill="#f20010" />
+      <CheckBox fx:id="cbAktivWeisungVerlassen" layoutX="20.0" layoutY="741.0" mnemonicParsing="false" text="Für Weisungserfassung beim Verlassen der HV aktivieren" textFill="#f20010" />
+      <Label layoutX="32.0" layoutY="433.0" text="Stimmausschluss:" />
+      <CheckBox fx:id="cbStimmausschlussV" layoutX="283.0" layoutY="433.0" mnemonicParsing="false" text="V" />
+      <CheckBox fx:id="cbStimmausschlussA" layoutX="348.0" layoutY="433.0" mnemonicParsing="false" text="A" />
+      <Label layoutX="32.0" layoutY="463.0" text="Erforderliche Mehrheit:" />
+      <ComboBox fx:id="cbErforderlicheMehrheit" layoutX="200.0" layoutY="461.0" prefWidth="428.0" />
+      <Label layoutX="32.0" layoutY="501.0" text="Beschlussvorschlag von:" />
+      <ComboBox fx:id="cbBeschlussvorschlagVon" layoutX="200.0" layoutY="497.0" prefWidth="220.0" />
+      <Label layoutX="452.0" layoutY="500.0" text="Bei Sonstigen:" />
+      <TextField fx:id="tfBeschlussvorschlagSonstige" layoutX="547.0" layoutY="497.0" prefHeight="25.0" prefWidth="266.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="77.0" layoutX="830.0" layoutY="329.0" stroke="BLACK" strokeType="INSIDE" width="700.0" />
+      <CheckBox fx:id="cbAktivWeisungInternetservice" layoutX="581.0" layoutY="717.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="541.0" text="Für Weisungen Internetservice aktivieren (Achtung! Wird im Internetservice sofort sichtbar!)" textFill="#f20010" />
+      <Label layoutX="842.0" layoutY="340.0" text="Bei Weisungen einordnen vor Abstimmung (leer=am Ende):" />
+      <ComboBox fx:id="cbWeisungVorAbstimmung" layoutX="881.0" layoutY="366.0" prefHeight="25.0" prefWidth="610.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="84.0" layoutX="13.0" layoutY="619.0" stroke="BLACK" strokeType="INSIDE" width="810.0" />
+      <Label fx:id="lblWeisungen" alignment="TOP_LEFT" layoutX="32.0" layoutY="631.0" prefHeight="60.0" prefWidth="190.0" text="Bei Erstanlage: bei Aktionären mit Weisungen belegen mit (=keine Weisung):" wrapText="true">
+         <tooltip>
+            <Tooltip text=". wählen für eine Einzelabstimmung statt Gesamtabstimmung, bzw. wenn Gesamtweisung in diesen TOP übernommen werden soll" />
+         </tooltip></Label>
+      <Label fx:id="lblWeisungKIAV" layoutX="417.0" layoutY="635.0" text="KIAV" />
+      <Label fx:id="lblWeisungSRV" layoutX="230.0" layoutY="632.0" text="SRV" />
+      <Label fx:id="lblWeisungBriefwahl" layoutX="229.0" layoutY="666.0" text="Briefwahl" />
+      <Label fx:id="lblWeisungDauer" layoutX="418.0" layoutY="666.0" text="Dauervollmacht" />
+      <Label fx:id="lblWeisungOrga" layoutX="629.0" layoutY="631.0" text="Organisatorisch" />
+      <ComboBox fx:id="cbWeisungSRV" layoutX="290.0" layoutY="629.0" prefHeight="25.0" prefWidth="94.0" />
+      <ComboBox fx:id="cbWeisungBriefwahl" layoutX="290.0" layoutY="662.0" prefHeight="25.0" prefWidth="94.0" />
+      <ComboBox fx:id="cbWeisungKIAV" layoutX="515.0" layoutY="627.0" prefHeight="25.0" prefWidth="94.0" />
+      <ComboBox fx:id="cbWeisungDauer" layoutX="516.0" layoutY="662.0" prefHeight="25.0" prefWidth="94.0" />
+      <ComboBox fx:id="cbWeisungOrga" layoutX="719.0" layoutY="627.0" prefHeight="25.0" prefWidth="94.0" />
+      <Label layoutX="842.0" layoutY="429.0" text="In Abstimmungsvorgang einordnen (leer=keine Zuordnung)" />
+      <Button fx:id="btnNeueAbstimmung" layoutX="1227.0" layoutY="425.0" mnemonicParsing="false" onAction="#clickedNeueAbstimmung" text="neuen Abstimmungsvorgang anlegen" />
+      <ComboBox fx:id="cbInAbstimmungsvorgang" layoutX="881.0" layoutY="467.0" prefHeight="25.0" prefWidth="610.0" />
+      <Label fx:id="lblStimmkartennummer" layoutX="842.0" layoutY="518.0" text="Stimmkartennummer:" />
+      <TextField fx:id="tfStimmkartennummer" layoutX="1128.0" layoutY="514.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label fx:id="lblStimmkartennummerPosition" layoutX="1215.0" layoutY="518.0" text="Position:" />
+      <TextField fx:id="tfStimmkartennummerPosition" layoutX="1293.0" layoutY="514.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label fx:id="lblTabletBlaetternSeite" layoutX="841.0" layoutY="556.0" text="Tabletabstimmung Seite:" />
+      <TextField fx:id="tfTabletBlaetternSeite" layoutX="1128.0" layoutY="552.0" prefHeight="25.0" prefWidth="63.0" />
+      <TextField fx:id="tfTabletBlaetternPosition" layoutX="1293.0" layoutY="552.0" prefHeight="25.0" prefWidth="63.0" />
+      <Label fx:id="lblTabletBlaetternPosition" layoutX="1215.0" layoutY="556.0" text="Position:" />
+      <CheckBox fx:id="cbTOPExtern" layoutX="495.0" layoutY="84.0" mnemonicParsing="false" onAction="#onCbTOPExtern" text="Intern mit . )" />
+      <CheckBox fx:id="cbTOPFormulare" layoutX="495.0" layoutY="118.0" mnemonicParsing="false" onAction="#onCbTOPFormulare" text="Wie Intern" />
+      <CheckBox fx:id="cbGattung5" layoutX="535.0" layoutY="402.0" mnemonicParsing="false" text="5" />
+      <TextField fx:id="tfKandidatDE" layoutX="213.0" layoutY="284.0" prefWidth="600.0" />
+      <TextField fx:id="tfKandidatEN" layoutX="880.0" layoutY="284.0" prefWidth="600.0" />
+      <Label layoutX="32.0" layoutY="289.0" text="Kandidat:" />
+      <Label fx:id="lblWeisungHolenVon" alignment="TOP_LEFT" layoutX="35.0" layoutY="552.0" prefHeight="21.0" prefWidth="419.0" text="Falls keine Weisung markiert, dann holen von Abstimmung (!):">
+         <tooltip>
+            <Tooltip text="Verwendung z.B. bei Einzelentlastung, wenn die Weisung für die Gesamtentlastung auch für die Kandidaten gelten sollen, außer es wurde explizit für die einzelnen Kandidaten eine Weisung gespeichert" />
+         </tooltip></Label>
+      <ComboBox fx:id="cbWeisungHolenVon" layoutX="224.0" layoutY="576.0" prefWidth="589.0" />
+      <CheckBox fx:id="cbAktivAbstimmungTabletApp" layoutX="581.0" layoutY="741.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="547.0" text="Für Tablet/App-Abstimmung aktivieren (Achtung! Wird ggf. auf Tablet/App sofort sichtbar!)" textFill="#f20010" />
+      <Label layoutX="494.0" layoutY="53.0" text="(Standard: Kleinbuchstaben)" />
+      <Label fx:id="lblAnzKurz" layoutX="167.0" layoutY="157.0" AnchorPane.rightAnchor="1335.0" />
+      <Label fx:id="lblAnzLang" layoutX="167.0" layoutY="193.0" AnchorPane.rightAnchor="1335.0" />
+      <Label fx:id="lblAnzKurzEN" layoutX="845.0" layoutY="157.0" AnchorPane.rightAnchor="670.0" />
+      <Label fx:id="lblAnzLangEN" layoutX="845.0" layoutY="193.0" AnchorPane.rightAnchor="670.0" />
+</children>
+</AnchorPane>

@@ -1,0 +1,27 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html"
+    lang="de">
+    <!-- Als value wird nur ein Dummy angegeben. Welches Logo tatsächlich angezeigt wird,
+                    wird in der Bean TImageServlet.java über Parameter gesteuert bzw. aus Datei ausgelesen-->
+    <h:graphicImage value="/images/dummy.png" width="#{eclParamM.logoBreite}" styleClass="logoHeader" alt="Logo" />
+    <!-- Muster für Direkteinbindung eines Logos aus dem Eclipse-Projekt:
+                    <h:graphicImage library="std"
+                        name="images/logos/#{eclParamM.logoName}"
+                        height="#{eclParamM.logoHoehe}" width="#{eclParamM.logoBreite}" />
+                        -->
+
+</ui:composition>

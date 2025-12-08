@@ -1,0 +1,77 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <f:subview id="pKontaktformularOben">
+        <ui:include src="idetail/idSeiteStart.xhtml" />
+    </f:subview>
+
+    <!-- Inhaltsbereich -->
+    <section id="inhalts-bereich">
+        <div class="col-4 kontaktformular">
+            <!-- Überschrift */ -->
+            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1533')}">
+                <p>
+                <h2>
+                    <h:outputLabel value="#{eclPortalTexteM.holeIText(1533)}" escape="false"></h:outputLabel>
+                </h2>
+                </p>
+            </h:panelGroup>
+            <!-- Starttext -->
+            <p>
+                <h:outputLabel value="#{eclPortalTexteM.holeIText(1534)}" escape="false"></h:outputLabel>
+            </p>
+
+            <h:selectOneMenu value="#{tKontaktformularSession.identThemenListeGewaehlt}" styleClass="input-typ-00">
+                <f:selectItem itemLabel="#{eclPortalTexteM.holeIText(1535)}" noSelectionOption="true" value="#{null}" />
+                <f:selectItems value="#{eclParamM.kontaktformularThemenListe}" var="thema"
+                    itemLabel="#{thema.spracheDEText}" itemValue="#{thema.ident}" />
+            </h:selectOneMenu>
+
+            <p>
+                <!-- Text zum Anzeigen in noch nicht ausgefülltem Textbereich -->
+                <h:outputLabel value="#{eclPortalTexteM.holeIText(1536)}" escape="false"></h:outputLabel>
+            </p>
+
+            <!--  Textbereich -->
+            <h:inputTextarea value="#{tKontaktformularSession.textEingabe}" counter="display" rows="5" cols="70"
+                pt:maxlength="10000" onkeyup="setVerbleibendeZeichen(event);" styleClass="input-typ-00">
+            </h:inputTextarea>
+
+            <p>
+                <span id="span-verbleibende-Zeichen">0</span> /
+                <h:outputText value="10000" escape="false" />
+            </p>
+
+            <!--  Button Senden -->
+            <p class="t-right">
+                <h:commandButton value="#{eclPortalTexteM.holeIText(1537)}" id="buttonKontaktformularSenden"
+                    action="#{tKontaktformular.doSenden()}" styleClass="btn-typ-01">
+
+                    <f:ajax execute="@all" render="inhaltsform" onevent="nachAjaxButton" />
+                </h:commandButton>
+            </p>
+
+            <!-- Text Ende -->
+            <p>
+                <h:outputLabel value="#{eclPortalTexteM.holeIText(1538)}" escape="false"></h:outputLabel>
+            </p>
+        </div>
+    </section>
+</ui:composition>

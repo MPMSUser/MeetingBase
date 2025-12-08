@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1029.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btnVerzeichnisVerein" layoutX="30.0" layoutY="112.0" mnemonicParsing="false" onAction="#clickedBtnVerzeichnisVerein" text="Zählen und Drucken - aktuell Anwesende" />
+      <Button fx:id="btnAbbrechen" layoutX="30.0" layoutY="455.0" mnemonicParsing="false" onAction="#clickedBtnAbbrechen" prefHeight="25.0" prefWidth="129.0" text="Abbrechen" />
+      <Label layoutX="30.0" layoutY="18.0" prefHeight="52.0" prefWidth="391.0" text="Liefert die Anzahl der aktuell anwesenden Mitglieder (&quot;Kopfzählung&quot;). Achtung, nicht 1:1 wiederholbar, deshalb gleich PDF erzeugen!" wrapText="true" />
+      <Label layoutX="30.0" layoutY="254.0" prefHeight="52.0" prefWidth="391.0" text="Liefert Teilnehmerverzeichnis zu einem bestimmten Zeitpunkt (JJJJ.MM.TT HH:TT:SS). Bis kann leer sein, dann Stichzeit. Nicht für Hybrid!" wrapText="true" />
+      <Label layoutX="30.0" layoutY="318.0" text="Von" />
+      <Label layoutX="30.0" layoutY="354.0" text="Bis" />
+      <TextField fx:id="tfVon" layoutX="125.0" layoutY="314.0" />
+      <TextField fx:id="tfBis" layoutX="125.0" layoutY="350.0" />
+      <Button fx:id="btnDrucken" layoutX="32.0" layoutY="394.0" mnemonicParsing="false" onAction="#clickedBtnDrucken" prefHeight="25.0" prefWidth="129.0" text="Drucken" />
+      <Button fx:id="btnVerzeichnisVereinBisherAnwesende" layoutX="30.0" layoutY="158.0" mnemonicParsing="false" onAction="#clickedBtnVerzeichnisVereinBisherAnwesende" text="Zählen und Drucken - bisher Anwesende" />
+      <Label layoutX="31.0" layoutY="74.0" text="Gattung (leer=alle; 1,2,3 = zulässig)" />
+      <TextField fx:id="tfGattung" layoutX="264.0" layoutY="70.0" />
+      <Button fx:id="btnHybridHoleTeilnehmer" layoutX="602.0" layoutY="32.0" mnemonicParsing="false" onAction="#clickedBtnHybridHoleTeilnehmer" text="Hybrid: Hole Online-Teilnehmer" />
+      <Button fx:id="btnHybridSperreAufPortal" layoutX="602.0" layoutY="79.0" mnemonicParsing="false" onAction="#clickedBtnHybridSperreAufPortal" text="Hybrid: Sperre physik.Präsente zur Abstimmung auf Portal" />
+      <Button fx:id="btnHybridAbstimmungenVonPortal" layoutX="602.0" layoutY="125.0" mnemonicParsing="false" onAction="#clickedBtnHybridAbstimmungenVonPortal" text="Hybrid: Abstimmungen von Portal" />
+      <Button fx:id="btnku310SperreAlleTeilnehmer" layoutX="602.0" layoutY="212.0" mnemonicParsing="false" onAction="#clickedBtnku310SperreAlleTeilnehmer" text="ku310: Sperren aller Teilnehmer" />
+      <Button fx:id="btnku310Abstimmungsauswertung" layoutX="599.0" layoutY="288.0" mnemonicParsing="false" onAction="#clickedBtnku310Abstimmungsauswertung" text="ku310: Abstimmungsauswertung" />
+      <Button fx:id="btnku310Praesenzkonsolidierung" layoutX="599.0" layoutY="254.0" mnemonicParsing="false" onAction="#clickedBtnku310Praesenzkonsolidierung" text="ku310: Präsenzkonsolidierung" />
+      <Button fx:id="btnWeisungskonsolidierung" layoutX="599.0" layoutY="363.0" mnemonicParsing="false" onAction="#clickedBtnWeisungskonsolidierung" text="Weisungskonsolidierung" />
+      <Button fx:id="btnNordzEK" layoutX="599.0" layoutY="419.0" mnemonicParsing="false" onAction="#clickedBtnNordzEK" text="Nordz: EK Ergänzen" />
+   </children>
+</Pane>

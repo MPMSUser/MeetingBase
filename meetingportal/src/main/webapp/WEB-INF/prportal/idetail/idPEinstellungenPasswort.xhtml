@@ -1,0 +1,192 @@
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:faces="jakarta.faces" xmlns:ui="jakarta.faces.facelets"
+    xmlns:f="jakarta.faces.core" xmlns:h="jakarta.faces.html" xmlns:pt="jakarta.faces.passthrough"
+    xmlns:cc="jakarta.faces.composite"  xmlns:c="jakarta.tags.core"
+    xmlns:fn="jakarta.tags.functions" xmlns:p="http://primefaces.org/ui" lang="de">
+
+    <section id="einstellungen-passwort-bereich">
+        <div class="row">
+            <div class="col-8">
+                <!-- aDlgVariablen.renderDauerhaftesPasswortAngebotenUndZulaessig()==true -->
+                <h:panelGroup id="eigenesPasswort"
+                    rendered="#{tRender.pDauerhaftesPasswortAngebotenUndZulaessig()==true}">
+                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1679')}">
+                        <p>
+                            <h:outputText value="#{eclPortalTexteM.holeText('1679')}" escape="false" />
+                        </p>
+                    </h:panelGroup>
+
+                    <!-- dauerhaftes Passwort - falls bisher noch kein Passwort vergeben -->
+                    <!-- !aDlgVariablen.passwortBereitsVergeben  -->
+                    <h:panelGroup rendered="#{!tEinstellungenSession.passwortBereitsVergeben}">
+
+                        <h:panelGroup id="passwortvergabe">
+
+                            <!-- Passwort vergeben -->
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1680')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1680')}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+
+                            <div class="row">
+                                <div class="col-2">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1691')}" escape="false">
+                                        </h:outputText>
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p>
+                                        <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.neuesPasswort -->
+                                        <h:inputSecret id="txtPasswort07" value="#{tEinstellungenSession.neuesPasswort}"
+                                            maxlength="20" size="20" redisplay="true" autocomplete="off"
+                                            styleClass="input-typ-01"></h:inputSecret>
+                                        <span class="spanShowPassword  spanShowPassword07">
+                                            <i class="fas fa-eye" onclick="showPassword0('txtPasswort07', '07');"></i>
+                                        </span>
+                                        <span class="spanHidePassword d-none spanHidePassword07">
+                                            <i class="fas fa-eye-slash"
+                                                onclick="hidePassword0('txtPasswort07', '07');"></i>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="col-2">
+                                    <p>
+                                        <h:outputText value="#{eclPortalTexteM.holeText('1692')}" escape="false">
+                                        </h:outputText>
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p>
+                                        <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.neuesPasswortBestaetigung -->
+                                        <h:inputSecret id="txtPasswort08"
+                                            value="#{tEinstellungenSession.neuesPasswortBestaetigung}" maxlength="20"
+                                            sizwe="20" redisplay="true" autocomplete="off" styleClass="input-typ-01">
+                                        </h:inputSecret>
+                                        <span class="spanShowPassword  spanShowPassword08">
+                                            <i class="fas fa-eye" onclick="showPassword0('txtPasswort08', '08');"></i>
+                                        </span>
+                                        <span class="spanHidePassword d-none spanHidePassword08">
+                                            <i class="fas fa-eye-slash"
+                                                onclick="hidePassword0('txtPasswort08', '08');"></i>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1693')}">
+                                <p>
+                                    <h:outputText value="#{eclPortalTexteM.holeText('1693')}" escape="false" />
+                                </p>
+                            </h:panelGroup>
+
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                    <!-- Passwort, falls bereits vergeben -->
+                    <!-- aDlgVariablen.passwortBereitsVergeben -->
+                    <h:panelGroup rendered="#{tEinstellungenSession.passwortBereitsVergeben}">
+
+                        <h:panelGroup id="passwortDauerhaft">
+
+                            <!-- aDlgVariablen.ausgewaehltVergabeEigenesPasswort -->
+                            <h:panelGrid columns="2">
+                                <!-- aDlgVariablen.neuesPasswort -->
+                                <h:selectBooleanCheckbox id="id3neuesPasswort"
+                                    value="#{tEinstellungenSession.passwortNeuVergeben}">
+                                    <f:ajax render="passwortNeu" />
+                                </h:selectBooleanCheckbox>
+                                <h:outputText value="#{eclPortalTexteM.holeText('1694')}" escape="false"></h:outputText>
+                            </h:panelGrid>
+
+                            <h:panelGroup id="passwortNeu">
+                                <!-- aDlgVariablen.neuesPasswort and aDlgVariablen.ausgewaehltVergabeEigenesPasswort -->
+                                <h:panelGroup rendered="#{tEinstellungenSession.passwortNeuVergeben}">
+
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1695')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1695')}" escape="false" />
+                                        </p>
+                                    </h:panelGroup>
+
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1696')}"
+                                                    escape="false"></h:outputText>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p>
+                                                <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.neuesPasswort -->
+                                                <h:inputSecret id="txtPasswort09"
+                                                    value="#{tEinstellungenSession.neuesPasswort}" maxlength="20"
+                                                    size="20" redisplay="true" autocomplete="off"
+                                                    styleClass="input-typ-01"></h:inputSecret>
+                                                <span class="spanShowPassword  spanShowPassword09">
+                                                    <i class="fas fa-eye"
+                                                        onclick="showPassword0('txtPasswort09', '09');"></i>
+                                                </span>
+                                                <span class="spanHidePassword d-none spanHidePassword09">
+                                                    <i class="fas fa-eye-slash"
+                                                        onclick="hidePassword0('txtPasswort09', '09');"></i>
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="col-2">
+                                            <p>
+                                                <h:outputText value="#{eclPortalTexteM.holeText('1697')}"
+                                                    escape="false"></h:outputText>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p>
+                                                <!-- eclTeilnehmerLoginM.aktienregisterZusatzM.neuesPasswortBestaetigung -->
+                                                <h:inputSecret id="txtPasswort10"
+                                                    value="#{tEinstellungenSession.neuesPasswortBestaetigung}"
+                                                    maxlength="20" sizwe="20" redisplay="true" autocomplete="off"
+                                                    styleClass="input-typ-01"></h:inputSecret>
+                                                <span class="spanShowPassword  spanShowPassword10">
+                                                    <i class="fas fa-eye"
+                                                        onclick="showPassword0('txtPasswort10', '10');"></i>
+                                                </span>
+                                                <span class="spanHidePassword d-none spanHidePasswort10">
+                                                    <i class="fas fa-eye-slash"
+                                                        onclick="hidePassword0('txtPasswort10', '10');"></i>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <h:panelGroup rendered="#{eclPortalTexteM.pruefeTextVorhanden('1698')}">
+                                        <p>
+                                            <h:outputText value="#{eclPortalTexteM.holeText('1698')}" escape="false" />
+                                        </p>
+                                    </h:panelGroup>
+
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+
+                </h:panelGroup>
+
+            </div>
+        </div>
+    </section>
+</ui:composition>

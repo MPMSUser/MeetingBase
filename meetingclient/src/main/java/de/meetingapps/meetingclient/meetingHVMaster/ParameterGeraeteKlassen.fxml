@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+     Copyright 2025 Better Orange IR & HV AG
+
+     Licensed under the Meetingbase License (the "License");
+     Vou may not use this file except in compliance with the License.
+     You may obtain a copy of the License in the root directory (MEETINGBASE_LICENSE).
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+
+-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="29.0" layoutY="35.0" text="Die Geräteparameter werden mandantenübergreifend gespeichert. Sie sollten auf allen Servern identisch sein.">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <Label layoutX="29.0" layoutY="66.0" text="Klassen-Nummer">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfKlasse" layoutX="179.0" layoutY="62.0" onKeyPressed="#onKeyPressedSetNummer" prefHeight="25.0" prefWidth="126.0" />
+      <Button fx:id="btnBearbeiten" layoutX="328.0" layoutY="62.0" mnemonicParsing="false" onAction="#clickedBearbeiten" text="Bearbeiten">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnNeueKlasse" layoutX="415.0" layoutY="62.0" mnemonicParsing="false" onAction="#clickedNeueKlasse" text="Neue Klasse anlegen">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnZurueck" layoutX="585.0" layoutY="62.0" mnemonicParsing="false" onAction="#clickedZurueck" text="Zurück">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnVor" layoutX="644.0" layoutY="62.0" mnemonicParsing="false" onAction="#clickedVor" text="Vor">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Label layoutX="687.0" layoutY="57.0" prefHeight="36.0" prefWidth="73.0" text="Innerhalb des Sets:" wrapText="true">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <ComboBox fx:id="comboSet" layoutX="775.0" layoutY="62.0" prefHeight="25.0" prefWidth="365.0" />
+      <Label layoutX="29.0" layoutY="101.0" text="Bezeichnung der Klasse">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextField fx:id="tfBezeichnung" layoutX="179.0" layoutY="97.0" prefHeight="25.0" prefWidth="930.0" />
+      <Label layoutX="29.0" layoutY="130.0" text="Ausführliche Beschreibung">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Label>
+      <TextArea fx:id="tfAusfuehrlicheBeschreibung" layoutX="29.0" layoutY="154.0" prefHeight="114.0" prefWidth="1082.0" />
+      <Button fx:id="btnSpeichern" layoutX="29.0" layoutY="766.0" mnemonicParsing="false" onAction="#clickedSpeichern" text="Speichern">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnLoeschen" layoutX="120.0" layoutY="766.0" mnemonicParsing="false" onAction="#clickedLoeschen" text="Klasse löschen">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnAbbrechen" layoutX="231.0" layoutY="766.0" mnemonicParsing="false" onAction="#clickedAbbrechen" text="Abbrechen">
+         <font>
+            <Font name="Arial" size="12.0" />
+         </font></Button>
+      <TabPane layoutX="29.0" layoutY="273.0" prefHeight="474.0" prefWidth="1111.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Übersicht Klassen">
+               <content>
+                  <ScrollPane fx:id="scrpnVorhandeneKlassen" prefHeight="418.0" prefWidth="1111.0" />
+               </content>
+          </Tab>
+          <Tab text="Hardware">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="27.0" layoutY="14.0" text="Gerätetyp">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfAbstimmungTabletTyp" layoutX="180.0" layoutY="10.0" prefHeight="25.0" prefWidth="106.0" />
+                        <Label layoutX="373.0" layoutY="14.0" text="1= &quot;altes Tablet&quot;, 2 = &quot;neues Tablet&quot;, 3 = Notebook (abstimmungTabletTyp)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="27.0" layoutY="48.0" text="Arbeits-LW/Pfad">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfLwPfadAllgemein" layoutX="180.0" layoutY="44.0" prefHeight="25.0" prefWidth="182.0" />
+                        <Label layoutX="373.0" layoutY="36.0" prefHeight="44.0" prefWidth="723.0" text="Laufwerk und Pfad, auf/in dem betterausdrucke, betterausdruckeintern, betteroutput, betterreports zufinden sind. Bsp.: D:\better (lwPfadAllgemein)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="27.0" layoutY="120.0" text="LW/Pfad Sicherung 1">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfLwPfadSicherung1" layoutX="180.0" layoutY="116.0" prefHeight="25.0" prefWidth="183.0" />
+                        <Label layoutX="373.0" layoutY="107.0" prefHeight="44.0" prefWidth="723.0" text="Laufwerk und Pfad, auf/in dem  (bei den Tablets) die lokale Sicherungsdatei erzeugt wird. Bsp.: D: . Kann leer sein, dann wird keine erzeugt. (lwPfadSicherung1)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="27.0" layoutY="156.0" text="LW/Pfad Sicherung 2">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfLwPfadSicherung2" layoutX="180.0" layoutY="152.0" prefHeight="25.0" prefWidth="183.0" />
+                        <Label layoutX="373.0" layoutY="143.0" prefHeight="44.0" prefWidth="723.0" text="Laufwerk und Pfad, auf/in dem  (bei den Tablets) die lokale zweite Sicherungsdatei (z.B. auf SD-Karte) erzeugt wird. Bsp.: E: . Kann leer sein, dann wird keine erzeugt. (lwPfadSicherung2). Achtung, darf nicht identisch zu LW/Pfad Sicherung 1 sein!" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="27.0" layoutY="191.0" text="Ex.Pfad Präsentation">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfLwPfadExportFuerPraesentation" layoutX="180.0" layoutY="187.0" prefHeight="25.0" prefWidth="184.0" />
+                        <Label layoutX="373.0" layoutY="178.0" prefHeight="44.0" prefWidth="723.0" text="Pfad, auf dem die komplett-fertige Präsentation (je nach Funktion Power Point oder PFD) für Präsenz-/Abstimmungsverkündung zur Verfügung gestellt wird. Kann leer sein. Bsp.: F:\Praesi . (lwPfadExportFuerPraesentation)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="27.0" layoutY="228.0" text="Ex.Pfad Bühnensystem">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfLwPfadExportFuerBuehnensystem" layoutX="180.0" layoutY="224.0" prefHeight="25.0" prefWidth="187.0" />
+                        <Label layoutX="374.0" layoutY="215.0" prefHeight="44.0" prefWidth="723.0" text="Pfad, auf dem die Verkündungstexte für das Bühnensystem zur Verfügung gestellt wird. Kann leer sein. Bsp.: F:\Buehne . (lwPfadExportFuerBuehnensystem)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="27.0" layoutY="269.0" text="Ex. Pfad PP-Excel">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfLwPfadExportExcelFuerPowerpoint" layoutX="180.0" layoutY="265.0" prefHeight="25.0" prefWidth="188.0" />
+                        <Label layoutX="373.0" layoutY="256.0" prefHeight="44.0" prefWidth="723.0" text="Pfad, auf dem der Excel-Export für den Power-Point Import für Präsenz/Abstimmungsverkündung zur Verfügung gestellt wird. Kann leer sein. Bsp.: F:\Buehne . (lwPfadExportExcelFuerPowerpoint)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="27.0" layoutY="303.0" text="Kundeno.Basis-LW/Pfad">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfLwPfadKundenordnerBasis" layoutX="180.0" layoutY="299.0" prefHeight="25.0" prefWidth="188.0" />
+                        <Label layoutX="373.0" layoutY="290.0" prefHeight="44.0" prefWidth="723.0" text="Basis-Pfad für Kundenordner. Wird ergänzt um den kundenspezifischen Pfad in Emittent. Wenn leer, dann gibt es für diese Klasse keinen Kunden-Pfad. Bsp.: K:\Kundenordner . (lwPfadKundenordnerBasis)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="27.0" layoutY="341.0" text="Bon-Drucker aktiv">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbBonDruckerIstZugeordnet" layoutX="180.0" layoutY="341.0" mnemonicParsing="false" />
+                        <Label layoutX="373.0" layoutY="328.0" prefHeight="44.0" prefWidth="723.0" text="Am Arbeitsplatz ist über Bluetooth ein Bon-Drucker angeschlossen, auf dem bei der Abstimmung die Stimmabgabe-Bestätigung ausgedruckt wird (bonDruckerIstZugeordnet)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="27.0" layoutY="378.0" text="Start-Kontrollscreen aktiv">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="cbKontrollScreenAktiv" layoutX="180.0" layoutY="378.0" mnemonicParsing="false" />
+                        <Label layoutX="373.0" layoutY="365.0" prefHeight="44.0" prefWidth="723.0" text="Beim Programmstart wird ein Kontrollscreen mit den wichtigsten Geräte-Parametern angezeigt." wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="27.0" layoutY="408.0" text="Vorrangig Datenbank">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="cbVorrangigDB" layoutX="180.0" layoutY="408.0" mnemonicParsing="false" />
+                        <Label layoutX="373.0" layoutY="395.0" prefHeight="44.0" prefWidth="723.0" text="Wenn als Kommunikationsverbindung Datenbank und Webservice konfiguriert ist, wird vorrangig Datenbank verwendet (sonst: Webservice)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="26.0" layoutY="80.0" text="LW/Pfad Großdokumente">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tfLwPfadGrossdokumente" layoutX="180.0" layoutY="83.0" prefHeight="25.0" prefWidth="183.0" />
+                        <Label layoutX="373.0" layoutY="74.0" prefHeight="44.0" prefWidth="723.0" text="Laufwerk und Pfad, auf/in dem große unzusichernde Daten abgelegt werden (konkret: Videos)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </content>
+          </Tab>
+            <Tab text="Module">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" text="Die folgenden Module dürfen auf den Geräten dieser Arbeitsklasse gestartet werden:">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="14.0" layoutY="43.0" text="HV Master">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="360.0" layoutY="31.0" prefHeight="44.0" prefWidth="723.0" text="Master-Steuerung für die HV; Parameter (moduleHVMaster) (Kommunikation: D* - Datenbank) " wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbModuleHVMaster" layoutX="271.0" layoutY="45.0" mnemonicParsing="false" />
+                        <Label layoutX="14.0" layoutY="106.0" text="HV Front-Office">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="360.0" layoutY="94.0" prefHeight="44.0" prefWidth="723.0" text="(moduleFrontOffice) (Kommunikation: C* - Webservices)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbModuleFrontOffice" layoutX="271.0" layoutY="108.0" mnemonicParsing="false" />
+                        <Label layoutX="14.0" layoutY="194.0" text="HV Kontrollerfassung Präsenzerfassung">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="360.0" layoutY="182.0" prefHeight="44.0" prefWidth="723.0" text="(moduleKontrolle) (Kommunikation: D*)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbModuleKontrolle" layoutX="271.0" layoutY="196.0" mnemonicParsing="false" />
+                        <Label layoutX="14.0" layoutY="238.0" text="HV Service-Desk">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="360.0" layoutY="226.0" prefHeight="44.0" prefWidth="723.0" text="(moduleServiceDesk) (Kommunikation: C*)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbModuleServiceDesk" layoutX="271.0" layoutY="240.0" mnemonicParsing="false" />
+                        <Label layoutX="14.0" layoutY="282.0" text="HV Elektronisches Teilnehmerverzeichnis">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="360.0" layoutY="270.0" prefHeight="44.0" prefWidth="723.0" text="(moduleTeilnahmeverzeichnis) (Kommunikation: D*)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbModuleTeilnahmeverzeichnis" layoutX="271.0" layoutY="284.0" mnemonicParsing="false" />
+                        <Label layoutX="14.0" layoutY="147.0" text="HV Tablet-Abstimmung">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="360.0" layoutY="135.0" prefHeight="44.0" prefWidth="723.0" text="(moduleTabletAbstimmung) (Kommunikation: C* - Webservices); wenn aktiv, dann Tablet-Abstimmung sowohl separat aufrufbar, als auch aus dem Modul Frontoffice heraus" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbModuleTabletabstimmung" layoutX="271.0" layoutY="149.0" mnemonicParsing="false" />
+                        <Label layoutX="14.0" layoutY="320.0" text="Bestandsverwaltung">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="360.0" layoutY="308.0" prefHeight="44.0" prefWidth="723.0" text="Meldebestand, Weisungen (moduleAnmeldestelle) (Kommunikation: C*)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbModuleAnmeldestelle" layoutX="271.0" layoutY="322.0" mnemonicParsing="false" />
+                        <Label layoutX="14.0" layoutY="364.0" text="Info-Tool für Hotline">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="360.0" layoutY="352.0" prefHeight="44.0" prefWidth="723.0" text="(moduleHotline) (Kommunikation: C*)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbModuleHotline" layoutX="271.0" layoutY="366.0" mnemonicParsing="false" />
+                        <Label layoutX="14.0" layoutY="395.0" text="Import Aktienregister">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="360.0" layoutY="383.0" prefHeight="44.0" prefWidth="723.0" text="(moduleHotline) (Kommunikation: D*)" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbModuleAktienregisterImport" layoutX="271.0" layoutY="397.0" mnemonicParsing="false" />
+                        <Label layoutX="14.0" layoutY="74.0" text="Designer">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="360.0" layoutY="62.0" prefHeight="44.0" prefWidth="723.0" text="Designer List&amp;Label (moduleHVMaster) (Kommunikation: D* - Datenbank) " wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="cbModuleDesigner" layoutX="271.0" layoutY="76.0" mnemonicParsing="false" />
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+            <Tab text="Mandant/Benutzer">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox fx:id="cbFestgelegterMandantFix" layoutX="166.0" layoutY="120.0" mnemonicParsing="false" />
+                        <Label layoutX="15.0" layoutY="14.0" prefHeight="56.0" prefWidth="1064.0" text="In den folgenden Parametern wird eingestellt, welcher Mandant bzw. welcher Datenbereich beim Programmstart der jeweiligen Geräteklasse voreingestellt werden. Werden in den jeweiligen Feldern Werte eingetragen, so werden diese beim Programmstart so übernommen. Wenn die Checkbox markiert ist, kÃ¶nnen die voreingestellten Werte vom Benutzer NICHT verändert werden. Wenn alle Werte voreingestellt sind und &quot;nicht veränderbar&quot; in der Checkbox markiert ist, wird die Auswahlmaske beim Programmstart nicht angezeigt." wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="14.0" layoutY="121.0" text="Mandant (Gesellschaft)">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="13.0" layoutY="154.0" text="HV-Jahr">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfFestgelegtesJahr" layoutX="210.0" layoutY="148.0" prefHeight="25.0" prefWidth="182.0" />
+                        <Label layoutX="403.0" layoutY="140.0" prefHeight="44.0" prefWidth="676.0" text="z.B. 2017, 2018" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <ComboBox fx:id="comboFestgelegterMandant" layoutX="210.0" layoutY="117.0" prefHeight="25.0" prefWidth="871.0" />
+                        <Label layoutX="13.0" layoutY="185.0" text="Lfd. HV-Nummer (A-Z)">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfFestgelegteHVNummer" layoutX="211.0" layoutY="180.0" prefHeight="25.0" prefWidth="68.0" />
+                        <Label layoutX="359.0" layoutY="173.0" prefHeight="44.0" prefWidth="723.0" text="Zur Unterscheidung mehrerer Versammlungen der selben Gesellschaft " wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="13.0" layoutY="217.0" text="Datenbereich">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfFestgelegteDatenbank" layoutX="211.0" layoutY="212.0" prefHeight="25.0" prefWidth="68.0" />
+                        <Label layoutX="359.0" layoutY="205.0" prefHeight="44.0" prefWidth="723.0" text="P=Produktion; S=Schulung; T, U, V, W, X, Y, Z=für verschiedene Testbereiche. Rest: soweit benötigt." wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="13.0" layoutY="249.0" text="Benutzer">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfFestgelegterBenutzername" layoutX="210.0" layoutY="244.0" prefHeight="25.0" prefWidth="176.0" />
+                        <Label layoutX="426.0" layoutY="237.0" prefHeight="44.0" prefWidth="656.0" text="Ist hier ein Benutzer eingetragen, so wird dieser automatisch auf den Geräten dieser Klasse verwendet. Ansonsten muß sich ein Benutzer beim Programmstart einloggen. " wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="133.0" layoutY="86.0" text="markiert=nicht veränderbar">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="cbFestgelegtesJahrFix" layoutX="166.0" layoutY="152.0" mnemonicParsing="false" />
+                        <CheckBox fx:id="cbFestgelegteHVNummerFix" layoutX="166.0" layoutY="184.0" mnemonicParsing="false" />
+                        <CheckBox fx:id="cbFestgelegteDatenbankFix" layoutX="166.0" layoutY="219.0" mnemonicParsing="false" />
+                        <CheckBox fx:id="cbFestgelegterBenutzernameFix" layoutX="166.0" layoutY="251.0" mnemonicParsing="false" />
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+            <Tab text="Präsenzerfassung">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="14.0" layoutY="6.0" prefHeight="25.0" prefWidth="1070.0" text="Parameter, die vom Frontoffice-Tool (und teilweise bei der Kontrollerfassung) ausgewertet werden" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="38.0" text="Bestätigung mit weiterem Scan">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbAkkreditierungScanFeldFuerBestaetigungAktiv" layoutX="212.0" layoutY="40.0" mnemonicParsing="false" />
+                        <Label layoutX="314.0" layoutY="26.0" prefHeight="44.0" prefWidth="770.0" text="Darf nur bei Tausch 1:1 aktiviert werden. Eine Präsenzbuchung kann dann wahlweise durch einen Button oder durch erneutes Scannen des Belegs bestätigt werden" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="67.0" text="Short-Cut-Leiste aktiv">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbAkkreditierungShortcutsAktiv" layoutX="212.0" layoutY="69.0" mnemonicParsing="false" />
+                        <Label layoutX="314.0" layoutY="55.0" prefHeight="44.0" prefWidth="770.0" text="Die Short-Cut-Buttons (&quot;Selbst&quot;, &quot;Neuer Vertreter&quot;, &quot;Letzter Vertreter&quot; etc.) wird angeboten" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="96.0" text="Bündel-Hinweis aktiv">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbAkkreditierungAnzeigeBelegeBuendeln" layoutX="212.0" layoutY="132.0" mnemonicParsing="false" />
+                        <Label layoutX="314.0" layoutY="84.0" prefHeight="44.0" prefWidth="770.0" text="Beim Bündel-Vorgang erfolgt ein Bildschirmhinweis" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="127.0" text="Bündeln nach Anz. Erstzugängen">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfProtokollAnzMaxZugaenge" layoutX="206.0" layoutY="125.0" prefHeight="25.0" prefWidth="91.0" />
+                        <Label layoutX="314.0" layoutY="115.0" prefHeight="44.0" prefWidth="770.0" text="Das Bündeln erfolgt, sobald diese Anzahl Erstzugänge auf dem Gerät gebucht wurden." wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="162.0" text="Bündeln nach Vorgängen">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <TextField fx:id="tfProtokollAnzMax" layoutX="206.0" layoutY="160.0" prefHeight="25.0" prefWidth="91.0" />
+                        <Label layoutX="314.0" layoutY="150.0" prefHeight="44.0" prefWidth="770.0" text="Das Bündeln erfolgt, sobald diese Anzahl Vorgänge insgesamt auf dem Gerät gebucht wurden." wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="201.0" text="Delay ignorieren">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbAkkreditierungDelayIgnorieren" layoutX="212.0" layoutY="203.0" mnemonicParsing="false" />
+                        <Label layoutX="314.0" layoutY="189.0" prefHeight="44.0" prefWidth="770.0" text="Wenn aktiv, dann werden die Buchungsvorgänge immer SOFORT verbucht, AUCH wenn Delay gerade aktiv ist. Achtung - nur auf RZ-Geräten aktivieren!" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="238.0" text="Sammelkarten Buchen möglich">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbAkkreditierungSammelkartenBuchenMoeglich" layoutX="212.0" layoutY="240.0" mnemonicParsing="false" />
+                        <Label layoutX="314.0" layoutY="226.0" prefHeight="44.0" prefWidth="770.0" text="Wenn nicht aktiv, können auf diesen Geräten keine Sammelkarten gebucht werden. Unbedingt immer für Bankenschalter-Geräte aktivieren :-)." wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="282.0" text="Labeldruck Aktionäre">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbAkkreditierungLabeldruckFuerAktionaer" layoutX="212.0" layoutY="284.0" mnemonicParsing="false" />
+                        <Label layoutX="314.0" layoutY="270.0" prefHeight="44.0" prefWidth="770.0" text="Wenn aktiv, dann werden beim Erstzugang für den Aktionär ein Label ausgedruckt." wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="391.0" prefHeight="36.0" prefWidth="173.0" text="Vertreternacherfassung bei Kontrolle" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbVertreterKorrekturBeiKontrollerfassungMoeglich" layoutX="212.0" layoutY="401.0" mnemonicParsing="false" />
+                        <Label layoutX="314.0" layoutY="387.0" prefHeight="44.0" prefWidth="770.0" text="Nur wirksam bei der Kontrollerfassung. Wird üblicherweise aktiviert, wenn im Frontoffice keine Vertretererfassung erfolgt." wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="309.0" prefHeight="36.0" prefWidth="173.0" text="Suchfunktion aktiv" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="cbAkkreditierungSuchfunktionAktiv" layoutX="212.0" layoutY="319.0" mnemonicParsing="false" />
+                        <Label layoutX="314.0" layoutY="305.0" prefHeight="44.0" prefWidth="770.0" text="Wenn aktiv, wird eine Suchfunktion angeboten - deren Ergebnis einen Erstzugangs-Versuch auslöst" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="349.0" prefHeight="36.0" prefWidth="173.0" text="Vertretererfassung im Frontoffice aktiv" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="cbVertreterErfassungAktiv" layoutX="212.0" layoutY="359.0" mnemonicParsing="false" />
+                        <Label layoutX="314.0" layoutY="345.0" prefHeight="44.0" prefWidth="770.0" text="Wenn nicht aktiv, kann auf diesem Gerät im Front-Office-Tool keine Vertretererfassung erfolgen" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+            <Tab text="Abstimmung">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Label layoutX="21.0" layoutY="14.0" prefHeight="44.0" prefWidth="770.0" text="Die folgenden Parameter werden von der Tablet-Abstimmung verwendet" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="21.0" layoutY="112.0" text="Abstimmung Hochformat">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <CheckBox fx:id="cbAbstimmungTabletHochformat" layoutX="218.0" layoutY="114.0" mnemonicParsing="false" />
+                        <Label layoutX="320.0" layoutY="100.0" prefHeight="44.0" prefWidth="770.0" text="Wenn aktiviert, wird die Abstimmungserfassung auf den Tablets im Hochformat angezeigt" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font></Label>
+                        <Label layoutX="21.0" layoutY="150.0" text="Persönliches Gerät">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="cbAbstimmungTabletPersoenlichZugeordnet" layoutX="218.0" layoutY="152.0" mnemonicParsing="false" />
+                        <Label layoutX="320.0" layoutY="139.0" prefHeight="44.0" prefWidth="770.0" text="Wenn aktiviert, wird dieses Tablet als persönliches Tablet eines Teilnehmers eingerichtet" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="21.0" layoutY="180.0" text="Testmodus Tabletabstimmung">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="cbAbstimmungTabletTestmodus" layoutX="218.0" layoutY="182.0" mnemonicParsing="false" />
+                        <Label layoutX="320.0" layoutY="169.0" prefHeight="44.0" prefWidth="770.0" text="Wenn aktiviert, führt das Tablet automatisch immer Abstimmungen durch. Nur für persönliches Gerät" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="21.0" layoutY="212.0" text="Tablet geht beim Start in FullScreen">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="cbAbtimmungTabletFullScreen" layoutX="218.0" layoutY="214.0" mnemonicParsing="false" />
+                        <Label layoutX="21.0" layoutY="255.0" text="ScreenSize Tablet X" />
+                        <Label layoutX="21.0" layoutY="285.0" text="ScreenSize Tablet Y" />
+                        <TextField fx:id="tfAbstimmungTabletXSize" layoutX="218.0" layoutY="251.0" prefHeight="25.0" prefWidth="265.0" />
+                        <TextField fx:id="tfAbstimmungTabletYSize" layoutX="218.0" layoutY="281.0" prefHeight="25.0" prefWidth="265.0" />
+                     </children></Pane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
